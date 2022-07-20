@@ -154,6 +154,7 @@ const NavBar = ({ children }) => {
                   Sign Up
                 </NavLink>
               </li>
+
             </ul>
           </div>
 

@@ -3,12 +3,10 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
-// import logo from "../../../src/"
-
-const navbar = ({ children }) => {
+const NavBar = ({ children }) => {
     const [dark, setDark] = useState(false);
   
-    const [user] = useAuthState(auth);
+    // const [user] = useAuthState(auth);
   
     // const handelSignOut = () => {
     //   signOut(auth);
@@ -25,7 +23,7 @@ const navbar = ({ children }) => {
 
             <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
               <NavLink to="/" className="rounded-lg">
-               {/* <img className="" src={} /> */}
+             
                Book self
                 </NavLink>
                 
@@ -64,13 +62,13 @@ const navbar = ({ children }) => {
                   </li>
                 
   
-                  <li>
+                  {/* <li>
                     {user && (
                       <NavLink to="/dashboard" className="rounded-lg">
                         Dashboard
                       </NavLink>
                     )}
-                  </li>
+                  </li> */}
   
                   <li>
                     <NavLink to="/blogs" className="rounded-lg">
@@ -167,7 +165,7 @@ const navbar = ({ children }) => {
         </div>
       </div>
     );
-  };
+                };
   
-  export default navbar;
+  export default NavBar;
   

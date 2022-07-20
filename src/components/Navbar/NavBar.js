@@ -155,11 +155,6 @@ const NavBar = ({ children }) => {
                 </NavLink>
               </li>
 
-              <li>
-                <NavLink to="/nup" className="rounded-lg">
-                  Up
-                </NavLink>
-              </li>
             </ul>
           </div>
 

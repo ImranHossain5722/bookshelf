@@ -1,4 +1,5 @@
 import React from 'react';
+import Banner from '../../components/Banner/Banner';
 import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner"
 import SampleCard from '../../components/SampleCard/SampleCard';
 import BestSelling from '../BestSelling/BestSelling';
@@ -14,6 +15,7 @@ const Home = () => {
             <Review/>
         </div>
     );
-};
+}
+
 
 export default Home;

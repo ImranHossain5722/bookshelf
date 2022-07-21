@@ -4,6 +4,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/images/Logo/bookshelf-.png"
+import user from "../../Assets/images/icon/001-user.png"
+import bag from "../../Assets/images/icon//002-bag.png"
+import wishlist from "../../Assets/images/icon/003-heart.png"
 const NavBar = ({ children }) => {
     const [dark, setDark] = useState(false);
   
@@ -16,11 +19,11 @@ const NavBar = ({ children }) => {
   
     return (
       <div>
-        <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
+        <div class="drawer   " data-theme={dark ? "dark" : "light"}>
           <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
           <div class="drawer-content flex flex-col">
             {/* <!-- Navbar --> */}
-            <div class="w-full navbar bg-base-200 px-20 ">
+            <div class="w-full navbar bg-gray-200 px-20 ">
 
             <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
               <NavLink to="/" className="rounded-lg">
@@ -49,11 +52,11 @@ const NavBar = ({ children }) => {
               </div>
               
               {/* desktop */}
-              <div class="flex-auto  hidden lg:block">
+              <div class=" flex-none mx-20 hidden lg:block">
                 <ul class="menu menu-horizontal  ">
                   {/* <!-- Navbar menu content here --> */}
                   <li>
-                    <NavLink to="/" className="rounded-lg">
+                    <NavLink to="/" className="rounded-lg ">
                       Home
                     </NavLink>
                   </li>
@@ -98,8 +101,29 @@ const NavBar = ({ children }) => {
                   
                 </ul>
               </div>
+
               {/* dark button */}
             <div>
+
+              <div class="form-control mx-4" >
+                <input type="text" placeholder="Search Books" class="input input-bordered" />
+                
+              </div>
+                    {/* user image */}
+                  <div className="user mx-4 mt-1"> 
+                  <img className="" src={wishlist} /> 
+               
+                  </div>
+                  <div className="user  "> 
+                  <img className="" src={bag} /> 
+                     
+                  </div>
+                  <div className="user mx-4 "> 
+                  <img className="" src={user} /> 
+                  </div>
+
+
+                {/* dark button */}
               <label class="swap swap-rotate ">
                     {/* <!-- this hidden checkbox controls the state --> */}
                     <input type="checkbox" onClick={() => setDark(!dark)} />
@@ -115,13 +139,16 @@ const NavBar = ({ children }) => {
   
                     {/* <!-- Dark moon icon --> */}
                     <svg
-                      class="swap-off fill-current w-10 h-10"
+                      className="swap-off fill-current w-8 h-11"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                     >
                       <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
                     </svg>
-                  </label></div>
+                  </label>
+                 
+                  
+                  </div>
             </div>
             
             {/* <!-- Page content here --> */}
@@ -130,7 +157,7 @@ const NavBar = ({ children }) => {
           
 
           {/* mobile-phone */}
-          <div class="drawer-side">
+           <div class="drawer-side">
             <label for="my-drawer-3" class="drawer-overlay"></label>
             <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
               {/* <!-- Sidebar content here --> */}
@@ -156,7 +183,7 @@ const NavBar = ({ children }) => {
               </li>
 
             </ul>
-          </div>
+          </div> 
 
           
         </div>

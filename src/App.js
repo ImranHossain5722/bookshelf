@@ -1,12 +1,28 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import NavBar from "./components/Navbar/NavBar";
+import SampleCard from "./components/SampleCard/SampleCard";
 import Home from "./pages/home/Home";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
     <div className="App">
-      <h1 className="text-center text-5xl">Welcome to Bookshelf !!!</h1>
-      <h2 className="text-center text-4xl">Under Construction </h2>
-      <Home></Home>
+      <NavBar>
+        <Routes>
+          <Route path="/" element={<Home></Home>}>
+
+          </Route>
+        </Routes>
+        
+        <SampleCard />
+
+      </NavBar>
+
+      <Footer></Footer>
+          
+   
+      
     </div>
   );
 }

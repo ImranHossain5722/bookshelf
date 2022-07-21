@@ -1,0 +1,23 @@
+
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+   color: black;
+    /* height: 100vh; */
+  }
+  
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px ;
+    height: fit-content;
+    filter: blur(4px);
+
+  }
+  .swiper-slide-active{
+    filter: blur(0px);
+
+  }
+

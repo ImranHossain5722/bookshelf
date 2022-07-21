@@ -1,10 +1,34 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+// aos animation
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import NavBar from "./components/Navbar/NavBar";
+import SampleCard from "./components/SampleCard/SampleCard";
+import Home from "./pages/home/Home";
+import Footer from "./components/Footer/Footer";
+
+// initialize aos
+AOS.init();
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to Bookshelf </h1>
-      <h2>Under Construction </h2>
+      <NavBar>
+        <Routes>
+          <Route path="/" element={<Home></Home>}>
+
+          </Route>
+        </Routes>
+        
+        <SampleCard />
+
+      </NavBar>
+
+      <Footer></Footer>
+          
+   
+      
     </div>
   );
 }

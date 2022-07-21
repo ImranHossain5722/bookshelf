@@ -6,7 +6,6 @@ module.exports = {
       {
         light: {
           primary: "#27AE61",
-
           secondary: "#293661",
         },
       },

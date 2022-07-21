@@ -1,17 +1,16 @@
-import React from 'react';
-import Banner from '../../components/Banner/Banner';
-import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner"
-
+import React from "react";
+import Categorys from "../../components/Category/Categorys";
+import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner";
+import Banner from "../../components/Banner/Banner";
 const Home = () => {
-    return (
-        <>
-            <Banner />
-            <ContactClubBanner></ContactClubBanner>
-            Home
-        </>
-
-    );
-}
-
+  return (
+    <div>
+      <Banner />
+      <ContactClubBanner></ContactClubBanner>
+      {/* category section ::start  */}
+      <Categorys></Categorys>
+    </div>
+  );
+};
 
 export default Home;

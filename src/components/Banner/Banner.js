@@ -45,7 +45,7 @@ const Banner = () => {
             <Swiper navigation={true} pagination={{ clickable: true }} modules={[Pagination, Navigation]} className="mySwiper my-auto">
                 {
                     data.map(bnrData => <SwiperSlide>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-center lg:px-20">
+                        <div className="grid grid-cols-1 lg:grid-cols-2  items-center justify-center px-4 pb-10 lg:px-20">
                             <div>
                                 <h3
                                     data-aos="fade-up"

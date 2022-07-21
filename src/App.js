@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer/Footer";
-import NavBar from "./components/Navbar/NavBar"
-
+import NavBar from "./components/Navbar/NavBar";
+import SampleCard from "./components/SampleCard/SampleCard";
 import Home from "./pages/home/Home";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -14,9 +14,15 @@ function App() {
 
           </Route>
         </Routes>
+        
+        <SampleCard />
+
       </NavBar>
 
       <Footer></Footer>
+          
+   
+      
     </div>
   );
 }

@@ -1,0 +1,156 @@
+.title{
+        text-align: center;
+        white-space: nowrap;
+        position: relative;
+        color: transparent;
+}
+
+.title::before{
+    content: 'Join Our Books Club';
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #27AE61;
+        animation: typing 3s linear infinite;
+}
+
+
+
+@keyframes typing {
+    0% {
+        content: 'J|';
+    }
+
+    4% {
+        content: 'Jo|';
+    }
+
+    8% {
+        content: 'Joi|';
+    }
+
+    12% {
+        content: 'Join|';
+    }
+
+    16% {
+        content: 'Join O|';
+    }
+
+    20% {
+        content: 'Join Ou|';
+    }
+
+    24% {
+        content: 'Join Our|';
+    }
+
+    28% {
+        content: 'Join Our B|';
+    }
+
+    32% {
+        content: 'Join Our Bo|';
+    }
+
+    36% {
+        content: 'Join Our Boo|';
+    }
+
+    40% {
+        content: 'Join Our Book|';
+    }
+
+    44% {
+        content: 'Join Our Books|';
+    }
+
+    48% {
+        content: 'Join Our Books C|';
+    }
+
+    52% {
+        content: 'Join Our Books Cl|';
+    }
+
+    56% {
+        content: 'Join Our Books Clu|';
+    }
+
+    60% {
+        content: 'Join Our Books Club|';
+    }
+
+    64%,           
+    69% {
+        content: 'Join Our Books Club|';
+    }
+
+    70% {
+        content: 'Join Our Books Clu|';
+    }
+
+    85% {
+        content: 'Join Our Books Cl|';
+    }
+
+    86% {
+        content: 'Join Our Books C|';
+    }
+
+    87% {
+        content: 'Join Our Books|';
+    }
+
+    88% {
+        content: 'Join Our Book|';
+    }
+
+    89% {
+        content: 'Join Our Boo|';
+    }
+
+    90% {
+        content: 'Join Our Bo|';
+    }
+
+    91% {
+        content: 'oin Our B|';
+    }
+
+    92% {
+        content: 'Join Our|';
+    }
+
+    93% {
+        content: 'Join Ou|';
+    }
+
+    94% {
+        content: 'Join O|';
+    }
+
+    95% {
+        content: 'Join|';
+    }
+
+    96% {
+        content: 'Joi|';
+    }
+
+    97% {
+        content: 'Jo|';
+    }
+
+    98% {
+        content: 'J|';
+    }
+
+    99% {
+        content: '|';
+    }
+
+    100% {
+        content: '|';
+    }
+}

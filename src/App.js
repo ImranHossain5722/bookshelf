@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/Navbar/NavBar";
-import SampleCard from "./components/SampleCard/SampleCard";
-import Home from "./pages/home/Home";
+// import SampleCard from "./components/SampleCard/SampleCard";
+import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           </Route>
         </Routes>
         
-        <SampleCard />
+       
 
       </NavBar>
 

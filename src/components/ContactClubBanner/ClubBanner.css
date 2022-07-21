@@ -89,10 +89,13 @@
         content: 'Join Our Readers Club|';
     }
 
-    70%,
+    72% {
+        content:'Join Our Readers Club|';
+    }
 
-    80% {
-        content: 'Join Our Readers Club |';
+    76%,
+    84% {
+        content: 'Join Our Readers Club|';
     }
 
     85% {

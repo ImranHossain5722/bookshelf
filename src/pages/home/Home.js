@@ -8,11 +8,11 @@ import Review from '../Review/Review';
 const Home = () => {
     return (
         <div>
+            <Banner/>
             <ContactClubBanner></ContactClubBanner>
-            <SampleCard />
             <Release/> 
-            <BestSelling/>
             <Review/>
+            <BestSelling/>
         </div>
     );
 }

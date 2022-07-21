@@ -15,11 +15,7 @@
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-<<<<<<< HEAD
     "swiper": "^8.3.1",
-=======
-    "swiper": "^8.2.2",
->>>>>>> 412e66510da21189d0d13ec46af1285bc8e5272c
     "web-vitals": "^2.1.4"
   },
   "scripts": {

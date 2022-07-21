@@ -11,9 +11,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 // import required modules
-import { Navigation } from "swiper";
+import { Pagination, Navigation } from "swiper";
 
 
 const data = [
@@ -41,7 +42,7 @@ const data = [
 const Banner = () => {
     return (
         <div className="lg:px-10 mt-20">
-            <Swiper navigation={true} modules={[Navigation]} className="mySwiper my-auto">
+            <Swiper navigation={true} pagination={{ clickable: true }} modules={[Pagination, Navigation]} className="mySwiper my-auto">
                 {
                     data.map(bnrData => <SwiperSlide>
                         <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-center lg:px-20">

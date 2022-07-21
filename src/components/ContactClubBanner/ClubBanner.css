@@ -1,0 +1,161 @@
+.title{
+        text-align: center;
+        white-space: nowrap;
+        position: relative;
+        color: transparent;
+}
+
+.title::before{
+    content: 'Join Our Readers Club';
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #27AE61;
+        animation: typing 3s linear infinite;
+}
+
+
+
+@keyframes typing {
+    0% {
+        content: 'J|';
+    }
+
+    4% {
+        content: 'Jo|';
+    }
+
+    8% {
+        content: 'Joi|';
+    }
+
+    12% {
+        content: 'Join|';
+    }
+
+    16% {
+        content: 'Join O|';
+    }
+
+    20% {
+        content: 'Join Ou|';
+    }
+
+    24% {
+        content: 'Join Our|';
+    }
+
+    28% {
+        content: 'Join Our R|';
+    }
+
+    32% {
+        content: 'Join Our Re|';
+    }
+
+    36% {
+        content: 'Join Our Rea|';
+    }
+
+    40% {
+        content: 'Join Our Read|';
+    }
+
+    44% {
+        content: 'Join Our Reade|';
+    }
+
+    48% {
+        content: 'Join Our Reader|';
+    }
+
+    52% {
+        content: 'Join Our Readers|';
+    }
+
+    56% {
+        content: 'Join Our Readers C|';
+    }
+
+    60% {
+        content: 'Join Our Reads Cl|';
+    }
+
+    64%{
+        content: 'Join Readers Clu|';
+    }
+
+    68% {
+        content: 'Join Our Readers Club|';
+    }
+
+    70%,
+
+    80% {
+        content: 'Join Our Readers Club |';
+    }
+
+    85% {
+        content: 'Join Our Readers Cl|';
+    }
+
+    86% {
+        content: 'Join Our Readers C|';
+    }
+
+    87% {
+        content: 'Join Our Readers|';
+    }
+
+    88% {
+        content: 'Join Our Reader|';
+    }
+
+    89% {
+        content: 'Join Our Reade|';
+    }
+
+    90% {
+        content: 'Join Our Read|';
+    }
+
+    91% {
+        content: 'oin Our Rea|';
+    }
+
+    92% {
+        content: 'Join Our Re|';
+    }
+
+    93% {
+        content: 'Join Our R|';
+    }
+
+    94% {
+        content: 'Join Ou|';
+    }
+
+    95% {
+        content: 'Join Ou|';
+    }
+
+    96% {
+        content: 'Join O |';
+    }
+
+    97% {
+        content: 'Join|';
+    }
+
+    98% {
+        content: 'Joi|';
+    }
+
+    99% {
+        content: 'jo|';
+    }
+
+    100% {
+        content: '|';
+    }
+}

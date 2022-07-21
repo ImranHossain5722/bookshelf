@@ -6,7 +6,7 @@
 }
 
 .title::before{
-    content: 'Join Our Books Club';
+    content: 'Join Our Readers Club';
         position: absolute;
         top: 0;
         left: 0;
@@ -46,108 +46,113 @@
     }
 
     28% {
-        content: 'Join Our B|';
+        content: 'Join Our R|';
     }
 
     32% {
-        content: 'Join Our Bo|';
+        content: 'Join Our Re|';
     }
 
     36% {
-        content: 'Join Our Boo|';
+        content: 'Join Our Rea|';
     }
 
     40% {
-        content: 'Join Our Book|';
+        content: 'Join Our Read|';
     }
 
     44% {
-        content: 'Join Our Books|';
+        content: 'Join Our Reade|';
     }
 
     48% {
-        content: 'Join Our Books C|';
+        content: 'Join Our Reader|';
     }
 
     52% {
-        content: 'Join Our Books Cl|';
+        content: 'Join Our Readers|';
     }
 
     56% {
-        content: 'Join Our Books Clu|';
+        content: 'Join Our Readers C|';
     }
 
     60% {
-        content: 'Join Our Books Club|';
+        content: 'Join Our Reads Cl|';
     }
 
-    64%,           
-    69% {
-        content: 'Join Our Books Club|';
+    64%{
+        content: 'Join Readers Clu|';
     }
 
-    70% {
-        content: 'Join Our Books Clu|';
+    68% {
+        content: 'Join Our Readers Club|';
+    }
+
+    70%,
+
+    80% {
+        content: 'Join Our Readers Club |';
     }
 
     85% {
-        content: 'Join Our Books Cl|';
+        content: 'Join Our Readers Cl|';
     }
 
     86% {
-        content: 'Join Our Books C|';
+        content: 'Join Our Readers C|';
     }
 
     87% {
-        content: 'Join Our Books|';
+        content: 'Join Our Readers|';
     }
 
     88% {
-        content: 'Join Our Book|';
+        content: 'Join Our Reader|';
     }
 
     89% {
-        content: 'Join Our Boo|';
+        content: 'Join Our Reade|';
     }
 
     90% {
-        content: 'Join Our Bo|';
+        content: 'Join Our Read|';
     }
 
     91% {
-        content: 'oin Our B|';
+        content: 'oin Our Rea|';
     }
 
     92% {
-        content: 'Join Our|';
+        content: 'Join Our Re|';
     }
 
     93% {
-        content: 'Join Ou|';
+        content: 'Join Our R|';
     }
 
     94% {
-        content: 'Join O|';
+        content: 'Join Ou|';
     }
 
     95% {
-        content: 'Join|';
+        content: 'Join Ou|';
     }
 
     96% {
-        content: 'Joi|';
+        content: 'Join O |';
     }
 
     97% {
-        content: 'Jo|';
+        content: 'Join|';
     }
 
     98% {
-        content: 'J|';
+        content: 'Joi|';
     }
 
     99% {
-        content: '|';
+        content: 'jo|';
     }
 
     100% {

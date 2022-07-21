@@ -4,8 +4,8 @@ import "./App.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import NavBar from "./components/Navbar/NavBar";
-import SampleCard from "./components/SampleCard/SampleCard";
-import Home from "./pages/home/Home";
+// import SampleCard from "./components/SampleCard/SampleCard";
+import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 
 // initialize aos
@@ -14,7 +14,7 @@ AOS.init();
 function App() {
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar>
         <Routes>
           <Route path="/" element={<Home></Home>}>
 
@@ -22,6 +22,9 @@ function App() {
         </Routes>
       
         
+       
+
+      </NavBar>
 
       <Footer></Footer>
           

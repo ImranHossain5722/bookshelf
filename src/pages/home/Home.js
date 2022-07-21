@@ -1,9 +1,12 @@
 import React from 'react';
+import Release from '../Release/Release';
+import Review from '../Review/Review';
 
 const Home = () => {
     return (
         <div>
-            Home 
+            <Release/>
+            <Review/>
         </div>
     );
 };

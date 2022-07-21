@@ -44,7 +44,7 @@ const Release = () => {
   return (
     <div className='px-10'>
       <div class="card lg:card-side bg-base-100 shadow-xl p-10">
-        <figure><img className='rounded' src="https://placeimg.com/400/400/arch" alt="Album" /></figure>
+        <figure><img className='rounded' src="https://images-us.bookshop.org/ingram/9780593353707.jpg?height=500&v=v2" alt="Album" /></figure>
         <div class="card-body flex justify-center items-center">
           <div>
 

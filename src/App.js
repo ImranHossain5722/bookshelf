@@ -6,7 +6,7 @@ import "aos/dist/aos.css";
 import NavBar from "./components/Navbar/NavBar";
 // import SampleCard from "./components/SampleCard/SampleCard";
 import Footer from "./components/Footer/Footer";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home/Home";
 
 // initialize aos
 AOS.init();

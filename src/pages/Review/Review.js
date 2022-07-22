@@ -11,29 +11,48 @@ import "swiper/css/effect-coverflow";
 // import required modules
 import { Navigation } from "swiper";
 import './review.css'
+import useWindowDimensions from "../../components/windowSize/windowSize";
 
 const Review = () => {
   const [reviews, setReviews] = useState([])
+  const [size, setSize] = useState(1)
+  const {width } = useWindowDimensions()
+
+  // fetched  review data
   useEffect(() => {
     fetch('reviews/review.json')
       .then(res => res.json())
       .then(data => setReviews(data))
   }, [])
 
+useEffect(() => {
+//  responsiveness added by width change
+  if(width >= 900){
+      setSize(2) 
+  }
+  else{
+    setSize(1)
+  }
+
+}, [width])
 
   return (
     <div className="p-5 my-20">
-      <Swiper navigation={true} slidesPerView={3} loop={true} grabCursor={true}
+      <Swiper navigation={true} slidesPerView={size} loop={true} grabCursor={true}
         centeredSlides={true}
-        spaceBetween={30} modules={[Navigation]} className="mySwiper">
+        spaceBetween={30} modules={[Navigation]} className="mySwiper" 
+    
+        >
         {
-          reviews.map(review => <SwiperSlide>
+          reviews.map(review => <SwiperSlide className="swiper-review">
+            <div >
             <p className="p-2">{review.review}</p>
             <div class="avatar p-2">
               <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                 <img src={review.image} alt="" />
               </div>
-              <p className="pl-4 pt-2">{review.name}</p>
+              <p className="pl-4 pt-2">{review.name} </p> 
+            </div>
             </div>
 
 
@@ -44,4 +63,4 @@ const Review = () => {
   )
 }
 
-export default Review
+export default Review;

@@ -20,9 +20,9 @@ const BestSelling = () => {
 <div className="p-6">
       <Swiper navigation={true} slidesPerView={5} loop={true} grabCursor={true}
         centeredSlides={true}
-        spaceBetween={30} modules={[Navigation]} className="mySwiper">
+        spaceBetween={30} modules={[Navigation]} className="mySwiper flex-wrap">
         {
-          sellings && sellings.map(selling => <SwiperSlide className='swiper-other'> 
+          sellings && sellings.map(selling => <SwiperSlide className='swiper-other  flex-wrap'> 
             <Card data={selling} key={selling.id}/>
           </SwiperSlide>)
         } 

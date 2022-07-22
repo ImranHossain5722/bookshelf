@@ -10,7 +10,7 @@ import Card from '../../components/Card/Card';
 const BestSelling = () => {
     const [sellings, setSellings] = useState([])
     useEffect(() => {
-      fetch('reviews/review.json')
+      fetch('data/data.json')
         .then(res => res.json())
         .then(data => setSellings(data))
     }, [])
@@ -22,10 +22,10 @@ const BestSelling = () => {
         centeredSlides={true}
         spaceBetween={30} modules={[Navigation]} className="mySwiper">
         {
-          sellings.map(selling => <SwiperSlide> 
-            <Card />
+          sellings && sellings.map(selling => <SwiperSlide className='swiper-other'> 
+            <Card data={selling} key={selling.id}/>
           </SwiperSlide>)
-        }
+        } 
       </Swiper>
     </div>
     </div>

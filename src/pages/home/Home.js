@@ -18,7 +18,6 @@ const Home = () => {
             <BestSelling/>
         </div>
     );
-}
-
+    }
 
 export default Home;

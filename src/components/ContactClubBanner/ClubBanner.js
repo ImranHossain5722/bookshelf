@@ -19,7 +19,7 @@ const ClubBanner = () => {
         <div class="hero-overlay bg-opacity-75 "></div>
         <div class="hero-content text-center text-neutral-content py-24">
           <div class="max-w-lg">
-            <h1 class="mb-5 text-5xl font-bold  title ">Join Readers Club </h1>
+            <h1 class="mb-5 text-center text-2xl lg:text-5xl md:text-lg font-bold  title ">Join Our Readers Club </h1>
             <p class="mb-5">
               Join Our Readers Club. It's a coummuity for books lover. we can discus every user about to books details.
             </p>

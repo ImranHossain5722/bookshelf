@@ -16,7 +16,9 @@ import useWindowDimensions from "../../components/windowSize/windowSize";
 const Review = () => {
   const [reviews, setReviews] = useState([])
   const [size, setSize] = useState(1)
-  const {width , height} = useWindowDimensions()
+  const {width } = useWindowDimensions()
+
+  // fetched  review data
   useEffect(() => {
     fetch('reviews/review.json')
       .then(res => res.json())
@@ -24,7 +26,7 @@ const Review = () => {
   }, [])
 
 useEffect(() => {
- 
+//  responsiveness added by width change
   if(width >= 900){
       setSize(2) 
   }
@@ -32,7 +34,6 @@ useEffect(() => {
     setSize(1)
   }
 
-  
 }, [width])
 
   return (
@@ -62,4 +63,4 @@ useEffect(() => {
   )
 }
 
-export default Review
+export default Review;

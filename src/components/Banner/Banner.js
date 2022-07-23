@@ -14,7 +14,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // import required modules
-import { Pagination, Navigation } from "swiper";
+import { Autoplay, Pagination, Navigation } from "swiper";
 
 
 const data = [
@@ -42,10 +42,21 @@ const data = [
 const Banner = () => {
     return (
         <div className="lg:px-10 mt-20">
-            <Swiper navigation={true} pagination={{ clickable: true }} modules={[Pagination, Navigation]} className="mySwiper my-auto">
+            <Swiper
+                spaceBetween={30}
+                centeredSlides={true}
+                autoplay={{
+                    delay: 6000,
+                    disableOnInteraction: false,
+                }}
+                navigation={true}
+                pagination={{ clickable: true }}
+                modules={[Autoplay, Pagination, Navigation]}
+                className="mySwiper my-auto"
+                style={{ "--swiper-navigation-color": "#27AE61", "--swiper-pagination-color": "#27AE61" }}>
                 {
                     data.map(bnrData => <SwiperSlide>
-                        <div className="grid grid-cols-1 lg:grid-cols-2  items-center justify-center px-4 pb-10 lg:px-20">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-2 items-center justify-center px-4 pb-10 lg:px-20">
                             <div>
                                 <h3
                                     data-aos="fade-up"
@@ -60,7 +71,7 @@ const Banner = () => {
                                     data-aos="fade-right"
                                     data-aos-delay="750"
                                     data-aos-duration="1000"
-                                    class="px-8 py-4 bg-[#293661] hover:bg-[#27AE61] duration-500 rounded-full text-[#ffffff] mt-8">Explore More</button>
+                                    class="px-8 py-4 bg-[#27AE61] hover:bg-[#293661] duration-500 rounded-full text-[#ffffff] mt-8">Explore More</button>
                             </div>
 
                             <div

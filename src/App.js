@@ -20,15 +20,15 @@ function App() {
 
           </Route>
         </Routes>
-        
+
         <SampleCard />
 
       </NavBar>
 
       <Footer></Footer>
-          
-   
-      
+
+
+
     </div>
   );
 }

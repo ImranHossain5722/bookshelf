@@ -3,10 +3,12 @@ import "./App.css";
 // aos animation
 import AOS from "aos";
 import "aos/dist/aos.css";
-import NavBar from "./components/Navbar/NavBar";
+// import NavBar2 from "./components/Navbar/NavBar2";
 // import SampleCard from "./components/SampleCard/SampleCard";
 import Footer from "./components/Footer/Footer";
-import Home from "./pages/Home/Home";
+import Home from "./pages/home/Home";
+import NavBar from "./components/Navbar/NavBar";
+
 
 // initialize aos
 AOS.init();
@@ -18,9 +20,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}></Route>
         </Routes>
-      </NavBar>
 
-      <Footer></Footer>
+      <Footer/>
+      </NavBar>
     </div>
   );
 }

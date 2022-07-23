@@ -1,6 +1,6 @@
 import React from "react";
 import clubBanner from '../../Assets/images/clubB.jpg';
-import './ClubBanner.css';
+
 import Typewriter from 'typewriter-effect'
 
 const ClubBanner = () => {

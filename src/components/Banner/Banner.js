@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
+import Button from "../Button/Button";
 
 const data = [
   {
@@ -66,14 +67,21 @@ const Banner = () => {
                   {bnrData.title} <br />
                   <span className="font-semibold">{bnrData.month}</span>
                 </h2>
-                <button
+                {/* <button
                   data-aos="fade-right"
                   data-aos-delay="750"
                   data-aos-duration="1000"
-                  class="px-8 py-4 bg-[#293661] hover:bg-[#27AE61] duration-500 rounded-full text-[#ffffff] mt-8"
-                >
+                  class="btn btn-primary text-white font-normal mt-8">
                   Explore More
-                </button>
+                </button> */}
+                <div
+                  data-aos="fade-right"
+                  data-aos-delay="750"
+                  data-aos-duration="1000"
+                  className="mt-8"
+                >
+                  <Button>Explore More</Button>
+                </div>
               </div>
 
               <div

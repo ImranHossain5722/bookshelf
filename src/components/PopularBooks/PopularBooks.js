@@ -1,59 +1,31 @@
-import React, { useEffect, useRef, useState } from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-// import required modules
-import { Pagination, Navigation } from "swiper";
-import Stars from "../Stars/Stars";
-
+import React from "react";
+import Card from "../Card/Card";
 
 const PopularBooks = () => {
-    const [books, setBooks] = useState([]);
-
-    useEffect(() => {
-        fetch('data.json')
-            .then(res => res.json())
-            .then(data => setBooks(data));
-    }, []);
-
-    // console.log(books);
-
-    return (
-        <div className="px-10 mt-28">
-            <Swiper
-                slidesPerView={6}
-                spaceBetween={5}
-                slidesPerGroup={6}
-                loop={true}
-                loopFillGroupWithBlank={true}
-                pagination={{
-                    clickable: true,
-                }}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="mySwiper px-8"
-            >
-                {
-                    books.map(book => <SwiperSlide>
-                        <div className="mb-10 py-5 hover:shadow-xl cursor-pointer rounded-md">
-                            <img src={book.image} className='w-32 h-52 bg-cover mx-auto' alt="" />
-                            <div className="text-center mt-2 px-5">
-                                <h2>{book.title}</h2>
-                                <p className="my-2">{book.author}</p>
-                                <Stars />
-                                <h2 className="mt-2 font-semibold">TK. {book.price}</h2>
-                            </div>
-                        </div>
-                    </SwiperSlide>)
-                }
-            </Swiper>
-        </div>
-    );
+  const imgLinks = [
+    "https://i.ibb.co/ysvP0xV/62ac8862c-199403.png",
+    "https://i.ibb.co/4pXDCwX/If-Cats-Disappeared-from-the-world-Genki-Kawamura-e7a6d-220182.png",
+    "https://i.ibb.co/JyCDhW7/Ami-Poramanob-Muhammod-Zafar-Iqbal-0ac3e-222641.png",
+    "https://i.ibb.co/mDsf3NM/d631b7a03-154385.jpg",
+    "https://i.ibb.co/3y5C6BM/Rag-Niyontrone-Rakhun-Abu-Zarif-11f8f-226653.jpg",
+    "https://i.ibb.co/0JY2BMZ/cb53eac80-215701.jpg",
+    "https://i.ibb.co/RN2XCFF/0b8dbade5-198345.png",
+    "https://i.ibb.co/jGxSS6B/247fb7d26-61656.png",
+  ];
+  return (
+    <>
+      <div className="grid sm:grid-cols-1  md:grid-cols-2  lg:grid-cols-4 gap-4 justify-evenly justify-items-center my-20">
+        {imgLinks.map((link) => (
+          <Card imgSrc={link}></Card>
+        ))}
+      </div>
+      <div className="flex justify-center">
+        <button className="btn btn-primary text-white my-8 mx-auto">
+          See more
+        </button>
+      </div>
+    </>
+  );
 };
 
 export default PopularBooks;

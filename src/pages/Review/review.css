@@ -1,0 +1,43 @@
+
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+   color: black;
+    /* height: 100vh; */
+  }
+  
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px ;
+    height: fit-content;
+    
+    filter: blur(4px);
+
+  }
+  .swiper-slide-active{
+    filter: blur(0px);
+
+  }
+.swiper-other{
+  filter: blur(0px);
+}
+.swiper-container {
+  width: 100%;
+}
+
+@media screen and (min-width: 640px) {
+  .swiper-container {
+    width: 640px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .swiper-container {
+    width: 768px;
+  }
+}
+
+ 

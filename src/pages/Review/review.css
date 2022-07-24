@@ -13,6 +13,7 @@
     background-size: cover;
     width: 300px ;
     height: fit-content;
+    
     filter: blur(4px);
 
   }
@@ -20,4 +21,23 @@
     filter: blur(0px);
 
   }
+.swiper-other{
+  filter: blur(0px);
+}
+.swiper-container {
+  width: 100%;
+}
 
+@media screen and (min-width: 640px) {
+  .swiper-container {
+    width: 640px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .swiper-container {
+    width: 768px;
+  }
+}
+
+ 

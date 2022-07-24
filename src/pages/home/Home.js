@@ -33,7 +33,6 @@ const Home = () => {
 
       <ProductSwitch />
       <PopularBooks />
-
       <Release />
       <Review />
       <BestSelling />

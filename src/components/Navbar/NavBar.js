@@ -15,7 +15,7 @@ const NavBar = ({ children }) => {
   //   signOut(auth);
   //   localStorage.removeItem('accessToken');
   // };
-
+// h-13vh
   return (
     <div>
       <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
@@ -48,7 +48,7 @@ const NavBar = ({ children }) => {
             </div>
 
             {/* desktop */}
-            <div class=" flex-none mx-20 hidden lg:block">
+            <div class="flex-none mx-20 hidden lg:block">
               <ul class="menu menu-horizontal  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>

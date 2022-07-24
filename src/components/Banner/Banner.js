@@ -40,21 +40,23 @@ const data = [
 
 const Banner = () => {
   return (
-    <div className="lg:px-10 mt-20">
+    <div className="lg:max-w-[1240px] mx-auto bg-white">
       <Swiper
         navigation={true}
         pagination={{ clickable: true }}
         modules={[Pagination, Navigation]}
         className="mySwiper my-auto"
+        style={{ "--swiper-theme-color": "#27AE61" }}
       >
         {data.map((bnrData) => (
           <SwiperSlide>
             <div className="grid grid-cols-1 lg:grid-cols-2  items-center justify-center px-4 pb-10 lg:px-20">
-              <div>
+              <div className="lg:mt-6">
                 <h3
                   data-aos="fade-up"
                   data-aos-delay="100"
                   data-aos-duration="750"
+                  className="text-2xl"
                 >
                   {bnrData.subtitle}
                 </h3>
@@ -62,7 +64,7 @@ const Banner = () => {
                   data-aos="fade-up"
                   data-aos-delay="100"
                   data-aos-duration="1200"
-                  className="text-[40px]"
+                  className="text-[40px] font-semibold"
                 >
                   {bnrData.title} <br />
                   <span className="font-semibold">{bnrData.month}</span>

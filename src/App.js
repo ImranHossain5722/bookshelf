@@ -3,7 +3,6 @@ import "./App.css";
 // aos animation
 import AOS from "aos";
 import "aos/dist/aos.css";
-// import NavBar2 from "./components/Navbar/NavBar2";
 // import SampleCard from "./components/SampleCard/SampleCard";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/home/Home";

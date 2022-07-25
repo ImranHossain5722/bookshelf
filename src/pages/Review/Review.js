@@ -51,7 +51,7 @@ const Review = () => {
         style={{ "--swiper-theme-color": "#27AE61" }}
       >
         {
-          reviews.map(review => <SwiperSlide className="swiper-review">
+          reviews.map(review => <SwiperSlide key={review.id} className="swiper-review">
             <div className="text-center p-4">
               <p>{review.review}</p>
               <div class="avatar pt-6">

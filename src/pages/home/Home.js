@@ -11,13 +11,17 @@ import ProductSwitch from "../../components/ProductSwitch/ProductSwitch";
 import BestSelling from "../BestSelling/BestSelling";
 import Release from "../Release/Release";
 import Review from "../Review/Review";
+import FirstCategoryBooks from '../../components/FirstCategoryBooks/FirstCategoryBooks';
 const Home = () => {
   return (
     <div>
       <Banner />
       <ContactClubBanner></ContactClubBanner>
-      <Categorys></Categorys>
+
       {/* select catgory */}
+      <Categorys></Categorys>
+      <FirstCategoryBooks />
+
       {/* popler book section */}
       <AddBanner></AddBanner>
 

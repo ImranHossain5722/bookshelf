@@ -12,6 +12,7 @@ import BestSelling from "../BestSelling/BestSelling";
 import Release from "../Release/Release";
 import Review from "../Review/Review";
 import FirstCategoryBooks from '../../components/FirstCategoryBooks/FirstCategoryBooks';
+import SecondCategoryBooks from '../../components/SecondCategoryBooks/SecondCategoryBooks';
 const Home = () => {
   return (
     <div>
@@ -21,6 +22,7 @@ const Home = () => {
       {/* select catgory */}
       <Categorys></Categorys>
       <FirstCategoryBooks />
+      <SecondCategoryBooks />
 
       {/* popler book section */}
       <AddBanner></AddBanner>

@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
 import Stars from "../Stars/Stars";
 
-const FirstCategoryBooks = () => {
+const SecondCategoryBooks = () => {
     const [books, setBooks] = useState([]);
     useEffect(() => {
         fetch('data.json')
@@ -23,7 +23,7 @@ const FirstCategoryBooks = () => {
     return (
         <div className="bg-white max-w-[1240px] mx-auto mt-[120px] py-10">
             {/* ------title section----- */}
-            <h1 className="pl-6 text-[40px] font-bold text-[#00124E]">The Novel</h1>
+            <h1 className="pl-6 text-[40px] font-bold text-[#00124E]">The Story</h1>
 
             {/* ------categories slider----- */}
             <div className="mt-8">
@@ -59,4 +59,4 @@ const FirstCategoryBooks = () => {
     );
 };
 
-export default FirstCategoryBooks;
+export default SecondCategoryBooks;

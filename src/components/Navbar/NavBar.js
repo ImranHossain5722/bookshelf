@@ -16,7 +16,7 @@ const NavBar = ({ children }) => {
   //   localStorage.removeItem('accessToken');
   // };
 // h-13vh
-  return (
+  return ( 
     <div>
       <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />

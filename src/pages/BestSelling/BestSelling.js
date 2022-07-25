@@ -8,16 +8,19 @@ import "swiper/css/effect-coverflow";
 import { Navigation } from "swiper";
 import Card from '../../components/Card/Card';
 import useWindowDimensions from '../../components/windowSize/windowSize';
+import { useDispatch, useSelector } from "react-redux";
+import { sellings } from '../../components/Redux/Features/Slices';
 const BestSelling = () => {
-    const [sellings, setSellings] = useState([])
+  const sellingBooks = useSelector((state) => console.log(state))
+  const dispatch = useDispatch()
   const {width } = useWindowDimensions()
   const [size, setSize] = useState(5)
 
     useEffect(() => {
       fetch('data/data.json')
         .then(res => res.json())
-        .then(data => setSellings(data))
-    }, [])
+        .then(data => dispatch(sellings(data)))
+    }, [sellingBooks])
     
 useEffect(() => {
   //  responsiveness added by width change
@@ -41,15 +44,15 @@ useEffect(() => {
     <div>
         <p className='pl-6 text-[20px] '>Last week Best sellings</p>
 <div className="p-6">
-      <Swiper navigation={true} slidesPerView={size} loop={true} grabCursor={true}
+      {/* <Swiper navigation={true} slidesPerView={size} loop={true} grabCursor={true}
         centeredSlides={true}
         spaceBetween={30} modules={[Navigation]} className="mySwiper flex-wrap">
         {
-          sellings && sellings.map(selling => <SwiperSlide className='swiper-other  flex-wrap'> 
-            <Card data={selling} key={selling.id}/>
+          // sellings && sellings.map(selling => <SwiperSlide className='swiper-other  flex-wrap'> 
+          //   <Card data={selling} key={selling.id}/>
           </SwiperSlide>)
         } 
-      </Swiper>
+      </Swiper> */}
     </div>
     </div>
   )

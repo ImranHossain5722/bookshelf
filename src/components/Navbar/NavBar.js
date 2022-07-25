@@ -3,19 +3,21 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/images/Logo/bookshelf-.png";
-import user from "../../Assets/images/icon/001-user.png";
+import userImg from "../../Assets/images/icon/001-user.png";
 import bag from "../../Assets/images/icon//002-bag.png";
 import wishlist from "../../Assets/images/icon/003-heart.png";
+import { signOut } from "firebase/auth";
+
 const NavBar = ({ children }) => {
   const [dark, setDark] = useState(false);
 
-  // const [user] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
-  // const handelSignOut = () => {
-  //   signOut(auth);
-  //   localStorage.removeItem('accessToken');
-  // };
-// h-13vh
+  const handelSignOut = () => {
+    signOut(auth);
+    localStorage.removeItem('accessToken');
+  };
+  // h-13vh
   return (
     <div>
       <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
@@ -25,7 +27,7 @@ const NavBar = ({ children }) => {
           <div class="w-full navbar bg-gray-200 px-20 ">
             <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
               <NavLink to="/" className="rounded-lg">
-                <img className="" src={logo} />
+                <img className="" alt="" src={logo} />
               </NavLink>
             </div>
             {/* mobile button */}
@@ -107,13 +109,15 @@ const NavBar = ({ children }) => {
               </div>
               {/* user image */}
               <div className="user mx-4 mt-1">
-                <img className="" src={wishlist} />
+                <img className="" alt="" src={wishlist} />
               </div>
               <div className="user  ">
-                <img className="" src={bag} />
+                <img className="" alt="" src={bag} />
               </div>
               <div className="user mx-4 ">
-                <img className="" src={user} />
+                <NavLink to="/login" className="rounded-lg">
+                  <img className="" alt="" src={userImg} />
+                </NavLink>
               </div>
 
               {/* dark button */}

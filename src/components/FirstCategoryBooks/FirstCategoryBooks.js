@@ -10,23 +10,24 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Navigation } from "swiper";
+import Stars from "../Stars/Stars";
 import useWindowDimensions from "../windowSize/windowSize";
 
-const PopularAuthor = () => {
-    const [authors, setAuthors] = useState([]);
+const FirstCategoryBooks = () => {
+    const [books, setBooks] = useState([]);
     const [size, setSize] = useState(1);
     const { width } = useWindowDimensions();
 
     useEffect(() => {
-        fetch('reviews/review.json')
+        fetch('data.json')
             .then(res => res.json())
-            .then(data => setAuthors(data));
+            .then(data => setBooks(data));
     }, []);
 
     useEffect(() => {
         //  responsiveness added by width change
         if (width >= 992) {
-            setSize(5)
+            setSize(4)
         }
         // else if (width >= 768) {
         //     setSize(3)
@@ -40,9 +41,9 @@ const PopularAuthor = () => {
     }, [width]);
 
     return (
-        <div className="bg-white max-w-[1240px] mx-auto my-[120px] py-10">
+        <div className="bg-white max-w-[1240px] mx-auto mt-[120px] py-10">
             {/* ------title section----- */}
-            <h1 className="pl-6 text-[40px] font-bold text-[#00124E]">Popular Author</h1>
+            <h1 className="pl-6 text-[40px] font-bold text-[#00124E]">The Novel</h1>
 
             {/* ------categories slider----- */}
             <div className="mt-8">
@@ -54,15 +55,20 @@ const PopularAuthor = () => {
                     loopFillGroupWithBlank={true}
                     navigation={true}
                     modules={[Navigation]}
-                    className="mySwiper px-9 py-6"
+                    className="mySwiper px-7 py-6"
                     style={{ "--swiper-theme-color": "#27AE61" }}
                 >
                     {
-                        authors.map(author => <SwiperSlide key={author.id}>
-                            <div className="py-6 flex items-center justify-center hover:fill-blue-500">
+                        books.map(book => <SwiperSlide key={book._id}>
+                            <div className="shadow-lg rounded-lg h-[460px] pt-6 flex justify-center hover:fill-blue-500">
                                 <div>
-                                    <img src={author.image} className="w-48 h-48 rounded-full image-full bg-cover" alt="" />
-                                    <p className="mt-2 text-center text-xl font-bold">{author.name}</p>
+                                    <img src={book.image} className="h-64 w-44 image-full" alt="" />
+                                    <div className="w-44 mt-2">
+                                        <h3>{book.title}</h3>
+                                        <p className="mt-2">{book.author}</p>
+                                        <h2 className="text-xl font-semibold text-primary mt-2 mb-1">${book.price}</h2>
+                                        <Stars />
+                                    </div>
                                 </div>
                             </div>
                         </SwiperSlide>)
@@ -73,4 +79,4 @@ const PopularAuthor = () => {
     );
 };
 
-export default PopularAuthor;
+export default FirstCategoryBooks;

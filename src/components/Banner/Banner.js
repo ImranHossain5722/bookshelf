@@ -50,8 +50,8 @@ const Banner = () => {
       >
         {data.map((bnrData) => (
           <SwiperSlide>
-            <div className="grid grid-cols-1 lg:grid-cols-2  items-center justify-center px-4 pb-10 lg:px-20">
-              <div className="lg:mt-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2  items-center justify-center px-4 py-16 lg:px-20">
+              <div className="mt-6 mx-auto">
                 <h3
                   data-aos="fade-up"
                   data-aos-delay="100"

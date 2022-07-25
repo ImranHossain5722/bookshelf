@@ -72,7 +72,7 @@ const Categorys = () => {
       </div>
 
       {/* ------categories slider----- */}
-      <div className="bg-white max-w-[1240px] mx-auto mt-14 py-6">
+      <div className="bg-white max-w-[1240px] mx-auto mt-14 py-16">
         <Swiper
           slidesPerView={5}
           spaceBetween={30}
@@ -81,7 +81,7 @@ const Categorys = () => {
           loopFillGroupWithBlank={true}
           navigation={true}
           modules={[Navigation]}
-          className="mySwiper px-5"
+          className="mySwiper px-6"
           style={{ "--swiper-theme-color": "#27AE61" }}
         >
           {

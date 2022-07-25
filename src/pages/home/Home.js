@@ -13,6 +13,7 @@ import Release from "../Release/Release";
 import Review from "../Review/Review";
 import FirstCategoryBooks from '../../components/FirstCategoryBooks/FirstCategoryBooks';
 import SecondCategoryBooks from '../../components/SecondCategoryBooks/SecondCategoryBooks';
+import PreOrderBooks from '../../components/PreOrderBooks/PreOrderBooks';
 const Home = () => {
   return (
     <div>
@@ -28,6 +29,7 @@ const Home = () => {
       <AddBanner></AddBanner>
 
       {/* Pre Order section */}
+      <PreOrderBooks />
 
       {/* <Routes>
         <Route path="/" element={<ProductSwitch />}>

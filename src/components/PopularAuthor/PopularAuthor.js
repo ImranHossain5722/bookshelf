@@ -26,7 +26,7 @@ const PopularAuthor = () => {
     useEffect(() => {
         //  responsiveness added by width change
         if (width >= 992) {
-            setSize(4)
+            setSize(5)
         }
         // else if (width >= 768) {
         //     setSize(3)

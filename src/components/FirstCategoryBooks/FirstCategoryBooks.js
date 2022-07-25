@@ -11,14 +11,34 @@ import "swiper/css/navigation";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import Stars from "../Stars/Stars";
+import useWindowDimensions from "../windowSize/windowSize";
 
 const FirstCategoryBooks = () => {
     const [books, setBooks] = useState([]);
+    const [size, setSize] = useState(1);
+    const { width } = useWindowDimensions();
+
     useEffect(() => {
         fetch('data.json')
             .then(res => res.json())
             .then(data => setBooks(data));
     }, []);
+
+    useEffect(() => {
+        //  responsiveness added by width change
+        if (width >= 992) {
+            setSize(4)
+        }
+        // else if (width >= 768) {
+        //     setSize(3)
+        // }
+        else if (width >= 576) {
+            setSize(2)
+        }
+        else {
+            setSize(1)
+        }
+    }, [width]);
 
     return (
         <div className="bg-white max-w-[1240px] mx-auto mt-[120px] py-10">
@@ -28,9 +48,9 @@ const FirstCategoryBooks = () => {
             {/* ------categories slider----- */}
             <div className="mt-8">
                 <Swiper
-                    slidesPerView={4}
+                    slidesPerView={size}
                     spaceBetween={30}
-                    slidesPerGroup={4}
+                    slidesPerGroup={size}
                     loop={true}
                     loopFillGroupWithBlank={true}
                     navigation={true}
@@ -40,7 +60,7 @@ const FirstCategoryBooks = () => {
                 >
                     {
                         books.map(book => <SwiperSlide key={book._id}>
-                            <div className="shadow-lg rounded-lg py-6 flex items-center justify-center hover:fill-blue-500">
+                            <div className="shadow-lg rounded-lg h-[460px] pt-6 flex justify-center hover:fill-blue-500">
                                 <div>
                                     <img src={book.image} className="h-64 w-44 image-full" alt="" />
                                     <div className="w-44 mt-2">

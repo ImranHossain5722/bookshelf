@@ -10,15 +10,35 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Navigation } from "swiper";
-import Stars from "../Stars/Stars";
+import useWindowDimensions from "../windowSize/windowSize";
 
 const PopularAuthor = () => {
     const [authors, setAuthors] = useState([]);
+    const [size, setSize] = useState(1);
+    const { width } = useWindowDimensions();
+
     useEffect(() => {
         fetch('reviews/review.json')
             .then(res => res.json())
             .then(data => setAuthors(data));
     }, []);
+
+    useEffect(() => {
+        //  responsiveness added by width change
+        if (width >= 992) {
+            setSize(4)
+        }
+        // else if (width >= 768) {
+        //     setSize(3)
+        // }
+        else if (width >= 576) {
+            setSize(2)
+        }
+        else {
+            setSize(1)
+        }
+    }, [width]);
+
     return (
         <div className="bg-white max-w-[1240px] mx-auto my-[120px] py-10">
             {/* ------title section----- */}
@@ -27,9 +47,9 @@ const PopularAuthor = () => {
             {/* ------categories slider----- */}
             <div className="mt-8">
                 <Swiper
-                    slidesPerView={5}
+                    slidesPerView={size}
                     spaceBetween={30}
-                    slidesPerGroup={5}
+                    slidesPerGroup={size}
                     loop={true}
                     loopFillGroupWithBlank={true}
                     navigation={true}

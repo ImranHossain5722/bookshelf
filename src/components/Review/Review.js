@@ -14,16 +14,16 @@ import './review.css'
 import useWindowDimensions from "../windowSize/windowSize";
 
 const Review = () => {
-  const [reviews, setReviews] = useState([])
-  const [size, setSize] = useState(1)
-  const { width } = useWindowDimensions()
+  const [reviews, setReviews] = useState([]);
+  const [size, setSize] = useState(1);
+  const { width } = useWindowDimensions();
 
   // fetched  review data
   useEffect(() => {
     fetch('reviews/review.json')
       .then(res => res.json())
       .then(data => setReviews(data))
-  }, [])
+  }, []);
 
   useEffect(() => {
     //  responsiveness added by width change

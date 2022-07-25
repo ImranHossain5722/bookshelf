@@ -90,11 +90,7 @@ const NavBar = ({ children }) => {
                     )}
                   </li> */}
 
-                <li>
-                  <NavLink to="/signup" className="rounded-lg">
-                    Sign Up
-                  </NavLink>
-                </li>
+
               </ul>
             </div>
 
@@ -115,9 +111,12 @@ const NavBar = ({ children }) => {
                 <img className="" alt="" src={bag} />
               </div>
               <div className="user mx-4 ">
-                <NavLink to="/login" className="rounded-lg">
-                  <img className="" alt="" src={userImg} />
-                </NavLink>
+                {user ? <span>
+                  <img onClick={handelSignOut} className=" rounded-2xl" alt="" height={30} width={30} src={user ? user?.photoURL : userImg} /></span> :
+
+                  <NavLink to="/login" className="rounded-lg">
+                    <img className=" rounded-2xl" height={30} width={30} alt="" src={userImg} />
+                  </NavLink>}
               </div>
 
               {/* dark button */}
@@ -171,9 +170,6 @@ const NavBar = ({ children }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/signup" className="rounded-lg">
-                Sign Up
-              </NavLink>
             </li>
           </ul>
         </div>

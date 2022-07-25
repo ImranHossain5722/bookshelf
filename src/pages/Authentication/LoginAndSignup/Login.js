@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import Loading from '../../../components/Loading/Loading';
 import auth from '../../../firebase.init';
-import logo from '../../../Assets/images/Logo/Upbookself-.png';
+import logo from '../../../Assets/images/Logo/bookshelf-.png';
 // import useToken from '../../../hooks/useToken';
 import SocialLogin from './SocialLogin';
 
@@ -33,13 +33,10 @@ const Login = () => {
         <Loading></Loading>
     }
 
-
-
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password);
         reset();
     }
-
 
     return (
         <div className='flex justify-center items-center min-h-[70vh]'>

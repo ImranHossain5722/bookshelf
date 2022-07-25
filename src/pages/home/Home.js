@@ -14,6 +14,7 @@ import FirstCategoryBooks from '../../components/FirstCategoryBooks/FirstCategor
 import SecondCategoryBooks from '../../components/SecondCategoryBooks/SecondCategoryBooks';
 import PreOrderBooks from '../../components/PreOrderBooks/PreOrderBooks';
 import BestSelling from '../../components/BestSelling/BestSelling';
+import RecentlyViewed from '../../components/RecentlyViewed/RecentlyViewed';
 const Home = () => {
   return (
     <div>
@@ -46,6 +47,7 @@ const Home = () => {
       <BestSelling />
       <Newsletter></Newsletter>
       {/* Recently veiwd section */}
+      <RecentlyViewed />
     </div>
   );
 };

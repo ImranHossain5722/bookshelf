@@ -9,12 +9,13 @@ import Categorys from "../../components/Category/Categorys";
 import Newsletter from "../../components/NewsLetter/Newsletter";
 import ProductSwitch from "../../components/ProductSwitch/ProductSwitch";
 import Release from "../Release/Release";
-import Review from "../Review/Review";
+import Review from "../../components/Review/Review";
 import FirstCategoryBooks from '../../components/FirstCategoryBooks/FirstCategoryBooks';
 import SecondCategoryBooks from '../../components/SecondCategoryBooks/SecondCategoryBooks';
 import PreOrderBooks from '../../components/PreOrderBooks/PreOrderBooks';
 import BestSelling from '../../components/BestSelling/BestSelling';
 import RecentlyViewed from '../../components/RecentlyViewed/RecentlyViewed';
+import PopularAuthor from '../../components/PopularAuthor/PopularAuthor';
 const Home = () => {
   return (
     <div>
@@ -31,6 +32,7 @@ const Home = () => {
 
       {/* Pre Order section */}
       <PreOrderBooks />
+      <PopularAuthor />
 
       {/* <Routes>
         <Route path="/" element={<ProductSwitch />}>

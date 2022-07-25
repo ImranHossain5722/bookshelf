@@ -11,7 +11,7 @@ import "swiper/css/effect-coverflow";
 // import required modules
 import { Navigation } from "swiper";
 import './review.css'
-import useWindowDimensions from "../../components/windowSize/windowSize";
+import useWindowDimensions from "../windowSize/windowSize";
 
 const Review = () => {
   const [reviews, setReviews] = useState([])

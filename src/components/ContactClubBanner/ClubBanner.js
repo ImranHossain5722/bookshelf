@@ -29,7 +29,7 @@ const ClubBanner = () => {
             <p class="mb-5 ">
               Join Our Readers Club. It's a coummuity for books lover. we can discus every user about to books details.
             </p>
-            <button class="btn btn-primary text-white">Join</button>
+            <button class="btn btn-primary text-white hover:text-white hover:bg-accent">Join</button>
           </div>
         </div>
       </div>

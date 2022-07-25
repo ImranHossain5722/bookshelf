@@ -5,7 +5,8 @@ import { toast } from 'react-toastify';
 import Loading from '../../../components/Loading/Loading';
 import auth from '../../../firebase.init';
 import useToken from '../../../hooks/useToken';
-import google from '../../../Assets/images/Social-Icons/google.png'
+import google from '../../../Assets/images/Social-Icons/google.png';
+import fb from '../../../Assets/images/Social-Icons/facebook.png';
 
 
 const SocialLogin = () => {
@@ -35,7 +36,7 @@ const SocialLogin = () => {
             <div className=' mt-4'>
                 <button
                     onClick={() => signInWithGoogle()}
-                    className="btn btn-outline btn-primary hover:text-white "
+                    className="btn bg-white text-secondary hover:bg-secondary hover:text-white w-full"
                 >
                     Continute With Google
                     <img className='ml-2' src={google} alt="" width={25} height={25} />
@@ -44,10 +45,10 @@ const SocialLogin = () => {
             <div className=' mt-4'>
                 <button
                     onClick={() => signInWithFacebook()}
-                    className="btn btn-outline btn-primary hover:text-white "
+                    className="btn bg-white text-secondary hover:bg-secondary hover:text-white w-full"
                 >
                     Continute With Facebook
-                    <img className='ml-2' src={google} alt="" width={25} height={25} />
+                    <img className='ml-2' src={fb} alt="" width={25} height={25} />
                 </button>
             </div>
         </div>

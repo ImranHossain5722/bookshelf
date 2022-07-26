@@ -84,6 +84,26 @@ const NavBar = ({ children }) => {
                     Authors
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to="/addcategory" className="rounded-lg">
+                    Add Category
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/addbook" className="rounded-lg">
+                    Add Book
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/addauthor" className="rounded-lg">
+                    Add Author
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/addpublisher" className="rounded-lg">
+                    Add Publisher
+                  </NavLink>
+                </li>
 
                 {/* <li>
                     {user ? (
@@ -118,7 +138,7 @@ const NavBar = ({ children }) => {
                 <img className="" alt="" src={bag} />
               </div>
               <div className="user mx-4 ">
-                {user ? <span>
+                {user ? <span tabindex="0">
                   <img onClick={handelSignOut} className=" rounded-2xl" alt="" height={30} width={30} src={user?.photoURL ? user?.photoURL : userImg} /></span> :
 
                   <NavLink to="/login" className="rounded-lg">

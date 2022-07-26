@@ -21,6 +21,7 @@ const PopularAuthor = () => {
     const { width } = useWindowDimensions();
 
     useEffect(() => {
+        // add author route 
         fetch('reviews/review.json')
             .then(res => res.json())
             .then(data => dispatch(author(data))); 

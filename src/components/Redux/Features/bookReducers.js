@@ -1,9 +1,13 @@
+import { getDefaultMiddleware } from "@reduxjs/toolkit";
 import { ActionTypes } from "../Constants/ActionTypes";
 
 
 const defState = {
     books : [],
-    author:[]
+    author:[],
+    user:{},
+    popularBooks:[],
+    category:[]
 }
 
 export const sellBookReducer = (state = defState, {type, payload} ) => {
@@ -29,7 +33,48 @@ export const addCartReducer = (state = defState, {type, payload} ) => {
 export const authorsReducer = (state = defState, {type, payload} ) => {
     switch (type) {
         case ActionTypes.AUTHOR:
-            return {...state, author : payload};
+            return { 
+                author : payload
+            }
+    
+        default:
+            return state;
+    }
+}
+
+export const userReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.NEWUSER:
+           
+            return { 
+                user : payload
+            };
+    
+        default:
+            return state;
+    }
+}
+
+export const popularBookReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.POPULARBOOKS:
+          
+            return {
+                popularBooks : payload
+            };
+    
+        default:
+            return state;
+    }
+}
+
+export const categoryReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.CATEGORY:
+          
+            return {
+                category : payload
+            };
     
         default:
             return state;

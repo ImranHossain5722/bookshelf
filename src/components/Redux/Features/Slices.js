@@ -1,29 +1,21 @@
 import React from 'react'
-import { createSlice } from "@reduxjs/toolkit";
-
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from 'axios'
+export const fetchSellings = createAsyncThunk('books/fetchSellings', async () => {
+    const {data} = await axios.get('data.json')
+   return data;
+})
 
 export const Books = createSlice({
     name:"books",
     initialState:{
-        books: []
+        isLoading : false,
+        books: [],
+        error : null
     },
-    reducers:{
-        sellings : (state,{payload} ) => {
-            state.books = payload
-        },
-        user : (state, {payload}) => {
-
-        },
-        Books : (state, {payload}) =>{
-
-        },
-        setCatagory: (state, {payload}) =>{
-
-        },
-
-    }
+  
+    
 
 })
-export const {sellings} = Books.actions;
+
 export default Books.reducer

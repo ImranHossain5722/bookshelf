@@ -1,12 +1,14 @@
 import React from 'react'
 import { configureStore } from "@reduxjs/toolkit";
-import { sellings } from '../Features/Slices';
+import { sellBookReducer,addCartReducer, authorsReducer } from '../Features/bookReducers';
+
 
 
 const store = configureStore({
     reducer: {
-        sellBooks : sellings,
-
+        sellBooks : sellBookReducer,
+        addCart : addCartReducer,
+        author: authorsReducer 
     }
 })
 

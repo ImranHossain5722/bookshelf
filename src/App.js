@@ -2,11 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 // aos animation
 import AOS from "aos";
-import "aos/dist/aos.css";
-// import NavBar2 from "./components/Navbar/NavBar2";
+import "aos/dist/aos.css"; 
 // import SampleCard from "./components/SampleCard/SampleCard";
 import Footer from "./components/Footer/Footer";
-import Home from "./pages/Home/Home";
 import NavBar from "./components/Navbar/NavBar";
 import Login from "./pages/Authentication/LoginAndSignup/Login";
 import SignUp from "./pages/Authentication/LoginAndSignup/SignUp";
@@ -17,6 +15,7 @@ import AddBook from "./pages/Forms/AddBook";
 import AddCategory from "./pages/Forms/AddCategory";
 import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
+import Home from "./pages/home/Home";
 
 
 // initialize aos

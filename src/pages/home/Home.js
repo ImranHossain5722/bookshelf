@@ -48,7 +48,7 @@ const Home = () => {
       <Review />
       <BestSelling />
       <Newsletter></Newsletter>
-      {/* Recently veiwd section */}
+      {/* Recently veiwed section */}
       <RecentlyViewed />
     </div>
   );

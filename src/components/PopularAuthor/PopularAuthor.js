@@ -11,16 +11,20 @@ import "swiper/css/navigation";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import useWindowDimensions from "../windowSize/windowSize";
+import { useDispatch, useSelector } from "react-redux";
+import { author } from "../Redux/actions/bookActions";
 
 const PopularAuthor = () => {
-    const [authors, setAuthors] = useState([]);
+   const authors = useSelector((state)=> state.author.author)
+   const dispatch = useDispatch()
     const [size, setSize] = useState(1);
     const { width } = useWindowDimensions();
 
     useEffect(() => {
+        // add author route 
         fetch('reviews/review.json')
             .then(res => res.json())
-            .then(data => setAuthors(data));
+            .then(data => dispatch(author(data))); 
     }, []);
 
     useEffect(() => {
@@ -58,7 +62,7 @@ const PopularAuthor = () => {
                     style={{ "--swiper-theme-color": "#27AE61" }}
                 >
                     {
-                        authors.map(author => <SwiperSlide key={author.id}>
+                        authors?.map(author => <SwiperSlide key={author.id}>
                             <div className="py-6 flex items-center justify-center hover:fill-blue-500">
                                 <div>
                                     <img src={author.image} className="w-48 h-48 rounded-full image-full bg-cover" alt="" />

@@ -20,7 +20,7 @@ const NavBar = ({ children }) => {
   };
   // h-13vh
   return (
-    <div>
+    <div> 
 
       <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
 

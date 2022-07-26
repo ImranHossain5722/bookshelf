@@ -12,6 +12,11 @@ import Login from "./pages/Authentication/LoginAndSignup/Login";
 import SignUp from "./pages/Authentication/LoginAndSignup/SignUp";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
+import RequireAuth from "./pages/Authentication/RequireAuth/RequireAuth";
+import AddBook from "./pages/Forms/AddBook";
+import AddCategory from "./pages/Forms/AddCategory";
+import AddAuthor from "./pages/Forms/AddAuthor";
+import AddPublisher from "./pages/Forms/AddPublisher";
 
 
 // initialize aos
@@ -26,6 +31,10 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
+          <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
+          <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
+          <Route path="/addpublisher" element={<RequireAuth><AddPublisher /></RequireAuth>}></Route>
         </Routes>
 
         <Footer />

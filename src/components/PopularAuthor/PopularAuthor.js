@@ -42,7 +42,7 @@ const PopularAuthor = () => {
     return (
         <div className="bg-white max-w-[1240px] mx-auto my-[120px] py-10">
             {/* ------title section----- */}
-            <h1 className="pl-6 text-[40px] font-bold text-[#00124E]">Popular Author</h1>
+            <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">Popular Author</h1>
 
             {/* ------categories slider----- */}
             <div className="mt-8">

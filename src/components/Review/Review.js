@@ -40,8 +40,8 @@ const Review = () => {
   }, [width])
 
   return (
-    <div className="max-w-[1240px] mx-auto bg-white mt-[120px] py-4">
-      <h2 className="text-[40px] text-[#00124E] font-bold text-center pb-14">Clients Feedback</h2>
+    <div className="max-w-[1240px] mx-auto bg-white mt-[60px] lg:mt-[120px] py-4">
+      <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold text-center pb-14">Clients Feedback</h2>
       <Swiper
         slidesPerView={size}
         spaceBetween={30}

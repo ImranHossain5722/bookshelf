@@ -60,7 +60,7 @@ const FirstCategoryBooks = () => {
                 >
                     {
                         books.map(book => <SwiperSlide key={book._id}>
-                            <div className="shadow-lg rounded-lg h-[460px] pt-6 flex justify-center hover:fill-blue-500">
+                            <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center hover:fill-blue-500">
                                 <div>
                                     <img src={book.image} className="h-64 w-44 image-full" alt="" />
                                     <div className="w-44 mt-2">

@@ -8,6 +8,8 @@ import SampleCard from "./components/SampleCard/SampleCard";
 import Home from "./pages/home/Home";
 import Footer from "./components/Footer/Footer";
 import Cart from "./pages/Cart/Cart";
+import Checkout from "./pages/Checkout/Checkout";
+import Products_details from "./pages/Products_details/Products_details";
 
 // initialize aos
 AOS.init();
@@ -19,6 +21,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/cart" element={<Cart></Cart>}></Route>
+          <Route path="/checkout" element={<Checkout></Checkout>}></Route>
+          <Route
+            path="/products_details"
+            element={<Products_details></Products_details>}
+          ></Route>
         </Routes>
 
         {/* <SampleCard /> */}

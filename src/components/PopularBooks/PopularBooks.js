@@ -1,7 +1,9 @@
 import React from "react";
+
 import Card from "../Card/Card";
 
 const PopularBooks = () => {
+
   const imgLinks = [
     "https://i.ibb.co/ysvP0xV/62ac8862c-199403.png",
     "https://i.ibb.co/4pXDCwX/If-Cats-Disappeared-from-the-world-Genki-Kawamura-e7a6d-220182.png",

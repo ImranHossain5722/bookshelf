@@ -3,29 +3,37 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/images/Logo/bookshelf-.png";
-import user from "../../Assets/images/icon/001-user.png";
+import userImg from "../../Assets/images/icon/001-user.png";
 import bag from "../../Assets/images/icon//002-bag.png";
 import wishlist from "../../Assets/images/icon/003-heart.png";
+import { signOut } from "firebase/auth";
+
+import NavTopbar from "../NavTopbar/NavTopbar";
 const NavBar = ({ children }) => {
   const [dark, setDark] = useState(false);
 
-  // const [user] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
-  // const handelSignOut = () => {
-  //   signOut(auth);
-  //   localStorage.removeItem('accessToken');
-  // };
-// h-13vh
+  const handelSignOut = () => {
+    signOut(auth);
+    localStorage.removeItem('accessToken');
+  };
+  // h-13vh
   return (
-    <div>
+    <div> 
+
       <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
+
+
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
+          <NavTopbar />
           {/* <!-- Navbar --> */}
           <div class="w-full navbar bg-gray-200 px-20 ">
+
             <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
               <NavLink to="/" className="rounded-lg">
-                <img className="" src={logo} />
+                <img className="" alt="" src={logo} />
               </NavLink>
             </div>
             {/* mobile button */}
@@ -49,6 +57,7 @@ const NavBar = ({ children }) => {
 
             {/* desktop */}
             <div class="flex-none mx-20 hidden lg:block">
+
               <ul class="menu menu-horizontal  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>
@@ -75,6 +84,26 @@ const NavBar = ({ children }) => {
                     Authors
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to="/addcategory" className="rounded-lg">
+                    Add Category
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/addbook" className="rounded-lg">
+                    Add Book
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/addauthor" className="rounded-lg">
+                    Add Author
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/addpublisher" className="rounded-lg">
+                    Add Publisher
+                  </NavLink>
+                </li>
 
                 {/* <li>
                     {user ? (
@@ -88,11 +117,7 @@ const NavBar = ({ children }) => {
                     )}
                   </li> */}
 
-                <li>
-                  <NavLink to="/signup" className="rounded-lg">
-                    Sign Up
-                  </NavLink>
-                </li>
+
               </ul>
             </div>
 
@@ -107,13 +132,18 @@ const NavBar = ({ children }) => {
               </div>
               {/* user image */}
               <div className="user mx-4 mt-1">
-                <img className="" src={wishlist} />
+                <img className="" alt="" src={wishlist} />
               </div>
               <div className="user  ">
-                <img className="" src={bag} />
+                <img className="" alt="" src={bag} />
               </div>
               <div className="user mx-4 ">
-                <img className="" src={user} />
+                {user ? <span tabindex="0">
+                  <img onClick={handelSignOut} className=" rounded-2xl" alt="" height={30} width={30} src={user?.photoURL ? user?.photoURL : userImg} /></span> :
+
+                  <NavLink to="/login" className="rounded-lg">
+                    <img className=" rounded-2xl" height={30} width={30} alt="" src={userImg} />
+                  </NavLink>}
               </div>
 
               {/* dark button */}
@@ -167,9 +197,6 @@ const NavBar = ({ children }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/signup" className="rounded-lg">
-                Sign Up
-              </NavLink>
             </li>
           </ul>
         </div>

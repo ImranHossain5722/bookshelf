@@ -12,16 +12,19 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
 import Stars from "../Stars/Stars";
 import useWindowDimensions from "../windowSize/windowSize";
-
+import {useDispatch, useSelector} from 'react-redux'
+import Loading from "../Loading/Loading";
+import { sellBooks } from "../Redux/actions/bookActions";
 const BestSelling = () => {
-    const [books, setBooks] = useState([]);
+    const books = useSelector((state) => state.sellBooks.books)
+    const dispatch = useDispatch()
     const [size, setSize] = useState(1);
     const { width } = useWindowDimensions();
 
     useEffect(() => {
         fetch('data.json')
             .then(res => res.json())
-            .then(data => setBooks(data));
+            .then(data => dispatch(sellBooks(data)));
     }, []);
 
     useEffect(() => {
@@ -40,6 +43,7 @@ const BestSelling = () => {
         }
     }, [width]);
 
+  
     return (
         <div className="bg-white max-w-[1240px] mx-auto mt-[120px] py-10">
             {/* ------title section----- */}
@@ -59,7 +63,7 @@ const BestSelling = () => {
                     style={{ "--swiper-theme-color": "#27AE61" }}
                 >
                     {
-                        books.map(book => <SwiperSlide key={book._id}>
+                        books?.map(book => <SwiperSlide key={book._id}>
                             <div className="shadow-lg rounded-lg h-[460px] pt-6 flex justify-center hover:fill-blue-500">
                                 <div>
                                     <img src={book.image} className="h-64 w-44 image-full" alt="" />

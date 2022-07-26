@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 // aos animation
 import AOS from "aos";
-import "aos/dist/aos.css"; 
+import "aos/dist/aos.css";
 // import SampleCard from "./components/SampleCard/SampleCard";
 import Footer from "./components/Footer/Footer";
 import NavBar from "./components/Navbar/NavBar";
@@ -15,7 +15,7 @@ import AddBook from "./pages/Forms/AddBook";
 import AddCategory from "./pages/Forms/AddCategory";
 import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home/Home";
 
 
 // initialize aos

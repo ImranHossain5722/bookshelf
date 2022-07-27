@@ -8,7 +8,7 @@ import Footer from "./components/Footer/Footer";
 import NavBar from "./components/Navbar/NavBar";
 import Login from "./pages/Authentication/LoginAndSignup/Login";
 import SignUp from "./pages/Authentication/LoginAndSignup/SignUp";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import RequireAuth from "./pages/Authentication/RequireAuth/RequireAuth";
 import AddBook from "./pages/Forms/AddBook";
@@ -16,10 +16,8 @@ import AddCategory from "./pages/Forms/AddCategory";
 import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
 import Home from "./pages/Home/Home";
-<<<<<<< HEAD
-=======
 import Dashboard from "./pages/Dashboard/Dashboard";
->>>>>>> 22ed73a8d3ec26e87a9111b5e3fab13f7f171e7f
+
 
 
 // initialize aos
@@ -28,22 +26,57 @@ AOS.init();
 function App() {
   return (
     <div className="App">
-
       <NavBar>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
-          <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
-          <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
-          <Route path="/addpublisher" element={<RequireAuth><AddPublisher /></RequireAuth>}></Route>
-          <Route path="/dashboard" element={<RequireAuth><Dashboard></Dashboard></RequireAuth>} > </Route>
+          <Route
+            path="/addbook"
+            element={
+              <RequireAuth>
+                <AddBook />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/addcategory"
+            element={
+              <RequireAuth>
+                <AddCategory />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/addauthor"
+            element={
+              <RequireAuth>
+                <AddAuthor />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/addpublisher"
+            element={
+              <RequireAuth>
+                <AddPublisher />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/dashboard"
+            element={
+              <RequireAuth>
+                <Dashboard></Dashboard>
+              </RequireAuth>
+            }
+          >
+            {" "}
+          </Route>
         </Routes>
 
         <Footer />
       </NavBar>
-
 
       <ToastContainer />
     </div>

@@ -85,6 +85,12 @@ const NavBar = ({ children }) => {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to="/dashboard" className="rounded-lg">
+                    Dashboard
+                  </NavLink>
+                </li>
+                
+                <li>
                   <NavLink to="/addcategory" className="rounded-lg">
                     Add Category
                   </NavLink>

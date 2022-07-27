@@ -16,6 +16,10 @@ import AddCategory from "./pages/Forms/AddCategory";
 import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
 import Home from "./pages/home/Home";
+import Myprofile from "./components/Dashboard/Myprofile/Myprofile";
+import Myorder from "./components/Dashboard/Myorder/Myorder";
+import Addreview from "./components/Dashboard/Addreview/Addreview";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 
 // initialize aos
@@ -27,13 +31,22 @@ function App() {
 
       <NavBar>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home/>}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
           <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
           <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
           <Route path="/addpublisher" element={<RequireAuth><AddPublisher /></RequireAuth>}></Route>
+          <Route path="/dashboard" element={<RequireAuth>
+      <Dashboard/>
+     </RequireAuth>}>
+      <Route index element={<Myprofile/>} />
+       <Route path="myorder" element={<Myorder/>} />
+       <Route path="addreview" element={<Addreview/>} />
+    
+      
+      </Route>
         </Routes>
 
         <Footer />

@@ -1,7 +1,7 @@
-import React from 'react';
-import Banner from '../../components/Banner/Banner';
-import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner"
-import PopularBooks from '../../components/PopularBooks/PopularBooks';
+import React from "react";
+import Banner from "../../components/Banner/Banner";
+import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner";
+import PopularBooks from "../../components/PopularBooks/PopularBooks";
 import AddBanner from "../../components/AddBanner/AddBanner";
 import "../../components/CustomScrollbar/CustomScrollBar.css";
 
@@ -10,12 +10,12 @@ import Newsletter from "../../components/NewsLetter/Newsletter";
 import ProductSwitch from "../../components/ProductSwitch/ProductSwitch";
 import Release from "../Release/Release";
 import Review from "../../components/Review/Review";
-import FirstCategoryBooks from '../../components/FirstCategoryBooks/FirstCategoryBooks';
-import SecondCategoryBooks from '../../components/SecondCategoryBooks/SecondCategoryBooks';
-import PreOrderBooks from '../../components/PreOrderBooks/PreOrderBooks';
-import BestSelling from '../../components/BestSelling/BestSelling';
-import RecentlyViewed from '../../components/RecentlyViewed/RecentlyViewed';
-import PopularAuthor from '../../components/PopularAuthor/PopularAuthor';
+import FirstCategoryBooks from "../../components/FirstCategoryBooks/FirstCategoryBooks";
+import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCategoryBooks";
+import PreOrderBooks from "../../components/PreOrderBooks/PreOrderBooks";
+import BestSelling from "../../components/BestSelling/BestSelling";
+import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
+import PopularAuthor from "../../components/PopularAuthor/PopularAuthor";
 const Home = () => {
   return (
     <div>

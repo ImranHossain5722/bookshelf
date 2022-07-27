@@ -17,7 +17,7 @@ import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
 // import Home from "./pages/home/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home/Home";
 
 // initialize aos
 AOS.init();

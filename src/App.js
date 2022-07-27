@@ -17,6 +17,7 @@ import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
 import Home from "./pages/Home/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import AuthorOrPublisher from "./pages/Forms/AuthorOrPublisher";
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/became" element={<AuthorOrPublisher />}></Route>
           <Route
             path="/addbook"
             element={

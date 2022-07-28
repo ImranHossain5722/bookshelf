@@ -67,7 +67,7 @@ const AddPublisher = () => {
             await sendEmailVerification();
             toast('Verification Email Sent');
             // navigate('/dashboard');
-
+            console.log('user created on firebase');
             if (user) {
                 console.log('Got User')
                 const postPublisherData = async () => {
@@ -77,11 +77,12 @@ const AddPublisher = () => {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',
+                                'Accept': 'application/json'
                             },
                             body: JSON.stringify(publisherInfo)
                         })
                             .then(res => {
-
+                                console.log(res.json())
                             })
                             .then(data => {
                                 console.log("DB :", data)
@@ -94,6 +95,8 @@ const AddPublisher = () => {
                 }
                 postPublisherData();
 
+            } else {
+                console.log('user data not found')
             }
         }
         else {

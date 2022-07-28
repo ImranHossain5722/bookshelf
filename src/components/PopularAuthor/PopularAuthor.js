@@ -29,17 +29,18 @@ const PopularAuthor = () => {
 
     useEffect(() => {
         //  responsiveness added by width change
-        if (width >= 992) {
+        if (width >=1110) {
             setSize(5)
         }
-        // else if (width >= 768) {
-        //     setSize(3)
-        // }
+        else if (width >= 768) {
+            setSize(3)
+        }
+       
         else if (width >= 576) {
             setSize(2)
         }
         else {
-            setSize(5)
+            setSize(1)
         }
     }, [width]);
 
@@ -51,7 +52,7 @@ const PopularAuthor = () => {
             {/* ------categories slider----- */}
             <div className="mt-8">
                 <Swiper
-                    slidesPerView={5}
+                    slidesPerView={size}
                     spaceBetween={30}
                     // slidesPerGroup={size}
                     loop={true}

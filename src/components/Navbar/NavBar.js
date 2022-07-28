@@ -86,10 +86,10 @@ const NavBar = ({ children }) => {
                 />
               </div>
               {/* user image */}
-              <div className="user mx-4 mt-1">
+              <div className="hidden lg:flex user mx-4 mt-1">
                 <img className="" alt="" src={wishlist} />
               </div>
-              <div className="user  ">
+              <div className="user  hidden lg:flex">
                 <img className="" alt="" src={bag} />
               </div>
 
@@ -144,7 +144,7 @@ const NavBar = ({ children }) => {
               </div>
 
               {/* dark button */}
-              <label class="swap swap-rotate ">
+              <label class="swap swap-rotate hidden lg:flex ">
                 {/* <!-- this hidden checkbox controls the state --> */}
                 <input type="checkbox" onClick={() => setDark(!dark)} />
 
@@ -189,11 +189,17 @@ const NavBar = ({ children }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/authors" className="rounded-lg">
-                Authors
+              <NavLink to="/books" className="rounded-lg">
+              wishlist
               </NavLink>
             </li>
-            <li></li>
+            <li>
+              <NavLink to="/books" className="rounded-lg">
+              Cart
+              </NavLink>
+            </li>
+            
+          
           </ul>
         </div>
       </div>

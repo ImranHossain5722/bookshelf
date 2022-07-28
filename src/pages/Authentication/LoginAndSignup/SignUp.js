@@ -55,7 +55,7 @@ const SignUp = () => {
 
     }
     return (
-        <div className='flex justify-center items-center min-h-[70vh]'>
+        <div className='flex justify-center items-center h-full my-12'>
 
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className='text-center'>
@@ -167,11 +167,15 @@ const SignUp = () => {
                     </form>
                     <p className='mt-4'>Already have an account? <Link to='/login' className='text-primary font-bold'>Login</Link></p>
                 </div>
+                <div className='lg:hidden sm:flex  m-4'>
+                <SocialLogin></SocialLogin>
             </div>
-            <div class="outer">
+            </div>
+
+            <div class=" hidden lg:flex  outer" >
                 <div class="inner"></div>
             </div>
-            <div>
+            <div className='hidden lg:flex '>
                 <SocialLogin></SocialLogin>
             </div>
 

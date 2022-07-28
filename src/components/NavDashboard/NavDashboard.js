@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
-import logo from "../../Assets/images/Logo/bookshelf-.png";
+import logo from "../../Assets/images/Logo/logoBookself-.png";
 import userImg from "../../Assets/images/icon/001-user.png";
 import bag from "../../Assets/images/icon//002-bag.png";
 import wishlist from "../../Assets/images/icon/003-heart.png";
@@ -22,19 +22,20 @@ const NavDashboard = ({ children }) => {
   // h-13vh
   return (
     <div>
-      <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
+      <div class="drawer drawer-end  " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
-          {/* <NavTopbar /> */}
+          
           {/* <!-- Navbar --> */}
-          <div class="w-full navbar bg-gray-200 px-20 ">
-            <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
-              <NavLink to="/" className="rounded-lg">
-                <img className="" alt="" src={logo} />
+          <div class="w-full  navbar bg-white p-20 border-b-2 border-primary ">
+            <div style={{margin:"0px 0px 0px -45px"}} class=" hidden lg:flex  flex-1 px-2 ">
+              <NavLink to="/" className="text-white text-sm p-2 bg-primary rounded-md">
+               
+                Back to home
               </NavLink>
             </div>
             {/* mobile button */}
-            <div class="flex-none lg:hidden">
+            <div class="flex-none lg:hidden mr-5">
               <label for="my-drawer-3" class="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -53,13 +54,18 @@ const NavDashboard = ({ children }) => {
             </div>
 
             {/* desktop */}
-            <div class="flex-none mx-20 hidden lg:block">
-              <ul class="menu menu-horizontal  ">
+            <div className="flex-none mx-96 hidden lg:block">
+              <ul className="menu menu-vertical  ">
                 {/* <!-- Navbar menu content here --> */}
+                <li className="text-2xl text-primary uppercase text-center font-bold">
+                  Weclome to 
+                </li>
                 <li>
-                  <NavLink to="/" className="rounded-lg ">
-                    Home
-                  </NavLink>
+                  <img className="" height={45}
+                      width={150} alt="" src={logo} />
+                </li>
+                <li className="text-2xl text-secondary uppercase text-center font-bold">
+                  Deshbord
                 </li>
               </ul>
             </div>
@@ -68,7 +74,7 @@ const NavDashboard = ({ children }) => {
             <div>
               {/* user image */}
 
-              <div className="user ml-4 ">
+              <div className="user mr-4 ">
                 {user ? (
                   <span tabindex="0">
                     <img
@@ -129,22 +135,18 @@ const NavDashboard = ({ children }) => {
           <label for="my-drawer-3" class="drawer-overlay"></label>
           <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
             {/* <!-- Sidebar content here --> */}
-            <li>
-              <NavLink to="/" className="rounded-lg">
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/books" className="rounded-lg">
-                Books
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/authors" className="rounded-lg">
-                Authors
-              </NavLink>
-            </li>
-            <li></li>
+            <li><Link to='/' className='text-lg text-[#00124E] font-bold'>Home</Link></li>
+            <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
+       <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
+        <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
+        
+        <li><Link to='/dashboard/allusers' className='text-lg text-[#00124E] font-bold'>All Users</Link></li>
+        <li><Link to='/dashboard/allorders' className='text-lg text-[#00124E] font-bold'>All Orders</Link></li>
+        <li><Link to='/dashboard/allauthor' className='text-lg text-[#00124E] font-bold'>All Authors</Link></li>
+        <li><Link to='/dashboard/allpublisher' className='text-lg text-[#00124E] font-bold'>All Publishers</Link></li>
+        <li><Link to='/dashboard/orderhistory' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
+        <li><Link to='/dashboard/addproduct' className='text-lg text-[#00124E] font-bold'>All Product</Link></li>
+        <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
           </ul>
         </div>
       </div>

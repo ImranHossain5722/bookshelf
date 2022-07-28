@@ -2,20 +2,20 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 // aos animation
 import AOS from "aos";
-import "aos/dist/aos.css"; 
+import "aos/dist/aos.css";
 // import SampleCard from "./components/SampleCard/SampleCard";
 import Footer from "./components/Footer/Footer";
+
 import NavBar from "./components/Navbar/NavBar";
 import Login from "./pages/Authentication/LoginAndSignup/Login";
 import SignUp from "./pages/Authentication/LoginAndSignup/SignUp";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import RequireAuth from "./pages/Authentication/RequireAuth/RequireAuth";
 import AddBook from "./pages/Forms/AddBook";
 import AddCategory from "./pages/Forms/AddCategory";
 import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
-import Home from "./pages/home/Home";
 import Myprofile from "./components/Dashboard/Myprofile/Myprofile";
 import Myorder from "./components/Dashboard/Myorder/Myorder";
 import Addreview from "./components/Dashboard/Addreview/Addreview";
@@ -26,7 +26,7 @@ import AllUsers from "./components/Dashboard/AllUsers/AllUsers";
 import AllOrders from "./components/Dashboard/AllOrders/AllOrders";
 import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
 import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
-import { useEffect, useState } from "react";
+import Home from "./pages/home/Home";
 
 
 // initialize aos
@@ -38,7 +38,6 @@ function App() {
 
   return (
     <div className="App">
-
       <NavBar>
         <Routes>
           <Route path="/" element={<Home/>}></Route>
@@ -64,11 +63,43 @@ function App() {
     
       
       </Route>
+          <Route
+            path="/addbook"
+            element={
+              <RequireAuth>
+                <AddBook />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/addcategory"
+            element={
+              <RequireAuth>
+                <AddCategory />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/addauthor"
+            element={
+              <RequireAuth>
+                <AddAuthor />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/addpublisher"
+            element={
+              <RequireAuth>
+                <AddPublisher />
+              </RequireAuth>
+            }
+          ></Route>
+        
         </Routes>
 
         <Footer />
       </NavBar>
-
 
       <ToastContainer />
     </div>

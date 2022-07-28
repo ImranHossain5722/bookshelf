@@ -1,0 +1,7 @@
+.book-shadow {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.10);
+}
+
+.for-hover:hover .hover-button {
+    display: inline-flex;
+}

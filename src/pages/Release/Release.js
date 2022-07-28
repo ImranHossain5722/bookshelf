@@ -19,10 +19,10 @@ const Release = () => {
       const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((duration % (1000 * 60)) / 1000);
 
-      if(duration < 0){
+      if (duration < 0) {
         clearInterval(interval.current)
       }
-      else{
+      else {
         setCountDays(days)
         setCountHour(hours)
         setCountMinutes(minutes)
@@ -30,26 +30,26 @@ const Release = () => {
       }
 
     }, 1000);
-    
+
   }
-  
-      useEffect(() => {
-        startCounting()
-      
-        return () => {
-          clearInterval(interval.current)
-         
-        }
-      }, [])
+
+  useEffect(() => {
+    startCounting()
+
+    return () => {
+      clearInterval(interval.current)
+
+    }
+  }, [])
   return (
-    <div className='px-10 bg-white mx-auto max-w-[1240px] mt-[120px] shadow-xl rounded-xl'>
+    <div className='px-10 bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] shadow-xl rounded-xl'>
       <div class="card lg:card-side p-10">
         <figure><img className='rounded' src="https://images-us.bookshop.org/ingram/9780593353707.jpg?height=500&v=v2" alt="Album" /></figure>
         <div class="card-body flex justify-center items-center">
           <div>
-          <p className='  text-xl lg:text-[40px]  my-5 font-semibold text-accent' >Time Remaining For </p>
-          <p className=' text-xl lg:text-[40px] mb-5 font-semibold text-accent' >Publishing!
-</p>
+            <p className='  text-xl lg:text-[30px] lg:text-[40px]  my-5 font-semibold text-accent' >Time Remaining For </p>
+            <p className=' text-xl lg:text-[30px] lg:text-[40px] mb-5 font-semibold text-accent' >Publishing!
+            </p>
 
             <div className='lg:flex lg:justify-around '>
               <div className="text-center bg-">

@@ -7,7 +7,6 @@ import "../../components/CustomScrollbar/CustomScrollBar.css";
 
 import Categorys from "../../components/Category/Categorys";
 import Newsletter from "../../components/NewsLetter/Newsletter";
-import ProductSwitch from "../../components/ProductSwitch/ProductSwitch";
 import Release from "../Release/Release";
 import Review from "../../components/Review/Review";
 import FirstCategoryBooks from "../../components/FirstCategoryBooks/FirstCategoryBooks";
@@ -20,15 +19,16 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <ContactClubBanner></ContactClubBanner>
+      <ContactClubBanner />
 
       {/* select catgory */}
-      <Categorys></Categorys>
+      <Categorys />
       <FirstCategoryBooks />
       <SecondCategoryBooks />
 
       {/* popler book section */}
-      <AddBanner></AddBanner>
+      <PopularBooks />
+      <AddBanner />
 
       {/* Pre Order section */}
       <PreOrderBooks />
@@ -42,12 +42,11 @@ const Home = () => {
         </Route>
       </Routes> */}
 
-      <ProductSwitch />
-      <PopularBooks />
+
       <Release />
       <Review />
       <BestSelling />
-      <Newsletter></Newsletter>
+      <Newsletter />
       {/* Recently veiwed section */}
       <RecentlyViewed />
     </div>

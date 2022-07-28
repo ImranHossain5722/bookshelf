@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-// import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading/Loading';
 import auth from '../../firebase.init';
@@ -39,28 +38,10 @@ const AddPublisher = () => {
     if (user) {
         console.log('Got User')
         const postPublisherData = async () => {
-            // try {
-            //     console.log('inside try', publisherInfo)
-            //     await fetch(`https://bookshelf-web.herokuapp.com/add-user`, {
-            //         method: 'POST',
-            //         headers: {
-            //             'content-type': 'application/json',
-            //             'Accept': 'application/json'
-            //         },
-            //         body: JSON.stringify(publisherInfo)
-            //     })
-            //         .then(res => {
-            //             console.log(res.json())
-            //         })
-            //         .then(data => {
-            //             console.log("DB :", data)
-            //             toast.success(`Account created Successfully`);
-            //         })
-            // }
-            // catch (error) {
-            //     console.error(error)
-            // }
+
             await axios.post('https://bookshelf-web.herokuapp.com/add-user', publisherInfo).then(data => console.log(data))
+            navigate('/dashboard');
+
         }
         postPublisherData();
 
@@ -76,13 +57,12 @@ const AddPublisher = () => {
             await updateProfile({ displayName: data?.publisher_name, phoneNumber: data?.phone });
             await sendEmailVerification();
             toast('Verification Email Sent');
-            // navigate('/dashboard');
             console.log('user created on firebase');
         }
         else {
             toast('Password and Confirm Password Dose not match');
         }
-        // reset();
+        reset();
     }
     return (
         <div className="pt-0 pb-12 w-1/2 mx-auto">

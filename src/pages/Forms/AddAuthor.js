@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-// import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading/Loading';
 import auth from '../../firebase.init';
@@ -24,7 +23,6 @@ const AddAuthor = () => {
     if (error || uError || vError) {
         toast(`Error: ${error?.message}` || uError?.message)
     }
-    // const [user] = useAuthState(auth);
     let confirmPassError;
     const authorInfo = {
         user_name: user?.user?.displayName,
@@ -40,7 +38,7 @@ const AddAuthor = () => {
         const postAuthorData = async () => {
 
             await axios.post('https://bookshelf-web.herokuapp.com/add-user', authorInfo).then(data => console.log(data))
-            // navigate('/dashboard');
+            navigate('/dashboard');
 
         }
         postAuthorData();
@@ -65,7 +63,7 @@ const AddAuthor = () => {
         else {
             toast('Password and Confirm Password Dose not match');
         }
-        // reset();
+        reset();
     }
     return (
         <div className="pt-0 pb-12 w-1/2 mx-auto">

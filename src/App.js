@@ -18,6 +18,10 @@ import AddPublisher from "./pages/Forms/AddPublisher";
 // import Home from "./pages/home/Home";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Home from "./pages/Home/Home";
+import Cart from "./pages/Cart/Cart"
+import Checkout from "./pages/Checkout/Checkout"
+import Products from "./pages/Products/Products";
+import Products_details from "./pages/Products_details/Products_details";
 
 // initialize aos
 AOS.init();
@@ -72,6 +76,11 @@ function App() {
           >
             {" "}
           </Route>
+
+          <Route path="/cart" element={<RequireAuth> <Cart></Cart>  </RequireAuth>}  > </Route>
+          <Route path="/checkout" element={<RequireAuth> <Checkout></Checkout>  </RequireAuth>}  > </Route>
+          <Route path="/product" element={<RequireAuth> <Products></Products>  </RequireAuth>}  > </Route>
+          <Route path="/productdetails" element={<RequireAuth> <Products_details></Products_details>  </RequireAuth>}  > </Route>
         </Routes>
 
         <Footer />

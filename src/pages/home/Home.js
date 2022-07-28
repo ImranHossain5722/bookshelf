@@ -1,21 +1,21 @@
-import React from 'react';
-import Banner from '../../components/Banner/Banner';
-import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner"
-import PopularBooks from '../../components/PopularBooks/PopularBooks';
+import React from "react";
 import AddBanner from "../../components/AddBanner/AddBanner";
+import Banner from "../../components/Banner/Banner";
+import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner";
 import "../../components/CustomScrollbar/CustomScrollBar.css";
+import PopularBooks from "../../components/PopularBooks/PopularBooks";
 
+import BestSelling from "../../components/BestSelling/BestSelling";
 import Categorys from "../../components/Category/Categorys";
+import FirstCategoryBooks from "../../components/FirstCategoryBooks/FirstCategoryBooks";
 import Newsletter from "../../components/NewsLetter/Newsletter";
+import PopularAuthor from "../../components/PopularAuthor/PopularAuthor";
+import PreOrderBooks from "../../components/PreOrderBooks/PreOrderBooks";
 import ProductSwitch from "../../components/ProductSwitch/ProductSwitch";
-import Release from "../Release/Release";
+import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 import Review from "../../components/Review/Review";
-import FirstCategoryBooks from '../../components/FirstCategoryBooks/FirstCategoryBooks';
-import SecondCategoryBooks from '../../components/SecondCategoryBooks/SecondCategoryBooks';
-import PreOrderBooks from '../../components/PreOrderBooks/PreOrderBooks';
-import BestSelling from '../../components/BestSelling/BestSelling';
-import RecentlyViewed from '../../components/RecentlyViewed/RecentlyViewed';
-import PopularAuthor from '../../components/PopularAuthor/PopularAuthor';
+import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCategoryBooks";
+import Release from "../Release/Release";
 const Home = () => {
   return (
     <div>
@@ -50,6 +50,13 @@ const Home = () => {
       <Newsletter></Newsletter>
       {/* Recently veiwed section */}
       <RecentlyViewed />
+
+      <label for="quick-view" class="btn modal-button">
+        open quick view modal
+      </label>
+      {/* <Modal modal={"quick-view"}>
+        <QuickView />
+      </Modal> */}
     </div>
   );
 };

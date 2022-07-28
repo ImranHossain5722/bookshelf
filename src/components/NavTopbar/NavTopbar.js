@@ -4,9 +4,13 @@ import email from "../../Assets/images/icon/Email.png";
 import liveChat from "../../Assets/images/icon/Support agent.png";
 import IG from "../../Assets/images/icon/instagram 1.png";
 import FB from "../../Assets/images/icon/facebook-app-symbol 1.png";
+import { useLocation } from "react-router-dom";
 const NavTopbar = () => {
+  
+
   return (
-    <div className="bg-primary p-2">
+    <div 
+    className="bg-primary p-2">
       <div className="grid justify-center	">
         <div className="grid md:grid-cols-3 lg:grid-cols-4">
           <div className="flex items-center">
@@ -30,17 +34,6 @@ const NavTopbar = () => {
 
            
         </div>
-        {/* <div className="lg:cols-2">
-          <div className="flex">
-            <div className="pt-2">
-            <img className="mr-4"src={FB} />
-            </div>
-            <div className="pt-2">
-            <img className=""src={IG} />
-              
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

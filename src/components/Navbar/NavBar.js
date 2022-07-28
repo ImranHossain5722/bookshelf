@@ -22,37 +22,37 @@ const NavBar = ({ children }) => {
 
   };
 
-  
+
 
   return (
-    
-    <nav 
-    
+
+    <nav
+
     >
-      <div  class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
+      <div class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
-          <NavTopbar  />
+          <NavTopbar />
           {/* <!-- Navbar --> */}
-          <div  class="w-full navbar bg-gray-200 px-20 ">
+          <div class="w-full navbar bg-gray-200 px-20 ">
             <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
               <NavLink to="/" className="rounded-lg">
                 <img className="" alt="" src={logo} />
               </NavLink>
             </div>
             {/* mobile button */}
-            <div class="flex-none lg:hidden">
-              <label for="my-drawer-3" class="btn btn-square btn-ghost">
+            <div className="flex-none lg:hidden">
+              <label for="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  class="inline-block w-6 h-6 stroke-current"
+                  className="inline-block w-6 h-6 stroke-current"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M4 6h16M4 12h16M4 18h16"
                   ></path>
                 </svg>
@@ -78,11 +78,11 @@ const NavBar = ({ children }) => {
 
             {/* dark button */}
             <div>
-              <div class="form-control mx-4">
+              <div className="form-control mx-4">
                 <input
                   type="text"
                   placeholder="Search Books"
-                  class="input input-bordered"
+                  className="input input-bordered"
                 />
               </div>
               {/* user image */}
@@ -113,9 +113,7 @@ const NavBar = ({ children }) => {
 
                           <ul
                             style={{ margin: "-14px 0px 0px 0px" }}
-                            class="p-2 z-40 drop-shadow-md
-
- bg-base-100"
+                            class="p-2 z-40 drop-shadow-md bg-base-100"
                           >
                             <li>
                               <Link target={"_blank"} to="dashboard">
@@ -150,7 +148,7 @@ const NavBar = ({ children }) => {
 
                 {/* <!-- sun icon --> */}
                 <svg
-                  class="swap-on fill-current w-10 h-10"
+                  className="swap-on fill-current w-10 h-10"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -174,9 +172,9 @@ const NavBar = ({ children }) => {
         </div>
 
         {/* mobile-phone */}
-        <div class="drawer-side">
-          <label for="my-drawer-3" class="drawer-overlay"></label>
-          <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+        <div className="drawer-side">
+          <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
             {/* <!-- Sidebar content here --> */}
             <li>
               <NavLink to="/" className="rounded-lg">
@@ -190,16 +188,16 @@ const NavBar = ({ children }) => {
             </li>
             <li>
               <NavLink to="/books" className="rounded-lg">
-              wishlist
+                wishlist
               </NavLink>
             </li>
             <li>
               <NavLink to="/books" className="rounded-lg">
-              Cart
+                Cart
               </NavLink>
             </li>
-            
-          
+
+
           </ul>
         </div>
       </div>

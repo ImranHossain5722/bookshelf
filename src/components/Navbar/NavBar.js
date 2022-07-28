@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/images/Logo/bookshelf-.png";
 import userImg from "../../Assets/images/icon/001-user.png";
 import bag from "../../Assets/images/icon//002-bag.png";
 import wishlist from "../../Assets/images/icon/003-heart.png";
 import { signOut } from "firebase/auth";
-import downArrow from "../../Assets/images/icon/down-arrow.png"
-
+import downArrow from "../../Assets/images/icon/down-arrow.png";
 import NavTopbar from "../NavTopbar/NavTopbar";
+
+
 const NavBar = ({ children }) => {
   const [dark, setDark] = useState(false);
 
@@ -17,21 +18,23 @@ const NavBar = ({ children }) => {
 
   const handelSignOut = () => {
     signOut(auth);
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
+
   };
-  // h-13vh
+
+  
+
   return (
-    <div> 
-
-      <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
-
-
+    
+    <nav 
+    
+    >
+      <div  class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
-          <NavTopbar />
+          <NavTopbar  />
           {/* <!-- Navbar --> */}
-          <div class="w-full navbar bg-gray-200 px-20 ">
-
+          <div  class="w-full navbar bg-gray-200 px-20 ">
             <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
               <NavLink to="/" className="rounded-lg">
                 <img className="" alt="" src={logo} />
@@ -58,7 +61,6 @@ const NavBar = ({ children }) => {
 
             {/* desktop */}
             <div class="flex-none mx-20 hidden lg:block">
-
               <ul class="menu menu-horizontal  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>
@@ -71,39 +73,6 @@ const NavBar = ({ children }) => {
                     Books
                   </NavLink>
                 </li>
-
-                {/* <li>
-                  <NavLink to="/authors" className="rounded-lg">
-                    Authors
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard" className="rounded-lg">
-                    Dashboard
-                  </NavLink>
-                </li>
-                
-                <li>
-                  <NavLink to="/addcategory" className="rounded-lg">
-                    Add Category
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/addbook" className="rounded-lg">
-                    Add Book
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/addauthor" className="rounded-lg">
-                    Add Author
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/addpublisher" className="rounded-lg">
-                    Add Publisher
-                  </NavLink>
-                </li> */}
-
               </ul>
             </div>
 
@@ -117,49 +86,65 @@ const NavBar = ({ children }) => {
                 />
               </div>
               {/* user image */}
-              <div className="user mx-4 mt-1">
+              <div className="hidden lg:flex user mx-4 mt-1">
                 <img className="" alt="" src={wishlist} />
               </div>
-              <div className="user  ">
+              <div className="user  hidden lg:flex">
                 <img className="" alt="" src={bag} />
               </div>
 
               <div className="user ml-4 ">
-                {user ? <span tabindex="0">
+                {user ? (
+                  <span tabindex="0">
+                    <img
+                      style={{ margin: "40px 0px -10px -4px" }}
+                      onClick={handelSignOut}
+                      className=" rounded-2xl"
+                      alt=""
+                      height={30}
+                      width={30}
+                      src={user?.photoURL ? user?.photoURL : userImg}
+                    />
 
-                <img style={{margin:"40px 0px -10px -4px"}} onClick={handelSignOut} className=" rounded-2xl" alt="" height={30} width={30} src={user?.photoURL ? user?.photoURL : userImg}/>
+                    <div class="flex-none">
+                      <ul class="menu menu-horizontal p-0">
+                        <li tabindex="0">
+                          <img className="" width={45} alt="" src={downArrow} />
 
-                  <div class="flex-none">
-                    <ul class="menu menu-horizontal p-0">
-                    <li tabindex="0">
+                          <ul
+                            style={{ margin: "-14px 0px 0px 0px" }}
+                            class="p-2 z-40 drop-shadow-md
 
-                      <img  className="" width={45} alt="" src={downArrow} />
-                      
-     
-        <ul style={{margin:"-14px 0px 0px 0px"}} class="p-2 z-40 drop-shadow-md
-
- bg-base-100">
-          <li><Link target={"_blank"} to="dashboard">Dashboard</Link></li>
-          <li><a onClick={handelSignOut} >sign Out</a></li>
-        </ul>
-      </li>
-      
-    </ul>
-  </div>
-                  
-                  </span> :
-
+ bg-base-100"
+                          >
+                            <li>
+                              <Link target={"_blank"} to="dashboard">
+                                Dashboard
+                              </Link>
+                            </li>
+                            <li>
+                              <a onClick={handelSignOut}>sign Out</a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </span>
+                ) : (
                   <NavLink to="/login" className="rounded-lg">
-                    <img className=" mr-4 rounded-2xl" height={30} width={30} alt="" src={userImg} />
-                  </NavLink>}
+                    <img
+                      className=" mr-4 rounded-2xl"
+                      height={30}
+                      width={30}
+                      alt=""
+                      src={userImg}
+                    />
+                  </NavLink>
+                )}
               </div>
 
-
-
-    
-
               {/* dark button */}
-              <label class="swap swap-rotate ">
+              <label class="swap swap-rotate hidden lg:flex ">
                 {/* <!-- this hidden checkbox controls the state --> */}
                 <input type="checkbox" onClick={() => setDark(!dark)} />
 
@@ -204,16 +189,21 @@ const NavBar = ({ children }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/authors" className="rounded-lg">
-                Authors
+              <NavLink to="/books" className="rounded-lg">
+              wishlist
               </NavLink>
             </li>
             <li>
+              <NavLink to="/books" className="rounded-lg">
+              Cart
+              </NavLink>
             </li>
+            
+          
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

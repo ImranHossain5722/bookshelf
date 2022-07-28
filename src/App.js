@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 // aos animation
 import AOS from "aos";
@@ -20,12 +20,22 @@ import Myprofile from "./components/Dashboard/Myprofile/Myprofile";
 import Myorder from "./components/Dashboard/Myorder/Myorder";
 import Addreview from "./components/Dashboard/Addreview/Addreview";
 import Dashboard from "./components/Dashboard/Dashboard";
+import AddProduct from "./components/Dashboard/AddProduct/AddProduct";
+import AllPublishers from "./components/Dashboard/AllPublishers/AllPublishers";
+import AllUsers from "./components/Dashboard/AllUsers/AllUsers";
+import AllOrders from "./components/Dashboard/AllOrders/AllOrders";
+import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
+import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
+import { useEffect, useState } from "react";
 
 
 // initialize aos
 AOS.init();
 
 function App() {
+ 
+
+
   return (
     <div className="App">
 
@@ -38,12 +48,19 @@ function App() {
           <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
           <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
           <Route path="/addpublisher" element={<RequireAuth><AddPublisher /></RequireAuth>}></Route>
+          {/* Dashboard routes */}
           <Route path="/dashboard" element={<RequireAuth>
       <Dashboard/>
      </RequireAuth>}>
       <Route index element={<Myprofile/>} />
        <Route path="myorder" element={<Myorder/>} />
        <Route path="addreview" element={<Addreview/>} />
+       <Route path="addproduct" element={<AddProduct/>} />
+       <Route path="allpublisher" element={<AllPublishers/>} />
+       <Route path="allusers" element={<AllUsers/>} />
+       <Route path="allorders" element={<AllOrders/>} />
+       <Route path="allauthor" element={<AllAuthors/>} />
+       <Route path="orderhistory" element={<OrderHistory/>} />
     
       
       </Route>

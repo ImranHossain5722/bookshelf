@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-// import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading/Loading';
 import auth from '../../firebase.init';
@@ -13,42 +14,25 @@ const AddPublisher = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate();
 
-    if (user) {
-        navigate('/dashboard');
-    }
-    if (loading || updating || sending) {
-        return <Loading></Loading>
-    }
-
-    if (error || uError || vError) {
-        toast(`Error: ${error?.message}` || uError?.message)
-    }
-    // const [user] = useAuthState(auth);
-    let confirmPassError;
-
-    const onSubmit = async (data) => {
-        const date = new Date();
-
-        const publisherInfo = {
-            author_name: data?.publisher_name,
-            author_email: data?.publisher_email,
-            phone: data?.phone,
-            address: data?.address,
-            user_role: 'publisher',
-            joining: date
-        }
-
-        // console.log(authorInfo);
-
-
-        const pass = data?.password;
-        const confirmPass = data?.cpassword;
-
-        if (pass === confirmPass) {
-            fetch(`https://bookshelf-web.herokuapp.com/add-publisher`, {
+    const getUser = useAuthState(auth);
+    let publisherInfo = {
+        user_name: user?.user?.displayName,
+        user_email: user?.user?.email,
+        user_phone: user?.user?.phoneNumber,
+        user_photo_url: user?.user?.photoURL,
+        uid: user?.user?.uid,
+        user_role: 'publisher',
+    };
+    console.log(publisherInfo);
+    console.log('user', user);
+    console.log('getUser', getUser);
+    useEffect(() => {
+        if (user || getUser) {
+            fetch(`https://bookshelf-web.herokuapp.com/add-user`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(publisherInfo)
             })
@@ -59,19 +43,45 @@ const AddPublisher = () => {
                     return res.json()
                 })
                 .then(data => {
+                    console.log("DB :", data)
                     toast.success(`Account created Successfully`);
                     reset();
                 })
+        }
 
+    }, [user, getUser])
+
+    if (loading || updating || sending) {
+        return <Loading></Loading>
+    }
+
+    if (error || uError || vError) {
+        toast(`Error: ${error?.message}` || uError?.message)
+    }
+    // const [user] = useAuthState(auth);
+
+    let confirmPassError;
+
+
+    const onSubmit = async (data) => {
+
+        // console.log(authorInfo);
+        const pass = data?.password;
+        const confirmPass = data?.cpassword;
+
+        if (pass === confirmPass) {
             await createUserWithEmailAndPassword(data?.publisher_email, data?.password);
-            await updateProfile({ displayName: data?.publisher_name });
+            await updateProfile({ displayName: data?.publisher_name, phoneNumber: data?.phone });
             await sendEmailVerification();
             toast('Verification Email Sent');
+
             reset();
+            // navigate('/dashboard');
         } else {
             toast('Password and Confirm Password Dose not match');
         }
         reset();
+
     }
     return (
         <div className="pt-0 pb-12 w-1/2 mx-auto">

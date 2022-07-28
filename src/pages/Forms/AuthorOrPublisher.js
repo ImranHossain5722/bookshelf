@@ -8,7 +8,6 @@ const AuthorOrPublisher = () => {
 
         const checked = e.target.checked;
         setIsChecked(checked);
-        console.log(isChecked);
     }
 
     return (

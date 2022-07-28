@@ -42,3 +42,52 @@ export const category = (books) =>{
         payload: books
     }
 }
+
+export const allUsers = (users) =>{
+    return {
+        type : ActionTypes.ALLUSER,
+        payload: users
+    }
+}
+
+export const allPublishers = (users) =>{
+    return {
+        type : ActionTypes.ALLUSER,
+        payload: users
+    }
+}
+
+export const allAuthors = (users) =>{
+    return {
+        type : ActionTypes.ALLUSER,
+        payload: users
+    }
+}
+
+export const MyOrder = (order) =>{
+    return {
+        type : ActionTypes.ALLUSER,
+        payload: order
+    }
+}
+
+export const allOrders = (orders) =>{
+    return {
+        type : ActionTypes.ALLUSER,
+        payload: orders
+    }
+}
+
+export const myProfile = (user) =>{
+    return {
+        type : ActionTypes.ALLUSER,
+        payload: user
+    }
+}
+
+export const orderHistory = (orders) =>{
+    return {
+        type : ActionTypes.ALLUSER,
+        payload: orders
+    }
+}

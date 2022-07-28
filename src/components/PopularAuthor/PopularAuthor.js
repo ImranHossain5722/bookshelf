@@ -29,12 +29,13 @@ const PopularAuthor = () => {
 
     useEffect(() => {
         //  responsiveness added by width change
-        if (width >= 992) {
+        if (width >=1110) {
             setSize(5)
         }
-        // else if (width >= 768) {
-        //     setSize(3)
-        // }
+        else if (width >= 768) {
+            setSize(3)
+        }
+       
         else if (width >= 576) {
             setSize(2)
         }
@@ -53,9 +54,9 @@ const PopularAuthor = () => {
                 <Swiper
                     slidesPerView={size}
                     spaceBetween={30}
-                    slidesPerGroup={size}
+                    // slidesPerGroup={size}
                     loop={true}
-                    loopFillGroupWithBlank={true}
+                    // loopFillGroupWithBlank={true}
                     navigation={true}
                     modules={[Navigation]}
                     className="mySwiper px-9 py-6"

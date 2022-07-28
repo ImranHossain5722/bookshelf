@@ -95,3 +95,10 @@ const FirstCategoryBooks = () => {
 };
 
 export default FirstCategoryBooks;
+
+
+{/* <Route path="/" element={<Home />}>
+            <Route path="/" element={<BestSellingBooks />} />
+            <Route path="/popular-writers" element={<PopularWritersBooks />} />
+            <Route path="/best-offers" element={<BestOffersBooks />} />
+          </Route> */}

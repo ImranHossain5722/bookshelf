@@ -10,7 +10,7 @@ import { signOut } from "firebase/auth";
 import downArrow from "../../Assets/images/icon/down-arrow.png"
 
 import NavTopbar from "../NavTopbar/NavTopbar";
-const NavBar = ({ children }) => {
+const NavDashboard = ({ children }) => {
   const [dark, setDark] = useState(false);
 
   const [user] = useAuthState(auth);
@@ -28,7 +28,7 @@ const NavBar = ({ children }) => {
 
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
-          <NavTopbar />
+          {/* <NavTopbar /> */}
           {/* <!-- Navbar --> */}
           <div class="w-full navbar bg-gray-200 px-20 ">
 
@@ -72,7 +72,7 @@ const NavBar = ({ children }) => {
                   </NavLink>
                 </li>
 
-                {/* <li>
+                <li>
                   <NavLink to="/authors" className="rounded-lg">
                     Authors
                   </NavLink>
@@ -102,7 +102,7 @@ const NavBar = ({ children }) => {
                   <NavLink to="/addpublisher" className="rounded-lg">
                     Add Publisher
                   </NavLink>
-                </li> */}
+                </li>
 
               </ul>
             </div>
@@ -217,4 +217,4 @@ const NavBar = ({ children }) => {
   );
 };
 
-export default NavBar;
+export default NavDashboard;

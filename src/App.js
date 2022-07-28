@@ -34,7 +34,7 @@ import PopularWritersBooks from "./components/PopularWritersBooks/PopularWriters
 import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home/Home";
 
 
 // initialize aos

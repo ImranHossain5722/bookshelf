@@ -21,35 +21,35 @@ const NavBar = ({ children }) => {
   };
   // h-13vh
   return (
-    <div> 
+    <div>
 
-      <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
+      <div className="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
 
 
-        <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content flex flex-col">
+        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content flex flex-col">
           <NavTopbar />
           {/* <!-- Navbar --> */}
-          <div class="w-full navbar bg-gray-200 px-20 ">
+          <div className="w-full navbar bg-gray-200 px-20 ">
 
-            <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
+            <div className="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
               <NavLink to="/" className="rounded-lg">
                 <img className="" alt="" src={logo} />
               </NavLink>
             </div>
             {/* mobile button */}
-            <div class="flex-none lg:hidden">
-              <label for="my-drawer-3" class="btn btn-square btn-ghost">
+            <div className="flex-none lg:hidden">
+              <label for="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  class="inline-block w-6 h-6 stroke-current"
+                  className="inline-block w-6 h-6 stroke-current"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M4 6h16M4 12h16M4 18h16"
                   ></path>
                 </svg>
@@ -57,9 +57,9 @@ const NavBar = ({ children }) => {
             </div>
 
             {/* desktop */}
-            <div class="flex-none mx-20 hidden lg:block">
+            <div className="flex-none mx-20 hidden lg:block">
 
-              <ul class="menu menu-horizontal  ">
+              <ul className="menu menu-horizontal  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>
                   <NavLink to="/" className="rounded-lg ">
@@ -109,11 +109,11 @@ const NavBar = ({ children }) => {
 
             {/* dark button */}
             <div>
-              <div class="form-control mx-4">
+              <div className="form-control mx-4">
                 <input
                   type="text"
                   placeholder="Search Books"
-                  class="input input-bordered"
+                  className="input input-bordered"
                 />
               </div>
               {/* user image */}
@@ -127,27 +127,27 @@ const NavBar = ({ children }) => {
               <div className="user ml-4 ">
                 {user ? <span tabindex="0">
 
-                <img style={{margin:"40px 0px -10px -4px"}} onClick={handelSignOut} className=" rounded-2xl" alt="" height={30} width={30} src={user?.photoURL ? user?.photoURL : userImg}/>
+                  <img style={{ margin: "40px 0px -10px -4px" }} onClick={handelSignOut} className=" rounded-2xl" alt="" height={30} width={30} src={user?.photoURL ? user?.photoURL : userImg} />
 
                   <div class="flex-none">
                     <ul class="menu menu-horizontal p-0">
-                    <li tabindex="0">
+                      <li tabindex="0">
 
-                      <img  className="" width={45} alt="" src={downArrow} />
-                      
-     
-        <ul style={{margin:"-14px 0px 0px 0px"}} class="p-2 z-40 drop-shadow-md
+                        <img className="" width={45} alt="" src={downArrow} />
+
+
+                        <ul style={{ margin: "-14px 0px 0px 0px" }} className="p-2 z-40 drop-shadow-md
 
  bg-base-100">
-          <li><Link target={"_blank"} to="dashboard">Dashboard</Link></li>
-          <li><a onClick={handelSignOut} >sign Out</a></li>
-        </ul>
-      </li>
-      
-    </ul>
-  </div>
-                  
-                  </span> :
+                          <li><Link target={"_blank"} to="dashboard">Dashboard</Link></li>
+                          <li><span onClick={handelSignOut} >sign Out</span></li>
+                        </ul>
+                      </li>
+
+                    </ul>
+                  </div>
+
+                </span> :
 
                   <NavLink to="/login" className="rounded-lg">
                     <img className=" mr-4 rounded-2xl" height={30} width={30} alt="" src={userImg} />
@@ -156,16 +156,16 @@ const NavBar = ({ children }) => {
 
 
 
-    
+
 
               {/* dark button */}
-              <label class="swap swap-rotate ">
+              <label className="swap swap-rotate ">
                 {/* <!-- this hidden checkbox controls the state --> */}
                 <input type="checkbox" onClick={() => setDark(!dark)} />
 
                 {/* <!-- sun icon --> */}
                 <svg
-                  class="swap-on fill-current w-10 h-10"
+                  className="swap-on fill-current w-10 h-10"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -189,9 +189,9 @@ const NavBar = ({ children }) => {
         </div>
 
         {/* mobile-phone */}
-        <div class="drawer-side">
-          <label for="my-drawer-3" class="drawer-overlay"></label>
-          <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+        <div className="drawer-side">
+          <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
             {/* <!-- Sidebar content here --> */}
             <li>
               <NavLink to="/" className="rounded-lg">

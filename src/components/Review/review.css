@@ -1,0 +1,35 @@
+.swiper-button-next {
+    background-image: url(../../Assets/icons/navigations/button-right.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 25px;
+    margin-right: -10px;
+    transition: .5s;
+}
+
+.swiper-button-next:hover {
+    background-image: url(../../Assets/icons/navigations/hover-button-right.png);
+}
+
+.swiper-button-next::after {
+    display: none;
+}
+
+.swiper-button-prev {
+    background-image: url(../../Assets/icons/navigations/button-left.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 25px;
+    margin-left: -10px;
+    transition: .5s;
+}
+
+.swiper-button-prev:hover {
+    background-image: url(../../Assets/icons/navigations/hover-button-left.png);
+}
+
+.swiper-button-prev::after {
+    display: none;
+}

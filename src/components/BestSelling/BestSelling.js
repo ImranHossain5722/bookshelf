@@ -1,9 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 
+//icons
+import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
+import "./BestSelling.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -12,20 +16,21 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
 import Stars from "../Stars/Stars";
 import useWindowDimensions from "../windowSize/windowSize";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Loading from "../Loading/Loading";
 import { sellBooks } from "../Redux/actions/bookActions";
 const BestSelling = () => {
-    const books = useSelector((state) => state.sellBooks.books)
-    const dispatch = useDispatch()
+    const books = useSelector((state) => state?.sellBooks?.books);
     const [size, setSize] = useState(1);
     const { width } = useWindowDimensions();
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
         fetch('data.json')
             .then(res => res.json())
             .then(data => dispatch(sellBooks(data)));
-    }, []);
+    }, [])
 
     useEffect(() => {
         //  responsiveness added by width change
@@ -43,11 +48,11 @@ const BestSelling = () => {
         }
     }, [width]);
 
-  
+
     return (
-        <div className="bg-white max-w-[1240px] mx-auto mt-[120px] py-10">
+        <div className="bg-white max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] py-10">
             {/* ------title section----- */}
-            <h1 className="pl-6 text-[40px] font-bold text-[#00124E]">Last Week Best Selling</h1>
+            <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">Last Week Best Selling</h1>
 
             {/* ------categories slider----- */}
             <div className="mt-8">
@@ -63,8 +68,8 @@ const BestSelling = () => {
                     style={{ "--swiper-theme-color": "#27AE61" }}
                 >
                     {
-                        books?.map(book => <SwiperSlide key={book._id}>
-                            <div className="shadow-lg rounded-lg h-[460px] pt-6 flex justify-center hover:fill-blue-500">
+                        books?.map(book => <SwiperSlide className="for-hover" key={book._id}>
+                            <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center relative">
                                 <div>
                                     <img src={book.image} className="h-64 w-44 image-full" alt="" />
                                     <div className="w-44 mt-2">
@@ -74,6 +79,18 @@ const BestSelling = () => {
                                         <Stars />
                                     </div>
                                 </div>
+                            </div>
+                            {/* second div  */}
+                            <div className="bg-[#00124ea4] h-[460px] w-full rounded-lg flex items-center justify-center absolute top-0 hover-button hidden">
+                                <button className="text-5xl text-white hover:text-primary duration-500">
+                                    <FaEye />
+                                </button>
+                                <button className="mx-7 text-5xl text-white hover:text-primary duration-500">
+                                    <FaHeart />
+                                </button>
+                                <button className="text-5xl text-white hover:text-primary duration-500">
+                                    <FaShoppingCart />
+                                </button>
                             </div>
                         </SwiperSlide>)
                     }

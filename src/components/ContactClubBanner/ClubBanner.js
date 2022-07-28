@@ -6,7 +6,7 @@ import Button from "../Button/Button";
 
 const ClubBanner = () => {
   return (
-    <div className="max-w-[1240px] mx-auto mt-[120px]">
+    <div className="max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px]">
       <div
         class="w-full"
         style={{

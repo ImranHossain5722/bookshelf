@@ -6,17 +6,22 @@ import { allUsers, sellBooks } from '../../Redux/actions/bookActions'
 import axios from 'axios'
 import { BsClipboardData } from 'react-icons/bs'
 const AllUsers = () => {
-  const users = useSelector((state) =>  state) 
+  const users = useSelector((state) =>state.allUser.allUsers) 
   const dispatch = useDispatch();
-// useEffect(() => {
-//   const {data} = axios.get('https://bookshelf-web.herokuapp.com/all-books')
-//   console.log(data)
-// }, [])
 
+  const getUsers = () =>{
+    fetch('https://bookshelf-web.herokuapp.com/all-books').then(res => res.json()).then(data => dispatch(allUsers(data)))
+  }
+  
+  
+useEffect(() => {
+  getUsers()
+}, [])
   return (
-    <div className='grid grid-cols-3 g-4'>
-      <p>users</p>
-     {/* {users?.map(user =>  <div className="mx-[12px] card user-shadow  w-[370px] h-[160px] p-7 font-semibold">
+    <div className="bg-base-100 my-8 p-3">
+      <div  className='grid grid-cols-3 g-4 gy-8'>
+
+     {users?.map(user =>  <div className="mx-[12px] card user-shadow  w-[370px] h-[160px] p-7 font-semibold m-3">
         <p className="pl-8 relative bottom-2">mark don</p>
       <div className='flex items-center'>
       <div class="avatar">
@@ -30,7 +35,8 @@ const AllUsers = () => {
         
         </div>
       </div>
-    </div>)} */}
+    </div>)}
+      </div>
     </div>
   )
 }

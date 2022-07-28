@@ -17,6 +17,10 @@ import AddCategory from "./pages/Forms/AddCategory";
 import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import PopularBooks from "./components/PopularBooks/PopularBooks";
+import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
+import PopularWritersBooks from "./components/PopularWritersBooks/PopularWritersBooks";
+import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 
 // initialize aos
 AOS.init();
@@ -26,7 +30,13 @@ function App() {
     <div className="App">
       <NavBar>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+
+          <Route path="/" element={<Home />}>
+            <Route path="/" element={<BestSellingBooks />} />
+            <Route path="/popular-writers" element={<PopularWritersBooks />} />
+            <Route path="/best-offers" element={<BestOffersBooks />} />
+          </Route>
+
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route

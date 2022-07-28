@@ -1,17 +1,24 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {getAuth} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD_fAnrY-5nIjE1tJib8h7i96OugY5N2Os",
-  authDomain: "bookshelf-9bb86.firebaseapp.com",
-  projectId: "bookshelf-9bb86",
-  storageBucket: "bookshelf-9bb86.appspot.com",
-  messagingSenderId: "475653592618",
-  appId: "1:475653592618:web:d1e530b9233efec5da5553"
+  // apiKey: process.env.REACT_APP_apiKey,
+  // authDomain: process.env.REACT_APP_authDomain,
+  // projectId: process.env.REACT_APP_projectId,
+  // storageBucket: process.env.REACT_APP_storageBucket,
+  // messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  // appId: process.env.REACT_APP_appId,
+  apiKey: "AIzaSyAReInWQOYKkujR4sOn6BLrTjmJlnzDaiQ",
+  authDomain: "darkfam-virtual-dairy.firebaseapp.com",
+  projectId: "darkfam-virtual-dairy",
+  storageBucket: "darkfam-virtual-dairy.appspot.com",
+  messagingSenderId: "771090903302",
+  appId: "1:771090903302:web:f626f698990a0f8c352e87",
+  measurementId: "G-3FKNRQBMSZ" 
 };
 
 // Initialize Firebase

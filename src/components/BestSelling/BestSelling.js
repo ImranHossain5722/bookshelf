@@ -1,11 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 
+//icons
 import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
-
-// import-hover-icons 
-import eyeIcon from '../../Assets/icons/hover-icons/eye.svg';
-import heartIcon from '../../Assets/icons/hover-icons/heart.svg';
-import cartIcon from '../../Assets/icons/hover-icons/cart.svg';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,17 +16,21 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
 import Stars from "../Stars/Stars";
 import useWindowDimensions from "../windowSize/windowSize";
-
+import { useDispatch, useSelector } from 'react-redux'
+import Loading from "../Loading/Loading";
+import { sellBooks } from "../Redux/actions/bookActions";
 const BestSelling = () => {
-    const [books, setBooks] = useState([]);
+    const books = useSelector((state) => state?.sellBooks?.books);
     const [size, setSize] = useState(1);
     const { width } = useWindowDimensions();
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
         fetch('data.json')
             .then(res => res.json())
-            .then(data => setBooks(data));
-    }, []);
+            .then(data => dispatch(sellBooks(data)));
+    }, [])
 
     useEffect(() => {
         //  responsiveness added by width change
@@ -47,6 +47,7 @@ const BestSelling = () => {
             setSize(1)
         }
     }, [width]);
+
 
     return (
         <div className="bg-white max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] py-10">
@@ -67,7 +68,7 @@ const BestSelling = () => {
                     style={{ "--swiper-theme-color": "#27AE61" }}
                 >
                     {
-                        books.map(book => <SwiperSlide className="for-hover" key={book._id}>
+                        books?.map(book => <SwiperSlide className="for-hover" key={book._id}>
                             <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center relative">
                                 <div>
                                     <img src={book.image} className="h-64 w-44 image-full" alt="" />

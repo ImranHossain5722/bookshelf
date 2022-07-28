@@ -14,7 +14,7 @@ function Dashboard() {
     <div class="drawer-content ">
         
   <Outlet/>
-      
+ 
     </div> 
     <div class="drawer-side ">
       <label for="dashboard_drawer" class=" drawer-overlay bg-white "></label> 
@@ -35,9 +35,12 @@ function Dashboard() {
 
         
       </ul>
-    
+      
+      
     </div>
+   
   </div>
+  
   )
 }
 

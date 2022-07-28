@@ -26,7 +26,7 @@ import AllUsers from "./components/Dashboard/AllUsers/AllUsers";
 import AllOrders from "./components/Dashboard/AllOrders/AllOrders";
 import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
 import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home/Home";
 
 
 // initialize aos
@@ -38,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar>
+      <NavBar />
         <Routes>
           <Route path="/" element={<Home/>}></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -99,7 +99,7 @@ function App() {
         </Routes>
 
         <Footer />
-      </NavBar>
+      {/* </NavBar> */}
 
       <ToastContainer />
     </div>

@@ -12,7 +12,7 @@ const PopularWritersBooks = () => {
             .then(res => res.json())
             .then(data => setBooks(data));
     }, []);
-
+ 
     return (
         <>
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14'>

@@ -26,12 +26,13 @@ import AllUsers from "./components/Dashboard/AllUsers/AllUsers";
 import AllOrders from "./components/Dashboard/AllOrders/AllOrders";
 import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
 import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
-import Home from "./pages/Home/Home";
+
 import BestSellingBooks from "./components/BestOffersBooks/BestOffersBooks";
 import PopularWritersBooks from "./components/PopularWritersBooks/PopularWritersBooks";
 import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
+import Home from "./pages/home/Home";
 
 
 // initialize aos

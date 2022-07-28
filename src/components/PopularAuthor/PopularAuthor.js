@@ -29,12 +29,13 @@ const PopularAuthor = () => {
 
     useEffect(() => {
         //  responsiveness added by width change
-        if (width >= 992) {
+        if (width >=1110) {
             setSize(5)
         }
-        // else if (width >= 768) {
-        //     setSize(3)
-        // }
+        else if (width >= 768) {
+            setSize(3)
+        }
+       
         else if (width >= 576) {
             setSize(2)
         }
@@ -46,16 +47,16 @@ const PopularAuthor = () => {
     return (
         <div className="bg-white max-w-[1240px] mx-auto my-[120px] py-10">
             {/* ------title section----- */}
-            <h1 className="pl-6 text-[40px] font-bold text-[#00124E]">Popular Author</h1>
+            <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">Popular Author</h1>
 
             {/* ------categories slider----- */}
             <div className="mt-8">
                 <Swiper
                     slidesPerView={size}
                     spaceBetween={30}
-                    slidesPerGroup={size}
+                    // slidesPerGroup={size}
                     loop={true}
-                    loopFillGroupWithBlank={true}
+                    // loopFillGroupWithBlank={true}
                     navigation={true}
                     modules={[Navigation]}
                     className="mySwiper px-9 py-6"

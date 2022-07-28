@@ -11,7 +11,6 @@ import FirstCategoryBooks from "../../components/FirstCategoryBooks/FirstCategor
 import Newsletter from "../../components/NewsLetter/Newsletter";
 import PopularAuthor from "../../components/PopularAuthor/PopularAuthor";
 import PreOrderBooks from "../../components/PreOrderBooks/PreOrderBooks";
-import ProductSwitch from "../../components/ProductSwitch/ProductSwitch";
 import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 import Review from "../../components/Review/Review";
 import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCategoryBooks";
@@ -20,15 +19,16 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <ContactClubBanner></ContactClubBanner>
+      <ContactClubBanner />
 
       {/* select catgory */}
-      <Categorys></Categorys>
+      <Categorys />
       <FirstCategoryBooks />
       <SecondCategoryBooks />
 
       {/* popler book section */}
-      <AddBanner></AddBanner>
+      <PopularBooks />
+      <AddBanner />
 
       {/* Pre Order section */}
       <PreOrderBooks />
@@ -42,12 +42,10 @@ const Home = () => {
         </Route>
       </Routes> */}
 
-      <ProductSwitch />
-      <PopularBooks />
       <Release />
       <Review />
       <BestSelling />
-      <Newsletter></Newsletter>
+      <Newsletter />
       {/* Recently veiwed section */}
       <RecentlyViewed />
 

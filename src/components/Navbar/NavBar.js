@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/images/Logo/bookshelf-.png";
 import userImg from "../../Assets/images/icon/001-user.png";
 import bag from "../../Assets/images/icon//002-bag.png";
 import wishlist from "../../Assets/images/icon/003-heart.png";
 import { signOut } from "firebase/auth";
+import downArrow from "../../Assets/images/icon/down-arrow.png"
 
 import NavTopbar from "../NavTopbar/NavTopbar";
 const NavBar = ({ children }) => {
@@ -72,18 +73,16 @@ const NavBar = ({ children }) => {
                 </li>
 
                 {/* <li>
-                    {user && (
-                      <NavLink to="/dashboard" className="rounded-lg">
-                        Dashboard
-                      </NavLink>
-                    )}
-                  </li> */}
-
-                <li>
                   <NavLink to="/authors" className="rounded-lg">
                     Authors
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to="/dashboard" className="rounded-lg">
+                    Dashboard
+                  </NavLink>
+                </li>
+                
                 <li>
                   <NavLink to="/addcategory" className="rounded-lg">
                     Add Category
@@ -103,20 +102,7 @@ const NavBar = ({ children }) => {
                   <NavLink to="/addpublisher" className="rounded-lg">
                     Add Publisher
                   </NavLink>
-                </li>
-
-                {/* <li>
-                    {user ? (
-                      <button className="btn btn-ghost" onClick={handelSignOut}>
-                        Sign Out
-                      </button>
-                    ) : (
-                      <NavLink to="/login" className="rounded-lg">
-                        Login
-                      </NavLink>
-                    )}
-                  </li> */}
-
+                </li> */}
 
               </ul>
             </div>
@@ -137,14 +123,40 @@ const NavBar = ({ children }) => {
               <div className="user  ">
                 <img className="" alt="" src={bag} />
               </div>
-              <div className="user mx-4 ">
+
+              <div className="user ml-4 ">
                 {user ? <span tabindex="0">
-                  <img onClick={handelSignOut} className=" rounded-2xl" alt="" height={30} width={30} src={user?.photoURL ? user?.photoURL : userImg} /></span> :
+
+                <img style={{margin:"40px 0px -10px -4px"}} onClick={handelSignOut} className=" rounded-2xl" alt="" height={30} width={30} src={user?.photoURL ? user?.photoURL : userImg}/>
+
+                  <div class="flex-none">
+                    <ul class="menu menu-horizontal p-0">
+                    <li tabindex="0">
+
+                      <img  className="" width={45} alt="" src={downArrow} />
+                      
+     
+        <ul style={{margin:"-14px 0px 0px 0px"}} class="p-2 z-40 drop-shadow-md
+
+ bg-base-100">
+          <li><Link target={"_blank"} to="dashboard">Dashboard</Link></li>
+          <li><a onClick={handelSignOut} >sign Out</a></li>
+        </ul>
+      </li>
+      
+    </ul>
+  </div>
+                  
+                  </span> :
 
                   <NavLink to="/login" className="rounded-lg">
-                    <img className=" rounded-2xl" height={30} width={30} alt="" src={userImg} />
+                    <img className=" mr-4 rounded-2xl" height={30} width={30} alt="" src={userImg} />
                   </NavLink>}
               </div>
+
+
+
+    
 
               {/* dark button */}
               <label class="swap swap-rotate ">

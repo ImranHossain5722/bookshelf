@@ -16,9 +16,6 @@ const PopularBooks = () => {
       </div>
       {/* content */}
       <Outlet />
-      <div className="flex justify-center my-16">
-        <Button>See More</Button>
-      </div>
     </div>
   );
 };

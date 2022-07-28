@@ -28,23 +28,17 @@ import AllUsers from "./components/Dashboard/AllUsers/AllUsers";
 import AllOrders from "./components/Dashboard/AllOrders/AllOrders";
 import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
 import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
-<<<<<<< HEAD
-=======
-import Home from "./pages/Home/Home";
 import BestSellingBooks from "./components/BestOffersBooks/BestOffersBooks";
 import PopularWritersBooks from "./components/PopularWritersBooks/PopularWritersBooks";
 import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
->>>>>>> be50ed9406905f8d6a83e7b7e226cc2a1e5a510c
 
 
 // initialize aos
 AOS.init();
 
 function App() {
-<<<<<<< HEAD
-=======
   const { pathname } = useLocation()
   const [dash, setdash] = useState('')
 
@@ -56,7 +50,6 @@ function App() {
       setdash('')
     }
   }, [pathname])
->>>>>>> be50ed9406905f8d6a83e7b7e226cc2a1e5a510c
 
 
 
@@ -64,9 +57,6 @@ function App() {
     <div className="App">
       {dash ? <NavDashboard >
         <Routes>
-<<<<<<< HEAD
-          <Route path="/" element={<Home />}></Route>
-=======
           <Route path="/dashboard" element={<RequireAuth>
             <Dashboard />
           </RequireAuth>}>
@@ -90,7 +80,6 @@ function App() {
             <Route path="/popular-writers" element={<PopularWritersBooks />} />
             <Route path="/best-offers" element={<BestOffersBooks />} />
           </Route>
->>>>>>> be50ed9406905f8d6a83e7b7e226cc2a1e5a510c
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/became" element={<AuthorOrPublisher />}></Route>
@@ -99,25 +88,6 @@ function App() {
           <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
           <Route path="/addpublisher" element={<RequireAuth><AddPublisher /></RequireAuth>}></Route>
           {/* Dashboard routes */}
-<<<<<<< HEAD
-          <Route path="/dashboard" element={<RequireAuth>
-            <Dashboard />
-          </RequireAuth>}>
-            <Route index element={<Myprofile />} />
-            <Route path="myorder" element={<Myorder />} />
-            <Route path="addreview" element={<Addreview />} />
-            <Route path="addproduct" element={<AddProduct />} />
-            <Route path="allpublisher" element={<AllPublishers />} />
-            <Route path="allusers" element={<AllUsers />} />
-            <Route path="allorders" element={<AllOrders />} />
-            <Route path="allauthor" element={<AllAuthors />} />
-            <Route path="orderhistory" element={<OrderHistory />} />
-
-
-          </Route>
-=======
-
->>>>>>> be50ed9406905f8d6a83e7b7e226cc2a1e5a510c
           <Route
             path="/addbook"
             element={

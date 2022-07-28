@@ -1,5 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 
+//icons
+import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -59,8 +62,8 @@ const SecondCategoryBooks = () => {
                     style={{ "--swiper-theme-color": "#27AE61" }}
                 >
                     {
-                        books.map(book => <SwiperSlide key={book._id}>
-                            <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center hover:fill-blue-500">
+                        books?.map(book => <SwiperSlide className="for-hover" key={book._id}>
+                            <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center relative">
                                 <div>
                                     <img src={book.image} className="h-64 w-44 image-full" alt="" />
                                     <div className="w-44 mt-2">
@@ -70,6 +73,18 @@ const SecondCategoryBooks = () => {
                                         <Stars />
                                     </div>
                                 </div>
+                            </div>
+                            {/* second div  */}
+                            <div className="bg-[#00124ea4] h-[460px] w-full rounded-lg flex items-center justify-center absolute top-0 hover-button hidden">
+                                <button className="text-5xl text-white hover:text-primary duration-500">
+                                    <FaEye />
+                                </button>
+                                <button className="mx-7 text-5xl text-white hover:text-primary duration-500">
+                                    <FaHeart />
+                                </button>
+                                <button className="text-5xl text-white hover:text-primary duration-500">
+                                    <FaShoppingCart />
+                                </button>
                             </div>
                         </SwiperSlide>)
                     }

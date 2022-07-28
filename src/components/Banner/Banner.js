@@ -64,7 +64,7 @@ const Banner = () => {
                   data-aos="fade-up"
                   data-aos-delay="100"
                   data-aos-duration="1200"
-                  className="text-[40px] font-semibold"
+                  className="text-[30px] lg:text-[40px] font-semibold"
                 >
                   {bnrData.title} <br />
                   <span className="font-semibold">{bnrData.month}</span>

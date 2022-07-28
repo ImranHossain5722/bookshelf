@@ -30,6 +30,9 @@ const Review = () => {
     if (width >= 900) {
       setSize(3)
     }
+    else if (width >= 576) {
+      setSize(2)
+    }
     else {
       setSize(1)
     }
@@ -37,17 +40,17 @@ const Review = () => {
   }, [width])
 
   return (
-    <div className="max-w-[1240px] mx-auto bg-white mt-[120px] py-4">
-      <h2 className="text-[40px] text-[#00124E] font-bold text-center pb-14">Clients Feedback</h2>
+    <div className="max-w-[1240px] mx-auto bg-white mt-[60px] lg:mt-[120px] py-4">
+      <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold text-center pb-14">Clients Feedback</h2>
       <Swiper
-        navigation={true}
         slidesPerView={size}
-        loop={true}
-        grabCursor={true}
-        centeredSlides={true}
         spaceBetween={30}
+        slidesPerGroup={size}
+        loop={true}
+        loopFillGroupWithBlank={true}
+        navigation={true}
         modules={[Navigation]}
-        className="mySwiper px-8"
+        className="mySwiper px-7 py-6"
         style={{ "--swiper-theme-color": "#27AE61" }}
       >
         {

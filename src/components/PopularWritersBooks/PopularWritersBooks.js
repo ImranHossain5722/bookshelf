@@ -15,7 +15,7 @@ const PopularWritersBooks = () => {
 
     return (
         <>
-            <div className='grid grid-cols-4 gap-x-8 gap-y-14'>
+            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14'>
                 {
                     books?.splice(0, 8).map(book =>
                         <div className="on-book relative" key={book._id}>

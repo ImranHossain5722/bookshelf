@@ -16,6 +16,8 @@ import AddBook from "./pages/Forms/AddBook";
 import AddCategory from "./pages/Forms/AddCategory";
 import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
+import Home from "./pages/Home/Home";
+import AuthorOrPublisher from "./pages/Forms/AuthorOrPublisher";
 import Myprofile from "./components/Dashboard/Myprofile/Myprofile";
 import Myorder from "./components/Dashboard/Myorder/Myorder";
 import Addreview from "./components/Dashboard/Addreview/Addreview";
@@ -26,7 +28,6 @@ import AllUsers from "./components/Dashboard/AllUsers/AllUsers";
 import AllOrders from "./components/Dashboard/AllOrders/AllOrders";
 import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
 import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
-import Home from "./pages/Home/Home";
 import BestSellingBooks from "./components/BestOffersBooks/BestOffersBooks";
 import PopularWritersBooks from "./components/PopularWritersBooks/PopularWritersBooks";
 import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
@@ -81,12 +82,12 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/became" element={<AuthorOrPublisher />}></Route>
           <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
           <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
           <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
           <Route path="/addpublisher" element={<RequireAuth><AddPublisher /></RequireAuth>}></Route>
           {/* Dashboard routes */}
-
           <Route
             path="/addbook"
             element={

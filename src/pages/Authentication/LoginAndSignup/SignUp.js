@@ -29,7 +29,7 @@ const SignUp = () => {
         toast(`Error: ${error?.message}` || uError?.message)
     }
 
-    if (user || socialUser) {
+    if (user || socialUser || token) {
         navigate('/dashboard');
     }
 

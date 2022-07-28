@@ -39,7 +39,7 @@ const PopularAuthor = () => {
             setSize(2)
         }
         else {
-            setSize(1)
+            setSize(5)
         }
     }, [width]);
 
@@ -51,11 +51,11 @@ const PopularAuthor = () => {
             {/* ------categories slider----- */}
             <div className="mt-8">
                 <Swiper
-                    slidesPerView={size}
+                    slidesPerView={5}
                     spaceBetween={30}
-                    slidesPerGroup={size}
+                    // slidesPerGroup={size}
                     loop={true}
-                    loopFillGroupWithBlank={true}
+                    // loopFillGroupWithBlank={true}
                     navigation={true}
                     modules={[Navigation]}
                     className="mySwiper px-9 py-6"

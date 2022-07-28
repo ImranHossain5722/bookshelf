@@ -72,7 +72,7 @@ const NavDashboard = ({ children }) => {
                   </NavLink>
                 </li>
 
-                <li>
+                {/* <li>
                   <NavLink to="/authors" className="rounded-lg">
                     Authors
                   </NavLink>
@@ -102,7 +102,7 @@ const NavDashboard = ({ children }) => {
                   <NavLink to="/addpublisher" className="rounded-lg">
                     Add Publisher
                   </NavLink>
-                </li>
+                </li> */}
 
               </ul>
             </div>

@@ -1,11 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 // aos animation
 import AOS from "aos";
 import "aos/dist/aos.css";
 // import SampleCard from "./components/SampleCard/SampleCard";
 import Footer from "./components/Footer/Footer";
-import Home from "./pages/Home/Home";
+
 import NavBar from "./components/Navbar/NavBar";
 import Login from "./pages/Authentication/LoginAndSignup/Login";
 import SignUp from "./pages/Authentication/LoginAndSignup/SignUp";
@@ -16,23 +16,53 @@ import AddBook from "./pages/Forms/AddBook";
 import AddCategory from "./pages/Forms/AddCategory";
 import AddAuthor from "./pages/Forms/AddAuthor";
 import AddPublisher from "./pages/Forms/AddPublisher";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Cart from "./pages/Cart/Cart"
-import Checkout from "./pages/Checkout/Checkout"
-import Products from "./pages/Products/Products";
-import Products_details from "./pages/Products_details/Products_details";
+import Myprofile from "./components/Dashboard/Myprofile/Myprofile";
+import Myorder from "./components/Dashboard/Myorder/Myorder";
+import Addreview from "./components/Dashboard/Addreview/Addreview";
+import Dashboard from "./components/Dashboard/Dashboard";
+import AddProduct from "./components/Dashboard/AddProduct/AddProduct";
+import AllPublishers from "./components/Dashboard/AllPublishers/AllPublishers";
+import AllUsers from "./components/Dashboard/AllUsers/AllUsers";
+import AllOrders from "./components/Dashboard/AllOrders/AllOrders";
+import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
+import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
+import Home from "./pages/home/Home";
+
 
 // initialize aos
 AOS.init();
 
 function App() {
+ 
+
+
   return (
     <div className="App">
       <NavBar>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home/>}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
+          <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
+          <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
+          <Route path="/addpublisher" element={<RequireAuth><AddPublisher /></RequireAuth>}></Route>
+          {/* Dashboard routes */}
+          <Route path="/dashboard" element={<RequireAuth>
+      <Dashboard/>
+     </RequireAuth>}>
+      <Route index element={<Myprofile/>} />
+       <Route path="myorder" element={<Myorder/>} />
+       <Route path="addreview" element={<Addreview/>} />
+       <Route path="addproduct" element={<AddProduct/>} />
+       <Route path="allpublisher" element={<AllPublishers/>} />
+       <Route path="allusers" element={<AllUsers/>} />
+       <Route path="allorders" element={<AllOrders/>} />
+       <Route path="allauthor" element={<AllAuthors/>} />
+       <Route path="orderhistory" element={<OrderHistory/>} />
+    
+      
+      </Route>
           <Route
             path="/addbook"
             element={
@@ -65,21 +95,7 @@ function App() {
               </RequireAuth>
             }
           ></Route>
-          <Route
-            path="/dashboard"
-            element={
-              <RequireAuth>
-                <Dashboard></Dashboard>
-              </RequireAuth>
-            }
-          >
-            {" "}
-          </Route>
-
-          <Route path="/cart" element={<RequireAuth> <Cart></Cart>  </RequireAuth>}  > </Route>
-          <Route path="/checkout" element={<RequireAuth> <Checkout></Checkout>  </RequireAuth>}  > </Route>
-          <Route path="/product" element={<RequireAuth> <Products></Products>  </RequireAuth>}  > </Route>
-          <Route path="/productdetails" element={<RequireAuth> <Products_details></Products_details>  </RequireAuth>}  > </Route>
+        
         </Routes>
 
         <Footer />

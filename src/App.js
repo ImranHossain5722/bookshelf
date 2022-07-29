@@ -35,6 +35,7 @@ import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import Home from "./pages/Home/Home";
+import AllBooks from "./components/Books/AllBooks";
 
 
 // initialize aos
@@ -85,6 +86,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/became" element={<AuthorOrPublisher />}></Route>
+          <Route path="/books" element={<AllBooks />}></Route> 
           <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
           <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
           <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>

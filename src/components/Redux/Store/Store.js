@@ -1,11 +1,9 @@
 import React from 'react'
 import { applyMiddleware, configureStore } from "@reduxjs/toolkit";
 import { sellBookReducer,addCartReducer, authorsReducer,popularBookReducer, categoryReducer, allUserReducer, allPublisherReducer, allAuthorReducer, allOrdersReducer, myorderReducer, myProfileReducer, orderHistoryReducer, selectedBooksReducer, cartBooksReducer, allBooksReducer } from '../Features/bookReducers';
-const thunk = require('redux-thunk');
+import logger from 'redux-logger'
 
-const middleware = process.env.NODE_ENV !== 'production' ?
-  [require('redux-immutable-state-invariant').default(), thunk] :
-  [thunk];
+
 
 const store = configureStore({
     reducer: {
@@ -25,9 +23,11 @@ const store = configureStore({
         cartBooks : cartBooksReducer,
         selectedBooks : selectedBooksReducer
 
-    }
+    },
     
-},applyMiddleware(...middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+}
+
 )
 
 export default store

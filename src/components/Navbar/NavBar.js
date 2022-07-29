@@ -90,7 +90,7 @@ const NavBar = ({ children }) => {
                 <img className="" alt="" src={wishlist} />
               </div>
               <div className="user  hidden lg:flex">
-                <img className="" alt="" src={bag} />
+               <NavLink to='/cart'>  <img className="" alt="" src={bag} /></NavLink>
               </div>
 
               <div className="user ml-4 ">

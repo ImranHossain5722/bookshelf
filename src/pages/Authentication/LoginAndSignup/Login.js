@@ -39,7 +39,7 @@ const Login = () => {
     }
 
     return (
-        <div className='flex justify-center items-center min-h-[70vh]'>
+        <div className='flex justify-center items-center  h-full my-5'>
             <div className="card bg-base-100 shadow-xl">
                 <div className='text-center'>
                     <img className='mx-auto' src={logo} alt="" />
@@ -90,15 +90,20 @@ const Login = () => {
                     </form>
                     <p className='mt-4'>New to BookShelf? <Link to='/signup' className='text-primary font-bold'>Create a new account</Link></p>
                     <p className='mt-1'>Forgot Your Password? <span style={{ cursor: "pointer" }} className='pointer text-primary font-bold'>Reset</span></p>
+
+                    <div className='lg:hidden sm:flex '>
+                <SocialLogin></SocialLogin>
+            </div>
+
                 </div>
 
 
 
             </div>
-            <div class="outer">
+            <div class="hidden lg:flex outer">
                 <div class="inner"></div>
             </div>
-            <div>
+            <div className='hidden lg:flex'>
                 <SocialLogin></SocialLogin>
             </div>
 

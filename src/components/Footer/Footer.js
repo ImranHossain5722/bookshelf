@@ -17,31 +17,31 @@ const Footer = () => {
           <div classNmae="">
             <img className="" src={logo} />
           </div>
-          <p>
+          <p className="text-white">
           Our Goal is to reach maximum book lovers <br/>and reduce the distance between readers <br/>and writers. Become the biggest book readers <br/>community. To give the booksellers a virtual<br/> store for selling the books and making <br/>the process seamless.
             
           </p>
         </div>
-        <div>
+        <div className="text-white">
           <span class="footer-title">About Us</span>
           <a class="link link-hover">Contat Us</a>
           <a class="link link-hover">About Us</a>
           <a class="link link-hover">Support</a>
         </div>
-        <div>
-          <span class="footer-title">Partner</span>
+        <div className="text-white">
+          <span class="footer-title ">Partner</span>
           <a class="link link-hover">Authors</a>
           <a class="link link-hover">Publishert</a>
           <a class="link link-hover">Affiliate</a>
         </div>
-        <div>
+        <div className="text-white">
           <span class="footer-title">Legal</span>
           <a class="link link-hover">Privacy policy</a>
           <a class="link link-hover">Terms of use</a>
           <a class="link link-hover">Return policy</a>
         </div>
 
-        <div>
+        <div className="text-white">
           <span class="footer-title">Follow Us</span>
           <div class="grid grid-flow-col gap-4">
             <a>

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 
 const AddProduct = () => {
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit, reset } = useForm();
   const onSubmit = data => {
     console.log(data);
     axios.post('https://bookshelf-web.herokuapp.com/add-book', {
@@ -18,6 +18,7 @@ const AddProduct = () => {
       cover_photo_url: data.cover_photo_url,
     })
       .then(res => console.log(res));
+    reset();
   };
 
   // console.log(errors);

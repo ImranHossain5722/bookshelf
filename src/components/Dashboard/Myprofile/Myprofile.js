@@ -13,11 +13,8 @@ const Myprofile = () => {
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  console.log('get User', getUser);
-
+  console.log(getUser[0])
   useEffect(() => {
-    console.log(user?.email);
-
     const userEmail = {
       email: user?.email
     };
@@ -28,16 +25,14 @@ const Myprofile = () => {
       },
       body: JSON.stringify(userEmail)
     })
-      .then((res) => setGetUser(res.json()))
-      .then(data => {
-        console.log(data);
-        return (data)
-      });
+      .then((res) => res.json())
+      .then(data => setGetUser(data)
+      );
   }, [user?.email])
 
   // // get user role form database 
   useEffect(() => {
-    const currentUserRole = user?.role;
+    const currentUserRole = getUser[0]?.user_role;
 
     if (currentUserRole === 'author') {
       setUserRole('author');
@@ -51,7 +46,7 @@ const Myprofile = () => {
     else if (currentUserRole === 'admin') {
       setUserRole('admin');
     }
-  }, [user?.role])
+  }, [getUser])
 
 
   const onSubmit = data => {
@@ -98,7 +93,7 @@ const Myprofile = () => {
           </div>
           <div>
             <h4 className='font-[600] text-[25px] py-[7px]'>Phone Number </h4>
-            <p className='font-[600] text-[16px] py-[7px]'>{'017211'}</p>
+            <p className='font-[600] text-[16px] py-[7px]'>{getUser[0]?.user_phone}</p>
           </div>
           <div>
             <h4 className='font-[600] text-[25px] py-[7px]'>Address</h4>

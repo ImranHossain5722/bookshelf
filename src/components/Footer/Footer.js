@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../../Assets/images/Logo/bookshelfWhite-removebg-preview.png";
 const Footer = () => {
   return (
@@ -18,8 +19,8 @@ const Footer = () => {
             <img className="" src={logo} />
           </div>
           <p className="text-white">
-          Our Goal is to reach maximum book lovers <br/>and reduce the distance between readers <br/>and writers. Become the biggest book readers <br/>community. To give the booksellers a virtual<br/> store for selling the books and making <br/>the process seamless.
-            
+            Our Goal is to reach maximum book lovers <br />and reduce the distance between readers <br />and writers. Become the biggest book readers <br />community. To give the booksellers a virtual<br /> store for selling the books and making <br />the process seamless.
+
           </p>
         </div>
         <div className="text-white">
@@ -30,8 +31,9 @@ const Footer = () => {
         </div>
         <div className="text-white">
           <span class="footer-title ">Partner</span>
-          <a class="link link-hover">Authors</a>
-          <a class="link link-hover">Publishert</a>
+          <NavLink to="/became" className="rounded-lg">
+            Became Author/Publisher
+          </NavLink>
           <a class="link link-hover">Affiliate</a>
         </div>
         <div className="text-white">

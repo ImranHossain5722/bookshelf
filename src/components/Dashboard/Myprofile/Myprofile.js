@@ -247,7 +247,7 @@ const Myprofile = () => {
                   </div>
                   <div className="form-control w-full ">
                     <label className="label">
-                      <span className="label-text text-lg">Your Address</span>
+                      <span className="label-text text-lg">Your Birthday </span>
                     </label>
                     <input
                       {...register("date", {

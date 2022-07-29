@@ -35,6 +35,11 @@ import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import Home from "./pages/Home/Home";
+import NotFound from './pages/NotFound/NotFound'
+import AllBooks from "./components/Books/AllBooks";
+import Cart from "./pages/Cart/Cart";
+import Products_details from "./pages/Products_details/Products_details";
+import Checkout from "./pages/Checkout/Checkout";
 
 
 // initialize aos
@@ -84,7 +89,11 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/selectedBook/:_id" element={<Products_details/>}></Route>
           <Route path="/became" element={<AuthorOrPublisher />}></Route>
+          <Route path="/books" element={<AllBooks />}></Route> 
           <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
           <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
           <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
@@ -123,6 +132,7 @@ function App() {
             }
           ></Route>
 
+            <Route path="*" element={<NotFound></NotFound>}> </Route>
         </Routes>
 
         <Footer />

@@ -35,6 +35,7 @@ import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import Home from "./pages/Home/Home";
+import NotFound from './pages/NotFound/NotFound'
 
 
 // initialize aos
@@ -123,6 +124,7 @@ function App() {
             }
           ></Route>
 
+            <Route path="*" element={<NotFound></NotFound>}> </Route>
         </Routes>
 
         <Footer />

@@ -1,39 +1,56 @@
-import React from 'react';
-import AddBanner from '../../components/AddBanner/AddBanner';
-import Banner from '../../components/Banner/Banner';
-import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner"
-import '../../components/CustomScrollbar/CustomScrollBar.css'
+import React from "react";
+import Banner from "../../components/Banner/Banner";
+import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner";
+import PopularBooks from "../../components/PopularBooks/PopularBooks";
+import AddBanner from "../../components/AddBanner/AddBanner";
+import "../../components/CustomScrollbar/CustomScrollBar.css";
 
-import BestSelling from '../BestSelling/BestSelling';
-import Release from '../Release/Release';
 import Categorys from "../../components/Category/Categorys";
-import Review from '../Review/Review';
-import Newsletter from '../../components/NewsLetter/Newsletter';
+import Newsletter from "../../components/NewsLetter/Newsletter";
+import Release from "../Release/Release";
+import Review from "../../components/Review/Review";
+import FirstCategoryBooks from "../../components/FirstCategoryBooks/FirstCategoryBooks";
+import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCategoryBooks";
+import PreOrderBooks from "../../components/PreOrderBooks/PreOrderBooks";
+import BestSelling from "../../components/BestSelling/BestSelling";
+import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
+import PopularAuthor from "../../components/PopularAuthor/PopularAuthor";
 const Home = () => {
-    return (
-        <div>
-            <Banner />
-            <ContactClubBanner></ContactClubBanner>
-            <Categorys></Categorys>
-            {/* select catgory */}
-            {/* popler book section */}
-            <AddBanner></AddBanner>
+  return (
+    <div>
+      <Banner />
+      <ContactClubBanner />
 
-           {/* Pre Order section */}
-           {/* populer Author section */}
+      {/* select catgory */}
+      <Categorys />
+      <FirstCategoryBooks />
+      <SecondCategoryBooks />
 
-           <Release />
-           <Review />
-           <BestSelling />
-            <Newsletter></Newsletter>
-            {/* Recently veiwd section */}
-            
-            
-         
+      {/* popler book section */}
+      <PopularBooks />
+      <AddBanner />
 
-        </div>
-    );
-}
+      {/* Pre Order section */}
+      <PreOrderBooks />
+      <PopularAuthor />
 
+      {/* <Routes>
+        <Route path="/" element={<ProductSwitch />}>
+          <Route path="popular-books" element={<PopularBooks />} />
+          <Route path="popular-authors-books" element={<PopularBooks />} />
+          <Route path="best-offers" element={<PopularBooks />} />
+        </Route>
+      </Routes> */}
+
+
+      <Release />
+      <Review />
+      <BestSelling />
+      <Newsletter />
+      {/* Recently veiwed section */}
+      <RecentlyViewed />
+    </div>
+  );
+};
 
 export default Home;

@@ -14,7 +14,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // import required modules
-import { Pagination, Navigation } from "swiper";
+import { Autoplay, Pagination, Navigation } from "swiper";
+import Button from "../Button/Button";
 
 const data = [
   {
@@ -39,21 +40,23 @@ const data = [
 
 const Banner = () => {
   return (
-    <div className="lg:px-10 mt-20">
+    <div className="lg:max-w-[1240px] mx-auto bg-white">
       <Swiper
         navigation={true}
         pagination={{ clickable: true }}
         modules={[Pagination, Navigation]}
         className="mySwiper my-auto"
+        style={{ "--swiper-theme-color": "#27AE61" }}
       >
         {data.map((bnrData) => (
           <SwiperSlide>
-            <div className="grid grid-cols-1 lg:grid-cols-2  items-center justify-center px-4 pb-10 lg:px-20">
-              <div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0  items-center justify-center px-4 py-16 lg:px-20">
+              <div className="mt-6 mx-auto">
                 <h3
                   data-aos="fade-up"
                   data-aos-delay="100"
                   data-aos-duration="750"
+                  className="text-2xl"
                 >
                   {bnrData.subtitle}
                 </h3>
@@ -61,19 +64,26 @@ const Banner = () => {
                   data-aos="fade-up"
                   data-aos-delay="100"
                   data-aos-duration="1200"
-                  className="text-[40px]"
+                  className="text-[30px] lg:text-[40px] font-semibold"
                 >
                   {bnrData.title} <br />
                   <span className="font-semibold">{bnrData.month}</span>
                 </h2>
-                <button
+                {/* <button
                   data-aos="fade-right"
                   data-aos-delay="750"
                   data-aos-duration="1000"
-                  class="px-8 py-4 bg-[#293661] hover:bg-[#27AE61] duration-500 rounded-full text-[#ffffff] mt-8"
-                >
+                  class="btn btn-primary text-white font-normal mt-8">
                   Explore More
-                </button>
+                </button> */}
+                <div
+                  data-aos="fade-right"
+                  data-aos-delay="750"
+                  data-aos-duration="1000"
+                  className="mt-8"
+                >
+                  <Button>Explore More</Button>
+                </div>
               </div>
 
               <div

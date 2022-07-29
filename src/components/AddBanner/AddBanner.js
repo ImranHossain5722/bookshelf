@@ -1,20 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
-import banner from '../../Assets/images/Add-Banner-img/Banner-Ad.jpg';
+import React from "react";
+import { Link } from "react-router-dom";
+import Bannerbook from "../../Assets/images/Banner-images/img1-13.png";
 
 const AddBanner = () => {
+  //dynamic api needed to make the banner image and link change form the dashboard
 
-    //dynamic api needed to make the banner image and link change form the dashboard
+  return (
+    <div
 
+      class="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 ">
 
-    return (
-        <section className='w-11/12 mx-auto py-32 g-slate-300'>
-            <Link to='/'>
-                <img className='w-full rounded-2xl' src={banner} alt="" />
-            </Link>
-        </section>
-    );
+      <div class="card-body">
+        <h2 class="card-title ml-28 text-4xl"><span className="text-black">Get</span><span className="text-accent">Extra
+        </span></h2>
+        <p className="pl-28 text-4xl lg:text-7xl font-semibold text-primary">Sale -25%</p>
+        <p className="pl-28 text-4xl font-semibold text-accent">ON ORDER OVER</p>
+        <div class="card-actions">
+          <button class="btn btn-primary text-white hover:text-white hover:bg-accent ml-28">SEE MORE </button>
+        </div>
+      </div>
+      <figure>
+        <img className="pr-28" src={Bannerbook} alt="Album" />
+      </figure>
+    </div>
+  );
 };
 
 export default AddBanner;

@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import productImg from "../../Assets/images/clubB.jpg";
 const Cart = () => {
   return (
@@ -10,7 +11,7 @@ const Cart = () => {
               <thead>
                 <tr>
                   <th className="rounded-none">products</th>
-                  <th>prise</th>
+                  <th>price</th>
                   <th>quentity</th>
                   <th>subtotal</th>
                   <th>action</th>
@@ -152,9 +153,11 @@ const Cart = () => {
                 Continew shoping
               </button>
             </div>
-            <button className="btn btn-primary text-white">
-              Prossed to checkout
+           <NavLink to='/checkout'> 
+           <button className="btn btn-primary text-white">
+              Prossed to checkout 
             </button>
+           </NavLink>
           </div>
         </div>
         <div className="w-4/12">

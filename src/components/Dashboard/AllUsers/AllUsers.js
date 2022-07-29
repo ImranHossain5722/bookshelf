@@ -26,7 +26,7 @@ useEffect(() => {
       <div className='flex items-center'>
       <div class="avatar">
   <div class="w-16 rounded">
-    <img src={user.user_photo_url} alt="Tailwind-CSS-Avatar-component" />
+    <img src={user.user_photo_url} alt="Tailwind-CSS-Avatar-component" /> 
   </div>
 </div>
         <div className='pl-4'>

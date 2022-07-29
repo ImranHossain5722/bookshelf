@@ -10,15 +10,30 @@ import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 const Myprofile = () => {
   const [user] = useAuthState(auth);
   const [userRole, setUserRole] = useState('publisher')
-  const [allUsers, setAllUsers] = useState([]);
+  const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
-  // // console.log(user);
-  // useEffect(() => {
-  //   fetch('https://bookshelf-web.herokuapp.com/all-user')
-  //     .then(res => res.json())
-  //     .then(data => console.log(data));
-  // }, [])
 
+  console.log('get User', getUser);
+
+  useEffect(() => {
+    console.log(user?.email);
+
+    const userEmail = {
+      email: user?.email
+    };
+    fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(userEmail)
+    })
+      .then((res) => setGetUser(res.json()))
+      .then(data => {
+        console.log(data);
+        return (data)
+      });
+  }, [user?.email])
 
   // // get user role form database 
   useEffect(() => {
@@ -44,27 +59,26 @@ const Myprofile = () => {
     const updatedProfileData = {
       user_name: data?.name ? data?.name : user?.user?.displayName,
       user_phone: data?.phone,
-      user_photo_url: user?.user?.photoURL ? user?.user?.photoURL : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
+      user_address: data?.address,
       user_birthday: data?.date
     };
     console.log(updatedProfileData)
-    // if (user?.email) {
-    //   axios.post('https://bookshelf-web.herokuapp.com/add-user', updatedProfileData).then(data => console.log(data))
-    //   // fetch(``, {
-    //   //   method: 'PUT',
-    //   //   headers: {
-    //   //     'content-type': 'application/json',
-    //   //     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-    //   //   },
-    //   //   body: JSON.stringify(updatedProfileData)
-    //   // })
-    //   //   .then(res => res.json())
-    //   //   .then(data => {
-    //   //     toast.success(`Profile update Successfully`);
-    //   //     // reset();
-    //   //   })
+    if (user?.email) {
+      axios.put('https://book-shelf-webapp.herokuapp.com/add-user', updatedProfileData).then(data => console.log(data))
+      fetch(``, {
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(updatedProfileData)
+      })
+        .then(res => res.json())
+        .then(data => {
+          toast.success(`Profile update Successfully`);
+          // reset();
+        })
 
-    // }
+    }
 
 
   }

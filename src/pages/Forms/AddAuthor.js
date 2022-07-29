@@ -37,7 +37,7 @@ const AddAuthor = () => {
         console.log('Got User')
         const postAuthorData = async () => {
 
-            await axios.post('https://bookshelf-web.herokuapp.com/add-user', authorInfo).then(data => console.log(data))
+            await axios.post('https://book-shelf-webapp.herokuapp.com/add-user', authorInfo).then(data => console.log(data))
             navigate('/dashboard');
 
         }

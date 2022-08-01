@@ -65,7 +65,7 @@ const NavDashboard = ({ children }) => {
                       width={150} alt="" src={logo} />
                 </li>
                 <li className="text-2xl text-secondary uppercase text-center font-bold">
-                  Deshbord
+                  Dashboard
                 </li>
               </ul>
             </div>

@@ -23,6 +23,7 @@ const Login = () => {
     useEffect(() => {
         if (user || socialUser) {
             navigate(from, { replace: true });
+            console.log(user)
         }
     }, [user, socialUser, from, navigate])
 

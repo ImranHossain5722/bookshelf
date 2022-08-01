@@ -5,11 +5,11 @@ import { NavLink } from "react-router-dom";
 import productImg from "../../Assets/images/clubB.jpg";
 import { cartBooks } from "../../components/Redux/actions/bookActions";
 const Cart = () => {
-  const books = useSelector((state) =>state.cartBooks.cartBooks)
+  const books = useSelector((state) => state.cartBooks.cartBooks.user_cart) 
   const dispatch = useDispatch()
     useEffect(() => {
-      axios.get('https://book-shelf-webapp.herokuapp.com/all-books').then(data => dispatch(cartBooks(data.data))) 
-        }, [])
+      axios.get('https://book-shelf-webapp.herokuapp.com/get-cart-data?id=62e29c64754ed7d6c77da4be').then(data => dispatch(cartBooks(data.data))) 
+        }, [books])
 
   
   return (
@@ -28,24 +28,24 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody className="">
-               {books.map(book =>  <tr>
+               {books?.map(book =>  <tr>
                   <th className="border-[#e1e2e6]">
                     <div className="product flex items-center gap-2">
                       <div className="thumb w-[120px]">
-                        <img className="max-w-[100%]" src={productImg} alt="" />
+                        <img className="max-w-[100%]" src={book.book.book_cover_photo_url} alt="" />
                       </div>
                       <div className="">
                         <h3 className="text-[18px] font-medium capitalize text-black">
-                          product title{" "}
+                          {book.book.book_title}
                         </h3>
                         <p className="text-[16px] font-normal capitalize">
-                          product desc{" "}
+                          By author name
                         </p>
                       </div>
                     </div>
                   </th>
                   <td className="text-[16px] border-[#e1e2e6] text-black">
-                    $100
+                  ${book.book.book_price}
                   </td>
                   <td className="border-[#e1e2e6]">
                     <div className="flex">
@@ -63,7 +63,7 @@ const Cart = () => {
                     </div>
                   </td>
                   <td className="text-[16px] text-black border-[#e1e2e6]">
-                    $1200
+                    ${book.book.book_price}
                   </td>
                   <td className="border-[#e1e2e6]">
                     <button className="btn btn-error">delete</button>
@@ -79,7 +79,7 @@ const Cart = () => {
                 update cart
               </button>
               <button className="btn btn-primary text-white">
-                Continew shoping
+                Continue shoping
               </button>
             </div>
            <NavLink to='/checkout'> 

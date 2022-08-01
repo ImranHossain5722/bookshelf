@@ -10,8 +10,11 @@ const CartButton = ({_id}) => {
     const email = "sharif@gmail.com"
     const AddCart =(id) => {
       const cartData = {
-        user_email : email,
-        cart_data : id
+        user_email : "sharsdfdfdfdsif@gmail.com",
+        cart_data : {
+            book : id,
+            qnt : 5
+        }
       } 
        axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data => console.log(data))
       

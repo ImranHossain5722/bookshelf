@@ -9,11 +9,11 @@ import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 
 const Myprofile = () => {
   const [user] = useAuthState(auth);
-  const [userRole, setUserRole] = useState('');
+  const [userRole, setUserRole] = useState('publisher');
   const [getUser, setGetUser] = useState([]);
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-  console.log(getUser[0])
+  // console.log(getUser[0])
   useEffect(() => {
     const userEmail = {
       email: user?.email
@@ -30,7 +30,17 @@ const Myprofile = () => {
       );
   }, [user?.email])
 
-  // // get user role form database 
+  // upload image to imgbb and get image url 
+
+
+  useEffect(() => {
+
+
+
+  }, [])
+
+
+  // // get current user role form database 
   useEffect(() => {
     const currentUserRole = getUser[0]?.user_role;
 
@@ -49,29 +59,51 @@ const Myprofile = () => {
   }, [getUser])
 
 
+  const [upImgUrl, setUpImgUrl] = useState('');
+  console.log(upImgUrl);
   const onSubmit = data => {
+    const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
+
+    const image = data?.image[0];
+
+    const formData = new FormData();
+    formData.append('image', image);
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          setUpImgUrl(result?.data?.url)
+        }
+      })
+
+    // console.log(image)
 
     const updatedProfileData = {
       user_name: data?.name ? data?.name : user?.user?.displayName,
       user_phone: data?.phone,
       user_address: data?.address,
-      user_birthday: data?.date
+      user_birthday: data?.date,
+      user_photo_url: upImgUrl ? upImgUrl : user?.user_photo_url,
+      user_role: userRole
     };
     console.log(updatedProfileData)
     if (user?.email) {
-      axios.put('https://book-shelf-webapp.herokuapp.com/add-user', updatedProfileData).then(data => console.log(data))
-      fetch(``, {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(updatedProfileData)
-      })
-        .then(res => res.json())
-        .then(data => {
-          toast.success(`Profile update Successfully`);
-          // reset();
-        })
+      axios.put('https://book-shelf-webapp.herokuapp.com/update-user', updatedProfileData).then(data => toast.success(`Profile update Successfully`))
+      // fetch(``, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'content-type': 'application/json',
+      //   },
+      //   body: JSON.stringify(updatedProfileData)
+      // })
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     toast.success(`Profile update Successfully`);
+      //     // reset();
+      //   })
 
     }
 
@@ -260,7 +292,25 @@ const Myprofile = () => {
                       placeholder="Update Your Address"
                       className="input input-bordered w-full  bg-secondary text-white" />
                     <label className="label">
-                      <span className="label-text-alt text-red-500">{errors.address?.type === 'required' && `${errors?.address?.message}`}</span>
+                      <span className="label-text-alt text-red-500">{errors.date?.type === 'required' && `${errors?.date?.message}`}</span>
+                    </label>
+                  </div>
+                  <div className="form-control w-full ">
+                    <label className="label">
+                      <span className="label-text text-lg">Upload Image</span>
+                    </label>
+                    <input
+                      {...register("image", {
+                        required: {
+                          value: true,
+                          message: "image is Required"
+                        }
+                      })}
+                      type="file"
+                      placeholder="Update Your Address"
+                      className="input input-bordered w-full pt-[5px] bg-secondary text-white" />
+                    <label className="label">
+                      <span className="label-text-alt text-red-500">{errors.image?.type === 'required' && `${errors?.image?.message}`}</span>
                     </label>
                   </div>
                 </div>

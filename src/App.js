@@ -36,97 +36,130 @@ import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import Home from "./pages/home/Home";
 
-
 // initialize aos
 AOS.init();
 
 function App() {
-  const { pathname } = useLocation()
-  const [dash, setdash] = useState('')
+  const { pathname } = useLocation();
+  const [dash, setdash] = useState("");
 
   useEffect(() => {
-    if (pathname.includes('/dashboard')) {
-      setdash("in dash")
+    if (pathname.includes("/dashboard")) {
+      setdash("in dash");
+    } else {
+      setdash("");
     }
-    else {
-      setdash('')
-    }
-  }, [pathname])
-
-
+  }, [pathname]);
 
   return (
     <div className="App">
-      {dash ? <NavDashboard >
-        <Routes>
-          <Route path="/dashboard" element={<RequireAuth>
-            <Dashboard />
-          </RequireAuth>}>
-            <Route index element={<Myprofile />} />
-            <Route path="myorder" element={<Myorder />} />
-            <Route path="addreview" element={<Addreview />} />
-            <Route path="addproduct" element={<AddProduct />} />
-            <Route path="allpublisher" element={<AllPublishers />} />
-            <Route path="allusers" element={<AllUsers />} />
-            <Route path="allorders" element={<AllOrders />} />
-            <Route path="allauthor" element={<AllAuthors />} />
-            <Route path="orderhistory" element={<OrderHistory />} />
+      {dash ? (
+        <NavDashboard>
+          <Routes>
+            <Route
+              path="/dashboard"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            >
+              <Route index element={<Myprofile />} />
+              <Route path="myorder" element={<Myorder />} />
+              <Route path="addreview" element={<Addreview />} />
+              <Route path="addproduct" element={<AddProduct />} />
+              <Route path="allpublisher" element={<AllPublishers />} />
+              <Route path="allusers" element={<AllUsers />} />
+              <Route path="allorders" element={<AllOrders />} />
+              <Route path="allauthor" element={<AllAuthors />} />
+              <Route path="orderhistory" element={<OrderHistory />} />
+            </Route>
+          </Routes>
+        </NavDashboard>
+      ) : (
+        <NavBar>
+          <Routes>
+            <Route path="/" element={<Home />}>
+              <Route path="/" element={<BestSellingBooks />} />
+              <Route
+                path="/popular-writers"
+                element={<PopularWritersBooks />}
+              />
+              <Route path="/best-offers" element={<BestOffersBooks />} />
+            </Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/signup" element={<SignUp />}></Route>
+            <Route path="/became" element={<AuthorOrPublisher />}></Route>
+            <Route
+              path="/addbook"
+              element={
+                <RequireAuth>
+                  <AddBook />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addcategory"
+              element={
+                <RequireAuth>
+                  <AddCategory />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addauthor"
+              element={
+                <RequireAuth>
+                  <AddAuthor />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addpublisher"
+              element={
+                <RequireAuth>
+                  <AddPublisher />
+                </RequireAuth>
+              }
+            ></Route>
+            {/* Dashboard routes */}
+            <Route
+              path="/addbook"
+              element={
+                <RequireAuth>
+                  <AddBook />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addcategory"
+              element={
+                <RequireAuth>
+                  <AddCategory />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addauthor"
+              element={
+                <RequireAuth>
+                  <AddAuthor />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addpublisher"
+              element={
+                <RequireAuth>
+                  <AddPublisher />
+                </RequireAuth>
+              }
+            ></Route>
+          </Routes>
 
-
-          </Route>
-        </Routes>
-      </NavDashboard> : <NavBar>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route path="/" element={<BestSellingBooks />} />
-            <Route path="/popular-writers" element={<PopularWritersBooks />} />
-            <Route path="/best-offers" element={<BestOffersBooks />} />
-          </Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/became" element={<AuthorOrPublisher />}></Route>
-          <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
-          <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
-          <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
-          <Route path="/addpublisher" element={<RequireAuth><AddPublisher /></RequireAuth>}></Route>
-          {/* Dashboard routes */}
-          <Route
-            path="/addbook"
-            element={
-              <RequireAuth>
-                <AddBook />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/addcategory"
-            element={
-              <RequireAuth>
-                <AddCategory />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/addauthor"
-            element={
-              <RequireAuth>
-                <AddAuthor />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/addpublisher"
-            element={
-              <RequireAuth>
-                <AddPublisher />
-              </RequireAuth>
-            }
-          ></Route>
-
-        </Routes>
-
-        <Footer />
-      </NavBar>}
+          <Footer />
+        </NavBar>
+      )}
 
       <ToastContainer />
     </div>

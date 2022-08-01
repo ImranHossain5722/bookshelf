@@ -18,7 +18,11 @@ const AllUsers = () => {
   }, [])
   return (
     <div className="bg-base-100 my-8 p-3">
+<<<<<<< HEAD
       <div className='grid grid-cols-3 g-4 gy-8'>
+=======
+      <div  className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 g-4 gy-8'>
+>>>>>>> c1304b5ff615ea70ab03c804d17b78397db787a7
 
         {users?.map(user => <div className="mx-[12px] card user-shadow  w-[370px] h-[160px] p-7 font-semibold m-3">
           <p className="pl-8 relative bottom-2">{user.user_name}</p>

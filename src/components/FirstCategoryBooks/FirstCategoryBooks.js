@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
 import Stars from "../Stars/Stars";
 import useWindowDimensions from "../windowSize/windowSize";
+import CartButton from "../CartButton/CartButton";
 
 const FirstCategoryBooks = () => {
     const [books, setBooks] = useState([]);
@@ -75,9 +76,7 @@ const FirstCategoryBooks = () => {
                                         <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
                                             <FaHeart />
                                         </button>
-                                        <button className="text-3xl text-white hover:text-primary duration-500">
-                                            <FaShoppingCart />
-                                        </button>
+                                          <CartButton _id={book._id}/>
                                     </div>
                                     <div className="w-44 mt-2">
                                         <h3>{book.title}</h3>

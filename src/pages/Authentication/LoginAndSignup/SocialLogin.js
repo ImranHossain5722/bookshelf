@@ -19,8 +19,9 @@ const SocialLogin = () => {
     const [token] = useToken(user || fUser);
 
     useEffect(() => {
-        if (token) {
+        if (token || user || fUser) {
             navigate(from, { replace: true });
+           
         }
     }, [token, from, navigate])
 

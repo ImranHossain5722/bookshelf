@@ -43,7 +43,9 @@ const PreOrderBooks = () => {
             setSize(1)
         }
     }, [width]);
-
+    const AddCart =(id) => {
+        console.log(id)
+    }
     return (
         <div className="bg-white max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] py-10">
             {/* ------title section----- */}
@@ -77,7 +79,7 @@ const PreOrderBooks = () => {
                                             <FaHeart />
                                         </button>
                                         <button className="text-3xl text-white hover:text-primary duration-500">
-                                            <FaShoppingCart />
+                                            <FaShoppingCart onClick={() => AddCart(book._id)}/>
                                         </button>
                                     </div>
                                     <div className="w-44 mt-2">

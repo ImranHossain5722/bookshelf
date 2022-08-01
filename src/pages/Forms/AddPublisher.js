@@ -39,7 +39,7 @@ const AddPublisher = () => {
         console.log('Got User')
         const postPublisherData = async () => {
 
-            await axios.post('https://bookshelf-web.herokuapp.com/add-user', publisherInfo).then(data => console.log(data))
+            await axios.post('https://book-shelf-webapp.herokuapp.com/add-user', publisherInfo).then(data => console.log(data))
             navigate('/dashboard');
 
         }

@@ -9,7 +9,7 @@ import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 
 const Myprofile = () => {
   const [user] = useAuthState(auth);
-  const [userRole, setUserRole] = useState('publisher')
+  const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
@@ -81,8 +81,8 @@ const Myprofile = () => {
   return (
     <div>
       <div className='text-4xl text-center py-12 font-bold'>My Profile</div>
-      <div className='flex w-4/6 mr-auto ml-20 '>
-        <div className='w-[600px] p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black' >
+      <div className='md:flex  mr-auto mx-[20px] md:ml-20'>
+        <div className='md:w-[50%] p-[20px] md:p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black' >
           <img className='block mx-auto' height={200} width={200} src={user?.photoURL ? user?.photoURL : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg '} alt="" />
           <h2 className='text-[40px] font-bold mt-3 mb-1 text-center text-black'>{user?.displayName}</h2>
           <p className='text-center mb-3 text-[20px]'>{userRole}</p>
@@ -104,23 +104,23 @@ const Myprofile = () => {
             <p className='font-[600] text-[16px] py-[7px]'>{'26/03/1971'}</p>
           </div>
         </div>
-        <div className='p-12 pt-0 ml-6'>
+        <div className='p-[20px] md:p-12 pt-0 md:ml-6 md:w-[50%]'>
           {/* cards  */}
           {/* card raw container */}
           {userRole === 'user' && <div className='flex mt-[22px]'>
-            <div className='flex w-[260px] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
-              <div className='w-[170px]  text-[#00124E]'>
-                <h2 className='text-[40px] font-[600]'>{103}</h2>
+            <div className='flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
+              <div className='w-[70%]  text-[#00124E]'>
+                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{103}</h2>
                 <p className='text-[18px] font-[600]'>Brought</p>
               </div>
-              <div className='flex align-items-center justify-center text-primary text-[70px] w-[90px]'><BsFillBagCheckFill /></div>
+              <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><BsFillBagCheckFill /></div>
             </div>
             <div className=' ml-[24px] flex w-[260px] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
-              <div className='w-[170px] text-[#00124E]'>
-                <h2 className='text-[40px] font-[600]'>{1053}</h2>
+              <div className='w-[70%] text-[#00124E]'>
+                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{1053}</h2>
                 <p className='text-[18px] font-[600]'>Wish List</p>
               </div>
-              <div className='flex align-items-center justify-center text-primary text-[70px] w-[90px]'><BsFillHeartFill /></div>
+              <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><BsFillHeartFill /></div>
             </div>
           </div>}
 
@@ -129,55 +129,55 @@ const Myprofile = () => {
           {(userRole === 'publisher' || userRole === 'author') &&
             <div>
               <div className='flex mt-[22px]'>
-                <div className='flex w-[260px] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
-                  <div className='w-[170px]  text-[#00124E]'>
-                    <h2 className='text-[40px] font-[600]'>{10}</h2>
-                    <p className='text-[18px] font-[600]'>Total Books</p>
+                <div className='flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
+                  <div className='w-[70%]  text-[#00124E]'>
+                    <h2 className='text-[30px] md:text-[40px] font-[600]'>{10}</h2>
+                    <p className='text-[16px] font-[600]'>Total Books</p>
                   </div>
-                  <div className=' flex align-items-center justify-center text-primary text-[70px] w-[90px]'><BsFillJournalBookmarkFill /></div>
+                  <div className=' flex align-items-center justify-center text-primary text-[70px] w-[30%]'><BsFillJournalBookmarkFill /></div>
                 </div>
-                <div className=' ml-[24px] flex w-[260px] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
-                  <div className='w-[170px]  text-[#00124E]'>
-                    <h2 className='text-[40px] font-[600]'>{50}</h2>
+                <div className=' ml-[24px] flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
+                  <div className='w-[70%]  text-[#00124E]'>
+                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{50}</h2>
                     <p className='text-[18px] font-[600]'>Total Sell</p>
                   </div>
-                  <div className='flex align-items-center justify-center text-primary text-[70px] w-[90px]'><FaCommentDollar /></div>
+                  <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaCommentDollar /></div>
                 </div>
               </div>
 
               {/* card raw container */}
               <div className='flex mt-[22px]'>
-                <div className='flex w-[260px] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
-                  <div className='w-[170px]  text-[#00124E]'>
-                    <h2 className='text-[40px] font-[600]'>{100}</h2>
+                <div className='flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
+                  <div className='w-[70%]  text-[#00124E]'>
+                    <h2 className='text-[30px] md:text-[40px] font-[600]'>{100}</h2>
                     <p className='text-[18px] font-[600]'>This Month Earning</p>
                   </div>
-                  <div className=' flex align-items-center justify-center text-primary text-[70px] w-[90px]'><FaDollarSign /></div>
+                  <div className=' flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaDollarSign /></div>
                 </div>
-                <div className=' ml-[24px] flex w-[260px] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
-                  <div className='w-[170px]  text-[#00124E]'>
-                    <h2 className='text-[40px] font-[600]'>{500}</h2>
+                <div className=' ml-[24px] flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
+                  <div className='w-[70%]  text-[#00124E]'>
+                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{500}</h2>
                     <p className='text-[18px] font-[600]'>Total Earning</p>
                   </div>
-                  <div className='flex align-items-center justify-center text-primary text-[70px] w-[90px]'><FaDollarSign /></div>
+                  <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaDollarSign /></div>
                 </div>
               </div>
 
               {/* card raw container */}
               <div className='flex mt-[22px]'>
-                <div className='flex w-[260px] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
-                  <div className='w-[170px]  text-[#00124E]'>
-                    <h2 className='text-[40px] font-[600]'>{100}</h2>
+                <div className='flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
+                  <div className='w-[70%]  text-[#00124E]'>
+                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{100}</h2>
                     <p className='text-[18px] font-[600]'>Balance</p>
                   </div>
-                  <div className=' flex align-items-center justify-center text-primary text-[70px] w-[90px]'><FaDollarSign /></div>
+                  <div className=' flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaDollarSign /></div>
                 </div>
-                <div className=' ml-[24px] flex w-[260px] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
-                  <div className='w-[170px]  text-[#00124E]'>
-                    <h2 className='text-[40px] font-[600]'>{500}</h2>
+                <div className=' ml-[24px] flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
+                  <div className='w-[70%]  text-[#00124E]'>
+                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{500}</h2>
                     <p className='text-[18px] font-[600]'>Withdrawn</p>
                   </div>
-                  <div className='flex align-items-center justify-center text-primary text-[70px] w-[90px]'><FaDollarSign /></div>
+                  <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaDollarSign /></div>
                 </div>
               </div>
             </div>

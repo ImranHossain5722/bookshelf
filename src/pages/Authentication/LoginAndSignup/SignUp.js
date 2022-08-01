@@ -53,6 +53,9 @@ const SignUp = () => {
 
     if (user || socialUser || token) {
         navigate('/dashboard');
+
+        console.log(user)
+
     }
 
     let confirmPassError;

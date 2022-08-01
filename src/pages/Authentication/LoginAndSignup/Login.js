@@ -37,6 +37,8 @@ const Login = () => {
             }
             postAuthorData();
 
+            navigate(from, { replace: true });
+            console.log(user)
         }
     }, [user, socialUser, from, navigate])
 

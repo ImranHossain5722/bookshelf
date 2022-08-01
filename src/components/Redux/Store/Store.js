@@ -1,6 +1,6 @@
 import React from 'react'
 import { applyMiddleware, configureStore } from "@reduxjs/toolkit";
-import { sellBookReducer,addCartReducer, authorsReducer,popularBookReducer, categoryReducer, allUserReducer, allPublisherReducer, allAuthorReducer, allOrdersReducer, myorderReducer, myProfileReducer, orderHistoryReducer, selectedBooksReducer, cartBooksReducer, allBooksReducer } from '../Features/bookReducers';
+import { sellBookReducer,addCartReducer, authorsReducer,popularBookReducer, categoryReducer, allUserReducer, allPublisherReducer, allAuthorReducer, allOrdersReducer, myorderReducer, myProfileReducer, orderHistoryReducer, selectedBooksReducer, cartBooksReducer, allBooksReducer, userReducer } from '../Features/bookReducers';
 import logger from 'redux-logger'
 
 
@@ -13,6 +13,7 @@ const store = configureStore({
         author: authorsReducer ,
         popularBooks : popularBookReducer,
         category : categoryReducer,
+        newUser: userReducer,
         allUser : allUserReducer,
         allPublishers : allPublisherReducer,
         allAuthors : allAuthorReducer,

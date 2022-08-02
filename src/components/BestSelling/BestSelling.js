@@ -19,6 +19,8 @@ import useWindowDimensions from "../windowSize/windowSize";
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from "../Loading/Loading";
 import { sellBooks } from "../Redux/actions/bookActions";
+import CartButton from "../CartButton/CartButton";
+import { NavLink } from "react-router-dom";
 const BestSelling = () => {
     const books = useSelector((state) => state?.sellBooks?.books);
     const [size, setSize] = useState(1);
@@ -27,7 +29,7 @@ const BestSelling = () => {
 
 
     useEffect(() => {
-        fetch('data.json')
+        fetch('https://book-shelf-webapp.herokuapp.com/all-books')
             .then(res => res.json())
             .then(data => dispatch(sellBooks(data)));
     }, [])
@@ -48,7 +50,6 @@ const BestSelling = () => {
         }
     }, [width]);
 
-
     return (
         <div className="bg-white max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] py-10">
             {/* ------title section----- */}
@@ -68,30 +69,30 @@ const BestSelling = () => {
                     style={{ "--swiper-theme-color": "#27AE61" }}
                 >
                     {
-                        books?.map(book => <SwiperSlide className="for-hover" key={book._id}>
-                            <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center relative">
-                                <div>
-                                    <img src={book.image} className="h-64 w-44 image-full" alt="" />
+                        books?.map(book => <SwiperSlide key={book._id}>
+                             <NavLink to={`/selectedBook/${book._id}`}>
+                            <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
+                                <div className="for-hover relative">
+                                    {/* relative */}
+                                    <img src={book.book_cover_photo_url} className="h-64 w-44 image-full" alt="" />
+                                    {/* absolute hover effect */}
+                                    <div className="bg-[#00124ea4] h-64 w-44 flex items-center justify-center absolute top-0 hover-button hidden">
+                                        <button className="text-3xl text-white hover:text-primary duration-500">
+                                            <FaEye />
+                                        </button>
+                                        <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
+                                            <FaHeart />
+                                        </button>
+                                       <CartButton _id={book._id}/>
+                                    </div>
                                     <div className="w-44 mt-2">
-                                        <h3>{book.title}</h3>
-                                        <p className="mt-2">{book.author}</p>
-                                        <h2 className="text-xl font-semibold text-primary mt-2 mb-1">${book.price}</h2>
+                                        <h3>{book.book_title}</h3>
+                                        <h2 className="text-xl font-semibold text-primary mt-2 mb-1">${book.book_price}</h2>
                                         <Stars />
                                     </div>
                                 </div>
                             </div>
-                            {/* second div  */}
-                            <div className="bg-[#00124ea4] h-[460px] w-full rounded-lg flex items-center justify-center absolute top-0 hover-button hidden">
-                                <button className="text-5xl text-white hover:text-primary duration-500">
-                                    <FaEye />
-                                </button>
-                                <button className="mx-7 text-5xl text-white hover:text-primary duration-500">
-                                    <FaHeart />
-                                </button>
-                                <button className="text-5xl text-white hover:text-primary duration-500">
-                                    <FaShoppingCart />
-                                </button>
-                            </div>
+                            </NavLink>
                         </SwiperSlide>)
                     }
                 </Swiper>

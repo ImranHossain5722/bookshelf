@@ -1,4 +1,5 @@
 import { getDefaultMiddleware } from "@reduxjs/toolkit";
+import { cartBooks } from "../actions/bookActions";
 import { ActionTypes } from "../Constants/ActionTypes";
 
 
@@ -14,8 +15,11 @@ const defState = {
     allPublishers : [],
     OrderHistory : [],
     myOrder : {},
-    myProfile : {}
-
+    myProfile : {},
+    cartBooks : [],
+    selectedBooks : {},
+    whistBooks : [],
+    allBooks : []
 }
 
 export const sellBookReducer = (state = defState, {type, payload} ) => {
@@ -173,6 +177,46 @@ export const categoryReducer = (state = defState, {type, payload} ) => {
           
             return {
                 category : payload
+            };
+    
+        default:
+            return state;
+    }
+}
+
+export const cartBooksReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.CART_BOOKS:
+          
+            return {
+                ...cartBooks,
+                cartBooks : payload
+            };
+    
+        default:
+            return state;
+    }
+}
+
+export const selectedBooksReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.SELECTED_BOOKS:
+          
+            return {
+                selectedBooks : payload
+            };
+    
+        default:
+            return state;
+    }
+}
+
+export const allBooksReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.ALLBOOKS:
+          
+            return {
+                allBooks : payload
             };
     
         default:

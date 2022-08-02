@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 //icons
 import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
 import Button from '../Button/Button';
+import CartButton from '../CartButton/CartButton';
 import Stars from '../Stars/Stars';
 import './BestSellingBooks.css';
 
@@ -39,9 +40,7 @@ const BestSellingBooks = () => {
                                 <button className="mx-7 text-5xl text-white hover:text-primary duration-500">
                                     <FaHeart />
                                 </button>
-                                <button className="text-5xl text-white hover:text-primary duration-500">
-                                    <FaShoppingCart />
-                                </button>
+                             <CartButton _id={book._id}/>
                             </div>
                         </div>)
                 }

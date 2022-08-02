@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 //icons
 import { FaHeart, FaEye, FaShoppingCart } from 'react-icons/fa';
 import Button from '../Button/Button';
+import CartButton from '../CartButton/CartButton';
 import Stars from '../Stars/Stars';
 
 const PopularWritersBooks = () => {
@@ -12,7 +13,7 @@ const PopularWritersBooks = () => {
             .then(res => res.json())
             .then(data => setBooks(data));
     }, []);
-
+ 
     return (
         <>
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14'>
@@ -38,9 +39,7 @@ const PopularWritersBooks = () => {
                                 <button className="mx-7 text-5xl text-white hover:text-primary duration-500">
                                     <FaHeart />
                                 </button>
-                                <button className="text-5xl text-white hover:text-primary duration-500">
-                                    <FaShoppingCart />
-                                </button>
+                                <CartButton _id={book._id}/>
                             </div>
                         </div>)
                 }

@@ -10,7 +10,7 @@ const useToken = cUser => {
         const email = cUser?.user?.email;
         const currentUser = { email: email, name: user?.displayName };
         if (email) {
-            fetch(`api`, {
+            fetch(`https://book-shelf-webapp.herokuapp.com/add-user`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

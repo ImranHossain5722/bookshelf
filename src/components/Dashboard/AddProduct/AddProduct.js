@@ -7,7 +7,7 @@ const AddProduct = () => {
   const { register, formState: { errors }, handleSubmit, reset } = useForm();
   const onSubmit = data => {
     console.log(data);
-    axios.post('https://bookshelf-web.herokuapp.com/add-book', {
+    axios.post('https://book-shelf-webapp.herokuapp.com/add-book', {
       book_title: data.book_title,
       book_description: data.book_description,
       book_publisher: data.book_publisher,

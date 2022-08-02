@@ -9,6 +9,7 @@ import auth from '../../../firebase.init';
 import logo from '../../../Assets/images/Logo/bookshelf-.png';
 // import useToken from '../../../hooks/useToken';
 import SocialLogin from './SocialLogin';
+import axios from 'axios';
 
 const Login = () => {
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
@@ -21,12 +22,30 @@ const Login = () => {
 
 
     useEffect(() => {
+        const userInfo = {
+            user_name: user?.user?.displayName,
+            user_email: user?.user?.email,
+            uid: user?.user?.uid,
+            user_role: 'user'
+        };
         if (user || socialUser) {
+            console.log('Got User')
+            const postAuthorData = async () => {
+                await axios.post('https://book-shelf-webapp.herokuapp.com/add-user', userInfo).then(data => console.log(data))
+                navigate(from, { replace: true });
+
+            }
+            postAuthorData();
+
             navigate(from, { replace: true });
             console.log(user)
         }
     }, [user, socialUser, from, navigate])
 
+    if (user) {
+
+
+    }
     if (error) {
         toast(`Error: ${error?.message}`);
     }
@@ -93,8 +112,8 @@ const Login = () => {
                     <p className='mt-1'>Forgot Your Password? <span style={{ cursor: "pointer" }} className='pointer text-primary font-bold'>Reset</span></p>
 
                     <div className='lg:hidden sm:flex '>
-                <SocialLogin></SocialLogin>
-            </div>
+                        <SocialLogin></SocialLogin>
+                    </div>
 
                 </div>
 

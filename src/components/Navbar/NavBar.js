@@ -87,7 +87,7 @@ const NavBar = ({ children }) => {
               </div>
               {/* user image */}
               <div className="hidden lg:flex user mx-4 mt-1">
-                <img className="" alt="" src={wishlist} />
+              <NavLink to="/wishlist"><img className="" alt="" src={wishlist} /> </NavLink>
               </div>
               <div className="user  hidden lg:flex">
                <NavLink to='/cart'>  <img className="" alt="" src={bag} /></NavLink>

@@ -11,7 +11,7 @@ apiKey: process.env.REACT_APP_apiKey,
   projectId: process.env.REACT_APP_projectId,
   storageBucket: process.env.REACT_APP_storageBucket,
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
-  appId: process.env.REACT_APP_appId,
+  appId: process.env.REACT_APP_appId, 
 }; 
 
 // Initialize Firebase

@@ -43,6 +43,7 @@ import Checkout from "./pages/Checkout/Checkout";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./firebase.init";
 import axios from "axios";
+import Wishlist from "./pages/wishlist/Wishlist";
 
 
 // initialize aos
@@ -56,7 +57,7 @@ function App() {
    
 useEffect(() => {
   const userEmail = {
-    email: "sharif@gmail.com"
+    email: user?.email
   };
   fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
     method: 'POST',
@@ -90,7 +91,7 @@ useEffect(() => {
             <Dashboard />
           </RequireAuth>}>
             <Route index element={<Myprofile />} />
-            <Route path="myorder" element={<Myorder />} />
+            <Route path="myorder" element={<Myorder/>} />
             <Route path="addreview" element={<Addreview />} />
             <Route path="addproduct" element={<AddProduct />} />
             <Route path="allpublisher" element={<AllPublishers />} />
@@ -111,6 +112,7 @@ useEffect(() => {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/wishlist" element={<Wishlist />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/selectedBook/:_id" element={<Products_details/>}></Route>
           <Route path="/became" element={<AuthorOrPublisher />}></Route>

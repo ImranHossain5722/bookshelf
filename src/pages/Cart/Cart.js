@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import { MdShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import productImg from "../../Assets/images/clubB.jpg";
@@ -13,9 +14,11 @@ const Cart = () => {
 
   
   return (
-    <div className="pt-[60px] md:pt-[80px] lg:pt-[120px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">
-      <div className="container m-auto flex">
-        <div className="w-8/12">
+    <div className="pt-[60px] md:pt-[80px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">
+        
+            <p className="text-5xl text-center mb-5 flex justify-center">My Cart <span><MdShoppingCart className='text-5xl text-primary ' /></span></p>
+      <div className="container m-auto ">
+        <div className="w-full">
           <div class="overflow-auto  h-[460px]">
             <table class="table w-full ">
               <thead>
@@ -83,13 +86,13 @@ const Cart = () => {
               </button>
             </div>
            <NavLink to='/checkout'> 
-           <button className="btn btn-primary text-white">
+           <button className="btn btn-primary text-white mt-16">
               Prossed to checkout 
             </button>
            </NavLink>
           </div>
         </div>
-        <div className="w-4/12">
+        <div className="w-4/12 ml-auto mt-4">
           <div className="cart_summery  px-8">
             <h4 className="text-black text-[24px] capitalize font-medium mb-4">
               Order Summary

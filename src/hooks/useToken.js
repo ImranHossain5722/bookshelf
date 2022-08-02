@@ -9,9 +9,10 @@ const useToken = cUser => {
     useEffect(() => {
         const email = cUser?.user?.email;
         const currentUser = { email: email, name: user?.displayName };
+        console.log(currentUser)
         if (email) {
             fetch(`https://book-shelf-webapp.herokuapp.com/add-user`, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },

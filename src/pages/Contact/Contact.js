@@ -73,9 +73,4 @@ const Contact = () => {
 
 export default Contact;
 
-{
-  /* <Route path="/contact" element={<Contact />}></Route>
-<Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
-<Route path="/faq" element={<Faq />}></Route>
-<Route path="/termsCondition" element={<TermsCondition />}></Route> */
-}
+

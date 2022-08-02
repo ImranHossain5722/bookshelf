@@ -43,6 +43,10 @@ import Checkout from "./pages/Checkout/Checkout";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./firebase.init";
 import axios from "axios";
+import Contact from "./pages/Contact/Contact";
+import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
+import Faq from "./pages/Faq/Faq";
+import TermsCondition from "./pages/TermsCondition/TermsCondition";
 
 // initialize aos
 AOS.init();
@@ -194,7 +198,10 @@ function App() {
                 </RequireAuth>
               }
             ></Route>
-
+            <Route path="/contact" element={<Contact />}></Route>
+            <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
+            <Route path="/faq" element={<Faq />}></Route>
+            <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

@@ -21,6 +21,7 @@ import Loading from "../Loading/Loading";
 import { sellBooks } from "../Redux/actions/bookActions";
 import CartButton from "../CartButton/CartButton";
 import { NavLink } from "react-router-dom";
+import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 const BestSelling = () => {
     const books = useSelector((state) => state?.sellBooks?.books);
     const [size, setSize] = useState(1);
@@ -70,7 +71,7 @@ const BestSelling = () => {
                 >
                     {
                         books?.map(book => <SwiperSlide key={book._id}>
-                             <NavLink to={`/selectedBook/${book._id}`}>
+                             {/* <NavLink to={`/selectedBook/${book._id}`}> */}
                             <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
                                 <div className="for-hover relative">
                                     {/* relative */}
@@ -80,9 +81,7 @@ const BestSelling = () => {
                                         <button className="text-3xl text-white hover:text-primary duration-500">
                                             <FaEye />
                                         </button>
-                                        <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
-                                            <FaHeart />
-                                        </button>
+                                       <Wishlistbutton _id={book._id}/>
                                        <CartButton _id={book._id}/>
                                     </div>
                                     <div className="w-44 mt-2">
@@ -92,7 +91,7 @@ const BestSelling = () => {
                                     </div>
                                 </div>
                             </div>
-                            </NavLink>
+                            {/* </NavLink> */}
                         </SwiperSlide>)
                     }
                 </Swiper>

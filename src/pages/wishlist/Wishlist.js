@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaHeart,FaCartPlus } from 'react-icons/fa'
 import { MdShoppingCart } from 'react-icons/md'
 import { RiDeleteBack2Fill} from 'react-icons/ri'
@@ -8,11 +8,16 @@ import { NavLink } from 'react-router-dom'
 import { cartBooks } from '../../components/Redux/actions/bookActions'
 
 const Wishlist = () => {
-    const books = useSelector((state) => state.cartBooks.cartBooks.user_cart)
+   const [books, setBooks] = useState([]);
+    const user = useSelector((state) => state?.newUser?.user)
+    const userId = user?._id
     const dispatch = useDispatch()
     useEffect(() => {
-        axios.get('https://book-shelf-webapp.herokuapp.com/get-cart-data?id=62e29c64754ed7d6c77da4be').then(data => dispatch(cartBooks(data.data)))
-    }, [books])
+        if(userId){
+
+            axios.get(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${userId}`).then(data => setBooks(data.data.user_wishlist)) 
+        }
+    }, [books]) 
 
     return (
         <div className="my-5">
@@ -38,7 +43,7 @@ const Wishlist = () => {
 
                                         <div class="avatar">
                                             <div class="w-20 rounded">
-                                                <img src={book.book.book_cover_photo_url} />
+                                                <img src={book.book_cover_photo_url} />
                                             </div>
                                         </div>
                                        
@@ -47,12 +52,12 @@ const Wishlist = () => {
                                 <td>
                                 <div className=" ">
                                             <h3 className="text-[18px] capitalize text-[#00124E] font-semibold">
-                                                {book.book.book_title}
+                                                {book.book_title}
                                             </h3>
                                         </div>
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                    ${book.book.book_price}
+                                    ${book.book_price}
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
                                     Author name

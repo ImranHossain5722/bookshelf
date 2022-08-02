@@ -30,7 +30,6 @@ import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
 import AuthorOrPublisher from "./pages/Forms/AuthorOrPublisher";
 
 import { useEffect, useState } from "react";
-import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import AllBooks from "./components/Books/AllBooks";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import PopularWritersBooks from "./components/PopularWritersBooks/PopularWritersBooks";
@@ -38,7 +37,6 @@ import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
-import Products_details from "./pages/Products_details/Products_details";
 
 // initialize aos
 AOS.init();
@@ -183,6 +181,21 @@ function App() {
               }
             ></Route>
 
+<<<<<<< HEAD
+=======
+            <Route
+              path="/productsdetails"
+              element={
+                <RequireAuth>
+                  <Products_details />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route path="/contact" element={<Contact />}></Route>
+            <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
+            <Route path="/faq" element={<Faq />}></Route>
+            <Route path="/termsCondition" element={<TermsCondition />}></Route>
+>>>>>>> 4fa1458a3915ad20b183067a58a60825b8189259
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

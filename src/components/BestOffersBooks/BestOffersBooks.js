@@ -21,8 +21,19 @@ const BestOffersBooks = () => {
                     books?.splice(0, 8).map(book =>
                         <div className="on-book relative" key={book._id}>
                             <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
-                                <div>
+                                <div className="for-hover relative">
+                                    {/* relative */}
                                     <img src={book.image} className="h-64 w-44 image-full" alt="" />
+                                    {/* absolute hover effect */}
+                                    <div className="bg-[#00124ea4] h-64 w-44 flex items-center justify-center absolute top-0 hover-button hidden">
+                                        <button className="text-3xl text-white hover:text-primary duration-500">
+                                            <FaEye />
+                                        </button>
+                                        <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
+                                            <FaHeart />
+                                        </button>
+                                        <CartButton _id={book._id} />
+                                    </div>
                                     <div className="w-44 mt-2">
                                         <h3>{book.title}</h3>
                                         <p className="mt-2">{book.author}</p>
@@ -30,16 +41,6 @@ const BestOffersBooks = () => {
                                         <Stars />
                                     </div>
                                 </div>
-                            </div>
-                            {/* second div  */}
-                            <div className="bg-[#00124ea4] h-[460px] w-full rounded-lg flex items-center justify-center absolute top-0 hover-book hidden">
-                                <button className="text-5xl text-white hover:text-primary duration-500">
-                                    <FaEye />
-                                </button>
-                                <button className="mx-7 text-5xl text-white hover:text-primary duration-500">
-                                    <FaHeart />
-                                </button>
-                                <CartButton _id={book._id}/>
                             </div>
                         </div>)
                 }

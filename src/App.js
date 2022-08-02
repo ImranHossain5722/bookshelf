@@ -40,14 +40,36 @@ import AllBooks from "./components/Books/AllBooks";
 import Cart from "./pages/Cart/Cart";
 import Products_details from "./pages/Products_details/Products_details";
 import Checkout from "./pages/Checkout/Checkout";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "./firebase.init";
+import axios from "axios";
 
 
 // initialize aos
 AOS.init();
 
 function App() {
+  
   const { pathname } = useLocation()
   const [dash, setdash] = useState('')
+  const [user ] = useAuthState(auth)
+   
+useEffect(() => {
+  const userEmail = {
+    email: "sharif@gmail.com"
+  };
+  fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(userEmail)
+  })
+    .then((res) => res.json())
+    .then(data => console.log(data[0])
+    );
+}, [user?.email])
+  
 
   useEffect(() => {
     if (pathname.includes('/dashboard')) {
@@ -83,7 +105,6 @@ function App() {
       </NavDashboard> : <NavBar>
         <Routes>
           <Route path="/" element={<Home />}>
-            <Route path="/" element={<BestSellingBooks />} />
             <Route path="/popular-writers" element={<PopularWritersBooks />} />
             <Route path="/best-offers" element={<BestOffersBooks />} />
           </Route>

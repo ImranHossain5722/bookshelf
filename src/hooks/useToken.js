@@ -15,15 +15,15 @@ const useToken = (cUser) => {
           role: "user",
         };
         const data = await axios.post(
-          "http://localhost:4000/add-user",
+          "https://book-shelf-webapp.herokuapp.com/add-user",
           userData
         );
         if (data.data._id) {
           setUserData(data.data);
+          console.log(data.data);
         }
       }
     });
-    console.log(userData);
   };
 
   return { token, handleLogin };

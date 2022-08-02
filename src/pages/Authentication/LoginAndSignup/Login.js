@@ -56,7 +56,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     await signInWithEmailAndPassword(data.email, data.password);
-    await handleLogin("user");
+    await handleLogin();
     reset();
     navigate(from, { replace: true });
   };

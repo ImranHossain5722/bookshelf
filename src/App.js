@@ -30,13 +30,22 @@ import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
 import AuthorOrPublisher from "./pages/Forms/AuthorOrPublisher";
 
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import AllBooks from "./components/Books/AllBooks";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import PopularWritersBooks from "./components/PopularWritersBooks/PopularWritersBooks";
+import auth from "./firebase.init";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
+import Products_details from "./pages/Products_details/Products_details";
+
+import Contact from "./pages/Contact/Contact";
+import Faq from "./pages/Faq/Faq";
+import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
+import TermsCondition from "./pages/TermsCondition/TermsCondition";
 
 // initialize aos
 AOS.init();
@@ -44,23 +53,22 @@ AOS.init();
 function App() {
   const { pathname } = useLocation();
   const [dash, setdash] = useState("");
-  // const [user ] = useAuthState(auth)
+  const [user] = useAuthState(auth);
 
-  // useEffect(() => {
-  //   const userEmail = {
-  //     email: "sharif@gmail.com"
-  //   };
-  //   fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
-  //     method: 'POST',
-  //     headers: {
-  //       'content-type': 'application/json',
-  //     },
-  //     body: JSON.stringify(userEmail)
-  //   })
-  //     .then((res) => res.json())
-  //     .then(data => console.log(data[0])
-  //     );
-  // }, [user?.email])
+  useEffect(() => {
+    const userEmail = {
+      email: "sharif@gmail.com",
+    };
+    fetch("https://book-shelf-webapp.herokuapp.com/get-user", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userEmail),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data[0]));
+  }, [user?.email]);
 
   useEffect(() => {
     if (pathname.includes("/dashboard")) {
@@ -181,8 +189,6 @@ function App() {
               }
             ></Route>
 
-<<<<<<< HEAD
-=======
             <Route
               path="/productsdetails"
               element={
@@ -195,7 +201,6 @@ function App() {
             <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
             <Route path="/faq" element={<Faq />}></Route>
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
->>>>>>> 4fa1458a3915ad20b183067a58a60825b8189259
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

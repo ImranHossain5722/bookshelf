@@ -1,5 +1,5 @@
 import './Login.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthState, useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import useToken from '../../../hooks/useToken';
 import auth from '../../../firebase.init';
 import Loading from '../../../components/Loading/Loading';
 import logo from '../../../Assets/images/Logo/bookshelf-.png';
+import axios from 'axios';
 
 const SignUp = () => {
     const [sendEmailVerification, sending, vError] = useSendEmailVerification(auth);
@@ -16,10 +17,31 @@ const SignUp = () => {
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [socialUser] = useAuthState(auth);
+    const [phoneNo, setPhoneNo] = useState('');
 
     const navigate = useNavigate();
     const [token] = useToken(user || socialUser);
 
+    const userInfo = {
+        user_name: user?.user?.displayName,
+        user_email: user?.user?.email,
+        user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : phoneNo,
+        user_photo_url: user?.user?.photoURL ? user?.user?.photoURL : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
+        uid: user?.user?.uid,
+        user_role: 'user'
+    };
+    if (user) {
+        console.log('Got User')
+        const postAuthorData = async () => {
+            await axios.post('https://book-shelf-webapp.herokuapp.com/add-user', userInfo).then(data => console.log(data))
+            navigate('/dashboard');
+
+        }
+        postAuthorData();
+
+    } else {
+        console.log('user data not found')
+    }
     console.log(socialUser)
     if (loading || updating || sending) {
         return <Loading></Loading>
@@ -41,6 +63,7 @@ const SignUp = () => {
     const onSubmit = async (data) => {
         const pass = data?.password;
         const confirmPass = data?.cpassword;
+        setPhoneNo(data?.phone)
 
         if (pass === confirmPass) {
             await createUserWithEmailAndPassword(data.email, data.password);
@@ -51,11 +74,6 @@ const SignUp = () => {
         } else {
             toast('Password and Confirm Password Dose not match');
         }
-
-
-
-
-
     }
     return (
         <div className='flex justify-center items-center h-full my-12'>
@@ -106,7 +124,7 @@ const SignUp = () => {
 
                         <div className="form-control w-full max-w-xs">
                             <input
-                                {...register("mobile", {
+                                {...register("phone", {
                                     required: {
                                         value: true,
                                         message: "Mobile no is Required"
@@ -116,7 +134,7 @@ const SignUp = () => {
                                 placeholder="Enter Your Mobile no"
                                 className="input input-bordered w-full max-w-xs bg-secondary text-white" />
                             <label className="label">
-                                <span className="label-text-alt text-red-500">{errors.mobile?.type === 'required' && `${errors?.mobile?.message}`}</span>
+                                <span className="label-text-alt text-red-500">{errors.phone?.type === 'required' && `${errors?.phone?.message}`}</span>
                             </label>
                         </div>
 
@@ -171,8 +189,8 @@ const SignUp = () => {
                     <p className='mt-4'>Already have an account? <Link to='/login' className='text-primary font-bold'>Login</Link></p>
                 </div>
                 <div className='lg:hidden sm:flex  m-4'>
-                <SocialLogin></SocialLogin>
-            </div>
+                    <SocialLogin></SocialLogin>
+                </div>
             </div>
 
             <div class=" hidden lg:flex  outer" >

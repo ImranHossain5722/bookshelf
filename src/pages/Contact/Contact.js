@@ -42,7 +42,7 @@ const Contact = () => {
               />
               <input
                 type="text"
-                placeholder="Last Name"
+                placeholder="Last Name "
                 class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
               />
             </div>

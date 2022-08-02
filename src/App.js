@@ -29,7 +29,7 @@ import AllOrders from "./components/Dashboard/AllOrders/AllOrders";
 import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
 import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
 
-import BestSellingBooks from "./components/BestOffersBooks/BestOffersBooks";
+import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
 import PopularWritersBooks from "./components/PopularWritersBooks/PopularWritersBooks";
 import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
@@ -49,27 +49,27 @@ import axios from "axios";
 AOS.init();
 
 function App() {
-  
+
   const { pathname } = useLocation()
   const [dash, setdash] = useState('')
-  const [user ] = useAuthState(auth)
-   
-useEffect(() => {
-  const userEmail = {
-    email: "sharif@gmail.com"
-  };
-  fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(userEmail)
-  })
-    .then((res) => res.json())
-    .then(data => console.log(data[0])
-    );
-}, [user?.email])
-  
+  const [user] = useAuthState(auth)
+
+  useEffect(() => {
+    const userEmail = {
+      email: "sharif@gmail.com"
+    };
+    fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(userEmail)
+    })
+      .then((res) => res.json())
+      .then(data => console.log(data[0])
+      );
+  }, [user?.email])
+
 
   useEffect(() => {
     if (pathname.includes('/dashboard')) {
@@ -105,6 +105,7 @@ useEffect(() => {
       </NavDashboard> : <NavBar>
         <Routes>
           <Route path="/" element={<Home />}>
+            <Route path="/" element={<BestSellingBooks />} />
             <Route path="/popular-writers" element={<PopularWritersBooks />} />
             <Route path="/best-offers" element={<BestOffersBooks />} />
           </Route>
@@ -112,9 +113,9 @@ useEffect(() => {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
-          <Route path="/selectedBook/:_id" element={<Products_details/>}></Route>
+          <Route path="/selectedBook/:_id" element={<Products_details />}></Route>
           <Route path="/became" element={<AuthorOrPublisher />}></Route>
-          <Route path="/books" element={<AllBooks />}></Route> 
+          <Route path="/books" element={<AllBooks />}></Route>
           <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
           <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
           <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
@@ -153,7 +154,7 @@ useEffect(() => {
             }
           ></Route>
 
-<Route
+          <Route
             path="/productsdetails"
             element={
               <RequireAuth>
@@ -165,7 +166,7 @@ useEffect(() => {
 
 
 
-            <Route path="*" element={<NotFound></NotFound>}> </Route>
+          <Route path="*" element={<NotFound></NotFound>}> </Route>
         </Routes>
 
         <Footer />

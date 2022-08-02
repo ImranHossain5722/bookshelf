@@ -40,7 +40,7 @@ const BestSellingBooks = () => {
                                 <button className="mx-7 text-5xl text-white hover:text-primary duration-500">
                                     <FaHeart />
                                 </button>
-                             <CartButton _id={book._id}/>
+                                <CartButton _id={book._id} />
                             </div>
                         </div>)
                 }

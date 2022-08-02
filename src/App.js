@@ -34,7 +34,15 @@ import PopularWritersBooks from "./components/PopularWritersBooks/PopularWriters
 import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home/Home";
+import NotFound from "./pages/NotFound/NotFound";
+import AllBooks from "./components/Books/AllBooks";
+import Cart from "./pages/Cart/Cart";
+import Products_details from "./pages/Products_details/Products_details";
+import Checkout from "./pages/Checkout/Checkout";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "./firebase.init";
+import axios from "axios";
 
 // initialize aos
 AOS.init();
@@ -42,6 +50,22 @@ AOS.init();
 function App() {
   const { pathname } = useLocation();
   const [dash, setdash] = useState("");
+  const [user] = useAuthState(auth);
+
+  useEffect(() => {
+    const userEmail = {
+      email: "sharif@gmail.com",
+    };
+    fetch("https://book-shelf-webapp.herokuapp.com/get-user", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userEmail),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data[0]));
+  }, [user?.email]);
 
   useEffect(() => {
     if (pathname.includes("/dashboard")) {
@@ -80,7 +104,6 @@ function App() {
         <NavBar>
           <Routes>
             <Route path="/" element={<Home />}>
-              <Route path="/" element={<BestSellingBooks />} />
               <Route
                 path="/popular-writers"
                 element={<PopularWritersBooks />}
@@ -89,7 +112,14 @@ function App() {
             </Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/checkout" element={<Checkout />}></Route>
+            <Route
+              path="/selectedBook/:_id"
+              element={<Products_details />}
+            ></Route>
             <Route path="/became" element={<AuthorOrPublisher />}></Route>
+            <Route path="/books" element={<AllBooks />}></Route>
             <Route
               path="/addbook"
               element={
@@ -155,7 +185,19 @@ function App() {
                 </RequireAuth>
               }
             ></Route>
-            {/* new  */}
+
+            <Route
+              path="/productsdetails"
+              element={
+                <RequireAuth>
+                  <Products_details />
+                </RequireAuth>
+              }
+            ></Route>
+
+            <Route path="*" element={<NotFound></NotFound>}>
+              {" "}
+            </Route>
           </Routes>
 
           <Footer />

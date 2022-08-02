@@ -91,3 +91,32 @@ export const orderHistory = (orders) =>{
         payload: orders
     }
 }
+
+export const cartBooks = (books) =>{
+    return {
+        type : ActionTypes.CART_BOOKS,
+        payload: books
+    }
+}
+
+export const selectedBooks = (book) =>{
+    return {
+        type : ActionTypes.SELECTED_BOOKS,
+        payload: book
+    }
+}
+
+export const whistlist = (books) =>{
+    return {
+        type : ActionTypes.WHISTLIST,
+        payload: books
+    }
+}
+
+export const allBooks = (books) =>{
+    return {
+        type : ActionTypes.ALLBOOKS,
+        payload: books
+    }
+}
+

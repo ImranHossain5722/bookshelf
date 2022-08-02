@@ -13,32 +13,34 @@ import {
   myorderReducer,
   myProfileReducer,
   orderHistoryReducer,
+  selectedBooksReducer,
+  cartBooksReducer,
+  allBooksReducer,
+  userReducer,
 } from "../Features/bookReducers";
-const thunk = require("redux-thunk");
+import logger from "redux-logger";
 
-const middleware =
-  process.env.NODE_ENV !== "production"
-    ? [require("redux-immutable-state-invariant").default(), thunk]
-    : [thunk];
-
-const store = configureStore(
-  {
-    reducer: {
-      sellBooks: sellBookReducer,
-      addCart: addCartReducer,
-      author: authorsReducer,
-      popularBooks: popularBookReducer,
-      category: categoryReducer,
-      allUser: allUserReducer,
-      allPublishers: allPublisherReducer,
-      allAuthors: allAuthorReducer,
-      allOrders: allOrdersReducer,
-      myOrder: myorderReducer,
-      myProfile: myProfileReducer,
-      OrderHistory: orderHistoryReducer,
-    },
+const store = configureStore({
+  reducer: {
+    sellBooks: sellBookReducer,
+    allBooks: allBooksReducer,
+    addCart: addCartReducer,
+    author: authorsReducer,
+    popularBooks: popularBookReducer,
+    category: categoryReducer,
+    newUser: userReducer,
+    allUser: allUserReducer,
+    allPublishers: allPublisherReducer,
+    allAuthors: allAuthorReducer,
+    allOrders: allOrdersReducer,
+    myOrder: myorderReducer,
+    myProfile: myProfileReducer,
+    OrderHistory: orderHistoryReducer,
+    cartBooks: cartBooksReducer,
+    selectedBooks: selectedBooksReducer,
   },
-  applyMiddleware(...middleware)
-);
+
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+});
 
 export default store;

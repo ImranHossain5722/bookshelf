@@ -9,6 +9,7 @@ import auth from '../../../firebase.init';
 import logo from '../../../Assets/images/Logo/bookshelf-.png';
 // import useToken from '../../../hooks/useToken';
 import SocialLogin from './SocialLogin';
+import axios from 'axios';
 
 const Login = () => {
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
@@ -21,11 +22,30 @@ const Login = () => {
 
 
     useEffect(() => {
+        const userInfo = {
+            user_name: user?.user?.displayName,
+            user_email: user?.user?.email,
+            uid: user?.user?.uid,
+            user_role: 'user'
+        };
         if (user || socialUser) {
+            console.log('Got User')
+            const postAuthorData = async () => {
+                await axios.post('https://book-shelf-webapp.herokuapp.com/add-user', userInfo).then(data => console.log(data))
+                navigate(from, { replace: true });
+
+            }
+            postAuthorData();
+
             navigate(from, { replace: true });
+            console.log(user)
         }
     }, [user, socialUser, from, navigate])
 
+    if (user) {
+
+
+    }
     if (error) {
         toast(`Error: ${error?.message}`);
     }
@@ -39,7 +59,7 @@ const Login = () => {
     }
 
     return (
-        <div className='flex justify-center items-center min-h-[70vh]'>
+        <div className='flex justify-center items-center  h-full my-5'>
             <div className="card bg-base-100 shadow-xl">
                 <div className='text-center'>
                     <img className='mx-auto' src={logo} alt="" />
@@ -90,15 +110,20 @@ const Login = () => {
                     </form>
                     <p className='mt-4'>New to BookShelf? <Link to='/signup' className='text-primary font-bold'>Create a new account</Link></p>
                     <p className='mt-1'>Forgot Your Password? <span style={{ cursor: "pointer" }} className='pointer text-primary font-bold'>Reset</span></p>
+
+                    <div className='lg:hidden sm:flex '>
+                        <SocialLogin></SocialLogin>
+                    </div>
+
                 </div>
 
 
 
             </div>
-            <div class="outer">
+            <div class="hidden lg:flex outer">
                 <div class="inner"></div>
             </div>
-            <div>
+            <div className='hidden lg:flex'>
                 <SocialLogin></SocialLogin>
             </div>
 

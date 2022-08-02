@@ -9,13 +9,18 @@ const AddCategory = () => {
     // const [user] = useAuthState(auth);
 
     const onSubmit = data => {
-        fetch(``, {
+        const categoryInfo = {
+            category_title: data?.category,
+            category_icon_url: data?.icon
+
+        };
+        fetch(`https://book-shelf-webapp.herokuapp.com/add-category`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(categoryInfo)
         })
             .then(res => {
                 if (res.status === 403) {
@@ -25,7 +30,7 @@ const AddCategory = () => {
                 return res.json()
             })
             .then(data => {
-                toast.success(`Review Added Successfully`);
+                toast.success(`Category Added Successfully`);
                 reset();
             })
 

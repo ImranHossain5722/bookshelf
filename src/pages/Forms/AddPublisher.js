@@ -1,9 +1,8 @@
-// import { useEffect } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-// import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading/Loading';
 import auth from '../../firebase.init';
@@ -13,32 +12,9 @@ const AddPublisher = () => {
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [phoneNo, setPhoneNo] = useState('');
 
-
-    // useEffect(() => {
-    //     if (user) {
-    //         fetch(`https://bookshelf-web.herokuapp.com/add-user`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'content-type': 'application/json',
-    //                 'Accept': 'application/json'
-    //             },
-    //             body: JSON.stringify(publisherInfo)
-    //         })
-    //             .then(res => {
-    //                 if (res.status === 403) {
-    //                     toast.error('Unauthorized');
-    //                 }
-    //                 return res.json()
-    //             })
-    //             .then(data => {
-    //                 console.log("DB :", data)
-    //                 toast.success(`Account created Successfully`);
-    //             })
-    //     }
-
-    // }, [user])
 
     if (loading || updating || sending) {
         return <Loading></Loading>
@@ -50,62 +26,43 @@ const AddPublisher = () => {
 
     let confirmPassError;
 
+    const publisherInfo = {
+        user_name: user?.user?.displayName,
+        user_email: user?.user?.email,
+        user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : phoneNo,
+        user_photo_url: user?.user?.photoURL ? user?.user?.photoURL : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
+        uid: user?.user?.uid,
+        user_role: 'publisher'
+    };
 
+    if (user) {
+        console.log('Got User')
+        const postPublisherData = async () => {
+
+            await axios.post('https://book-shelf-webapp.herokuapp.com/add-user', publisherInfo).then(data => console.log(data))
+            navigate('/dashboard');
+
+        }
+        postPublisherData();
+
+    } else {
+        console.log('user data not found')
+    }
     const onSubmit = async (data) => {
         const pass = data?.password;
         const confirmPass = data?.cpassword;
-        console.log(user.user)
-        const publisherInfo = {
-            user_name: user?.user?.displayName,
-            user_email: user?.user?.email,
-            user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : data?.phone,
-            user_photo_url: user?.user?.photoURL ? user?.user?.photoURL : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
-            uid: user?.user?.uid,
-            user_role: 'publisher'
-        };
+        setPhoneNo(data?.phone)
         if (pass === confirmPass) {
             await createUserWithEmailAndPassword(data?.publisher_email, data?.password);
             await updateProfile({ displayName: data?.publisher_name, phoneNumber: data?.phone });
             await sendEmailVerification();
             toast('Verification Email Sent');
-            // navigate('/dashboard');
             console.log('user created on firebase');
-            if (user) {
-                console.log('Got User')
-                const postPublisherData = async () => {
-                    // try {
-                    //     console.log('inside try', publisherInfo)
-                    //     await fetch(`https://bookshelf-web.herokuapp.com/add-user`, {
-                    //         method: 'POST',
-                    //         headers: {
-                    //             'content-type': 'application/json',
-                    //             'Accept': 'application/json'
-                    //         },
-                    //         body: JSON.stringify(publisherInfo)
-                    //     })
-                    //         .then(res => {
-                    //             console.log(res.json())
-                    //         })
-                    //         .then(data => {
-                    //             console.log("DB :", data)
-                    //             toast.success(`Account created Successfully`);
-                    //         })
-                    // }
-                    // catch (error) {
-                    //     console.error(error)
-                    // }
-                    axios.post('https://bookshelf-web.herokuapp.com/add-user',publisherInfo).then(data => console.log(data))
-                }
-                postPublisherData();
-
-            } else {
-                console.log('user data not found')
-            }
         }
         else {
             toast('Password and Confirm Password Dose not match');
         }
-        // reset();
+        reset();
     }
     return (
         <div className="pt-0 pb-12 w-1/2 mx-auto">

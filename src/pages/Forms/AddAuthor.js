@@ -1,7 +1,8 @@
+import axios from 'axios';
+import { useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-// import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading/Loading';
 import auth from '../../firebase.init';
@@ -12,10 +13,9 @@ const AddAuthor = () => {
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate();
+    const [phoneNo, setPhoneNo] = useState('');
 
-    if (user) {
-        navigate('/dashboard');
-    }
+
     if (loading || updating || sending) {
         return <Loading></Loading>
     }
@@ -23,52 +23,44 @@ const AddAuthor = () => {
     if (error || uError || vError) {
         toast(`Error: ${error?.message}` || uError?.message)
     }
-    // const [user] = useAuthState(auth);
     let confirmPassError;
+    const authorInfo = {
+        user_name: user?.user?.displayName,
+        user_email: user?.user?.email,
+        user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : phoneNo,
+        user_photo_url: user?.user?.photoURL ? user?.user?.photoURL : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
+        uid: user?.user?.uid,
+        user_role: 'author'
+    };
 
-    const onSubmit = async (data) => {
-        const date = new Date();
+    if (user) {
+        console.log('Got User')
+        const postAuthorData = async () => {
 
-        const authorInfo = {
-            author_name: data?.author_name,
-            author_email: data?.author_email,
-            phone: data?.phone,
-            address: data?.address,
-            user_role: 'author',
-            joining: date
+            await axios.post('https://book-shelf-webapp.herokuapp.com/add-user', authorInfo).then(data => console.log(data))
+            navigate('/dashboard');
+
         }
+        postAuthorData();
 
-        // console.log(authorInfo);
-
-
+    } else {
+        console.log('user data not found')
+    }
+    const onSubmit = async (data) => {
         const pass = data?.password;
         const confirmPass = data?.cpassword;
 
+        setPhoneNo(data?.phone)
         if (pass === confirmPass) {
-            fetch(`https://bookshelf-web.herokuapp.com/add-author`, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(authorInfo)
-            })
-                .then(res => {
-                    if (res.status === 403) {
-                        toast.error('Unauthorized');
-                    }
-                    return res.json()
-                })
-                .then(data => {
-                    toast.success(`Account created Successfully`);
-                    reset();
-                })
-
             await createUserWithEmailAndPassword(data?.author_email, data?.password);
-            await updateProfile({ displayName: data?.author_name });
+            await updateProfile({ displayName: data?.author_name, phoneNumber: data?.phone });
             await sendEmailVerification();
             toast('Verification Email Sent');
-            reset();
-        } else {
+            // navigate('/dashboard');
+            console.log('user created on firebase');
+
+        }
+        else {
             toast('Password and Confirm Password Dose not match');
         }
         reset();

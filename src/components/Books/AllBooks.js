@@ -37,11 +37,11 @@ const AllBooks = () => {
     
 
   return (
-    <div className='my-6'>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14">
+    <div style={{background:"#FBF6F6"}} className=' max-w-[1440px] p-6 '>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 mb-10">
             {
                 bookpagi.map(book =>  <Link to={`/selectedBook/${book._id}`}>
-                  <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
+                  <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
                 <div className="for-hover relative">
                     {/* relative */}
                     <img src={book.book_cover_photo_url} className="h-64 w-44 image-full" alt="Books image" />

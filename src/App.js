@@ -35,7 +35,7 @@ import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import Home from "./pages/Home/Home";
-import NotFound from './pages/NotFound/NotFound'
+import NotFound from "./pages/NotFound/NotFound";
 import AllBooks from "./components/Books/AllBooks";
 import Cart from "./pages/Cart/Cart";
 import Products_details from "./pages/Products_details/Products_details";
@@ -45,121 +45,173 @@ import auth from "./firebase.init";
 import axios from "axios";
 import Wishlist from "./pages/wishlist/Wishlist";
 
+import Contact from "./pages/Contact/Contact";
+import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
+import Faq from "./pages/Faq/Faq";
+import TermsCondition from "./pages/TermsCondition/TermsCondition";
 
 // initialize aos
 AOS.init();
 
 function App() {
-  
-  const { pathname } = useLocation()
-  const [dash, setdash] = useState('')
-  const [user ] = useAuthState(auth)
-   
-useEffect(() => {
-  const userEmail = {
-    email: user?.email
-  };
-  fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(userEmail)
-  })
-    .then((res) => res.json())
-    .then(data => console.log(data[0])
-    );
-}, [user?.email])
-  
+  const { pathname } = useLocation();
+  const [dash, setdash] = useState("");
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
-    if (pathname.includes('/dashboard')) {
-      setdash("in dash")
-    }
-    else {
-      setdash('')
-    }
-  }, [pathname])
+    const userEmail = {
+      email: "sharif@gmail.com",
+    };
+    fetch("https://book-shelf-webapp.herokuapp.com/get-user", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userEmail),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data[0]));
+  }, [user?.email]);
 
-
+  useEffect(() => {
+    if (pathname.includes("/dashboard")) {
+      setdash("in dash");
+    } else {
+      setdash("");
+    }
+  }, [pathname]);
 
   return (
     <div className="App">
-      {dash ? <NavDashboard >
-        <Routes>
-          <Route path="/dashboard" element={<RequireAuth>
-            <Dashboard />
-          </RequireAuth>}>
-            <Route index element={<Myprofile />} />
-            <Route path="myorder" element={<Myorder/>} />
-            <Route path="addreview" element={<Addreview />} />
-            <Route path="addproduct" element={<AddProduct />} />
-            <Route path="allpublisher" element={<AllPublishers />} />
-            <Route path="allusers" element={<AllUsers />} />
-            <Route path="allorders" element={<AllOrders />} />
-            <Route path="allauthor" element={<AllAuthors />} />
-            <Route path="orderhistory" element={<OrderHistory />} />
+      {dash ? (
+        <NavDashboard>
+          <Routes>
+            <Route
+              path="/dashboard"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            >
+              <Route index element={<Myprofile />} />
+              <Route path="myorder" element={<Myorder />} />
+              <Route path="addreview" element={<Addreview />} />
+              <Route path="addproduct" element={<AddProduct />} />
+              <Route path="allpublisher" element={<AllPublishers />} />
+              <Route path="allusers" element={<AllUsers />} />
+              <Route path="allorders" element={<AllOrders />} />
+              <Route path="allauthor" element={<AllAuthors />} />
+              <Route path="orderhistory" element={<OrderHistory />} />
+            </Route>
+          </Routes>
+        </NavDashboard>
+      ) : (
+        <NavBar>
+          <Routes>
+            <Route path="/" element={<Home />}>
+              <Route
+                path="/popular-writers"
+                element={<PopularWritersBooks />}
+              />
+              <Route path="/best-offers" element={<BestOffersBooks />} />
+            </Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/signup" element={<SignUp />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/checkout" element={<Checkout />}></Route>
+            <Route
+              path="/selectedBook/:_id"
+              element={<Products_details />}
+            ></Route>
+            <Route path="/became" element={<AuthorOrPublisher />}></Route>
+            <Route path="/books" element={<AllBooks />}></Route>
+            <Route
+              path="/addbook"
+              element={
+                <RequireAuth>
+                  <AddBook />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addcategory"
+              element={
+                <RequireAuth>
+                  <AddCategory />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addauthor"
+              element={
+                <RequireAuth>
+                  <AddAuthor />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addpublisher"
+              element={
+                <RequireAuth>
+                  <AddPublisher />
+                </RequireAuth>
+              }
+            ></Route>
+            {/* Dashboard routes */}
+            <Route
+              path="/addbook"
+              element={
+                <RequireAuth>
+                  <AddBook />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addcategory"
+              element={
+                <RequireAuth>
+                  <AddCategory />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addauthor"
+              element={
+                <RequireAuth>
+                  <AddAuthor />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/addpublisher"
+              element={
+                <RequireAuth>
+                  <AddPublisher />
+                </RequireAuth>
+              }
+            ></Route>
 
+            <Route
+              path="/productsdetails"
+              element={
+                <RequireAuth>
+                  <Products_details />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route path="/contact" element={<Contact />}></Route>
+            <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
+            <Route path="/faq" element={<Faq />}></Route>
+            <Route path="/termsCondition" element={<TermsCondition />}></Route>
+            <Route path="*" element={<NotFound></NotFound>}>
+              {" "}
+            </Route>
+          </Routes>
 
-          </Route>
-        </Routes>
-      </NavDashboard> : <NavBar>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route path="/popular-writers" element={<PopularWritersBooks />} />
-            <Route path="/best-offers" element={<BestOffersBooks />} />
-          </Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/wishlist" element={<Wishlist />}></Route>
-          <Route path="/checkout" element={<Checkout />}></Route>
-          <Route path="/selectedBook/:_id" element={<Products_details/>}></Route>
-          <Route path="/became" element={<AuthorOrPublisher />}></Route>
-          <Route path="/books" element={<AllBooks />}></Route> 
-          <Route path="/addbook" element={<RequireAuth><AddBook /></RequireAuth>}></Route>
-          <Route path="/addcategory" element={<RequireAuth><AddCategory /></RequireAuth>}></Route>
-          <Route path="/addauthor" element={<RequireAuth><AddAuthor /></RequireAuth>}></Route>
-          <Route path="/addpublisher" element={<RequireAuth><AddPublisher /></RequireAuth>}></Route>
-          {/* Dashboard routes */}
-          <Route
-            path="/addbook"
-            element={
-              <RequireAuth>
-                <AddBook />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/addcategory"
-            element={
-              <RequireAuth>
-                <AddCategory />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/addauthor"
-            element={
-              <RequireAuth>
-                <AddAuthor />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/addpublisher"
-            element={
-              <RequireAuth>
-                <AddPublisher />
-              </RequireAuth>
-            }
-          ></Route>
-
-            <Route path="*" element={<NotFound></NotFound>}> </Route>
-        </Routes>
-
-        <Footer />
-      </NavBar>}
+          <Footer />
+        </NavBar>
+      )}
 
       <ToastContainer />
     </div>

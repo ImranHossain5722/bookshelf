@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaEye, FaHeart } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -7,21 +7,41 @@ import CartButton from '../CartButton/CartButton'
 import { allBooks } from '../Redux/actions/bookActions'
 import Stars from '../Stars/Stars'
 
+
 const AllBooks = () => {
+
+  const [bookpagi , setBookpagi] = useState([]);
+  const [pageCount, setPageCount] = useState(1);
+  const [size, setSize] = useState(10);
+
+  //  all books data 
     const books = useSelector((state) => state.allBooks.allBooks)
     const dispatch = useDispatch()
     useEffect(() => {
   axios.get('https://book-shelf-webapp.herokuapp.com/all-books').then(data => dispatch(allBooks(data.data))) 
  
-    }, [])
+    }, [pageCount,size])
+
+
+    // pagination count
+  useEffect(() => {
+    fetch(`https://book-shelf-webapp.herokuapp.com/books?page=${pageCount}&limit=${size}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        setPageCount(data.pages);
+        setBookpagi(data.books)
+      });
+  }, [pageCount, size]);
+
     
 
   return (
-    <div className='my-6'>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14">
+    <div style={{background:"#FBF6F6"}} className=' max-w-[1440px] p-6 '>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 mb-10">
             {
-                books.map(book =>  <Link to={`/selectedBook/${book._id}`}>
-                  <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
+                bookpagi.map(book =>  <Link to={`/selectedBook/${book._id}`}>
+                  <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
                 <div className="for-hover relative">
                     {/* relative */}
                     <img src={book.book_cover_photo_url} className="h-64 w-44 image-full" alt="Books image" />
@@ -45,10 +65,33 @@ const AllBooks = () => {
             </div>
                 </Link>
                 )
-            }
+     }
+              
+            
         </div>
+
+          {/* pagenation */}
+          <div className="flex justify-center p-3 ">
+            {[...Array(size).keys()].map((number) => (
+              <button
+                className="p-2 mr-2 border-2 border-secondary bg-primary text-white hover:bg-secondary active:bg-secondary"
+                onClick={() => setPageCount(number)}
+              >
+                {number + 1}
+              </button>
+            ))}
+            <select onChange={(event) => setSize(event.target.value)}>
+              <option value="5">5</option>
+              <option value="10" selected>
+                10
+              </option>
+              <option value="15">15</option>
+            </select>
+          </div>
     </div>
   )
 }
 
 export default AllBooks
+
+

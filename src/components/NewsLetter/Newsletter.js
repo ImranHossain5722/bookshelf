@@ -22,15 +22,25 @@ const Newsletter = () => {
             <p class="mb-5">
             Join Our Subscriptions. Connected our offer related update. also we can update every user about to New books Collections.
             </p>
-            <div class="form-control mx-4">
+            <div className='grid grid-cols-2'>
+                <div class="form-control mx-4 mb-10">
+                <input
+                  type="text"
+                  placeholder="Enter your Name"
+                  class="input input-bordered"
+                />
+              </div>
+              <div class="form-control mx-4">
                 <input
                   type="text"
                   placeholder="Enter your Email"
                   class="input input-bordered"
                 />
               </div>
-            <button class="btn btn-primary text-white mt-3">Submit</button>
           </div>
+          <button class="btn btn-primary text-white mt-3">Submit</button>
+          </div>
+
         </div>
       </div>
     </div>

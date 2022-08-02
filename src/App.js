@@ -35,6 +35,10 @@ import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import { useEffect, useState } from "react";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import Home from "./pages/home/Home";
+import Contact from "./pages/Contact/Contact";
+import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
+import Faq from "./pages/Faq/Faq";
+import TermsCondition from "./pages/TermsCondition/TermsCondition";
 
 // initialize aos
 AOS.init();
@@ -155,6 +159,7 @@ function App() {
                 </RequireAuth>
               }
             ></Route>
+            {/* new  */}
           </Routes>
 
           <Footer />

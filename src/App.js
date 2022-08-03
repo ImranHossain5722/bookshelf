@@ -107,10 +107,8 @@ function App() {
         <NavBar>
           <Routes>
             <Route path="/" element={<Home />}>
-              <Route
-                path="/popular-writers"
-                element={<PopularWritersBooks />}
-              />
+              <Route path="/" element={<BestOffersBooks />} />
+              <Route path="/popular-writers" element={<PopularWritersBooks />} />
               <Route path="/best-offers" element={<BestOffersBooks />} />
             </Route>
             <Route path="/login" element={<Login />}></Route>

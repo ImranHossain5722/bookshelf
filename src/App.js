@@ -46,6 +46,7 @@ import Contact from "./pages/Contact/Contact";
 import Faq from "./pages/Faq/Faq";
 import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
 import TermsCondition from "./pages/TermsCondition/TermsCondition";
+import AboutUs from "./pages/AboutUs/AboutUs";
 
 // initialize aos
 AOS.init();
@@ -197,6 +198,7 @@ function App() {
                 </RequireAuth>
               }
             ></Route>
+            <Route path="/about" element={<AboutUs/>}></Route>
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
             <Route path="/faq" element={<Faq />}></Route>

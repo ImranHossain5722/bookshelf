@@ -9,6 +9,7 @@ import wishlist from "../../Assets/images/icon/003-heart.png";
 import { signOut } from "firebase/auth";
 import downArrow from "../../Assets/images/icon/down-arrow.png";
 import NavTopbar from "../NavTopbar/NavTopbar";
+import { FaSearch } from 'react-icons/fa';
 
 
 const NavBar = ({ children }) => {
@@ -26,9 +27,7 @@ const NavBar = ({ children }) => {
 
   return (
 
-    <nav
-
-    >
+    <nav>
       <div class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
@@ -40,7 +39,7 @@ const NavBar = ({ children }) => {
                 <img className="" alt="" src={logo} />
               </NavLink>
             </div>
-            {/* mobile button */}
+            {/* mobile menu button */}
             <div className="flex-none lg:hidden">
               <label for="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg
@@ -76,29 +75,27 @@ const NavBar = ({ children }) => {
               </ul>
             </div>
 
-            {/* dark button */}
             <div>
+              {/* search button */}
               <div className="form-control mx-4">
-                <input
-                  type="text"
-                  placeholder="Search Books"
-                  className="input input-bordered"
-                />
+                <button>
+                  <FaSearch className="text-3xl" />
+                </button>
               </div>
-              {/* user image */}
+              {/* wishlist button */}
               <div className="hidden lg:flex user mx-4 mt-1">
                 <img className="" alt="" src={wishlist} />
               </div>
+              {/* cart button */}
               <div className="user  hidden lg:flex">
-               <NavLink to='/cart'>  <img className="" alt="" src={bag} /></NavLink>
+                <NavLink to='/cart'>  <img className="" alt="" src={bag} /></NavLink>
               </div>
-
+              {/* user photo */}
               <div className="user ml-4 ">
                 {user ? (
                   <span tabindex="0">
                     <img
                       style={{ margin: "40px 0px -10px -4px" }}
-                      onClick={handelSignOut}
                       className=" rounded-2xl"
                       alt=""
                       height={30}
@@ -106,6 +103,7 @@ const NavBar = ({ children }) => {
                       src={user?.photoURL ? user?.photoURL : userImg}
                     />
 
+                    {/* dropdown */}
                     <div class="flex-none">
                       <ul class="menu menu-horizontal p-0">
                         <li tabindex="0">

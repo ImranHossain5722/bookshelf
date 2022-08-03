@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { FaRegTimesCircle } from "react-icons/fa";
 
 const SearchModal = () => {
     const [searchText, setSearchText] = useState('');
@@ -11,8 +12,14 @@ const SearchModal = () => {
         if (search.length > 0) {
             axios.get(`https://book-shelf-webapp.herokuapp.com/search?sq=${search}`)
                 .then(res => {
-                    setSearchResults(res.data);
-                    console.log(res.data);
+                    console.log(res?.data.length);
+                    if (res?.data.length > 0) {
+                        setSearchResults(res.data);
+                    }
+                    else {
+                        setError('Result not found')
+                    }
+                    // console.log(res.data);
                 });
 
             setError('');
@@ -25,8 +32,11 @@ const SearchModal = () => {
     // console.log(searchText);
 
     return (
-        <div className='min-h-screen flex justify-center items-center'>
-            <div className='w-2/5'>
+        <div className='min-h-screen flex justify-center items-center relative'>
+            <button className='absolute top-16 right-16'>
+                <FaRegTimesCircle className='text-4xl text-red-600' />
+            </button>
+            <div className='w-[90%] lg:w-2/5 '>
                 {/* search field */}
                 <div class="form-control duration-300">
                     <div class="input-group">

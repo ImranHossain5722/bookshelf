@@ -22,31 +22,31 @@ const NavDashboard = ({ children }) => {
   // h-13vh
   return (
     <div>
-      <div class="drawer drawer-end  " data-theme={dark ? "dark" : "light"}>
-        <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content flex flex-col">
-          
+      <div className="drawer drawer-end  " data-theme={dark ? "dark" : "light"}>
+        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content flex flex-col">
+
           {/* <!-- Navbar --> */}
-          <div class="w-full  navbar bg-white p-20 border-b-2 border-primary ">
-            <div style={{margin:"0px 0px 0px -45px"}} class=" hidden lg:flex  flex-1 px-2 ">
+          <div className="w-full  navbar bg-white p-20 border-b-2 border-primary ">
+            <div style={{ margin: "0px 0px 0px -45px" }} className=" hidden lg:flex  flex-1 px-2 ">
               <NavLink to="/" className="text-white text-sm p-2 bg-primary rounded-md">
-               
+
                 Back to home
               </NavLink>
             </div>
             {/* mobile button */}
-            <div class="flex-none lg:hidden mr-5">
-              <label for="my-drawer-3" class="btn btn-square btn-ghost">
+            <div className="flex-none lg:hidden mr-5">
+              <label for="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  class="inline-block w-6 h-6 stroke-current"
+                  className="inline-block w-6 h-6 stroke-current"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M4 6h16M4 12h16M4 18h16"
                   ></path>
                 </svg>
@@ -58,11 +58,11 @@ const NavDashboard = ({ children }) => {
               <ul className="menu menu-vertical  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li className="text-2xl text-primary uppercase text-center font-bold">
-                  Weclome to 
+                  Weclome to
                 </li>
                 <li>
                   <img className="" height={45}
-                      width={150} alt="" src={logo} />
+                    width={150} alt="" src={logo} />
                 </li>
                 <li className="text-2xl text-secondary uppercase text-center font-bold">
                   Dashboard
@@ -76,7 +76,7 @@ const NavDashboard = ({ children }) => {
 
               <div className="user mr-4 ">
                 {user ? (
-                  <span tabindex="0">
+                  <span tabIndex="0">
                     <img
                       onClick={handelSignOut}
                       className=" rounded-2xl"
@@ -101,13 +101,13 @@ const NavDashboard = ({ children }) => {
               </div>
 
               {/* dark button */}
-              <label class="swap swap-rotate ">
+              <label className="swap swap-rotate ">
                 {/* <!-- this hidden checkbox controls the state --> */}
                 <input type="checkbox" onClick={() => setDark(!dark)} />
 
                 {/* <!-- sun icon --> */}
                 <svg
-                  class="swap-on fill-current w-10 h-10"
+                  className="swap-on fill-current w-10 h-10"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -131,22 +131,22 @@ const NavDashboard = ({ children }) => {
         </div>
 
         {/* mobile-phone */}
-        <div class="drawer-side">
-          <label for="my-drawer-3" class="drawer-overlay"></label>
-          <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+        <div className="drawer-side">
+          <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
             {/* <!-- Sidebar content here --> */}
             <li><Link to='/' className='text-lg text-[#00124E] font-bold'>Home</Link></li>
             <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
-       <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
-        <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
-        
-        <li><Link to='/dashboard/allusers' className='text-lg text-[#00124E] font-bold'>All Users</Link></li>
-        <li><Link to='/dashboard/allorders' className='text-lg text-[#00124E] font-bold'>All Orders</Link></li>
-        <li><Link to='/dashboard/allauthor' className='text-lg text-[#00124E] font-bold'>All Authors</Link></li>
-        <li><Link to='/dashboard/allpublisher' className='text-lg text-[#00124E] font-bold'>All Publishers</Link></li>
-        <li><Link to='/dashboard/orderhistory' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
-        <li><Link to='/dashboard/addproduct' className='text-lg text-[#00124E] font-bold'>All Product</Link></li>
-        <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
+            <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
+            <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
+
+            <li><Link to='/dashboard/allusers' className='text-lg text-[#00124E] font-bold'>All Users</Link></li>
+            <li><Link to='/dashboard/allorders' className='text-lg text-[#00124E] font-bold'>All Orders</Link></li>
+            <li><Link to='/dashboard/allauthor' className='text-lg text-[#00124E] font-bold'>All Authors</Link></li>
+            <li><Link to='/dashboard/allpublisher' className='text-lg text-[#00124E] font-bold'>All Publishers</Link></li>
+            <li><Link to='/dashboard/orderhistory' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
+            <li><Link to='/dashboard/addproduct' className='text-lg text-[#00124E] font-bold'>All Product</Link></li>
+            <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
           </ul>
         </div>
       </div>

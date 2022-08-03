@@ -10,6 +10,7 @@ import { signOut } from "firebase/auth";
 import downArrow from "../../Assets/images/icon/down-arrow.png";
 import NavTopbar from "../NavTopbar/NavTopbar";
 import { FaSearch } from 'react-icons/fa';
+import SearchModal from "../SearchModal/SearchModal";
 
 
 const NavBar = ({ children }) => {
@@ -31,6 +32,7 @@ const NavBar = ({ children }) => {
       <div class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
+          <SearchModal />
           <NavTopbar />
           {/* <!-- Navbar --> */}
           <div class="w-full navbar bg-gray-200 px-20 ">

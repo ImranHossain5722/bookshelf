@@ -9,9 +9,12 @@ const Wishlistbutton = ({_id}) => {
     const AddWishlist =(id) => {
         const cartData = {
             user_id : userId,
-            wishlist_data : id
+    wishlist_data : {
+      book : id
+      }
           }
           axios.post('https://book-shelf-webapp.herokuapp.com/add-to-wishlist',cartData).then(data => console.log(data))
+          // console.log(cartData)
         } 
         
       

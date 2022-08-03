@@ -10,37 +10,29 @@ import Stars from '../Stars/Stars'
 
 const AllBooks = () => {
 
-  const [bookpagi , setBookpagi] = useState([]);
+  const [books , setBooks] = useState([]);
   const [pageCount, setPageCount] = useState(1);
   const [size, setSize] = useState(10);
-
-  //  all books data 
-    const books = useSelector((state) => state.allBooks.allBooks)
-    const dispatch = useDispatch()
-    useEffect(() => {
-  axios.get('https://book-shelf-webapp.herokuapp.com/all-books').then(data => dispatch(allBooks(data.data))) 
- 
-    }, [pageCount,size])
-
+  
 
     // pagination count
   useEffect(() => {
     fetch(`https://book-shelf-webapp.herokuapp.com/books?page=${pageCount}&limit=${size}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data.books)
         setPageCount(data.pages);
-        setBookpagi(data.books)
+        setBooks(data.books)
       });
+      console.log(size)
   }, [pageCount, size]);
-
     
 
   return (
     <div style={{background:"#FBF6F6"}} className=' max-w-[1440px] p-6 '>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 mb-10">
             {
-                bookpagi.map(book =>  <Link to={`/selectedBook/${book._id}`}>
+                books.map(book =>  <Link to={`/selectedBook/${book._id}`}>
                   <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
                 <div className="for-hover relative">
                     {/* relative */}

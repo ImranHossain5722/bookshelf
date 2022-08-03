@@ -84,6 +84,11 @@ function App() {
     }
   }, [pathname]);
 
+
+  // const user = useSelector((state) => state?.newUser?.user)   --> to grap user data from everypage
+
+
+
   return (
     <div className="App">
       {dash ? (

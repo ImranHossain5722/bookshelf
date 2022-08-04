@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import auth from '../../../firebase.init';
 import Select from 'react-select'
+// import Async, { useAsync } from 'react-select/async';
 
 
 const AddProduct = () => {
@@ -11,7 +12,75 @@ const AddProduct = () => {
   const [userRole, setUserRole] = useState('user');
   const [getUser, setGetUser] = useState([]);
   const { register, formState: { errors }, handleSubmit } = useForm();
-  console.log(getUser, userRole)
+  // console.log(getUser, userRole);
+
+  // get all Categories 
+  const [allCategories, setAllCategories] = useState([]);
+  useEffect(() => {
+    const options = { method: 'GET' };
+
+    fetch('https://book-shelf-webapp.herokuapp.com/all-categories', options)
+      .then(response => response.json())
+      .then(data => setAllCategories(data))
+      .catch(err => console.error(err));
+
+  }, [])
+  // console.log('Categories :', allCategories)
+
+  // get all catagory list in array for drop down list 
+  let catOption = [];
+  allCategories.forEach(cat => {
+    let dropDown = { label: cat['category_title'], value: cat['_id'] };
+    catOption.push(dropDown);
+  });
+  // console.log('Options', catOption);
+
+
+  // get all authors 
+  const [allAuthors, setAllAuthors] = useState([]);
+  useEffect(() => {
+    const options = { method: 'GET' };
+
+    fetch('https://book-shelf-webapp.herokuapp.com/all-authors', options)
+      .then(response => response.json())
+      .then(data => setAllAuthors(data))
+      .catch(err => console.error(err));
+
+  }, [])
+  // console.log('Authors :', allAuthors)
+  // get all author list in array for drop down list 
+
+  let authorOptions = [];
+
+  allAuthors.forEach(cat => {
+    let dropDown = { label: cat['author_name'], value: cat['_id'] };
+    authorOptions.push(dropDown);
+  });
+
+  // console.log('authorOptions', authorOptions);
+  // get all Publishers 
+
+  const [allPublishers, setAllPublishers] = useState([]);
+  useEffect(() => {
+    const options = { method: 'GET' };
+
+    fetch('https://book-shelf-webapp.herokuapp.com/all-publishers', options)
+      .then(response => response.json())
+      .then(data => setAllPublishers(data))
+      .catch(err => console.error(err));
+
+  }, [])
+  // console.log('Publisher :', allPublishers)
+  // get all Publisher list in array for drop down list 
+
+  let publisherOptions = [];
+  allPublishers.forEach(cat => {
+    let dropDown = { label: cat['publisher_name'], value: cat['_id'] };
+    publisherOptions.push(dropDown);
+  });
+  // console.log('publisherOptions', publisherOptions);
+
+
   useEffect(() => {
     const userEmail = {
       email: user?.email
@@ -29,6 +98,7 @@ const AddProduct = () => {
   }, [user?.email])
 
   // // get current user role form database 
+
 
   useEffect(() => {
     const currentUserRole = getUser[0]?.user_role;
@@ -61,46 +131,50 @@ const AddProduct = () => {
   }
 
   // const [imgbbUrl, setImgbbUrl] = useState('');
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
+
+  const setUserChoice = (choice) => {
+    console.log(choice);
+  }
 
   const onSubmit = data => {
-    const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
-    const image = data?.image[0];
-    const formData = new FormData();
-    formData.append('image', image);
 
-    fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
-      method: 'POST',
-      body: formData
-    })
-      .then(res => res.json())
-      .then(result => {
-        if (result.success) {
-          const imgbbUrl = result?.data?.url;
-          const productInfoData = {
-            book_title: data.book_title,
-            book_description: data.book_description,
-            book_publisher: data.book_publisher,
-            book_author: data.book_author,
-            book_price: data.book_price,
-            book_pages: data.book_pages,
-            category: data.book_category,
-            book_cover_photo_url: imgbbUrl,
-            book_translator: data?.translator,
-            country: data?.country
 
-          }
-          const postAuthorData = () => {
-            console.log('before post:', productInfoData);
-            axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => console.log('Post data:', data))
-          }
-          postAuthorData();
-        }
-      })
+    console.log(data)
+    console.log(data.categoryName.value)
+
+    // const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
+    // const image = data?.image[0];
+    // const formData = new FormData();
+    // formData.append('image', image);
+
+    // fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+    //   method: 'POST',
+    //   body: formData
+    // })
+    //   .then(res => res.json())
+    //   .then(result => {
+    //     if (result.success) {
+    //       const imgbbUrl = result?.data?.url;
+    //       const productInfoData = {
+    //         book_title: data.book_title,
+    //         book_description: data.book_description,
+    //         book_publisher: data.book_publisher,
+    //         book_author: data.book_author,
+    //         book_price: data.book_price,
+    //         book_pages: data.book_pages,
+    //         category: data.book_category,
+    //         book_cover_photo_url: imgbbUrl,
+    //         book_translator: data?.translator,
+    //         country: data?.country
+
+    //       }
+    //       const postAuthorData = () => {
+    //         console.log('before post:', productInfoData);
+    //         axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => console.log('Post data:', data))
+    //       }
+    //       postAuthorData();
+    //     }
+    //   })
     // console.log('Add Data', productInfoData);
     // reset();
   };
@@ -123,7 +197,7 @@ const AddProduct = () => {
                 <input
                   {...register("image", {
                     required: {
-                      value: true,
+                      value: false,
                       message: "image is Required"
                     }
                   })}
@@ -143,19 +217,17 @@ const AddProduct = () => {
               <div className='md:flex gap-7'>
                 <div className='w-full'>
                   <label class="label-text text-lg">Product Name</label>
-                  <input type="text" {...register("book_title", {
-                    required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
+                  <input type="text" {...register("book_title",
+                    {
+                      required: 'required*',
+                    }
+                  )} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_title && <p><small className='pl-1 text-red-600'>{errors?.book_title?.message}</small></p>}
                 </div>
                 <div className='w-full mt-4 md:mt-0'>
                   <label class="label-text text-lg">Select Categories</label>
-                  {/* <input type="text" {...register("book_category", {
-                    required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
-                  {errors?.book_category && <p><small className='pl-1 text-red-600'>{errors?.book_category?.message}</small></p>} */}
 
-                  <Select className="input mt-2 rounded-xl" options={options} />
+                  <Select onChange={(choice) => setUserChoice(choice)} name='categoryName' className="mt-2 rounded-xl" options={catOption} />
                 </div>
 
               </div>
@@ -168,7 +240,7 @@ const AddProduct = () => {
                     required: 'required*',
                   })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
                   {errors?.book_author && <p><small className='pl-1 text-red-600'>{errors?.book_author?.message}</small></p>} */}
-                  <Select className="input mt-2 rounded-xl" options={options} />
+                  <Select name='authorName' className="mt-2 rounded-xl" options={authorOptions} />
                 </div>
                 <div className='w-full mt-4 md:mt-0'>
                   <label class="label-text text-lg">Publisher Name</label>
@@ -176,7 +248,7 @@ const AddProduct = () => {
                     required: 'required*',
                   })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
                   {errors?.book_publisher && <p><small className='pl-1 text-red-600'>{errors?.book_publisher?.message}</small></p>} */}
-                  <Select className="mt-2 rounded-xl" options={options} />
+                  <Select name='publisherName' className="mt-2 rounded-xl" options={publisherOptions} />
                 </div>
               </div >
               {/* row-4 */}
@@ -185,14 +257,17 @@ const AddProduct = () => {
                   <label class="label-text text-lg">Price</label>
                   <input type="number" {...register("book_price", {
                     required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
+                  })} placeholder="Type here"
+                    min={1}
+                    class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_price && <p><small className='pl-1 text-red-600'>{errors?.book_price?.message}</small></p>}
                 </div>
                 <div className='w-full'>
                   <label class="label-text text-lg">Pages</label>
                   <input type="number" {...register("book_pages", {
                     required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
+                  })} placeholder="Type here"
+                    min={1} class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_pages && <p><small className='pl-1 text-red-600'>{errors?.book_pages?.message}</small></p>}
                 </div>
               </div >
@@ -201,14 +276,14 @@ const AddProduct = () => {
                   <label class="label-text text-lg">Translator</label>
                   <input type="text" {...register("translator", {
                     required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full  mt-2" />
+                  })} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.translator && <p><small className='pl-1 text-red-600'>{errors?.translator?.message}</small></p>}
                 </div>
                 <div className='w-full mt-4  md:mt-0'>
                   <label class="label-text text-lg">Country</label>
                   <input type="text" {...register("country", {
                     required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full  mt-2" />
+                  })} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_pages && <p><small className='pl-1 text-red-600'>{errors?.country?.message}</small></p>}
                 </div>
               </div >

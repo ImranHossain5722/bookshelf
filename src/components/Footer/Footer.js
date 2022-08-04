@@ -67,7 +67,3 @@ const Footer = () => {
 
 export default Footer;
 
-
-// <NavLink to="/became" className="rounded-lg">
-//             Became Author/Publisher
-//           </NavLink>>

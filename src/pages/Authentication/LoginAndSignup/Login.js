@@ -24,7 +24,7 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/dashboard";
 
-  const { handleLogin } = useToken();
+  const { userLogin } = useToken();
 
   // useEffect(() => {
   //     const userInfo = {
@@ -56,7 +56,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     await signInWithEmailAndPassword(data.email, data.password);
-    await handleLogin();
+    await userLogin();
     reset();
     navigate(from, { replace: true });
   };

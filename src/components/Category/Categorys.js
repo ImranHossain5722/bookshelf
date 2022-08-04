@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 
+// images
+import img1 from "../../Assets/images/category-images/Open Book.png";
+import img2 from "../../Assets/images/category-images/Vector.png";
+import img3 from "../../Assets/images/category-images/Computer.png";
+import img4 from "../../Assets/images/category-images/Done.png";
 //icons
 import { FaHeart, FaEye } from 'react-icons/fa';
 import { BsCheckLg } from "react-icons/bs";
@@ -67,16 +72,15 @@ const Categorys = () => {
   useEffect(() => {
     //  responsiveness added by width change
     if (width >= 992) {
-      setSize(5)
+      setSize(5);
     }
     // else if (width >= 768) {
     //     setSize(3)
     // }
     else if (width >= 576) {
-      setSize(2)
-    }
-    else {
-      setSize(1)
+      setSize(2);
+    } else {
+      setSize(1);
     }
   }, [width]);
 
@@ -84,8 +88,13 @@ const Categorys = () => {
     <div className="mt-[60px] lg:mt-[120px]">
       {/* ------title section----- */}
       <div className="text-center">
-        <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold">Would you like to see any particular books?</h2>
-        <p className="text-xl text-[#00124E] font-bold">Select category to view books of choice - maximum <span className="text-primary">2</span></p>
+        <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold">
+          Would you like to see any particular books?
+        </h2>
+        <p className="text-xl text-[#00124E] font-bold">
+          Select category to view books of choice - maximum{" "}
+          <span className="text-primary">2</span>
+        </p>
       </div>
 
       {/* ------categories slider----- */}

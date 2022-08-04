@@ -11,6 +11,7 @@ import downArrow from "../../Assets/images/icon/down-arrow.png";
 import NavTopbar from "../NavTopbar/NavTopbar";
 import { FaSearch } from 'react-icons/fa';
 import SearchModal from "../SearchModal/SearchModal";
+import SearchIcon from "../../Assets/images/search-interface-symbol.png";
 
 import { useDispatch, useSelector } from "react-redux";
 // import { NavLink } from "react-router-dom";
@@ -109,9 +110,8 @@ const NavBar = ({ children }) => {
             <div>
               {/* search button */}
               <div className="form-control mx-4">
-                <button onClick={() => showSearchModal()}>
-                  <FaSearch className="text-3xl" />
-                </button>
+              <NavLink to=""><img  onClick={() => showSearchModal()} className="w-[25px] h-[25px]" alt="" src={SearchIcon} /> </NavLink>
+                
               </div>
               {/* wishlist button */}
               <div className="hidden lg:flex user mx-4 mt-1">
@@ -166,7 +166,7 @@ const NavBar = ({ children }) => {
                 ) : (
                   <NavLink to="/login" className="rounded-lg">
                     <img
-                      className=" mr-4 rounded-2xl"
+                      className="  rounded-2xl"
                       height={30}
                       width={30}
                       alt=""
@@ -183,7 +183,7 @@ const NavBar = ({ children }) => {
 
                 {/* <!-- sun icon --> */}
                 <svg
-                  className="swap-on fill-current w-10 h-10"
+                  className="swap-on fill-current w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -191,8 +191,8 @@ const NavBar = ({ children }) => {
                 </svg>
 
                 {/* <!-- Dark moon icon --> */}
-                <svg
-                  className="swap-off fill-current w-8 h-11"
+                <svg  style={{margin:""}}
+                  className="swap-off fill-current w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >

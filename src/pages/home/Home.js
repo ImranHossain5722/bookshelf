@@ -42,7 +42,6 @@ const Home = () => {
         </Route>
       </Routes> */}
 
-
       <Release />
       <Review />
       <BestSelling />

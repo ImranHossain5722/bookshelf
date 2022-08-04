@@ -212,10 +212,14 @@ const AddProduct = () => {
 
 
   return (
-    <div className=' w'>
+    <div className=''>
+       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'> Add Product</h2>
+       <div className=" flex items-center justify-center pb-10">
+            <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+          </div>
 
-      <div className='mt-14 md:w-5/6 mx-8 md:mx-auto'>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className='mt-1 md:w-5/6 mx-8 md:mx-auto bg-white p-10 rounded-xl shadow-md' >
+        <form className='' onSubmit={handleSubmit(onSubmit)}>
 
           <div className='md:flex'>
             {/* form container  */}
@@ -346,10 +350,11 @@ const AddProduct = () => {
               </div >
             </div>
             {/* Image Container  */}
-
+                
           </div>
-
-          <input type="submit" className='mt-4 btn btn-primary w-full text-white' value='Add Book' />
+          <input type="submit" className='mt-4 btn btn-primary w-1/2 text-white ml-[350px]' value='Add Book' />
+          
+            
         </form >
       </div >
     </div >

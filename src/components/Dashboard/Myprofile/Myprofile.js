@@ -9,7 +9,7 @@ import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 
 const Myprofile = () => {
   const [user] = useAuthState(auth);
-  const [userRole, setUserRole] = useState('user');
+  const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -45,16 +45,16 @@ const Myprofile = () => {
     const currentUserRole = getUser[0]?.user_role;
 
     if (currentUserRole === 'author') {
-      setUserRole('Author');
+      setUserRole('author');
     }
     else if (currentUserRole === 'publisher') {
-      setUserRole('Publisher');
+      setUserRole('publisher');
     }
     else if (currentUserRole === 'user') {
-      setUserRole('User');
+      setUserRole('user');
     }
     else if (currentUserRole === 'admin') {
-      setUserRole('Admin');
+      setUserRole('admin');
     }
   }, [getUser])
 

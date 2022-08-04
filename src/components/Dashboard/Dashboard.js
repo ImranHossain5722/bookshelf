@@ -17,9 +17,9 @@ function Dashboard() {
         <Outlet />
 
       </div>
-      <div class="drawer-side ">
+      <div class="drawer-side bg-white ">
         <label for="dashboard_drawer" class=" drawer-overlay bg-white "></label>
-        <ul class="menu p-4 overflow-y-auto w-full bg-base-100 text-base-content">
+        <ul class="menu p-4 overflow-y-auto w-full text-base-content active">
           <p className='text-xl text-[#00124E] font-bold'>Dashboard</p>
           <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
           <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>

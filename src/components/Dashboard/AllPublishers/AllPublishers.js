@@ -15,9 +15,14 @@ const AllPublishers = () => {
   }, [])
   return (
     <div className="bg-base-100 my-8 p-3">
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 g-4 gy-8'>
+       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>All Publishers</h2>
+       <div className=" flex items-center justify-center pb-10">
+       
+            <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+          </div>
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 g-4 gy-8 '>
 
-      {users?.map(user => <div className="mx-[12px] card user-shadow  w-[320px] h-[130px] p-7 font-semibold m-3">
+      {users?.map(user => <div className="mx-[12px] card user-shadow  w-[320px] h-[130px] p-7 font-semibold m-3 bg-white">
         <div className='flex items-center'>
           <div class="avatar">
             <div class="w-16 rounded">

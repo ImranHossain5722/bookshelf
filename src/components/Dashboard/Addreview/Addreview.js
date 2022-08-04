@@ -14,7 +14,11 @@ const Addreview = () => {
   };
   return (
     <div>
-      <p className="text-center text-4xl  font-bold text-[#00124E] mt-4">Add a Review</p>
+      <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>Add Review </h2>
+       <div className=" flex items-center justify-center pb-10">
+       
+            <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+          </div>
        <div className='bg-base-100 flex justify-around'>
     <div className='mt-20'>
       <img src='https://i.ibb.co/q0r29PV/1575376469213-employee-evaluation-form.jpg' className='h-[350px] w-300px' alt="" />

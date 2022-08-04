@@ -15,9 +15,14 @@ const AllAuthors = () => {
   }, [])
   return (
     <div className="bg-base-100 my-8 p-3">
+       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>All Authors</h2>
+       <div className=" flex items-center justify-center pb-10">
+       
+            <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+          </div>
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 g-4 gy-8'>
-
-      {users?.map(user => <div className="mx-[12px] card user-shadow  w-[370px] h-[160px] p-7 font-semibold m-3">
+       
+      {users?.map(user => <div className=" bg-white flex items-center justify-center  mx-[2px] card user-shadow  w-[370px] h-[160px] p-7 font-semibold m-3">
         <p className="pl-8 relative bottom-2">{user.user_name}</p>
         <div className='flex items-center'>
           <div class="avatar">

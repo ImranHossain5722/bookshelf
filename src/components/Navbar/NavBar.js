@@ -90,7 +90,7 @@ const NavBar = ({ children }) => {
             </div>
 
             {/* desktop */}
-            <div class="flex-none mx-20 hidden lg:block">
+            <div class="flex-none mx-20 hidden lg:block ">
               <ul class="menu menu-horizontal  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>
@@ -236,6 +236,7 @@ const NavBar = ({ children }) => {
           </ul>
         </div>
       </div>
+    
     </nav>
   );
 };

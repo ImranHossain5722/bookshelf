@@ -3,6 +3,7 @@ import clubBanner from '../../Assets/images/clubB.jpg';
 import { FaChevronRight, FaArrowRight } from 'react-icons/fa';
 
 import Typewriter from 'typewriter-effect';
+import { Link } from "react-router-dom";
 
 const ClubBanner = () => {
   return (
@@ -29,7 +30,7 @@ const ClubBanner = () => {
             <p class="my-5 ">
               Join Our Readers Club. It's a coummuity for books lover. we can discus every user about to books details.
             </p>
-            <button class="btn btn-primary text-white hover:text-white hover:bg-accent">Join <FaArrowRight className='ml-2' /></button>
+            <Link to='/comingsoon' class="btn btn-primary text-white hover:text-white hover:bg-accent">Join <FaArrowRight className='ml-2' /></Link>
           </div>
         </div>
       </div>

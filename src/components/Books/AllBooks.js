@@ -11,36 +11,13 @@ import Stars from '../Stars/Stars'
 
 const AllBooks = () => {
 
-  // const [bookpagi , setBookpagi] = useState([]);
-  // const [pageCount, setPageCount] = useState(1);
-  // const [size, setSize] = useState(10);
+
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage,setpostPerPage] = useState(10);
 
-  // //  all books data 
-  //   const books = useSelector((state) => state.allBooks.allBooks)
-  //   const dispatch = useDispatch()
-  //   useEffect(() => {
-  // axios.get('https://book-shelf-webapp.herokuapp.com/all-books').then(data => dispatch(allBooks(data.data))) 
  
-  //   }, [pageCount,size])
-
-
-  //   // pagination count
-  // useEffect(() => {
-  //   fetch(`https://book-shelf-webapp.herokuapp.com/books?page=${pageCount}&limit=${size}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data)
-  //       setPageCount(data.pages);
-  //       setBookpagi(data.books)
-  //     });
-  // }, [pageCount, size]);
-
-    
-
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);

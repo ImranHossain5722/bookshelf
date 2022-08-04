@@ -3,9 +3,7 @@ import "./App.css";
 // aos animation
 import AOS from "aos";
 import "aos/dist/aos.css";
-// import SampleCard from "./components/SampleCard/SampleCard";
 import Footer from "./components/Footer/Footer";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "./components/Navbar/NavBar";
@@ -16,7 +14,6 @@ import AddAuthor from "./pages/Forms/AddAuthor";
 import AddBook from "./pages/Forms/AddBook";
 import AddCategory from "./pages/Forms/AddCategory";
 import AddPublisher from "./pages/Forms/AddPublisher";
-
 import AddProduct from "./components/Dashboard/AddProduct/AddProduct";
 import Addreview from "./components/Dashboard/Addreview/Addreview";
 import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
@@ -49,8 +46,10 @@ import Contact from "./pages/Contact/Contact";
 import Faq from "./pages/Faq/Faq";
 import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
 import TermsCondition from "./pages/TermsCondition/TermsCondition";
+import AboutUs from "./pages/AboutUs/AboutUs";
 import { newUser } from "./components/Redux/actions/bookActions";
 import { useDispatch } from "react-redux";
+import CommingSoon from "./components/ommingSoon/CommingSoon";
 
 // initialize aos
 AOS.init();
@@ -207,9 +206,11 @@ function App() {
                 </RequireAuth>
               }
             ></Route>
+            <Route path="/about" element={<AboutUs/>}></Route>
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
             <Route path="/faq" element={<Faq />}></Route>
+            <Route path="/comingsoon" element={<CommingSoon/>}></Route>
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}

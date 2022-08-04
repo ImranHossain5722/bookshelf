@@ -25,9 +25,15 @@ const Footer = () => {
         </div>
         <div className="text-white">
           <span className="text-white text-xl font-bold">About Us</span>
-          <a className="link link-hover">Contat Us</a>
-          <a className="link link-hover">About Us</a>
-          <a className="link link-hover">Support</a>
+          <NavLink to="/contact" className="rounded-lg">
+            Contact Us
+          </NavLink>
+          <NavLink to="/about" className="rounded-lg">
+            About Us
+          </NavLink>
+          <NavLink to="/faq" className="rounded-lg">
+           FAQ
+          </NavLink>
         </div>
         <div className="text-white">
           <span className="text-xl font-bold">Partner</span>
@@ -36,10 +42,14 @@ const Footer = () => {
           </NavLink>
           <a className="link link-hover">Affiliate</a>
         </div>
-        <div className="">
+        <div className="text-white">
           <span className="text-xl font-bold text-white">Legal</span>
-          <a className=" text-white">Privacy policy</a>
-          <a className=" text-white">Terms of use</a>
+          <NavLink to="/privecy_policy" className="rounded-lg">
+          Privacy policy
+          </NavLink>
+          <NavLink to="/termsCondition" className="rounded-lg">
+          Terms of use
+          </NavLink>
           <a className="text-white">Return policy</a>
         </div>
         <div>
@@ -57,7 +67,3 @@ const Footer = () => {
 
 export default Footer;
 
-
-// <NavLink to="/became" className="rounded-lg">
-//             Became Author/Publisher
-//           </NavLink>>

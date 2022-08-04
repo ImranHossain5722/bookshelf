@@ -177,21 +177,16 @@ const AllBooks = () => {
       </div>
 
       {/* pagenation */}
-
-      <div className="flex justify-center">
-        {pageNumbers.map((number) => (
+      <div className="flex justify-center p-3 ">
+        {[...Array(size).keys()].map((number) => (
           <button
-            onClick={() => paginate(number)}
-            className="page-link btn btn-primary mx-2"
+            className="p-2 mr-2 border-2 border-secondary bg-primary text-white hover:bg-secondary active:bg-secondary"
+            onClick={() => setPageCount(number)}
           >
-            {number}
+            {number + 1}
           </button>
         ))}
-
-        <select
-          class="select select-primary "
-          onChange={(event) => setpostPerPage(event.target.value)}
-        >
+        <select onChange={(event) => setSize(event.target.value)}>
           <option value="5">5</option>
           <option value="10" selected>
             10

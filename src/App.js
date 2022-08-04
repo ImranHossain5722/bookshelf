@@ -3,9 +3,7 @@ import "./App.css";
 // aos animation
 import AOS from "aos";
 import "aos/dist/aos.css";
-// import SampleCard from "./components/SampleCard/SampleCard";
 import Footer from "./components/Footer/Footer";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "./components/Navbar/NavBar";
@@ -16,7 +14,6 @@ import AddAuthor from "./pages/Forms/AddAuthor";
 import AddBook from "./pages/Forms/AddBook";
 import AddCategory from "./pages/Forms/AddCategory";
 import AddPublisher from "./pages/Forms/AddPublisher";
-
 import AddProduct from "./components/Dashboard/AddProduct/AddProduct";
 import Addreview from "./components/Dashboard/Addreview/Addreview";
 import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
@@ -42,11 +39,16 @@ import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import Products_details from "./pages/Products_details/Products_details";
 
+import axios from "axios";
+import Wishlist from "./pages/wishlist/Wishlist";
+
 import Contact from "./pages/Contact/Contact";
 import Faq from "./pages/Faq/Faq";
 import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
 import TermsCondition from "./pages/TermsCondition/TermsCondition";
 import AboutUs from "./pages/AboutUs/AboutUs";
+import { newUser } from "./components/Redux/actions/bookActions";
+import { useDispatch } from "react-redux";
 
 // initialize aos
 AOS.init();
@@ -55,10 +57,11 @@ function App() {
   const { pathname } = useLocation();
   const [dash, setdash] = useState("");
   const [user] = useAuthState(auth);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const userEmail = {
-      email: "sharif@gmail.com",
+      email: user?.email,
     };
     fetch("https://book-shelf-webapp.herokuapp.com/get-user", {
       method: "POST",
@@ -68,7 +71,7 @@ function App() {
       body: JSON.stringify(userEmail),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data[0]));
+      .then((data) => dispatch(newUser(data[0])));
   }, [user?.email]);
 
   useEffect(() => {
@@ -78,6 +81,11 @@ function App() {
       setdash("");
     }
   }, [pathname]);
+
+
+  // const user = useSelector((state) => state?.newUser?.user)   --> to grap user data from everypage
+
+
 
   return (
     <div className="App">
@@ -115,6 +123,7 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/wishlist" element={<Wishlist/>}></Route> 
             <Route path="/checkout" element={<Checkout />}></Route>
             <Route
               path="/selectedBook/:_id"

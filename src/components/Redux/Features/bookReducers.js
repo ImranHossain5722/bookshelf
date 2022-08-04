@@ -18,7 +18,7 @@ const defState = {
     myProfile : {},
     cartBooks : [],
     selectedBooks : {},
-    whistBooks : [],
+    wishlistBooks : [],
     allBooks : []
 }
 
@@ -217,6 +217,19 @@ export const allBooksReducer = (state = defState, {type, payload} ) => {
           
             return {
                 allBooks : payload
+            };
+    
+        default:
+            return state;
+    }
+}
+
+export const wishlistReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.WHISTLIST:
+          
+            return {
+                wishlistBooks : payload
             };
     
         default:

@@ -14,7 +14,7 @@ const Addreview = () => {
   };
   return (
     <div>
-      <p>Add a Review</p>
+      <p className="text-center text-4xl  font-bold text-[#00124E] mt-4">Add a Review</p>
        <div className='bg-base-100 flex justify-around'>
     <div className='mt-20'>
       <img src='https://i.ibb.co/q0r29PV/1575376469213-employee-evaluation-form.jpg' className='h-[350px] w-300px' alt="" />

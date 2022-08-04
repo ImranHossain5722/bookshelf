@@ -7,16 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 const Wishlist = () => {
-   const [books, setBooks] = useState([]);
-    const user = useSelector((state) => state?.newUser?.user)
-    const userId = user?._id
-    useEffect(() => {
-        if(userId){
-
-            axios.get(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${userId}`).then(data => setBooks(data.data[0].user_wishlist))  
-        }
-        
-    }, [books]) 
+    const books =  useSelector((state) => state.wishlist.wishlistBooks)
 
     return (
         <div className="my-5">

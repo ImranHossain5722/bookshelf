@@ -7,20 +7,27 @@ import productImg from "../../Assets/images/clubB.jpg";
 import { cartBooks } from "../../components/Redux/actions/bookActions";
 const Cart = () => {
   const books = useSelector((state) => state.cartBooks.cartBooks)
-  const dispatch = useDispatch()
-
-  const [val, setVal] = useState(1)
+  const user = useSelector((state) => state?.newUser?.user) 
   let subtotal;
-  const user = useSelector((state) => state?.newUser?.user)
-  const userId = user?._id
-  // dispatch(cartBooks
-  useEffect(() => {
-    if (userId) {
-      axios.get(`https://book-shelf-webapp.herokuapp.com/get-cart-data?id=${userId}`).then(data => dispatch(cartBooks(data.data.user_cart)))
-    }
-  }, [books])
+//  getting subtotal value
   const sub = books?.map(book => book.book.book_price * book.qnt)
   subtotal = sub.reduce((a, b) => a + b, 0)
+  // const carts = books.map(book => {{
+  //   book_id: book.book._id,
+  //   qnt : book.book.qnt
+  // }
+  // })
+  const checkout = () => {
+    const data = {
+      user_id : user._id,
+    ordered_items: [ ],
+    ordered_price_amount : 21,
+    payment_info : {
+        payment_type : "cash_on",
+    } 
+    }
+    console.log("cart",data) 
+  }
 
   return (
     <div className="pt-[60px] md:pt-[80px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">
@@ -102,10 +109,10 @@ const Cart = () => {
               </button>
             </div>
             <NavLink to='/checkout'>
-              <button className="btn btn-primary text-white mt-16">
+              <button className="btn btn-primary text-white mt-16" onClick={checkout}>
                 Prossed to checkout
               </button>
-            </NavLink>
+            </NavLink> 
           </div>
         </div>
         <div className="w-4/12 ml-auto mt-4">

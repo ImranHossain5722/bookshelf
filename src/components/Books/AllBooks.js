@@ -4,35 +4,76 @@ import { FaEye, FaHeart } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CartButton from '../CartButton/CartButton'
+import Loading from '../Loading/Loading'
 import { allBooks } from '../Redux/actions/bookActions'
 import Stars from '../Stars/Stars'
 
 
 const AllBooks = () => {
 
-  const [books , setBooks] = useState([]);
-  const [pageCount, setPageCount] = useState(1);
-  const [size, setSize] = useState(10);
-  
+  // const [bookpagi , setBookpagi] = useState([]);
+  // const [pageCount, setPageCount] = useState(1);
+  // const [size, setSize] = useState(10);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage,setpostPerPage] = useState(10);
 
-    // pagination count
-  useEffect(() => {
-    fetch(`https://book-shelf-webapp.herokuapp.com/books?page=${pageCount}&limit=${size}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.books)
-        setPageCount(data.pages);
-        setBooks(data.books)
-      });
-      console.log(size)
-  }, [pageCount, size]);
+  // //  all books data 
+  //   const books = useSelector((state) => state.allBooks.allBooks)
+  //   const dispatch = useDispatch()
+  //   useEffect(() => {
+  // axios.get('https://book-shelf-webapp.herokuapp.com/all-books').then(data => dispatch(allBooks(data.data))) 
+ 
+  //   }, [pageCount,size])
+
+
+  //   // pagination count
+  // useEffect(() => {
+  //   fetch(`https://book-shelf-webapp.herokuapp.com/books?page=${pageCount}&limit=${size}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       setPageCount(data.pages);
+  //       setBookpagi(data.books)
+  //     });
+  // }, [pageCount, size]);
+
     
 
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await axios.get('https://book-shelf-webapp.herokuapp.com/all-books');
+      setPosts(res.data);
+      setLoading(false);
+    };
+
+    fetchPosts();
+  }, []);
+
+  
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+if(loading){
+  <Loading/>
+}
+  
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(posts.length / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
   return (
     <div style={{background:"#FBF6F6"}} className=' max-w-[1440px] p-6 '>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 mb-10">
             {
-                books.map(book =>  <Link to={`/selectedBook/${book._id}`}>
+               currentPosts.map(book =>  <Link to={`/selectedBook/${book._id}`}>
                   <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
                 <div className="for-hover relative">
                     {/* relative */}
@@ -63,23 +104,26 @@ const AllBooks = () => {
         </div>
 
           {/* pagenation */}
-          <div className="flex justify-center p-3 ">
-            {[...Array(size).keys()].map((number) => (
-              <button
-                className="p-2 mr-2 border-2 border-secondary bg-primary text-white hover:bg-secondary active:bg-secondary"
-                onClick={() => setPageCount(number)}
-              >
-                {number + 1}
-              </button>
-            ))}
-            <select onChange={(event) => setSize(event.target.value)}>
-              <option value="5">5</option>
+         
+        <div className="flex justify-center">
+
+        {pageNumbers.map(number => (
+       
+            <button onClick={() => paginate(number)} className='page-link btn btn-primary mx-2'>
+              {number}
+            </button>
+          
+        ))}
+      
+            <select class="select select-primary " onChange={(event) => setpostPerPage(event.target.value)}>
+            <option value="5">5</option>
               <option value="10" selected>
                 10
               </option>
               <option value="15">15</option>
-            </select>
-          </div>
+</select>
+        </div>
+  
     </div>
   )
 }

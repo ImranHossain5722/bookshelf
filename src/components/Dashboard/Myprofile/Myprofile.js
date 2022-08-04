@@ -9,7 +9,7 @@ import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 
 const Myprofile = () => {
   const [user] = useAuthState(auth);
-  const [userRole, setUserRole] = useState('user');
+  const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
 

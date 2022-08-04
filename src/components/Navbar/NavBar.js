@@ -26,17 +26,17 @@ const NavBar = ({ children }) => {
 
   };
 
+  // show search modal 
   const showSearchModal = () => {
-    console.log('show search modal working');
+    showModal.classList.remove('left-full');
+    showModal.classList.add('left-0');
   }
-
-
 
   return (
 
     <nav>
       {/* search feature */}
-      <SearchModal />
+      <SearchModal showModal={showModal} setShowModal={setShowModal} />
 
       <div class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />

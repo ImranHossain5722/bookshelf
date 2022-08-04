@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FaRegTimesCircle } from "react-icons/fa";
 import Loading from '../Loading/Loading';
 
-const SearchModal = () => {
+const SearchModal = ({ showModal, setShowModal }) => {
     const [searchText, setSearchText] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [error, setError] = useState('');
@@ -11,7 +11,7 @@ const SearchModal = () => {
 
     if (loading) {
         return <Loading />;
-    }
+    };
 
     const handleSearch = (search) => {
         setLoading(true);
@@ -35,21 +35,21 @@ const SearchModal = () => {
             setError('Please type something*');
         }
         setLoading(false);
-    }
+    };
 
+    // get search mdoal 
+    const searchModal = document.getElementById('search-modal');
+
+    setShowModal(searchModal);
 
     // close search modal 
     const closeSearchModal = () => {
-        console.log('close search modal working');
-        const searchModal = document.getElementById('search-modal');
-        console.log(searchModal);
+        searchModal.classList.remove('left-0');
         searchModal.classList.add('left-full');
     }
 
-    // console.log(searchText);
-
     return (
-        <div id='search-modal' className='min-h-screen w-full flex justify-center items-center absolute  z-50 bg-secondary duration-500'>
+        <div id='search-modal' className='min-h-screen w-full flex justify-center items-center absolute z-50 bg-[#00124ec0] duration-500'>
             <button onClick={() => closeSearchModal()} className='absolute bottom-16'>
                 <FaRegTimesCircle className='text-4xl text-white hover:text-red-600 duration-300' />
             </button>
@@ -62,7 +62,7 @@ const SearchModal = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         </button>
                     </div>
-                    {error && <p className='text-red-600 mt-1 ml-1'><small>{error}</small></p>}
+                    {error && <p className='text-white mt-1 ml-1'><small>{error}</small></p>}
                 </div>
                 {/* Result field */}
                 {(!error && searchResults) &&

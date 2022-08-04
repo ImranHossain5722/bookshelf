@@ -13,37 +13,27 @@ const Myprofile = () => {
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  console.log('my Profile : ', getUser[0])
   useEffect(() => {
-    const userEmail = {
-      email: user?.email
+
+    const userUid = { uid: user?.uid };
+
+    const options = {
+      method: 'GET',
+      url: 'https://book-shelf-webapp.herokuapp.com/get-user',
+      params: userUid
     };
-    fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(userEmail)
-    })
-      .then((res) => res.json())
-      .then(data => setGetUser(data)
-      );
-  }, [user?.email])
+    axios.request(options).then(function (response) {
+      setGetUser(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, [user?.uid])
 
-  // upload image to imgbb and get image url 
-
-
-  useEffect(() => {
-
-
-
-  }, [])
-
-
+  // console.log(getUser);
   // // get current user role form database 
+  const currentUserId = getUser[0]?._id;
   useEffect(() => {
     const currentUserRole = getUser[0]?.user_role;
-
     if (currentUserRole === 'author') {
       setUserRole('author');
     }
@@ -60,41 +50,53 @@ const Myprofile = () => {
 
 
   const [upImgUrl, setUpImgUrl] = useState('');
-  console.log(upImgUrl);
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
-
     const image = data?.image[0];
-
     const formData = new FormData();
     formData.append('image', image);
-    fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
-      method: 'POST',
-      body: formData
-    })
-      .then(res => res.json())
-      .then(result => {
-        if (result.success) {
-          setUpImgUrl(result?.data?.url)
-        }
+    if (image) {
+      fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+        method: 'POST',
+        body: formData
       })
+        .then(res => res.json())
+        .then(result => {
+          if (result.success) {
+            setUpImgUrl(result?.data?.url)
+            const phoneNo = parseInt(data?.phone)
+            const updatedProfileData = {
+              user_name: data?.name ? data?.name : user?.user?.displayName,
+              user_phone: phoneNo,
+              user_address: data?.address,
+              user_birthday: data?.date,
+              user_photo_url: result?.data?.url ? result?.data?.url : user?.user_photo_url
+            };
+            const updateData = async () => {
+              await axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => console.log(data))
+            }
+            updateData();
+          }
+        })
 
-    // console.log(image)
+    } else {
+      const phoneNo = parseInt(data?.phone)
+      const updatedProfileData = {
+        user_name: data?.name ? data?.name : user?.user?.displayName,
+        user_phone: phoneNo,
+        user_address: data?.address,
+        user_birthday: data?.date,
+      };
 
-    const updatedProfileData = {
-      user_name: data?.name ? data?.name : user?.user?.displayName,
-      user_phone: data?.phone,
-      user_address: data?.address,
-      user_birthday: data?.date,
-      user_photo_url: upImgUrl ? upImgUrl : user?.user_photo_url,
-      user_role: userRole
-    };
-    console.log(updatedProfileData)
-    if (user?.email) {
-      axios.put('https://book-shelf-webapp.herokuapp.com/update-user', updatedProfileData).then(data => toast.success(`Profile update Successfully`))
-
+      const updateData = async () => {
+        await axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => console.log(data))
+      }
+      updateData();
 
     }
+
+
+
 
 
   }
@@ -106,7 +108,7 @@ const Myprofile = () => {
         <div className='md:w-[50%] p-[20px] md:p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black bg-white' >
           <img className='block mx-auto' height={200} width={200} src={user?.photoURL ? user?.photoURL : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg '} alt="" />
           <h2 className='text-[40px] font-bold mt-3 mb-1 text-center text-black'>{user?.displayName}</h2>
-          <p className='text-center mb-3 text-[20px]'>{userRole === 'user' ? 'Customer' : userRole}</p>
+          <p className='text-center mb-3 text-[20px]'>{userRole}</p>
           <h3 className='font-bold text-[30px] mb-[19px]'>Contact Informatin</h3>
           <div>
             <h4 className='font-[600] text-[25px] py-[7px]'>Email Address</h4>
@@ -118,11 +120,11 @@ const Myprofile = () => {
           </div>
           <div>
             <h4 className='font-[600] text-[25px] py-[7px]'>Address</h4>
-            <p className='font-[600] text-[16px] py-[7px]'>{getUser[0]?.user_phone}</p>
+            <p className='font-[600] text-[16px] py-[7px]'>{getUser[0]?.user_address}</p>
           </div>
           <div>
             <h4 className='font-[600] text-[25px] py-[7px]'>Birthday</h4>
-            <p className='font-[600] text-[16px] py-[7px]'>{'26/03/1971'}</p>
+            <p className='font-[600] text-[16px] py-[7px]'>{getUser[0]?.user_birthday}</p>
           </div>
         </div>
         <div className='p-[20px] md:p-12 pt-0 md:ml-6 md:w-[50%]'>
@@ -217,12 +219,12 @@ const Myprofile = () => {
                     <input
                       {...register("name", {
                         required: {
-                          value: true,
+                          value: false,
                           message: "Name is Required"
                         }
                       })}
                       type="text"
-                      placeholder={user?.displayName}
+                      defaultValue={user?.displayName}
                       className="input input-bordered w-full bg-secondary text-white" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.author_name?.type === 'required' && `${errors?.author_name?.message}`}</span>
@@ -237,12 +239,12 @@ const Myprofile = () => {
                     <input
                       {...register("phone", {
                         required: {
-                          value: true,
+                          value: false,
                           message: "Email is Required"
                         }
                       })}
                       type="phone"
-                      placeholder="Update Your Phone"
+                      defaultValue={getUser[0]?.user_phone}
                       className="input input-bordered w-full bg-secondary text-white" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.phone?.type === 'required' && `${errors?.phone?.message}`}</span>
@@ -255,12 +257,12 @@ const Myprofile = () => {
                     <input
                       {...register("address", {
                         required: {
-                          value: true,
+                          value: false,
                           message: "Address is Required"
                         }
                       })}
                       type="text"
-                      placeholder="Update Your Address"
+                      defaultValue={getUser[0]?.user_address}
                       className="input input-bordered w-full  bg-secondary text-white" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.address?.type === 'required' && `${errors?.address?.message}`}</span>
@@ -273,12 +275,12 @@ const Myprofile = () => {
                     <input
                       {...register("date", {
                         required: {
-                          value: true,
+                          value: false,
                           message: "Date is Required"
                         }
                       })}
                       type="date"
-                      placeholder="Update Your Address"
+                      placeholder={getUser[0]?.user_birthday}
                       className="input input-bordered w-full  bg-secondary text-white" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.date?.type === 'required' && `${errors?.date?.message}`}</span>
@@ -291,12 +293,11 @@ const Myprofile = () => {
                     <input
                       {...register("image", {
                         required: {
-                          value: true,
+                          value: false,
                           message: "image is Required"
                         }
                       })}
                       type="file"
-                      placeholder="Update Your Address"
                       className="input input-bordered w-full pt-[5px] bg-secondary text-white" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.image?.type === 'required' && `${errors?.image?.message}`}</span>

@@ -21,7 +21,7 @@ const AboutUs = () => {
         </div>
       </div>
       <div
-        class="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 
+        npm class="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 
       grid lg:grid-cols-2
       "
       >

@@ -49,6 +49,7 @@ import TermsCondition from "./pages/TermsCondition/TermsCondition";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import { newUser } from "./components/Redux/actions/bookActions";
 import { useDispatch } from "react-redux";
+import CommingSoon from "./components/ommingSoon/CommingSoon";
 
 // initialize aos
 AOS.init();
@@ -209,6 +210,7 @@ function App() {
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
             <Route path="/faq" element={<Faq />}></Route>
+            <Route path="/comingsoon" element={<CommingSoon/>}></Route>
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}

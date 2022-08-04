@@ -37,11 +37,20 @@ const SearchModal = () => {
         setLoading(false);
     }
 
+
+    // close search modal 
+    const closeSearchModal = () => {
+        console.log('close search modal working');
+        const searchModal = document.getElementById('search-modal');
+        console.log(searchModal);
+        searchModal.classList.add('left-full');
+    }
+
     // console.log(searchText);
 
     return (
-        <div className='min-h-screen w-full flex justify-center items-center fixed z-50 bg-secondary'>
-            <button className='absolute top-16 right-16'>
+        <div id='search-modal' className='min-h-screen w-full flex justify-center items-center absolute  z-50 bg-secondary duration-500'>
+            <button onClick={() => closeSearchModal()} className='absolute bottom-16'>
                 <FaRegTimesCircle className='text-4xl text-white hover:text-red-600 duration-300' />
             </button>
             <div className='w-[90%] lg:w-2/5 '>

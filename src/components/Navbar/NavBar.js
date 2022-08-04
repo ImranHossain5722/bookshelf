@@ -18,18 +18,26 @@ const NavBar = ({ children }) => {
 
   const [user] = useAuthState(auth);
 
+  const [showModal, setShowModal] = useState('');
+
   const handelSignOut = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
 
   };
 
+  const showSearchModal = () => {
+    console.log('show search modal working');
+  }
+
 
 
   return (
 
     <nav>
+      {/* search feature */}
       <SearchModal />
+
       <div class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
@@ -81,7 +89,7 @@ const NavBar = ({ children }) => {
             <div>
               {/* search button */}
               <div className="form-control mx-4">
-                <button>
+                <button onClick={() => showSearchModal()}>
                   <FaSearch className="text-3xl" />
                 </button>
               </div>

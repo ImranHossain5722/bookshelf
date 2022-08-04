@@ -29,23 +29,10 @@ const AddAuthor = () => {
         user_email: user?.user?.email,
         user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : phoneNo,
         user_photo_url: user?.user?.photoURL ? user?.user?.photoURL : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
-        uid: user?.user?.uid,
-        user_role: 'author'
+        uid: user?.user?.uid
     };
 
-    if (user) {
-        console.log('Got User')
-        const postAuthorData = async () => {
 
-            await axios.post('https://book-shelf-webapp.herokuapp.com/add-user', authorInfo).then(data => console.log(data))
-            navigate('/dashboard');
-
-        }
-        postAuthorData();
-
-    } else {
-        console.log('user data not found')
-    }
     const onSubmit = async (data) => {
         const pass = data?.password;
         const confirmPass = data?.cpassword;
@@ -53,7 +40,7 @@ const AddAuthor = () => {
         setPhoneNo(data?.phone)
         if (pass === confirmPass) {
             await createUserWithEmailAndPassword(data?.author_email, data?.password);
-            await updateProfile({ displayName: data?.author_name, phoneNumber: data?.phone });
+            await updateProfile({ displayName: data?.author_name });
             await sendEmailVerification();
             toast('Verification Email Sent');
             // navigate('/dashboard');
@@ -64,6 +51,19 @@ const AddAuthor = () => {
             toast('Password and Confirm Password Dose not match');
         }
         reset();
+    }
+    if (user) {
+        console.log('Got User')
+        const postAuthorData = async () => {
+            await axios.post('https://book-shelf-webapp.herokuapp.com/register-author', authorInfo).then(data => {
+                console.log('Server Data', data)
+                navigate('/dashboard');
+            })
+        }
+        postAuthorData();
+
+    } else {
+        console.log('user data not found')
     }
     return (
         <div className="pt-0 pb-12 w-1/2 mx-auto">

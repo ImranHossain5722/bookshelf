@@ -19,7 +19,7 @@ const SocialLogin = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/dashboard";
-  const { handleLogin } = useToken();
+  const { userLogin } = useToken();
 
   if (error || fError) {
     toast(`Error: ${error?.message}`);
@@ -30,7 +30,7 @@ const SocialLogin = () => {
 
   const handleGoogleSignIn = async () => {
     await signInWithGoogle();
-    await handleLogin();
+    await userLogin();
     navigate(from, { replace: true });
   };
   return (

@@ -9,17 +9,11 @@ const useToken = (cUser) => {
   const [token, setToken] = useState("");
   const [userData, setUserData] = useState({});
   const dispatch = useDispatch()
-  const handleLogin = async () => {
+  const userLogin = async () => {
     await onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const userData = {
-          user,
-          role: "user",
-        };
         const data = await axios.post(
-          "https://book-shelf-webapp.herokuapp.com/add-user",
-          userData
-        );
+          "https://book-shelf-webapp.herokuapp.com/login-user", user);
         if (data.data._id) {
           dispatch(newUser(data.data));
           console.log(data.data);
@@ -28,7 +22,7 @@ const useToken = (cUser) => {
     });
   };
 
-  return { token, handleLogin };
+  return { token, userLogin };
 };
 
 export default useToken;

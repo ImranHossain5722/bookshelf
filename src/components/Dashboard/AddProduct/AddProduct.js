@@ -18,7 +18,6 @@ const AddProduct = () => {
   const [allCategories, setAllCategories] = useState([]);
   useEffect(() => {
     const options = { method: 'GET' };
-
     fetch('https://book-shelf-webapp.herokuapp.com/all-categories', options)
       .then(response => response.json())
       .then(data => setAllCategories(data))
@@ -133,30 +132,22 @@ const AddProduct = () => {
   // const [imgbbUrl, setImgbbUrl] = useState('');
   const [bookCat, setBookCat] = useState({});
   const getChoosenCategory = (choice) => {
-    const data = {
-      category_title: choice?.label,
-      cat_id: choice?.value
-    }
+    const data = [choice?.value];
     setBookCat(data);
   }
 
   const [bookAut, setBookAut] = useState({});
 
   const getChoosenAuthor = (choice) => {
-    const data = {
-      author_name: choice?.label,
-      aut_id: choice?.value
-    }
+    const data = choice?.value;
+
     setBookAut(data);
 
   }
   const [bookPub, setBookPub] = useState({});
 
   const getChoosenPublisher = (choice) => {
-    const data = {
-      publisher_name: choice?.label,
-      pub_id: choice?.value
-    }
+    const data = choice?.value;
     setBookPub(data);
 
   }
@@ -164,16 +155,19 @@ const AddProduct = () => {
   const onSubmit = data => {
 
     // const productInfoData = {
-    //   book_title: data.book_title,
-    //   book_description: data.book_description,
+    //   book_title: data?.book_title,
+    //   book_description: data?.book_description,
+    //   book_edition: data?.book_edition,
     //   book_publisher: bookPub,
     //   book_author: bookAut,
-    //   book_price: data.book_price,
-    //   book_pages: data.book_pages,
+    //   book_price: data?.book_price,
+    //   book_pages: data?.book_pages,
+    //   book_qnt: data?.book_qnt,
+    //   discount: 0,
     //   category: bookCat,
     //   // book_cover_photo_url: imgbbUrl,
-    //   book_translator: data?.translator,
-    //   country: data?.country
+    //   book_language: data?.translator,
+    //   book_country: data?.country
     // }
     // console.log(productInfoData)
 
@@ -191,16 +185,19 @@ const AddProduct = () => {
         if (result.success) {
           const imgbbUrl = result?.data?.url;
           const productInfoData = {
-            book_title: data.book_title,
-            book_description: data.book_description,
+            book_title: data?.book_title,
+            book_description: data?.book_description,
+            book_edition: data?.book_edition,
             book_publisher: bookPub,
             book_author: bookAut,
-            book_price: data.book_price,
-            book_pages: data.book_pages,
+            book_price: data?.book_price,
+            book_pages: data?.book_pages,
+            book_qnt: data?.book_qnt,
+            discount: 0,
             category: bookCat,
             book_cover_photo_url: imgbbUrl,
-            book_translator: data?.translator,
-            country: data?.country
+            book_language: data?.translator,
+            book_country: data?.country
           }
           const postAuthorData = () => {
             console.log('before post:', productInfoData);
@@ -209,7 +206,7 @@ const AddProduct = () => {
           postAuthorData();
         }
       })
-    // console.log('Add Data', productInfoData);
+
     // reset();
   };
 
@@ -230,7 +227,7 @@ const AddProduct = () => {
                 <input
                   {...register("image", {
                     required: {
-                      value: false,
+                      value: true,
                       message: "image is Required"
                     }
                   })}
@@ -304,9 +301,28 @@ const AddProduct = () => {
                   {errors?.book_pages && <p><small className='pl-1 text-red-600'>{errors?.book_pages?.message}</small></p>}
                 </div>
               </div >
+              <div className='md:flex gap-7 mt-4' >
+                <div className='w-full'>
+                  <label class="label-text text-lg">Quantity</label>
+                  <input type="number" {...register("book_qnt", {
+                    required: 'required*',
+                  })} placeholder="Type here"
+                    min={1}
+                    class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                  {errors?.book_qnt && <p><small className='pl-1 text-red-600'>{errors?.book_qnt?.message}</small></p>}
+                </div>
+                <div className='w-full'>
+                  <label class="label-text text-lg">Edition</label>
+                  <input type="text" {...register("book_edition", {
+                    required: 'required*',
+                  })} placeholder="Type here"
+                    min={1} class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                  {errors?.book_edition && <p><small className='pl-1 text-red-600'>{errors?.book_edition?.message}</small></p>}
+                </div>
+              </div >
               < div className='md:flex gap-7 mt-4' >
                 <div className='w-full'>
-                  <label class="label-text text-lg">Translator</label>
+                  <label class="label-text text-lg">Language</label>
                   <input type="text" {...register("translator", {
                     required: 'required*',
                   })} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />

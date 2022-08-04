@@ -46,6 +46,7 @@ import Contact from "./pages/Contact/Contact";
 import Faq from "./pages/Faq/Faq";
 import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
 import TermsCondition from "./pages/TermsCondition/TermsCondition";
+import ViewBySingleCategory from "./components/FirstCategoryBooks/ViewBySingleCategory";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import { newUser } from "./components/Redux/actions/bookActions";
 import { useDispatch } from "react-redux";
@@ -118,7 +119,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />}>
               <Route path="/" element={<BestOffersBooks />} />
-              <Route path="/popular-writers" element={<PopularWritersBooks />} />
+              <Route
+                path="/popular-writers"
+                element={<PopularWritersBooks />}
+              />
               <Route path="/best-offers" element={<BestOffersBooks />} />
             </Route>
             <Route path="/login" element={<Login />}></Route>
@@ -205,6 +209,10 @@ function App() {
                   <Products_details />
                 </RequireAuth>
               }
+            ></Route>
+            <Route
+              path="/categoryView"
+              element={<ViewBySingleCategory />}
             ></Route>
             <Route path="/about" element={<AboutUs/>}></Route>
             <Route path="/contact" element={<Contact />}></Route>

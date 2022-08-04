@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 //icons
 import { FaHeart, FaEye } from 'react-icons/fa';
+import { BsCheckLg } from "react-icons/bs";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,13 +21,10 @@ import CartButton from "../CartButton/CartButton";
 import { NavLink } from "react-router-dom";
 
 
-
-
 const Categorys = () => {
-  const books = useSelector((state) => state?.sellBooks?.books);
+  // const books = useSelector((state) => state?.sellBooks?.books);
   // Get Categories from database 
   const [allCategories, setAllCategories] = useState([]);
-
   useEffect(() => {
     const options = { method: 'GET' };
     fetch('https://book-shelf-webapp.herokuapp.com/all-categories', options)
@@ -36,18 +34,28 @@ const Categorys = () => {
 
   }, [])
 
-  console.log(allCategories);
-
+  // console.log(allCategories)
   const [selectedCatId, setSelectedCatId] = useState('');
+  const [selectedCatTitle, setSelectedCatTitle] = useState('');
 
+  const [books, setBooks] = useState([]);
+  // get books by category id 
+  useEffect(() => {
+    const options = { method: 'GET' };
+    fetch(`https://book-shelf-webapp.herokuapp.com/get-book-by-category?ct=${selectedCatId}`, options)
+      .then(response => response.json())
+      .then(response => setBooks(response))
+      .catch(err => console.error(err));
+  }, [selectedCatId])
 
-  console.log(selectedCatId);
   // get selected Category 
-  const getCategoryIdOnClick = (id) => {
-    if (selectedCatId.length <= 0) {
-      setSelectedCatId(id)
-    } else {
+  const getCategoryIdOnClick = (id, title) => {
+
+    if (selectedCatId === id) {
       setSelectedCatId('')
+    } else {
+      setSelectedCatId(id);
+      setSelectedCatTitle(title);
     }
 
   }
@@ -95,12 +103,26 @@ const Categorys = () => {
         >
           {
             allCategories.map(category => <SwiperSlide key={category._id}>
-              <div onClick={() => getCategoryIdOnClick(category._id)} className="h-56 w-52 bg-[#27AE612B] rounded-lg flex items-center justify-center p-2">
-                <div>
-                  <img src={category?.category_icon_url} className="mx-auto" width={70} alt="" />
-                  <h2 className="text-2xl mt-6 text-center text-[#00124E] font-bold">{category?.category_title}</h2>
+              {category._id === selectedCatId ?
+
+                <div className=" bg-[#98D8B2] rounded-lg" >
+                  <BsCheckLg className="text-[60px] text-[#ffffff] font-extrabold absolute left-[35%] top-[38%]" />
+                  <div onClick={() => getCategoryIdOnClick(category._id, category.category_title)} className="h-56 w-52 opacity-75 text-white rounded-lg flex items-center justify-center p-2">
+                    <div >
+                      <img src={category?.category_icon_url} className="mx-auto" width={70} alt="" />
+                      <h2 className="text-2xl mt-6 text-center text-[#00124E] font-bold">{category?.category_title}</h2>
+                    </div>
+                  </div>
                 </div>
-              </div>
+                :
+                <div onClick={() => getCategoryIdOnClick(category._id, category.category_title)} className="h-56 w-52 bg-[#27AE612B] rounded-lg flex items-center justify-center p-2">
+                  <div >
+                    <img src={category?.category_icon_url} className="mx-auto" width={70} alt="" />
+                    <h2 className="text-2xl mt-6 text-center text-[#00124E] font-bold">{category?.category_title}</h2>
+                  </div>
+                </div>
+              }
+
             </SwiperSlide>)
           }
         </Swiper>
@@ -109,20 +131,22 @@ const Categorys = () => {
 
       {selectedCatId &&
         <div className="bg-white max-w-[1240px] mx-auto mt-[10px] lg:mt-[10px] py-10">
-          <div className="mt-8">
-            <Swiper
-              slidesPerView={size}
-              spaceBetween={30}
-              slidesPerGroup={size}
-              loop={true}
-              loopFillGroupWithBlank={true}
-              navigation={true}
-              modules={[Navigation]}
-              className="mySwiper px-7 py-6"
-              style={{ "--swiper-theme-color": "#27AE61" }}
-            >
-              {
-                books?.map(book => <SwiperSlide key={book._id}>
+          <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">{selectedCatTitle}</h1>
+          {books.length === 0 && <h2 className="pl-6 text-[15px] lg:text-[20px] font-bold text-red-600 mb-8">No Books Found</h2>}
+          {books.length === 0 ||
+            <div className="mt-1">
+              <Swiper
+                slidesPerView={size}
+                spaceBetween={30}
+                slidesPerGroup={size}
+                loop={true}
+                loopFillGroupWithBlank={true}
+                navigation={true}
+                modules={[Navigation]}
+                className="mySwiper px-7 py-6"
+                style={{ "--swiper-theme-color": "#27AE61" }}
+              >
+                {books?.map(book => <SwiperSlide key={book._id}>
                   <NavLink to={`/selectedBook/${book._id}`}>
                     <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
                       <div className="for-hover relative">
@@ -147,9 +171,10 @@ const Categorys = () => {
                     </div>
                   </NavLink>
                 </SwiperSlide>)
-              }
-            </Swiper>
-          </div>
+                }
+              </Swiper>
+            </div>
+          }
         </div>}
     </div>
   );

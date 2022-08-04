@@ -1,13 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaRegTimesCircle } from "react-icons/fa";
+import Loading from '../Loading/Loading';
 
 const SearchModal = () => {
     const [searchText, setSearchText] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    if (loading) {
+        return <Loading />;
+    }
 
     const handleSearch = (search) => {
+        setLoading(true);
         console.log(search.length);
         if (search.length > 0) {
             axios.get(`https://book-shelf-webapp.herokuapp.com/search?sq=${search}`)
@@ -19,7 +26,7 @@ const SearchModal = () => {
                     else {
                         setError('Result not found')
                     }
-                    // console.log(res.data);
+                    console.log(searchResults.length);
                 });
 
             setError('');
@@ -27,14 +34,15 @@ const SearchModal = () => {
         else {
             setError('Please type something*');
         }
+        setLoading(false);
     }
 
     // console.log(searchText);
 
     return (
-        <div className='min-h-screen flex justify-center items-center relative'>
+        <div className='min-h-screen w-full flex justify-center items-center fixed z-50 bg-secondary'>
             <button className='absolute top-16 right-16'>
-                <FaRegTimesCircle className='text-4xl text-red-600' />
+                <FaRegTimesCircle className='text-4xl text-white hover:text-red-600 duration-300' />
             </button>
             <div className='w-[90%] lg:w-2/5 '>
                 {/* search field */}
@@ -49,7 +57,7 @@ const SearchModal = () => {
                 </div>
                 {/* Result field */}
                 {(!error && searchResults) &&
-                    <div className='mt-8 h-60 overflow-scroll'>
+                    <div className='mt-8 max-h-60 overflow-y-scroll'>
                         {
                             searchResults?.map(results => <div key={results._id} className='flex items-center justify-center h-16 w-full bg-white rounded-lg mb-3'>
                                 <img src={results.book_cover_photo_url} className='h-14 mr-5' alt="" />

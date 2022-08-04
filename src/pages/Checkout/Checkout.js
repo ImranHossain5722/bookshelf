@@ -39,7 +39,7 @@ const Checkout = () => {
               <input
                 type="text"
                 placeholder="House Number and street address"
-                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none" required
               />
             </div>
             <div className="w-full flex ">
@@ -53,14 +53,14 @@ const Checkout = () => {
               <input
                 type="text"
                 placeholder="Enter city/town name"
-                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none" required
               />
             </div>
             <div className="w-full flex ">
               <input
                 type="text"
                 placeholder="01XXXXXXXXXX"
-                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none" required
               />
             </div>
             <div className="w-full flex ">

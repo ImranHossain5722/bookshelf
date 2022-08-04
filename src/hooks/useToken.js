@@ -1,12 +1,14 @@
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { newUser } from "../components/Redux/actions/bookActions";
 import auth from "../firebase.init";
 
 const useToken = (cUser) => {
   const [token, setToken] = useState("");
   const [userData, setUserData] = useState({});
-
+  const dispatch = useDispatch()
   const handleLogin = async () => {
     await onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -19,7 +21,7 @@ const useToken = (cUser) => {
           userData
         );
         if (data.data._id) {
-          setUserData(data.data);
+          dispatch(newUser(data.data));
           console.log(data.data);
         }
       }

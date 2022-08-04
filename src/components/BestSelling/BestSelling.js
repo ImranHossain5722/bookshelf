@@ -52,7 +52,7 @@ const BestSelling = () => {
     }, [width]);
 
     return (
-        <div className="bg-white max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] py-10">
+        <div className="bg-white max-w-[1240px] mx-auto my-[60px] lg:my-[120px] py-10">
             {/* ------title section----- */}
             <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">Last Week Best Selling</h1>
 

@@ -2,6 +2,9 @@ import React from "react";
 import aboutBanner from "../../Assets/images/aboutUs-banner-1.jpg";
 import Bannerbook from "../../Assets/images/Banner-images/img1-13.png";
 import Review from "../../components/Review/Review";
+import wahtWeDo from "../../Assets/images/wahtWeAreDo.png";
+import misson from "../../Assets/images/Business mission-pana.png";
+import vision from "../../Assets/images/vision.png";
 import sliderBanner from "../../Assets/images/slider__bag.png";
 import "./Aboutus.css";
 const AboutUs = () => {
@@ -48,7 +51,7 @@ const AboutUs = () => {
         </div>
         <div className="">
           <figure className="">
-            <img className=" lg:ml-7" src={Bannerbook} alt="Album" />
+            <img className=" shadow-lg rounded-md w-1/2 h-1/2 lg:ml-7" src={wahtWeDo} alt="Album" />
           </figure>
         </div>
       </div>{" "}
@@ -60,7 +63,7 @@ const AboutUs = () => {
       >
         <div className="">
           <figure className="">
-            <img className=" " src={Bannerbook} alt="Album" />
+            <img className=" shadow-lg rounded-md w-1/2 h-1/2" src={misson} alt="Album" />
           </figure>
         </div>
 
@@ -115,7 +118,7 @@ const AboutUs = () => {
         </div>
         <div className="">
           <figure className="">
-            <img className=" lg:ml-7" src={Bannerbook} alt="Album" />
+            <img className=" shadow-lg rounded-md w-1/2 h-1/2 lg:ml-7" src={vision} alt="Album" />
           </figure>
         </div>
       </div>{" "}

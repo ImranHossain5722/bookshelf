@@ -6,14 +6,18 @@ import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import { BsFillBagCheckFill, BsFillHeartFill, BsFillJournalBookmarkFill } from "react-icons/bs";
 import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { newUser } from '../../Redux/actions/bookActions';
 
 const Myprofile = () => {
   const [user] = useAuthState(auth);
   const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const dispatch = useDispatch()
 
   useEffect(() => {
+   
 
     const userUid = { uid: user?.uid };
 
@@ -27,7 +31,21 @@ const Myprofile = () => {
     }).catch(function (error) {
       console.error(error);
     });
-  }, [user?.uid])
+
+  }, [user?.email])
+
+  // upload image to imgbb and get image url 
+
+
+  useEffect(() => {
+
+    dispatch(newUser(getUser[0]))
+
+
+  }, [getUser,user])
+
+
+
 
   // console.log(getUser);
   // // get current user role form database 
@@ -50,6 +68,7 @@ const Myprofile = () => {
 
 
   const [upImgUrl, setUpImgUrl] = useState('');
+  console.log(upImgUrl); 
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];

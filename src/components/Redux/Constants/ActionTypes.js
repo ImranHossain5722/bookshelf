@@ -15,7 +15,7 @@ export const ActionTypes = {
     NEWUSER: "NEWUSER",
     // ONLY THE SELECTED CATAGORY
     AUTHOR: "AUTHOR",
-    // all users
+    // Al USERS 
     ALLUSER : "ALLUSER",
     ALLPUBLISHER : "ALLPUBLISHER",
     ALLBOOKS : "ALLBOOKS",
@@ -24,5 +24,6 @@ export const ActionTypes = {
     ALLORDERS : "ALLORDERS",
     MYPROFILE : "MYPROFILE",
     ORDERHISTORYS : "ORDERHISTORYS",
+    CURRENT_CART : "CURRENT_CART"
 
 }

@@ -104,16 +104,16 @@ const AddProduct = () => {
     const currentUserRole = getUser[0]?.user_role;
 
     if (currentUserRole === 'author') {
-      setUserRole('Author');
+      setUserRole('author');
     }
     else if (currentUserRole === 'publisher') {
-      setUserRole('Publisher');
+      setUserRole('publisher');
     }
     else if (currentUserRole === 'user') {
-      setUserRole('User');
+      setUserRole('user');
     }
     else if (currentUserRole === 'admin') {
-      setUserRole('Admin');
+      setUserRole('admin');
     }
   }, [getUser])
 
@@ -131,55 +131,88 @@ const AddProduct = () => {
   }
 
   // const [imgbbUrl, setImgbbUrl] = useState('');
+  const [bookCat, setBookCat] = useState({});
+  const getChoosenCategory = (choice) => {
+    const data = {
+      category_title: choice?.label,
+      cat_id: choice?.value
+    }
+    setBookCat(data);
+  }
 
-  const setUserChoice = (choice) => {
-    console.log(choice);
+  const [bookAut, setBookAut] = useState({});
+
+  const getChoosenAuthor = (choice) => {
+    const data = {
+      author_name: choice?.label,
+      aut_id: choice?.value
+    }
+    setBookAut(data);
+
+  }
+  const [bookPub, setBookPub] = useState({});
+
+  const getChoosenPublisher = (choice) => {
+    const data = {
+      publisher_name: choice?.label,
+      pub_id: choice?.value
+    }
+    setBookPub(data);
+
   }
 
   const onSubmit = data => {
 
+    // const productInfoData = {
+    //   book_title: data.book_title,
+    //   book_description: data.book_description,
+    //   book_publisher: bookPub,
+    //   book_author: bookAut,
+    //   book_price: data.book_price,
+    //   book_pages: data.book_pages,
+    //   category: bookCat,
+    //   // book_cover_photo_url: imgbbUrl,
+    //   book_translator: data?.translator,
+    //   country: data?.country
+    // }
+    // console.log(productInfoData)
 
-    console.log(data)
-    console.log(data.categoryName.value)
+    const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
+    const image = data?.image[0];
+    const formData = new FormData();
+    formData.append('image', image);
 
-    // const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
-    // const image = data?.image[0];
-    // const formData = new FormData();
-    // formData.append('image', image);
-
-    // fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
-    //   method: 'POST',
-    //   body: formData
-    // })
-    //   .then(res => res.json())
-    //   .then(result => {
-    //     if (result.success) {
-    //       const imgbbUrl = result?.data?.url;
-    //       const productInfoData = {
-    //         book_title: data.book_title,
-    //         book_description: data.book_description,
-    //         book_publisher: data.book_publisher,
-    //         book_author: data.book_author,
-    //         book_price: data.book_price,
-    //         book_pages: data.book_pages,
-    //         category: data.book_category,
-    //         book_cover_photo_url: imgbbUrl,
-    //         book_translator: data?.translator,
-    //         country: data?.country
-
-    //       }
-    //       const postAuthorData = () => {
-    //         console.log('before post:', productInfoData);
-    //         axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => console.log('Post data:', data))
-    //       }
-    //       postAuthorData();
-    //     }
-    //   })
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          const imgbbUrl = result?.data?.url;
+          const productInfoData = {
+            book_title: data.book_title,
+            book_description: data.book_description,
+            book_publisher: bookPub,
+            book_author: bookAut,
+            book_price: data.book_price,
+            book_pages: data.book_pages,
+            category: bookCat,
+            book_cover_photo_url: imgbbUrl,
+            book_translator: data?.translator,
+            country: data?.country
+          }
+          const postAuthorData = () => {
+            console.log('before post:', productInfoData);
+            axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => console.log('Post data:', data))
+          }
+          postAuthorData();
+        }
+      })
     // console.log('Add Data', productInfoData);
     // reset();
   };
 
-  // console.log(errors);
 
   return (
     <div className=' w'>
@@ -227,7 +260,7 @@ const AddProduct = () => {
                 <div className='w-full mt-4 md:mt-0'>
                   <label class="label-text text-lg">Select Categories</label>
 
-                  <Select onChange={(choice) => setUserChoice(choice)} name='categoryName' className="mt-2 rounded-xl" options={catOption} />
+                  <Select onChange={(choice) => getChoosenCategory(choice)} name='categoryName' className="mt-2 rounded-xl" options={catOption} />
                 </div>
 
               </div>
@@ -240,7 +273,7 @@ const AddProduct = () => {
                     required: 'required*',
                   })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
                   {errors?.book_author && <p><small className='pl-1 text-red-600'>{errors?.book_author?.message}</small></p>} */}
-                  <Select name='authorName' className="mt-2 rounded-xl" options={authorOptions} />
+                  <Select onChange={(choice) => getChoosenAuthor(choice)} className="mt-2 rounded-xl" options={authorOptions} />
                 </div>
                 <div className='w-full mt-4 md:mt-0'>
                   <label class="label-text text-lg">Publisher Name</label>
@@ -248,7 +281,7 @@ const AddProduct = () => {
                     required: 'required*',
                   })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
                   {errors?.book_publisher && <p><small className='pl-1 text-red-600'>{errors?.book_publisher?.message}</small></p>} */}
-                  <Select name='publisherName' className="mt-2 rounded-xl" options={publisherOptions} />
+                  <Select onChange={(choice) => getChoosenPublisher(choice)} className="mt-2 rounded-xl" options={publisherOptions} />
                 </div>
               </div >
               {/* row-4 */}

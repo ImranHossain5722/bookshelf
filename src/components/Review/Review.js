@@ -13,6 +13,8 @@ import { Navigation } from "swiper";
 import './review.css'
 import useWindowDimensions from "../windowSize/windowSize";
 
+import sliderBanner from "../../Assets/images/slider__bag.png"
+
 const Review = () => {
   const [reviews, setReviews] = useState([]);
   const [size, setSize] = useState(1);
@@ -40,8 +42,19 @@ const Review = () => {
   }, [width])
 
   return (
-    <div className="max-w-[1240px] mx-auto bg-white mt-[60px] lg:mt-[120px] py-4">
-      <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold text-center pb-14">Clients Feedback</h2>
+    <div 
+    style={{
+      background: `url(${sliderBanner})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+    className=" px-8 mx-auto  mt-[60px] lg:mt-[120px] py-4">
+      <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold text-center pb-1">Our Clients Feedback</h2>
+      
+      <div className=" flex justify-center ">
+      <progress className="progress progress-success  h-2 w-5  "></progress>
+      </div>
       <Swiper
         slidesPerView={size}
         spaceBetween={30}

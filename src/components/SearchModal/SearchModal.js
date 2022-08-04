@@ -37,7 +37,7 @@ const SearchModal = ({ showModal, setShowModal }) => {
         setLoading(false);
     };
 
-    // get search mdoal 
+    // get search modal 
     const searchModal = document.getElementById('search-modal');
 
     setShowModal(searchModal);
@@ -49,7 +49,7 @@ const SearchModal = ({ showModal, setShowModal }) => {
     }
 
     return (
-        <div id='search-modal' className='min-h-screen w-full flex justify-center items-center absolute z-50 bg-[#00124ec0] duration-500'>
+        <div id='search-modal' className='min-h-screen w-full flex justify-center items-center absolute left-full z-50 bg-[#00124ec0] duration-500'>
             <button onClick={() => closeSearchModal()} className='absolute bottom-16'>
                 <FaRegTimesCircle className='text-4xl text-white hover:text-red-600 duration-300' />
             </button>

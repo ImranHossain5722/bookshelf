@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 
 // images
-import img1 from '../../Assets/images/category-images/Open Book.png';
-import img2 from '../../Assets/images/category-images/Vector.png';
-import img3 from '../../Assets/images/category-images/Computer.png';
-import img4 from '../../Assets/images/category-images/Done.png';
+import img1 from "../../Assets/images/category-images/Open Book.png";
+import img2 from "../../Assets/images/category-images/Vector.png";
+import img3 from "../../Assets/images/category-images/Computer.png";
+import img4 from "../../Assets/images/category-images/Done.png";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,7 +17,6 @@ import "swiper/css/navigation";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import useWindowDimensions from "../windowSize/windowSize";
-
 
 // fake data
 const categories = [
@@ -80,24 +79,28 @@ const Categorys = () => {
   useEffect(() => {
     //  responsiveness added by width change
     if (width >= 992) {
-      setSize(5)
+      setSize(5);
     }
     // else if (width >= 768) {
     //     setSize(3)
     // }
     else if (width >= 576) {
-      setSize(2)
-    }
-    else {
-      setSize(1)
+      setSize(2);
+    } else {
+      setSize(1);
     }
   }, [width]);
   return (
     <div className="mt-[60px] lg:mt-[120px]">
       {/* ------title section----- */}
       <div className="text-center">
-        <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold">Would you like to see any particular books?</h2>
-        <p className="text-xl text-[#00124E] font-bold">Select category to view books of choice - maximum <span className="text-primary">2</span></p>
+        <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold">
+          Would you like to see any particular books?
+        </h2>
+        <p className="text-xl text-[#00124E] font-bold">
+          Select category to view books of choice - maximum{" "}
+          <span className="text-primary">2</span>
+        </p>
       </div>
 
       {/* ------categories slider----- */}
@@ -113,16 +116,18 @@ const Categorys = () => {
           className="mySwiper px-6"
           style={{ "--swiper-theme-color": "#27AE61" }}
         >
-          {
-            categories.map(category => <SwiperSlide key={category._id}>
+          {categories.map((category) => (
+            <SwiperSlide key={category._id}>
               <div className="h-56 w-52 bg-[#27AE612B] rounded-lg flex items-center justify-center p-2">
                 <div>
                   <img src={category.image} className="mx-auto" alt="" />
-                  <h2 className="text-2xl text-center text-[#00124E] font-bold mt-2">{category.name}</h2>
+                  <h2 className="text-2xl text-center text-[#00124E] font-bold mt-2">
+                    {category.name}
+                  </h2>
                 </div>
               </div>
-            </SwiperSlide>)
-          }
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

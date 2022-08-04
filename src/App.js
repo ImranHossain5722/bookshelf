@@ -62,16 +62,9 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const userEmail = {
-      email: user?.email,
-    };
-    fetch("https://book-shelf-webapp.herokuapp.com/get-user", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(userEmail),
-    })
+    
+   const userUid  = user?.uid
+    fetch(`https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`)
       .then((res) => res.json())
       .then((data) => dispatch(newUser(data[0])));
   }, [user?.email]);

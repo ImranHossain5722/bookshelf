@@ -71,7 +71,7 @@ const BestSelling = () => {
                 >
                     {
                         books?.map(book => <SwiperSlide key={book._id}>
-                             {/* <NavLink to={`/selectedBook/${book._id}`}> */}
+                             {/* <NavLink to={`/selectedBook/${book._id}`}></NavLink> */}
                             <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
                                 <div className="for-hover relative">
                                     {/* relative */}

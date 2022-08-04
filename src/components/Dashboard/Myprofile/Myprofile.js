@@ -6,28 +6,30 @@ import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import { BsFillBagCheckFill, BsFillHeartFill, BsFillJournalBookmarkFill } from "react-icons/bs";
 import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { newUser } from '../../Redux/actions/bookActions';
 
 const Myprofile = () => {
   const [user] = useAuthState(auth);
   const [userRole, setUserRole] = useState('user');
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const dispatch = useDispatch()
 
-  console.log('my Profile : ', getUser[0])
   useEffect(() => {
-    const userEmail = {
-      email: user?.email
+   
+    const userUid = { uid: user?.uid };
+
+    const options = {
+      method: 'GET',
+      url: 'https://book-shelf-webapp.herokuapp.com/get-user',
+      params: userUid
     };
-    fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(userEmail)
-    })
-      .then((res) => res.json())
-      .then(data => setGetUser(data)
-      );
+    axios.request(options).then(function (response) {
+      setGetUser(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
   }, [user?.email])
 
   // upload image to imgbb and get image url 
@@ -35,9 +37,10 @@ const Myprofile = () => {
 
   useEffect(() => {
 
+    dispatch(newUser(getUser[0]))
 
 
-  }, [])
+  }, [getUser,user])
 
 
   // // get current user role form database 
@@ -60,7 +63,7 @@ const Myprofile = () => {
 
 
   const [upImgUrl, setUpImgUrl] = useState('');
-  console.log(upImgUrl);
+  console.log(upImgUrl); 
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
 

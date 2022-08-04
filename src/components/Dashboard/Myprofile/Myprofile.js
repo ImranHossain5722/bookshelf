@@ -9,11 +9,11 @@ import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 
 const Myprofile = () => {
   const [user] = useAuthState(auth);
-  const [userRole, setUserRole] = useState('publisher');
+  const [userRole, setUserRole] = useState('user');
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  // console.log(getUser[0])
+  console.log('my Profile : ', getUser[0])
   useEffect(() => {
     const userEmail = {
       email: user?.email
@@ -45,16 +45,16 @@ const Myprofile = () => {
     const currentUserRole = getUser[0]?.user_role;
 
     if (currentUserRole === 'author') {
-      setUserRole('author');
+      setUserRole('Author');
     }
     else if (currentUserRole === 'publisher') {
-      setUserRole('publisher');
+      setUserRole('Publisher');
     }
     else if (currentUserRole === 'user') {
-      setUserRole('user');
+      setUserRole('User');
     }
     else if (currentUserRole === 'admin') {
-      setUserRole('admin');
+      setUserRole('Admin');
     }
   }, [getUser])
 
@@ -92,18 +92,7 @@ const Myprofile = () => {
     console.log(updatedProfileData)
     if (user?.email) {
       axios.put('https://book-shelf-webapp.herokuapp.com/update-user', updatedProfileData).then(data => toast.success(`Profile update Successfully`))
-      // fetch(``, {
-      //   method: 'PUT',
-      //   headers: {
-      //     'content-type': 'application/json',
-      //   },
-      //   body: JSON.stringify(updatedProfileData)
-      // })
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     toast.success(`Profile update Successfully`);
-      //     // reset();
-      //   })
+
 
     }
 
@@ -114,10 +103,10 @@ const Myprofile = () => {
     <div>
       <div className='text-4xl text-center py-12 font-bold'>My Profile</div>
       <div className='md:flex  mr-auto mx-[20px] md:ml-20'>
-        <div className='md:w-[50%] p-[20px] md:p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black' >
+        <div className='md:w-[50%] p-[20px] md:p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black bg-white' >
           <img className='block mx-auto' height={200} width={200} src={user?.photoURL ? user?.photoURL : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg '} alt="" />
           <h2 className='text-[40px] font-bold mt-3 mb-1 text-center text-black'>{user?.displayName}</h2>
-          <p className='text-center mb-3 text-[20px]'>{userRole}</p>
+          <p className='text-center mb-3 text-[20px]'>{userRole === 'user' ? 'Customer' : userRole}</p>
           <h3 className='font-bold text-[30px] mb-[19px]'>Contact Informatin</h3>
           <div>
             <h4 className='font-[600] text-[25px] py-[7px]'>Email Address</h4>
@@ -129,7 +118,7 @@ const Myprofile = () => {
           </div>
           <div>
             <h4 className='font-[600] text-[25px] py-[7px]'>Address</h4>
-            <p className='font-[600] text-[16px] py-[7px]'>{'Dhaka'}</p>
+            <p className='font-[600] text-[16px] py-[7px]'>{getUser[0]?.user_phone}</p>
           </div>
           <div>
             <h4 className='font-[600] text-[25px] py-[7px]'>Birthday</h4>
@@ -147,7 +136,7 @@ const Myprofile = () => {
               </div>
               <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><BsFillBagCheckFill /></div>
             </div>
-            <div className=' ml-[24px] flex w-[260px] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
+            <div className=' ml-[24px] flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
               <div className='w-[70%] text-[#00124E]'>
                 <h2 className='text-[30px] md:text-[40px]  font-[600]'>{1053}</h2>
                 <p className='text-[18px] font-[600]'>Wish List</p>

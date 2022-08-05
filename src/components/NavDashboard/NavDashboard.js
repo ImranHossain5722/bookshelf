@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -10,16 +10,48 @@ import { signOut } from "firebase/auth";
 import downArrow from "../../Assets/images/icon/down-arrow.png";
 
 import NavTopbar from "../NavTopbar/NavTopbar";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { newUser } from "../Redux/actions/bookActions";
 const NavDashboard = ({ children }) => {
   const [dark, setDark] = useState(false);
 
   const [user] = useAuthState(auth);
 
-  const handelSignOut = () => {
+  const handelSignOut = () => {    
     signOut(auth);
     localStorage.removeItem("accessToken");
   };
   // h-13vh
+
+  const [getUser, setGetUser] = useState([]);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+   
+    const userUid = { uid: user?.uid };
+
+    const options = {
+      method: 'GET',
+      url: 'https://book-shelf-webapp.herokuapp.com/get-user',
+      params: userUid
+    };
+    axios.request(options).then(function (response) {
+      setGetUser(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, [user])
+
+  // upload image to imgbb and get image url 
+
+
+  useEffect(() => {
+
+    dispatch(newUser(getUser[0]))
+
+
+  }, [getUser,user])
   return (
     <div>
       <div className="drawer drawer-end  " data-theme={dark ? "dark" : "light"}>

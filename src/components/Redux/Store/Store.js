@@ -18,6 +18,7 @@ import {
   allBooksReducer,
   userReducer,
   wishlistReducer,
+  currentCartReducer,
 } from "../Features/bookReducers";
 import logger from "redux-logger";
 
@@ -40,9 +41,11 @@ const store = configureStore({
     OrderHistory: orderHistoryReducer,
     cartBooks: cartBooksReducer,
     selectedBooks: selectedBooksReducer,
-  }
 
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    cartData : currentCartReducer
+  },
+
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 export default store;

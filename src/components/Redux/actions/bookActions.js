@@ -120,3 +120,10 @@ export const allBooks = (books) =>{
     }
 }
 
+export const cartdata = (books) =>{
+    return {
+        type : ActionTypes.CURRENT_CART,
+        payload: books
+    }
+}
+

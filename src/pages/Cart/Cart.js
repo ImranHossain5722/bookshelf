@@ -4,31 +4,40 @@ import { MdShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import productImg from "../../Assets/images/clubB.jpg";
-import { cartBooks } from "../../components/Redux/actions/bookActions";
+import { cartBooks, cartdata } from "../../components/Redux/actions/bookActions";
 const Cart = () => {
-  const books = useSelector((state) => state.cartBooks.cartBooks)
+  const books = useSelector((state) => state?.cartBooks?.cartBooks)
   const user = useSelector((state) => state?.newUser?.user) 
+  const dispatch = useDispatch()
   let subtotal;
 //  getting subtotal value
-  const sub = books?.map(book => book.book.book_price * book.qnt)
+  const sub = books?.map(book => book?.book?.book_price * book?.qnt)
   subtotal = sub.reduce((a, b) => a + b, 0)
-  // const carts = books.map(book => {{
-  //   book_id: book.book._id,
-  //   qnt : book.book.qnt
-  // }
-  // })
-  const checkout = () => {
-    const data = {
-      user_id : user._id,
-    ordered_items: [ ],
-    ordered_price_amount : 21,
-    payment_info : {
-        payment_type : "cash_on",
-    } 
-    }
-    console.log("cart",data) 
-  }
+  const carts = books?.map(function (book) {
+    return {
+      book_id: book?.book?._id,
+      qnt : book?.qnt
+    }; 
+})
 
+  const checkout = (id) => {
+
+      const data = {
+        user_id : id,
+      ordered_items: carts ,
+      ordered_price_amount : subtotal,
+      payment_info : {
+          payment_type : "cash_on",
+      } 
+      }
+      dispatch(cartdata(data))
+    
+  }
+  // useEffect(() => {
+  
+  //   checkout()
+  // }, [carts])
+  
   return (
     <div className="pt-[60px] md:pt-[80px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">
 
@@ -54,7 +63,7 @@ const Cart = () => {
 
                                         <div class="avatar">
                                             <div class="w-20 rounded">
-                                                <img src={book.book.book_cover_photo_url} />
+                                                <img src={book.book?.book_cover_photo_url} />
                                             </div>
                                         </div>
                                        
@@ -63,14 +72,14 @@ const Cart = () => {
                                 <td>
                                 <div className=" ">
                                             <h3 className="text-[18px] capitalize text-[#00124E] font-semibold">
-                                                {book.book.book_title} 
+                                                {book.book?.book_title} 
 
                                             </h3>
                                             <p>By Author name</p>
                                         </div>
                                 </td>
                   <td className="text-[16px] border-[#e1e2e6] text-black">
-                    ${book.book.book_price}
+                    ${book.book?.book_price}
                   </td>
                   <td className="border-[#e1e2e6]">
                     <div className="flex">
@@ -79,7 +88,7 @@ const Cart = () => {
                       </button>
                       <input
                         type="text"
-                        value={book.qnt}
+                        value={book?.qnt}
 
                         class="input  w-[50px] h-[40px] max-w-xs rounded-none text-center border-[#e1e2e6] border-solid border-y-1 border-x-0 text-black"
                       />
@@ -89,10 +98,10 @@ const Cart = () => {
                     </div>
                   </td>
                   <td className="text-[16px] text-black border-[#e1e2e6]">
-                    ${book.book.book_price * book.qnt}
+                    ${book.book?.book_price * book?.qnt}
                   </td>
                   <td className="border-[#e1e2e6]">
-                    <button className="btn btn-error">delete</button>
+                    <button className="btn btn-error text-white">delete</button>
                   </td>
                 </tr>)}
 
@@ -109,8 +118,8 @@ const Cart = () => {
               </button>
             </div>
             <NavLink to='/checkout'>
-              <button className="btn btn-primary text-white mt-16" onClick={checkout}>
-                Prossed to checkout
+              <button className="btn btn-primary text-white mt-16" onClick={() => checkout(user?._id)}>
+                Prossed to checkout 
               </button>
             </NavLink> 
           </div>

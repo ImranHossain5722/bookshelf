@@ -9,6 +9,19 @@ import { NavLink } from 'react-router-dom'
 const Wishlist = () => {
     const books =  useSelector((state) => state.wishlist.wishlistBooks)
 
+    const user = useSelector((state) => state?.newUser?.user)
+    const userId = user?._id
+    const addToCart =(id) => {
+      const cartData = {
+        user_id : userId,
+        cart_data : {
+            book : id,
+            qnt : 2
+        }
+    }
+    axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data => console.log(data))
+    console.log(cartData)
+      }  
     return (
         <div className="my-5">
             <p><FaHeart className='text-5xl text-primary mx-auto' /></p>
@@ -33,7 +46,7 @@ const Wishlist = () => {
 
                                         <div class="avatar">
                                             <div class="w-20 rounded">
-                                                <img src={book.book.book_cover_photo_url} />
+                                                <img src={book.book?.book_cover_photo_url} />
                                             </div>
                                         </div>
                                        
@@ -42,12 +55,12 @@ const Wishlist = () => {
                                 <td>
                                 <div className=" ">
                                             <h3 className="text-[18px] capitalize text-[#00124E] font-semibold">
-                                                {book.book.book_title} 
+                                                {book.book?.book_title} 
                                             </h3>
                                         </div>
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                    ${book.book.book_price}
+                                    ${book.book?.book_price}
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
                                     Author name
@@ -56,7 +69,7 @@ const Wishlist = () => {
                                 <td className="border-[#e1e2e6] ">
                                     <div className=" flex flex-col my-auto">
 
-                                        <button className=" btn btn-xs btn-warning text-white w-[155px] h-[24px] mb-3 rounded-full">Add to cart <FaCartPlus className='ml-1 text-[16px]'/></button>
+                                        <button className=" btn btn-xs btn-warning text-white w-[155px] h-[24px] mb-3 rounded-full" onClick={() => addToCart(book.book._id)}>Add to cart <FaCartPlus className='ml-1 text-[16px]'/></button>
                                         <button className=" btn btn-xs btn-error text-white w-[155px] h-[24px] rounded-full">delete <RiDeleteBack2Fill className='ml-1 text-[16px]'/></button>
                                     </div>
                                 </td>

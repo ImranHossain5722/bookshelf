@@ -17,7 +17,7 @@ const Myprofile = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-   
+
 
     const userUid = { uid: user?.uid };
 
@@ -42,7 +42,7 @@ const Myprofile = () => {
     dispatch(newUser(getUser[0]))
 
 
-  }, [getUser,user])
+  }, [getUser, user])
 
 
 
@@ -68,7 +68,7 @@ const Myprofile = () => {
 
 
   const [upImgUrl, setUpImgUrl] = useState('');
-  console.log(upImgUrl); 
+  console.log(upImgUrl);
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -113,20 +113,34 @@ const Myprofile = () => {
       updateData();
 
     }
+  }
+  const viewAsUser = () => {
+    setUserRole('user');
+  }
 
+  const viewAsAuthor = () => {
+    setUserRole('author');
+  }
 
-
-
-
+  const viewAsPublisher = () => {
+    setUserRole('publisher');
   }
 
   return (
     <div>
-       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
-       <div className=" flex items-center justify-center pb-10">
-       
-            <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
-          </div>
+
+      {/* View As  */}
+      <div>
+        <span className='ml-6 text-2xl font-bold'>View As </span>
+        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => viewAsUser()}>User</button>
+        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => viewAsAuthor()}>Auther</button>
+        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => viewAsPublisher()}>Publiser</button>
+      </div>
+      <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
+      <div className=" flex items-center justify-center pb-10">
+        <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+      </div>
+
 
       <div className='md:flex  mr-auto mx-[20px] md:ml-20'>
         <div className='md:w-[50%] p-[20px] md:p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black bg-white' >
@@ -151,7 +165,7 @@ const Myprofile = () => {
             <p className='font-[600] text-[16px] py-[7px]'>{getUser[0]?.user_birthday}</p>
           </div>
         </div>
-        
+
         <div className='p-[20px] md:p-12 pt-0 md:ml-6 md:w-[50%] bg-white rounded' >
           {/* cards  */}
           {/* card raw container */}
@@ -234,11 +248,11 @@ const Myprofile = () => {
           {/* Information Update Form  */}
 
           <div>
-          <h2 className='font-semibold uppercase text-secondary mt-2 text-[16px]'>Update Form</h2>
-       <div className="">
-       
-            <progress className="progress progress-primary bg-white h-2 w-5  "></progress>
-          </div>
+            <h2 className='font-semibold uppercase text-secondary mt-2 text-[16px]'>Update Form</h2>
+            <div className="">
+
+              <progress className="progress progress-primary bg-white h-2 w-5  "></progress>
+            </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className='flex mx-auto py-2 '>
                 <div className=' flex-1 ' >

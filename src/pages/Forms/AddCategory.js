@@ -14,7 +14,7 @@ const AddCategory = () => {
             category_icon_url: data?.icon
 
         };
-        fetch(`https://bookshelf-web.herokuapp.com/add-category`, {
+        fetch(`https://book-shelf-webapp.herokuapp.com/add-category`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

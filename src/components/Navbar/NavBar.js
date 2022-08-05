@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -9,12 +9,37 @@ import wishlist from "../../Assets/images/icon/003-heart.png";
 import { signOut } from "firebase/auth";
 import downArrow from "../../Assets/images/icon/down-arrow.png";
 import NavTopbar from "../NavTopbar/NavTopbar";
+import { FaSearch } from 'react-icons/fa';
+import SearchModal from "../SearchModal/SearchModal";
+import SearchIcon from "../../Assets/images/search-interface-symbol.png";
 
-
+import { useDispatch, useSelector } from "react-redux";
+// import { NavLink } from "react-router-dom";
+// import productImg from "../../Assets/images/clubB.jpg";
+import { cartBooks, whistlist } from "../../components/Redux/actions/bookActions";
+import axios from "axios";
 const NavBar = ({ children }) => {
+
   const [dark, setDark] = useState(false);
 
   const [user] = useAuthState(auth);
+  const cartBook = useSelector((state) => state.cartBooks.cartBooks)
+  const wishlistBook = useSelector((state) => state.wishlist.wishlistBooks)
+  const dispatch = useDispatch()
+
+
+
+  const currentUser = useSelector((state) => state?.newUser?.user)
+  const userId = currentUser?._id
+  // dispatch(cartBooks 
+  useEffect(() => {
+    if (userId) {
+      axios.get(`https://book-shelf-webapp.herokuapp.com/get-cart-data?id=${userId}`).then(data => dispatch(cartBooks(data.data.user_cart)))
+      axios.get(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${userId}`).then(data => dispatch(whistlist(data.data[0].user_wishlist)))
+    }
+  }, [currentUser, wishlistBook, cartBook])
+
+  const [showModal, setShowModal] = useState('');
 
   const handelSignOut = () => {
     signOut(auth);
@@ -22,16 +47,22 @@ const NavBar = ({ children }) => {
 
   };
 
-
+  // show search modal 
+  const showSearchModal = () => {
+    showModal.classList.remove('left-full');
+    showModal.classList.add('left-0');
+  }
 
   return (
 
-    <nav
+    <nav>
+      {/* search feature */}
+      <SearchModal showModal={showModal} setShowModal={setShowModal} />
 
-    >
       <div class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
+
           <NavTopbar />
           {/* <!-- Navbar --> */}
           <div class="w-full navbar bg-gray-200 px-20 ">
@@ -40,7 +71,7 @@ const NavBar = ({ children }) => {
                 <img className="" alt="" src={logo} />
               </NavLink>
             </div>
-            {/* mobile button */}
+            {/* mobile menu button */}
             <div className="flex-none lg:hidden">
               <label for="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg
@@ -60,7 +91,7 @@ const NavBar = ({ children }) => {
             </div>
 
             {/* desktop */}
-            <div class="flex-none mx-20 hidden lg:block">
+            <div class="flex-none mx-20 hidden lg:block ">
               <ul class="menu menu-horizontal  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>
@@ -76,29 +107,32 @@ const NavBar = ({ children }) => {
               </ul>
             </div>
 
-            {/* dark button */}
             <div>
+              {/* search button */}
               <div className="form-control mx-4">
-                <input
-                  type="text"
-                  placeholder="Search Books"
-                  className="input input-bordered"
-                />
+              <NavLink to=""><img  onClick={() => showSearchModal()} className="w-[25px] h-[25px]" alt="" src={SearchIcon} /> </NavLink>
+                
               </div>
-              {/* user image */}
+              {/* wishlist button */}
               <div className="hidden lg:flex user mx-4 mt-1">
-                <img className="" alt="" src={wishlist} />
+                <div class="indicator ">
+                  <span class="indicator-item badge badge-secondary w-[15px] bg-primary text-white border-primary ">{wishlistBook.length}</span>
+                  <NavLink to="/wishlist"><img className="" alt="" src={wishlist} /> </NavLink>
+                </div>
               </div>
+              {/* cart button */}
               <div className="user  hidden lg:flex">
-               <NavLink to='/cart'>  <img className="" alt="" src={bag} /></NavLink>
+                <div class="indicator ]">
+                  <span class="indicator-item badge badge-secondary w-[15px]  bg-primary text-white border-primary ">{cartBook.length}</span>
+                  <NavLink to='/cart'>  <img className="" alt="" src={bag} /></NavLink>
+                </div>
               </div>
-
+              {/* user photo */}
               <div className="user ml-4 ">
                 {user ? (
                   <span tabindex="0">
                     <img
                       style={{ margin: "40px 0px -10px -4px" }}
-                      onClick={handelSignOut}
                       className=" rounded-2xl"
                       alt=""
                       height={30}
@@ -106,6 +140,7 @@ const NavBar = ({ children }) => {
                       src={user?.photoURL ? user?.photoURL : userImg}
                     />
 
+                    {/* dropdown */}
                     <div class="flex-none">
                       <ul class="menu menu-horizontal p-0">
                         <li tabindex="0">
@@ -131,7 +166,7 @@ const NavBar = ({ children }) => {
                 ) : (
                   <NavLink to="/login" className="rounded-lg">
                     <img
-                      className=" mr-4 rounded-2xl"
+                      className="  rounded-2xl"
                       height={30}
                       width={30}
                       alt=""
@@ -148,7 +183,7 @@ const NavBar = ({ children }) => {
 
                 {/* <!-- sun icon --> */}
                 <svg
-                  className="swap-on fill-current w-10 h-10"
+                  className="swap-on fill-current w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -156,8 +191,8 @@ const NavBar = ({ children }) => {
                 </svg>
 
                 {/* <!-- Dark moon icon --> */}
-                <svg
-                  className="swap-off fill-current w-8 h-11"
+                <svg  style={{margin:""}}
+                  className="swap-off fill-current w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -201,6 +236,7 @@ const NavBar = ({ children }) => {
           </ul>
         </div>
       </div>
+    
     </nav>
   );
 };

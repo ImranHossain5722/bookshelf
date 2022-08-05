@@ -52,42 +52,42 @@ export const allUsers = (users) =>{
 
 export const allPublishers = (users) =>{
     return {
-        type : ActionTypes.ALLUSER,
+        type : ActionTypes.ALLPUBLISHER,
         payload: users
     }
 }
 
 export const allAuthors = (users) =>{
     return {
-        type : ActionTypes.ALLUSER,
+        type : ActionTypes.ALLAUTHORS,
         payload: users
     }
 }
 
 export const MyOrder = (order) =>{
     return {
-        type : ActionTypes.ALLUSER,
+        type : ActionTypes.MYORDER,
         payload: order
     }
 }
 
 export const allOrders = (orders) =>{
     return {
-        type : ActionTypes.ALLUSER,
+        type : ActionTypes.ALLORDERS,
         payload: orders
     }
 }
 
 export const myProfile = (user) =>{
     return {
-        type : ActionTypes.ALLUSER,
+        type : ActionTypes.MYPROFILE,
         payload: user
     }
 }
 
 export const orderHistory = (orders) =>{
     return {
-        type : ActionTypes.ALLUSER,
+        type : ActionTypes.ORDERHISTORYS,
         payload: orders
     }
 }
@@ -116,6 +116,13 @@ export const whistlist = (books) =>{
 export const allBooks = (books) =>{
     return {
         type : ActionTypes.ALLBOOKS,
+        payload: books
+    }
+}
+
+export const cartdata = (books) =>{
+    return {
+        type : ActionTypes.CURRENT_CART,
         payload: books
     }
 }

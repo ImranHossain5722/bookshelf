@@ -1,24 +1,44 @@
-import React from "react";
-import productImg from "../../Assets/images/clubB.jpg";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 const Products_details = () => {
+  const { _id } = useParams();
+  const [book, setbook] = useState({});
+  const {
+    book_cover_photo_url,
+    book_title,
+    book_price,
+    book_country,
+    book_description,
+    book_pages,
+    book_language,
+    discount,
+  } = book;
+  useEffect(() => {
+    axios
+      .get(`https://book-shelf-webapp.herokuapp.com/get-book?id=${_id}`)
+      .then((data) => setbook(data.data[0]));
+  }, []);
+
   return (
     <div className="pt-[60px] md:pt-[80px] lg:pt-[120px]  pb-[60px] md:pb-[80px] lg:pb-[120px] ">
       <div className="container m-auto flex gap-6 justify-center">
         <div className="w-5/12">
           <div className="thumb w-full">
-            <img className="max-w-[100%]" src={productImg} alt="" />
+            <img className="max-w-[100%]" src={book_cover_photo_url} alt="" />
           </div>
         </div>
         <div className="w-6/12">
           <div class="cart_summery ">
-            <div className="flex items-center gap-2 mb-3">
+            {/* <div className="flex items-center gap-2 mb-3">
               <p className="text-[16px]">Availability : 1 in stock</p>
-            </div>
+            </div> */}
             <h4 class="text-black text-[24px] capitalize font-semibold mb-3">
-              East Hampton Fleece Hoodie
+              {book_title}
             </h4>
             <div className="flex items-center gap-2 mb-3">
-              <h3 className="text-black text-[18px]">$440.00 </h3>
+              <h3 className="text-black text-[18px]">${book_price}</h3>
               <p className="text-[16px]">Tax included</p>
             </div>
 
@@ -51,16 +71,15 @@ const Products_details = () => {
             <div class=" single_description_wrap border-b-[1px] border-[#e1e2e6] pb-4 mb-4">
               <div class="description_box">
                 <p class="Information_text text-black mb-3">
-                  {" "}
-                  <span>Vendor: </span> Gap
+                  <span> Language: </span> {book_language}
                 </p>
                 <p class="Information_text text-black mb-3">
                   {" "}
-                  <span>Product Type: </span> Sweater
+                  <span>Pages: </span> {book_pages}
                 </p>
                 <p class="Information_text text-black mb-3">
                   {" "}
-                  <span>Barcode: </span> 123456789
+                  <span>Country: </span> {book_country}
                 </p>
                 <p class="Information_text text-black mb-3">
                   {" "}
@@ -73,21 +92,10 @@ const Products_details = () => {
                 <h4 className="text-black text-[18px]">Description</h4>
               </div>
               <div class="description_box">
-                <p class="mb-4">
-                  Want to get a baby laundry basket? This tall toy storage
-                  basket is perfect to gift for her the basket is designed with
-                  two handles. The basket can also work well for dog toy basket
-                  tall toy storage basket is perfect to gift for her Want to get
-                  a baby laundry
-                </p>
-                <p>
-                  This tall toy storage basket is perfect to gift for her the
-                  basket is designed with two handles. The basket can also work
-                  well for dog toy basket tall toy storage.
-                </p>
+                <p class="mb-4">{book_description}</p>
               </div>
             </div>
-            <div class="single_description_wrap border-b-[1px] border-[#e1e2e6] pb-4 mb-4">
+            {/* <div class="single_description_wrap border-b-[1px] border-[#e1e2e6] pb-4 mb-4">
               <div class="details_title">
                 <h4 className="text-black text-[18px]">
                   Additional Information
@@ -107,7 +115,7 @@ const Products_details = () => {
                   <span>Material:</span> 100% Polyester
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

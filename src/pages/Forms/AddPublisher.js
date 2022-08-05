@@ -31,15 +31,14 @@ const AddPublisher = () => {
         user_email: user?.user?.email,
         user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : phoneNo,
         user_photo_url: user?.user?.photoURL ? user?.user?.photoURL : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
-        uid: user?.user?.uid,
-        user_role: 'publisher'
+        uid: user?.user?.uid
     };
 
     if (user) {
         console.log('Got User')
         const postPublisherData = async () => {
 
-            await axios.post('https://bookshelf-web.herokuapp.com/add-user', publisherInfo).then(data => console.log(data))
+            await axios.post('https://book-shelf-webapp.herokuapp.com/register-publisher', publisherInfo).then(data => console.log(data))
             navigate('/dashboard');
 
         }

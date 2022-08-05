@@ -68,7 +68,7 @@ const SearchModal = ({ showModal, setShowModal }) => {
                 {(!error && searchResults) &&
                     <div className='mt-8 max-h-60 overflow-y-scroll'>
                         {
-                            searchResults?.map(results => <div key={results._id} className='flex items-center justify-center h-16 w-full bg-white rounded-lg mb-3'>
+                            searchResults?.map(results => <div key={results._id} className='flex items-center justify-start h-16 w-full bg-white rounded-lg mb-3 pl-4'>
                                 <img src={results.book_cover_photo_url} className='h-14 mr-5' alt="" />
                                 <h3>{results.book_title}</h3>
                             </div>)

@@ -275,6 +275,7 @@ const Myprofile = () => {
                       })}
                       type="phone"
                       defaultValue={getUser[0]?.user_phone}
+                      placeholder={'Your Phone Number'}
                       className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.phone?.type === 'required' && `${errors?.phone?.message}`}</span>
@@ -293,6 +294,7 @@ const Myprofile = () => {
                       })}
                       type="text"
                       defaultValue={getUser[0]?.user_address}
+                      placeholder={'Your Address here'}
                       className="input input-bordered w-full  bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.address?.type === 'required' && `${errors?.address?.message}`}</span>

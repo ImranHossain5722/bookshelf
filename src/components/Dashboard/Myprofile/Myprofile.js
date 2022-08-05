@@ -32,7 +32,7 @@ const Myprofile = () => {
       console.error(error);
     });
 
-  }, [user?.email])
+  }, [user?.uid])
 
   // upload image to imgbb and get image url 
 

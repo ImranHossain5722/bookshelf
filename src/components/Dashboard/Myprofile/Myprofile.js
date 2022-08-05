@@ -94,15 +94,28 @@ const Myprofile = () => {
       updateData();
 
     }
+  }
+  const viewAsUser = () => {
+    setUserRole('user');
+  }
 
+  const viewAsAuthor = () => {
+    setUserRole('author');
+  }
 
-
-
-
+  const viewAsPublisher = () => {
+    setUserRole('publisher');
   }
 
   return (
     <div>
+      {/* View As  */}
+      <div>
+        <span className='ml-6 text-2xl font-bold'>View As </span>
+        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => viewAsUser()}>User</button>
+        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => viewAsAuthor()}>Auther</button>
+        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => viewAsPublisher()}>Publiser</button>
+      </div>
       <div className='text-4xl text-center py-12 font-bold'>My Profile</div>
       <div className='md:flex  mr-auto mx-[20px] md:ml-20'>
         <div className='md:w-[50%] p-[20px] md:p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black bg-white' >

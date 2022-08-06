@@ -23,6 +23,7 @@ function Dashboard() {
           <p className='text-xl text-[#00124E] font-bold'>Dashboard</p>
           <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
           <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
+          <li><Link to='/dashboard/mywishlist' className='text-lg text-[#00124E] font-bold'>My Wishlist</Link></li>
           <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
 
           <li><Link to='/dashboard/allusers' className='text-lg text-[#00124E] font-bold'>All Users</Link></li>

@@ -7,49 +7,45 @@ import CartButton from "../CartButton/CartButton";
 import Loading from "../Loading/Loading";
 import { allBooks } from "../Redux/actions/bookActions";
 import Stars from "../Stars/Stars";
-import { useQuery} from 'react-query'
+// import { useQuery } from "react-query";
 
 const AllBooks = () => {
   const [bookpagi, setBookpagi] = useState([]);
   const [pageCount, setPageCount] = useState(1);
   // const [size, setSize] = useState(10);
-  const [loading,setLoading] = useState(false)
-  const [posts, setPosts] = useState([]); 
+  const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage,setpostPerPage] = useState(10);
+  const [postsPerPage, setpostPerPage] = useState(10);
 
-   
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await axios.get(
+        "https://book-shelf-webapp.herokuapp.com/all-books"
+      );
+      setPosts(res.data);
+      setLoading(false);
+    };
 
- useEffect(() => {
-  const fetchPosts = async () => {
-    setLoading(true);
-    const res = await axios.get('https://book-shelf-webapp.herokuapp.com/all-books');
-    setPosts(res.data);
-    setLoading(false);
+    fetchPosts();
+  }, []);
 
-  };
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
 
-  fetchPosts();
-}, []);
-
-
-
- 
-   // Get current posts
-   const indexOfLastPost = currentPage * postsPerPage;
-   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-   const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
-
-   // Change page
-   const paginate = pageNumber => setCurrentPage(pageNumber);
- if(loading){
-   return <Loading/>
- }
- const pageNumbers = [];
- for (let i = 1; i <= Math.ceil(posts?.length / postsPerPage); i++) {
-  pageNumbers.push(i);
-}
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  if (loading) {
+    return <Loading />;
+  }
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(posts?.length / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
   return (
     <div
       style={{ background: "#FBF6F6" }}
@@ -194,19 +190,24 @@ const AllBooks = () => {
 
       {/* pagenation */}
       <div className="flex justify-center p-3 ">
-      {pageNumbers.map(number => (
-
-<button onClick={() => paginate(number)} className='page-link btn btn-primary mx-2'>
-  {number}
-</button>
+        {pageNumbers.map((number) => (
+          <button
+            onClick={() => paginate(number)}
+            className="page-link btn btn-primary mx-2"
+          >
+            {number}
+          </button>
         ))}
-      <select class="select select-primary " onChange={(event) => setpostPerPage(event.target.value)}>
-            <option value="5">5</option>
-              <option value="10" selected>
-                10
-              </option>
-              <option value="15">15</option>
-</select>
+        <select
+          class="select select-primary "
+          onChange={(event) => setpostPerPage(event.target.value)}
+        >
+          <option value="5">5</option>
+          <option value="10" selected>
+            10
+          </option>
+          <option value="15">15</option>
+        </select>
       </div>
     </div>
   );

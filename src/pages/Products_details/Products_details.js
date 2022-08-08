@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const Products_details = () => {
   const { _id } = useParams();
@@ -20,7 +21,31 @@ const Products_details = () => {
       .get(`https://book-shelf-webapp.herokuapp.com/get-book?id=${_id}`)
       .then((data) => setbook(data.data[0]));
   }, []);
+  const user = useSelector((state) => state?.newUser?.user)
+  const userId = user?._id
 
+    
+    const AddCart = (id) => {
+      const cartData = {
+        user_id: userId,
+        cart_data: {
+          book: id,
+          qnt: 2
+        }
+      }
+  
+      const options = {
+        method: 'POST',
+        url: 'https://book-shelf-webapp.herokuapp.com/add-to-cart',
+        params: cartData
+      };
+      axios.request(options).then(function (response) {
+      console.log(response.data);
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+ 
   return (
     <div className="pt-[60px] md:pt-[80px] lg:pt-[120px]  pb-[60px] md:pb-[80px] lg:pb-[120px] ">
       <div className="container m-auto flex gap-6 justify-center">
@@ -62,8 +87,8 @@ const Products_details = () => {
               </div>
             </div>
             <div className="flex items-center text-black mb-3 gap-2">
-              <button className="btn btn-primary">Add to Cart</button>
-              <button className="btn btn-primary">add to wishlist</button>
+              <button className="btn btn-primary" onClick={() => AddCart(_id)}>Add to Cart</button>
+              <button className="btn btn-primary" onClick={() => AddCart(_id)} >add to wishlist</button>
             </div>
             <h5 class="text-black text-[30px] font-medium mt-8">
               Guaranteed Safe Checkout

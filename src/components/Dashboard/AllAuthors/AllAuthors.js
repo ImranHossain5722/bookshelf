@@ -22,7 +22,6 @@ const AllAuthors = () => {
     const fetchPosts = async () => {
       setLoading(true);
       const {data} = await axios.get('https://book-shelf-webapp.herokuapp.com/all-authors');
-      // setPosts(res.data);
       dispatch(allAuthors(data))
       setLoading(false);
   

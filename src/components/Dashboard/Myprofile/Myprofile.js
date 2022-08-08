@@ -8,6 +8,7 @@ import { BsFillBagCheckFill, BsFillHeartFill, BsFillJournalBookmarkFill } from "
 import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { newUser } from '../../Redux/actions/bookActions';
+// import { useQuery } from '@tanstack/react-query';
 
 const Myprofile = () => {
   const [user] = useAuthState(auth);
@@ -15,6 +16,12 @@ const Myprofile = () => {
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch()
+  // const userUid = { uid: user?.uid };
+  // const { getUser, isLoading, refetch } = useQuery('userProfile', () => fetch(`https://book-shelf-webapp.herokuapp.com/get-user`, {
+  //   method: 'GET',
+  //   body: userUid
+
+  // }).then(res => console.log(res)))
 
   useEffect(() => {
     const userUid = { uid: user?.uid };
@@ -35,10 +42,7 @@ const Myprofile = () => {
 
 
   useEffect(() => {
-
     dispatch(newUser(getUser[0]))
-
-
   }, [getUser, dispatch])
 
 
@@ -63,9 +67,6 @@ const Myprofile = () => {
     }
   }, [getUser])
 
-
-  const [upImgUrl, setUpImgUrl] = useState('');
-  console.log(upImgUrl);
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -79,7 +80,6 @@ const Myprofile = () => {
         .then(res => res.json())
         .then(result => {
           if (result.success) {
-            setUpImgUrl(result?.data?.url)
             const phoneNo = parseInt(data?.phone)
             const updatedProfileData = {
               user_name: data?.name ? data?.name : user?.user?.displayName,
@@ -90,7 +90,13 @@ const Myprofile = () => {
             };
             const updateData = () => {
               console.log('APi Call:', updatedProfileData);
-              axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => console.log(data).catch(err => console.log(err)))
+              axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData)
+                .then(data => {
+                  toast.success('Profile Updated Successfully!');
+                  // refetch();
+                  console.log(data)
+                })
+                .catch(err => console.log(err))
             }
             updateData();
           }
@@ -106,7 +112,11 @@ const Myprofile = () => {
       };
 
       const updateData = async () => {
-        await axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => console.log(data))
+        await axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => {
+          toast.success('Profile Updated Successfully!');
+          // refetch();
+          console.log(data)
+        })
       }
       updateData();
 

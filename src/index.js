@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "./components/Redux/Store/Store";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import "../src/Assets/style.scss";
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ root.render(
           <App />
         </Provider>
       </BrowserRouter>
+      {/* <ReactQueryDevtools initialIsOpen={true} /> */}
     </QueryClientProvider>
   </React.StrictMode>
 );

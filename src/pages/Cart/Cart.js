@@ -31,7 +31,7 @@ const Cart = () => {
       } 
       }
       dispatch(cartdata(data))
-    
+    console.log(data)
   }
   // useEffect(() => {
   

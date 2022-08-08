@@ -5,20 +5,20 @@ import App from "./App";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./components/Redux/Store/Store";
-// import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-// const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <QueryClientProvider client={queryClient}> */}
+    <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
     </BrowserRouter>
-    {/* </QueryClientProvider> */}
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

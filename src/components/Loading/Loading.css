@@ -1,4 +1,4 @@
-.loader {
+/* .loader {
     position: absolute;
     top: calc(50% - 32px);
     left: calc(50% - 32px);
@@ -65,4 +65,61 @@
     100% {
         transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
     }
-}
+} */
+/* .loa/* From uiverse.io by @alexruix */
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    border: 3px solid;
+    box-sizing: border-box;
+    border-color: #00ff87 #00ff87 transparent transparent;
+    animation: rotation 1s linear infinite;
+  }
+  
+  .loader::after,
+  .loader::before {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent transparent #60efff #60efff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    animation: rotationBack924 0.5s linear infinite;
+    transform-origin: center center;
+  }
+  
+  .loader::before {
+    width: 32px;
+    height: 32px;
+    border-color: #00ff87 #00ff87 transparent transparent;
+    animation: rotation6123 1.5s linear infinite;
+  }
+  
+  @keyframes rotation6123 {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes rotationBack924 {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(-360deg);
+    }
+  } 

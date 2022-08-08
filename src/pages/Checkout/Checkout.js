@@ -1,6 +1,20 @@
+import axios from "axios";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Checkout = () => {
+  const cart = useSelector((state) => state.cartData.cartData)
+
+  const sendOrder = () => {
+    console.log(cart)
+    if(cart){
+
+      axios.post('https://book-shelf-webapp.herokuapp.com/place-order',cart).then(data => console.log(data))
+    }else{
+      console.log('cart not found')
+    }
+ 
+  }
   return (
     <div className="pt-[60px] md:pt-[80px] lg:pt-[120px]  pb-[60px] md:pb-[80px] lg:pb-[120px] ">
       <div className="container m-auto flex gap-6">
@@ -39,7 +53,7 @@ const Checkout = () => {
               <input
                 type="text"
                 placeholder="House Number and street address"
-                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none" required
               />
             </div>
             <div className="w-full flex ">
@@ -53,14 +67,14 @@ const Checkout = () => {
               <input
                 type="text"
                 placeholder="Enter city/town name"
-                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none" required
               />
             </div>
             <div className="w-full flex ">
               <input
                 type="text"
                 placeholder="01XXXXXXXXXX"
-                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                class="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none" required
               />
             </div>
             <div className="w-full flex ">
@@ -143,7 +157,7 @@ const Checkout = () => {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="btn btn-primary text-white w-full ">
+                <button className="btn btn-primary text-white w-full " onClick={() =>sendOrder()}>
                   + update cart
                 </button>
               </div>

@@ -1,55 +1,89 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/images/Logo/bookshelf-.png";
 import userImg from "../../Assets/images/icon/001-user.png";
 import bag from "../../Assets/images/icon//002-bag.png";
 import wishlist from "../../Assets/images/icon/003-heart.png";
 import { signOut } from "firebase/auth";
-import downArrow from "../../Assets/images/icon/down-arrow.png"
-
+import downArrow from "../../Assets/images/icon/down-arrow.png";
 import NavTopbar from "../NavTopbar/NavTopbar";
+import { FaSearch } from 'react-icons/fa';
+import SearchModal from "../SearchModal/SearchModal";
+import SearchIcon from "../../Assets/images/search-interface-symbol.png";
+
+import { useDispatch, useSelector } from "react-redux";
+// import { NavLink } from "react-router-dom";
+// import productImg from "../../Assets/images/clubB.jpg";
+import { cartBooks, whistlist } from "../../components/Redux/actions/bookActions";
+import axios from "axios";
 const NavBar = ({ children }) => {
+
   const [dark, setDark] = useState(false);
 
   const [user] = useAuthState(auth);
+  const cartBook = useSelector((state) => state.cartBooks.cartBooks)
+  const wishlistBook = useSelector((state) => state.wishlist.wishlistBooks)
+  const dispatch = useDispatch()
+
+
+
+  const currentUser = useSelector((state) => state?.newUser?.user)
+  const userId = currentUser?._id
+  // dispatch(cartBooks 
+  useEffect(() => {
+    if (userId) {
+      axios.get(`https://book-shelf-webapp.herokuapp.com/get-cart-data?id=${userId}`).then(data => dispatch(cartBooks(data.data.user_cart)))
+      axios.get(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${userId}`).then(data => dispatch(whistlist(data.data[0].user_wishlist)))
+    }
+  }, [currentUser, wishlistBook, cartBook])
+
+  const [showModal, setShowModal] = useState('');
 
   const handelSignOut = () => {
     signOut(auth);
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
+
   };
-  // h-13vh
+
+  // show search modal 
+  const showSearchModal = () => {
+    showModal.classList.remove('left-full');
+    showModal.classList.add('left-0');
+  }
+
   return (
-    <div> 
 
-      <div class="drawer drawer-end " data-theme={dark ? "dark" : "light"}>
+    <nav>
+      {/* search feature */}
+      <SearchModal showModal={showModal} setShowModal={setShowModal} />
 
-
+      <div class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
+
           <NavTopbar />
           {/* <!-- Navbar --> */}
           <div class="w-full navbar bg-gray-200 px-20 ">
-
             <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
               <NavLink to="/" className="rounded-lg">
                 <img className="" alt="" src={logo} />
               </NavLink>
             </div>
-            {/* mobile button */}
-            <div class="flex-none lg:hidden">
-              <label for="my-drawer-3" class="btn btn-square btn-ghost">
+            {/* mobile menu button */}
+            <div className="flex-none lg:hidden">
+              <label for="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  class="inline-block w-6 h-6 stroke-current"
+                  className="inline-block w-6 h-6 stroke-current"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M4 6h16M4 12h16M4 18h16"
                   ></path>
                 </svg>
@@ -57,8 +91,7 @@ const NavBar = ({ children }) => {
             </div>
 
             {/* desktop */}
-            <div class="flex-none mx-20 hidden lg:block">
-
+            <div class="flex-none mx-20 hidden lg:block ">
               <ul class="menu menu-horizontal  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>
@@ -71,101 +104,86 @@ const NavBar = ({ children }) => {
                     Books
                   </NavLink>
                 </li>
-
-                {/* <li>
-                  <NavLink to="/authors" className="rounded-lg">
-                    Authors
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard" className="rounded-lg">
-                    Dashboard
-                  </NavLink>
-                </li>
-                
-                <li>
-                  <NavLink to="/addcategory" className="rounded-lg">
-                    Add Category
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/addbook" className="rounded-lg">
-                    Add Book
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/addauthor" className="rounded-lg">
-                    Add Author
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/addpublisher" className="rounded-lg">
-                    Add Publisher
-                  </NavLink>
-                </li> */}
-
               </ul>
             </div>
 
-            {/* dark button */}
             <div>
-              <div class="form-control mx-4">
-                <input
-                  type="text"
-                  placeholder="Search Books"
-                  class="input input-bordered"
-                />
+              {/* search button */}
+              <div className="form-control mx-4">
+              <NavLink to=""><img  onClick={() => showSearchModal()} className="w-[25px] h-[25px]" alt="" src={SearchIcon} /> </NavLink>
+                
               </div>
-              {/* user image */}
-              <div className="user mx-4 mt-1">
-                <img className="" alt="" src={wishlist} />
+              {/* wishlist button */}
+              <div className="hidden lg:flex user mx-4 mt-1">
+                <div class="indicator ">
+                  <span class="indicator-item badge badge-secondary w-[15px] bg-primary text-white border-primary ">{wishlistBook.length}</span>
+                  <NavLink to="/wishlist"><img className="" alt="" src={wishlist} /> </NavLink>
+                </div>
               </div>
-              <div className="user  ">
-                <img className="" alt="" src={bag} />
+              {/* cart button */}
+              <div className="user  hidden lg:flex">
+                <div class="indicator ]">
+                  <span class="indicator-item badge badge-secondary w-[15px]  bg-primary text-white border-primary ">{cartBook.length}</span>
+                  <NavLink to='/cart'>  <img className="" alt="" src={bag} /></NavLink>
+                </div>
               </div>
-
+              {/* user photo */}
               <div className="user ml-4 ">
-                {user ? <span tabindex="0">
+                {user ? (
+                  <span tabindex="0">
+                    <img
+                      style={{ margin: "40px 0px -10px -4px" }}
+                      className=" rounded-2xl"
+                      alt=""
+                      height={30}
+                      width={30}
+                      src={user?.photoURL ? user?.photoURL : userImg}
+                    />
 
-                <img style={{margin:"40px 0px -10px -4px"}} onClick={handelSignOut} className=" rounded-2xl" alt="" height={30} width={30} src={user?.photoURL ? user?.photoURL : userImg}/>
+                    {/* dropdown */}
+                    <div class="flex-none">
+                      <ul class="menu menu-horizontal p-0">
+                        <li tabindex="0">
+                          <img className="" width={45} alt="" src={downArrow} />
 
-                  <div class="flex-none">
-                    <ul class="menu menu-horizontal p-0">
-                    <li tabindex="0">
-
-                      <img  className="" width={45} alt="" src={downArrow} />
-                      
-     
-        <ul style={{margin:"-14px 0px 0px 0px"}} class="p-2 z-40 drop-shadow-md
-
- bg-base-100">
-          <li><Link target={"_blank"} to="dashboard">Dashboard</Link></li>
-          <li><a onClick={handelSignOut} >sign Out</a></li>
-        </ul>
-      </li>
-      
-    </ul>
-  </div>
-                  
-                  </span> :
-
+                          <ul
+                            style={{ margin: "-14px 0px 0px 0px" }}
+                            class="p-2 z-40 drop-shadow-md bg-base-100"
+                          >
+                            <li>
+                              <Link target={"_blank"} to="dashboard">
+                                Dashboard
+                              </Link>
+                            </li>
+                            <li>
+                              <a onClick={handelSignOut}>sign Out</a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </span>
+                ) : (
                   <NavLink to="/login" className="rounded-lg">
-                    <img className=" mr-4 rounded-2xl" height={30} width={30} alt="" src={userImg} />
-                  </NavLink>}
+                    <img
+                      className="  rounded-2xl"
+                      height={30}
+                      width={30}
+                      alt=""
+                      src={userImg}
+                    />
+                  </NavLink>
+                )}
               </div>
-
-
-
-    
 
               {/* dark button */}
-              <label class="swap swap-rotate ">
+              <label class="swap swap-rotate hidden lg:flex ">
                 {/* <!-- this hidden checkbox controls the state --> */}
                 <input type="checkbox" onClick={() => setDark(!dark)} />
 
                 {/* <!-- sun icon --> */}
                 <svg
-                  class="swap-on fill-current w-10 h-10"
+                  className="swap-on fill-current w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -173,8 +191,8 @@ const NavBar = ({ children }) => {
                 </svg>
 
                 {/* <!-- Dark moon icon --> */}
-                <svg
-                  className="swap-off fill-current w-8 h-11"
+                <svg  style={{margin:""}}
+                  className="swap-off fill-current w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -189,9 +207,9 @@ const NavBar = ({ children }) => {
         </div>
 
         {/* mobile-phone */}
-        <div class="drawer-side">
-          <label for="my-drawer-3" class="drawer-overlay"></label>
-          <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+        <div className="drawer-side">
+          <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
             {/* <!-- Sidebar content here --> */}
             <li>
               <NavLink to="/" className="rounded-lg">
@@ -204,16 +222,22 @@ const NavBar = ({ children }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/authors" className="rounded-lg">
-                Authors
+              <NavLink to="/books" className="rounded-lg">
+                wishlist
               </NavLink>
             </li>
             <li>
+              <NavLink to="/books" className="rounded-lg">
+                Cart
+              </NavLink>
             </li>
+
+
           </ul>
         </div>
       </div>
-    </div>
+    
+    </nav>
   );
 };
 

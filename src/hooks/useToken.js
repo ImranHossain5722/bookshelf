@@ -1,32 +1,28 @@
-import { useEffect, useState } from "react"
-import { useAuthState } from "react-firebase-hooks/auth";
+import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { newUser } from "../components/Redux/actions/bookActions";
 import auth from "../firebase.init";
 
-const useToken = cUser => {
-    const [token, setToken] = useState('');
-    const [user] = useAuthState(auth);
-
-    useEffect(() => {
-        const email = cUser?.user?.email;
-        const currentUser = { email: email, name: user?.displayName };
-        if (email) {
-            fetch(`api`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(currentUser)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    const accessToken = data.token;
-                    localStorage.setItem('accessToken', accessToken);
-                    setToken(accessToken);
-                })
+const useToken = (cUser) => {
+  const [token, setToken] = useState("");
+  const [userData, setUserData] = useState({});
+  const dispatch = useDispatch()
+  const userLogin = async () => {
+    await onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const data = await axios.post(
+          "https://book-shelf-webapp.herokuapp.com/login-user", user);
+        if (data.data._id) {
+          dispatch(newUser(data.data));
+          console.log(data.data);
         }
+      }
+    });
+  };
 
-    }, [cUser, user?.displayName]);
-    return [token];
-}
+  return { token, userLogin };
+};
 
 export default useToken;

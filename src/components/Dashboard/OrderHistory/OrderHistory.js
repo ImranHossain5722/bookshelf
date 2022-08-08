@@ -13,7 +13,7 @@ const OrderHistory = () => {
         <p className="text-[40px] text-[#00124E] font-bold">1503</p>
         <p className='text-5xl text-primary'><BsFillArrowLeftSquareFill/></p>
       </div>
-      <div className='text-[#00124E] font-[600]'>Daily signup</div>
+      <div className='text-[#00124E] font-[600]'>Daily signup</div> 
     </div>
     <div className="mx-[12px] card history-shadow border-primary border-[1px] w-[260px] h-[150px] p-7">
       <div className='flex justify-between items-center'>

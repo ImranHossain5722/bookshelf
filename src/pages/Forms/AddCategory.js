@@ -1,21 +1,26 @@
 import { useForm } from 'react-hook-form';
-import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
 import { signOut } from 'firebase/auth';
 
 const AddCategory = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const [user] = useAuthState(auth);
+    // const [user] = useAuthState(auth);
 
     const onSubmit = data => {
-        fetch(`https://ancient-meadow-60272.herokuapp.com/review`, {
+        const categoryInfo = {
+            category_title: data?.category,
+            category_icon_url: data?.icon
+
+        };
+        fetch(`https://book-shelf-webapp.herokuapp.com/add-category`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(categoryInfo)
         })
             .then(res => {
                 if (res.status === 403) {
@@ -25,7 +30,7 @@ const AddCategory = () => {
                 return res.json()
             })
             .then(data => {
-                toast.success(`Review Added Successfully`);
+                toast.success(`Category Added Successfully`);
                 reset();
             })
 

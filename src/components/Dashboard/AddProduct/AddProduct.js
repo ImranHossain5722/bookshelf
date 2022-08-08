@@ -4,15 +4,17 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import auth from '../../../firebase.init';
 import Select from 'react-select'
-// import Async, { useAsync } from 'react-select/async';
+import { toast } from 'react-toastify';
 
 
 const AddProduct = () => {
   const [user] = useAuthState(auth);
-  const [userRole, setUserRole] = useState('user');
+  const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
   const { register, formState: { errors }, handleSubmit } = useForm();
   // console.log(getUser, userRole);
+
+
 
   // get all Categories 
   const [allCategories, setAllCategories] = useState([]);
@@ -81,20 +83,19 @@ const AddProduct = () => {
 
 
   useEffect(() => {
-    const userEmail = {
-      email: user?.email
+    const userUid = { uid: user?.uid };
+    const options = {
+      method: 'GET',
+      url: 'https://book-shelf-webapp.herokuapp.com/get-user',
+      params: userUid
     };
-    fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(userEmail)
-    })
-      .then((res) => res.json())
-      .then(data => setGetUser(data)
-      );
-  }, [user?.email])
+    axios.request(options).then(function (response) {
+      setGetUser(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, [user?.uid])
+
 
   // // get current user role form database 
 
@@ -130,17 +131,15 @@ const AddProduct = () => {
   }
 
   // const [imgbbUrl, setImgbbUrl] = useState('');
-  const [bookCat, setBookCat] = useState({});
+  const [bookCat, setBookCat] = useState([]);
   const getChoosenCategory = (choice) => {
-    const data = [choice?.value];
-    setBookCat(data);
+    setBookCat(Array.isArray(choice) ? choice.map(x => x.value) : []);
   }
 
   const [bookAut, setBookAut] = useState({});
 
   const getChoosenAuthor = (choice) => {
     const data = choice?.value;
-
     setBookAut(data);
 
   }
@@ -154,22 +153,7 @@ const AddProduct = () => {
 
   const onSubmit = data => {
 
-    // const productInfoData = {
-    //   book_title: data?.book_title,
-    //   book_description: data?.book_description,
-    //   book_edition: data?.book_edition,
-    //   book_publisher: bookPub,
-    //   book_author: bookAut,
-    //   book_price: data?.book_price,
-    //   book_pages: data?.book_pages,
-    //   book_qnt: data?.book_qnt,
-    //   discount: 0,
-    //   category: bookCat,
-    //   // book_cover_photo_url: imgbbUrl,
-    //   book_language: data?.translator,
-    //   book_country: data?.country
-    // }
-    // console.log(productInfoData)
+
 
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -188,8 +172,8 @@ const AddProduct = () => {
             book_title: data?.book_title,
             book_description: data?.book_description,
             book_edition: data?.book_edition,
-            book_publisher: bookPub,
-            book_author: bookAut,
+            book_publisher: userRole === 'publisher' ? getUser[0].uid : bookPub,
+            book_author: userRole === 'author' ? getUser[0].uid : bookAut,
             book_price: data?.book_price,
             book_pages: data?.book_pages,
             book_qnt: data?.book_qnt,
@@ -201,7 +185,10 @@ const AddProduct = () => {
           }
           const postAuthorData = () => {
             console.log('before post:', productInfoData);
-            axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => console.log('Post data:', data))
+            axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => {
+              toast.success('Book Added Successfully');
+              console.log('Post data:', data)
+            })
           }
           postAuthorData();
         }
@@ -210,13 +197,12 @@ const AddProduct = () => {
     // reset();
   };
 
-
   return (
     <div className=''>
-       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'> Add Product</h2>
-       <div className=" flex items-center justify-center pb-10">
-            <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
-          </div>
+      <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'> Add Product</h2>
+      <div className=" flex items-center justify-center pb-10">
+        <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+      </div>
 
       <div className='mt-1 md:w-5/6 mx-8 md:mx-auto bg-white p-10 rounded-xl shadow-md' >
         <form className='' onSubmit={handleSubmit(onSubmit)}>
@@ -261,7 +247,7 @@ const AddProduct = () => {
                 <div className='w-full mt-4 md:mt-0'>
                   <label class="label-text text-lg">Select Categories</label>
 
-                  <Select onChange={(choice) => getChoosenCategory(choice)} name='categoryName' className="mt-2 rounded-xl" options={catOption} />
+                  <Select isMulti onChange={(choice) => getChoosenCategory(choice)} name='categoryName' className="mt-2 rounded-xl" options={catOption} />
                 </div>
 
               </div>
@@ -270,19 +256,20 @@ const AddProduct = () => {
               <div className='md:flex gap-7 mt-4'>
                 <div className='w-full'>
                   <label class="label-text text-lg">Author Name</label>
-                  {/* <input type="text" {...register("book_author", {
-                    required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
-                  {errors?.book_author && <p><small className='pl-1 text-red-600'>{errors?.book_author?.message}</small></p>} */}
-                  <Select onChange={(choice) => getChoosenAuthor(choice)} className="mt-2 rounded-xl" options={authorOptions} />
+                  {userRole === 'author' ?
+                    <input type="text" disabled defaultValue={getUser[0]?.user_name} class="input-bordered rounded-[4px] text-gray-400 border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-grey-600 w-full mt-2" />
+                    :
+                    <Select onChange={(choice) => getChoosenAuthor(choice)} className="mt-2 rounded-xl" options={authorOptions} />
+                  }
+
                 </div>
                 <div className='w-full mt-4 md:mt-0'>
                   <label class="label-text text-lg">Publisher Name</label>
-                  {/* <input type="text" {...register("book_publisher", {
-                    required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
-                  {errors?.book_publisher && <p><small className='pl-1 text-red-600'>{errors?.book_publisher?.message}</small></p>} */}
-                  <Select onChange={(choice) => getChoosenPublisher(choice)} className="mt-2 rounded-xl" options={publisherOptions} />
+                  {userRole === 'publisher' ?
+                    <input type="text" disabled defaultValue={getUser[0]?.user_name} class="input-bordered rounded-[4px] text-gray-400 border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-grey-600 w-full mt-2" />
+                    :
+                    <Select onChange={(choice) => getChoosenPublisher(choice)} className="mt-2 rounded-xl" options={publisherOptions} />
+                  }
                 </div>
               </div >
               {/* row-4 */}
@@ -350,11 +337,11 @@ const AddProduct = () => {
               </div >
             </div>
             {/* Image Container  */}
-                
+
           </div>
           <input type="submit" className='mt-4 btn btn-primary w-1/2 text-white ml-[350px]' value='Add Book' />
-          
-            
+
+
         </form >
       </div >
     </div >

@@ -58,9 +58,9 @@ const SecondCategoryBooks = () => {
         <Swiper
           slidesPerView={size}
           spaceBetween={30}
-          slidesPerGroup={size}
+          // slidesPerGroup={5}
           loop={true}
-          loopFillGroupWithBlank={true}
+          // loopFillGroupWithBlank={true}
           navigation={true}
           modules={[Navigation]}
           className="mySwiper px-7 py-6"

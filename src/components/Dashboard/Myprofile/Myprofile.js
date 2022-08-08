@@ -17,7 +17,7 @@ const Myprofile = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-   
+
 
     const userUid = { uid: user?.uid };
 
@@ -32,7 +32,7 @@ const Myprofile = () => {
       console.error(error);
     });
 
-  }, [user?.email])
+  }, [user?.uid])
 
   // upload image to imgbb and get image url 
 
@@ -42,7 +42,7 @@ const Myprofile = () => {
     dispatch(newUser(getUser[0]))
 
 
-  }, [getUser,user])
+  }, [getUser, user])
 
 
 
@@ -68,7 +68,7 @@ const Myprofile = () => {
 
 
   const [upImgUrl, setUpImgUrl] = useState('');
-  console.log(upImgUrl); 
+  console.log(upImgUrl);
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -113,40 +113,60 @@ const Myprofile = () => {
       updateData();
 
     }
+  }
+  const viewAsUser = () => {
+    setUserRole('user');
+  }
 
+  const viewAsAuthor = () => {
+    setUserRole('author');
+  }
 
-
-
-
+  const viewAsPublisher = () => {
+    setUserRole('publisher');
   }
 
   return (
     <div>
-      <div className='text-4xl text-center py-12 font-bold'>My Profile</div>
+
+      {/* View As  */}
+      <div>
+        <span className='ml-6 text-2xl font-bold'>View As </span>
+        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => viewAsUser()}>User</button>
+        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => viewAsAuthor()}>Auther</button>
+        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => viewAsPublisher()}>Publiser</button>
+      </div>
+      <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
+      <div className=" flex items-center justify-center pb-10">
+        <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+      </div>
+
+
       <div className='md:flex  mr-auto mx-[20px] md:ml-20'>
         <div className='md:w-[50%] p-[20px] md:p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black bg-white' >
           <img className='block mx-auto' height={200} width={200} src={user?.photoURL ? user?.photoURL : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg '} alt="" />
-          <h2 className='text-[40px] font-bold mt-3 mb-1 text-center text-black'>{user?.displayName}</h2>
-          <p className='text-center mb-3 text-[20px]'>{userRole}</p>
-          <h3 className='font-bold text-[30px] mb-[19px]'>Contact Informatin</h3>
+          <h2 className='text-[20px] font-bold mt-3 mb-1 text-center text-black'>{user?.displayName}</h2>
+          <p className='text-center mb-3 font-semibold text-[16px]'>{userRole}</p>
+          <h3 className='font-bold text-[25px] uppercase text-secondary mb-[19px]'>Contact Informatin</h3>
           <div>
-            <h4 className='font-[600] text-[25px] py-[7px]'>Email Address</h4>
+            <h4 className='font-[600] text-[25px] text-secondary py-[7px]'>Email Address</h4>
             <p className='font-[600] text-[16px] py-[7px]'>{user?.email}</p>
           </div>
           <div>
-            <h4 className='font-[600] text-[25px] py-[7px]'>Phone Number </h4>
+            <h4 className='font-[600] text-[25px]  text-secondary py-[7px]'>Phone Number </h4>
             <p className='font-[600] text-[16px] py-[7px]'>{getUser[0]?.user_phone}</p>
           </div>
           <div>
-            <h4 className='font-[600] text-[25px] py-[7px]'>Address</h4>
+            <h4 className='font-[600] text-[25px] text-secondary py-[7px]'>Address</h4>
             <p className='font-[600] text-[16px] py-[7px]'>{getUser[0]?.user_address}</p>
           </div>
           <div>
-            <h4 className='font-[600] text-[25px] py-[7px]'>Birthday</h4>
+            <h4 className='font-[600] text-[25px]  text-secondary py-[7px]'>Birthday</h4>
             <p className='font-[600] text-[16px] py-[7px]'>{getUser[0]?.user_birthday}</p>
           </div>
         </div>
-        <div className='p-[20px] md:p-12 pt-0 md:ml-6 md:w-[50%]'>
+
+        <div className='p-[20px] md:p-12 pt-0 md:ml-6 md:w-[50%] bg-white rounded' >
           {/* cards  */}
           {/* card raw container */}
           {userRole === 'user' && <div className='flex mt-[22px]'>
@@ -228,6 +248,11 @@ const Myprofile = () => {
           {/* Information Update Form  */}
 
           <div>
+            <h2 className='font-semibold uppercase text-secondary mt-2 text-[16px]'>Update Form</h2>
+            <div className="">
+
+              <progress className="progress progress-primary bg-white h-2 w-5  "></progress>
+            </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className='flex mx-auto py-2 '>
                 <div className=' flex-1 ' >
@@ -244,7 +269,7 @@ const Myprofile = () => {
                       })}
                       type="text"
                       defaultValue={user?.displayName}
-                      className="input input-bordered w-full bg-secondary text-white" />
+                      className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.author_name?.type === 'required' && `${errors?.author_name?.message}`}</span>
                     </label>
@@ -264,7 +289,8 @@ const Myprofile = () => {
                       })}
                       type="phone"
                       defaultValue={getUser[0]?.user_phone}
-                      className="input input-bordered w-full bg-secondary text-white" />
+                      placeholder={'Your Phone Number'}
+                      className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.phone?.type === 'required' && `${errors?.phone?.message}`}</span>
                     </label>
@@ -282,7 +308,8 @@ const Myprofile = () => {
                       })}
                       type="text"
                       defaultValue={getUser[0]?.user_address}
-                      className="input input-bordered w-full  bg-secondary text-white" />
+                      placeholder={'Your Address here'}
+                      className="input input-bordered w-full  bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.address?.type === 'required' && `${errors?.address?.message}`}</span>
                     </label>
@@ -300,7 +327,7 @@ const Myprofile = () => {
                       })}
                       type="date"
                       placeholder={getUser[0]?.user_birthday}
-                      className="input input-bordered w-full  bg-secondary text-white" />
+                      className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.date?.type === 'required' && `${errors?.date?.message}`}</span>
                     </label>
@@ -317,7 +344,7 @@ const Myprofile = () => {
                         }
                       })}
                       type="file"
-                      className="input input-bordered w-full pt-[5px] bg-secondary text-white" />
+                      className="input input-bordered w-full pt-[5px] bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.image?.type === 'required' && `${errors?.image?.message}`}</span>
                     </label>

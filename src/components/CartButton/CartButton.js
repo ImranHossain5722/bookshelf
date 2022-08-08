@@ -18,6 +18,20 @@ const CartButton = ({ _id }) => {
         qnt: 2
       }
     }
+
+    const options = {
+      method: 'POST',
+      url: 'https://book-shelf-webapp.herokuapp.com/add-to-cart',
+      params: cartData
+    };
+    axios.request(options).then(function (response) {
+    console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+
+
+console.log(cartData)
     axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart', cartData).then(data => console.log(data))
     // console.log(cartData)
   }

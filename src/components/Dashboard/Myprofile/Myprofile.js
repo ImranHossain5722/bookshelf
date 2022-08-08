@@ -8,70 +8,51 @@ import { BsFillBagCheckFill, BsFillHeartFill, BsFillJournalBookmarkFill } from "
 import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { newUser } from '../../Redux/actions/bookActions';
-// import { useQuery } from '@tanstack/react-query';
-
+import useGetUserRole from '../../../hooks/useGetUserRole';
 const Myprofile = () => {
   const [user] = useAuthState(auth);
-  const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const dispatch = useDispatch()
-  // const userUid = { uid: user?.uid };
-  // const { getUser, isLoading, refetch } = useQuery('userProfile', () => fetch(`https://book-shelf-webapp.herokuapp.com/get-user`, {
-  //   method: 'GET',
-  //   body: userUid
-
-  // }).then(res => console.log(res)))
+  const dispatch = useDispatch();
+  const userUid = user?.uid;
 
   useEffect(() => {
-    const userUid = { uid: user?.uid };
+    const userUid = user?.uid;
     const options = {
       method: 'GET',
-      url: 'https://book-shelf-webapp.herokuapp.com/get-user',
-      params: userUid
+      url: `https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`
     };
-    axios.request(options).then(function (response) {
+    axios.request(options).then((response) => {
       setGetUser(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
+    })
+  }, [user?.uid, getUser])
 
-  }, [user?.uid])
-
-  // upload image to imgbb and get image url 
-
+  const { userRole } = useGetUserRole(getUser[0]?.user_role);
 
   useEffect(() => {
+
     dispatch(newUser(getUser[0]))
+
   }, [getUser, dispatch])
 
 
-
-
-  // console.log(getUser);
-  // // get current user role form database 
   const currentUserId = getUser[0]?._id;
-  useEffect(() => {
-    const currentUserRole = getUser[0]?.user_role;
-    if (currentUserRole === 'author') {
-      setUserRole('author');
-    }
-    else if (currentUserRole === 'publisher') {
-      setUserRole('publisher');
-    }
-    else if (currentUserRole === 'user') {
-      setUserRole('user');
-    }
-    else if (currentUserRole === 'admin') {
-      setUserRole('admin');
-    }
-  }, [getUser])
+
 
   const onSubmit = data => {
+
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
     const formData = new FormData();
     formData.append('image', image);
+    const updateData = (updatedProfileData) => {
+      axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData)
+        .then(data => {
+          toast.success('Profile Updated Successfully!');
+        })
+        .catch(err => console.log(err))
+    }
+
     if (image) {
       fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
         method: 'POST',
@@ -88,17 +69,7 @@ const Myprofile = () => {
               user_birthday: data?.date,
               user_photo_url: result?.data?.url ? result?.data?.url : user?.user_photo_url
             };
-            const updateData = () => {
-              console.log('APi Call:', updatedProfileData);
-              axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData)
-                .then(data => {
-                  toast.success('Profile Updated Successfully!');
-                  // refetch();
-                  console.log(data)
-                })
-                .catch(err => console.log(err))
-            }
-            updateData();
+            updateData(updatedProfileData);
           }
         })
 
@@ -110,40 +81,12 @@ const Myprofile = () => {
         user_address: data?.address,
         user_birthday: data?.date,
       };
-
-      const updateData = async () => {
-        await axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => {
-          toast.success('Profile Updated Successfully!');
-          // refetch();
-          console.log(data)
-        })
-      }
-      updateData();
-
+      updateData(updatedProfileData);
     }
-  }
-  const viewAsUser = () => {
-    setUserRole('user');
-  }
-
-  const viewAsAuthor = () => {
-    setUserRole('author');
-  }
-
-  const viewAsPublisher = () => {
-    setUserRole('publisher');
   }
 
   return (
     <div>
-
-      {/* View As  */}
-      <div>
-        <span className='ml-6 text-2xl font-bold'>View As </span>
-        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => viewAsUser()}>User</button>
-        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => viewAsAuthor()}>Auther</button>
-        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => viewAsPublisher()}>Publiser</button>
-      </div>
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
       <div className=" flex items-center justify-center pb-10">
         <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
@@ -152,8 +95,8 @@ const Myprofile = () => {
 
       <div className='md:flex  mr-auto mx-[20px] md:ml-20'>
         <div className='md:w-[50%] p-[20px] md:p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black bg-white' >
-          <img className='block mx-auto' height={200} width={200} src={user?.photoURL ? user?.photoURL : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg '} alt="" />
-          <h2 className='text-[20px] font-bold mt-3 mb-1 text-center text-black'>{user?.displayName}</h2>
+          <img className='block mx-auto' height={200} width={200} src={getUser[0]?.user_photo_url ? getUser[0]?.user_photo_url : (user?.photoURL || 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ')} alt="" />
+          <h2 className='text-[20px] font-bold mt-3 mb-1 text-center text-black'>{getUser[0]?.user_name ? getUser[0]?.user_name : user?.displayName}</h2>
           <p className='text-center mb-3 font-semibold text-[16px]'>{userRole}</p>
           <h3 className='font-bold text-[25px] uppercase text-secondary mb-[19px]'>Contact Informatin</h3>
           <div>

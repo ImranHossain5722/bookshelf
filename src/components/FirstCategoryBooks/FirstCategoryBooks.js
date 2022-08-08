@@ -70,9 +70,7 @@ const FirstCategoryBooks = () => {
         <Swiper
           slidesPerView={size}
           spaceBetween={30}
-          // slidesPerGroup={size}
           loop={true}
-          // loopFillGroupWithBlank={true}
           navigation={true}
           modules={[Navigation]}
           className="mySwiper px-7 py-6"
@@ -119,10 +117,3 @@ const FirstCategoryBooks = () => {
 
 export default FirstCategoryBooks;
 
-{
-  /* <Route path="/" element={<Home />}>
-            <Route path="/" element={<BestSellingBooks />} />
-            <Route path="/popular-writers" element={<PopularWritersBooks />} />
-            <Route path="/best-offers" element={<BestOffersBooks />} />
-          </Route> */
-}

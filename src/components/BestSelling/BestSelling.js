@@ -61,9 +61,7 @@ const BestSelling = () => {
                 <Swiper
                     slidesPerView={size}
                     spaceBetween={30}
-                    slidesPerGroup={size}
                     loop={true}
-                    loopFillGroupWithBlank={true}
                     navigation={true}
                     modules={[Navigation]}
                     className="mySwiper px-7 py-6"

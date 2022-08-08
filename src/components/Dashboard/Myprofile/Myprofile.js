@@ -39,7 +39,7 @@ const Myprofile = () => {
     dispatch(newUser(getUser[0]))
 
 
-  }, [getUser, user])
+  }, [getUser, dispatch])
 
 
 

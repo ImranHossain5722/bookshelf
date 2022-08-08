@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -8,26 +8,16 @@ import { BsFillBagCheckFill, BsFillHeartFill, BsFillJournalBookmarkFill } from "
 import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { newUser } from '../../Redux/actions/bookActions';
-import useGetUserRole from '../../../hooks/useGetUserRole';
+import useGetUserData from '../../../hooks/useGetUserData';
+import useViewAs from '../../../hooks/useViewAs';
 const Myprofile = () => {
   const [user] = useAuthState(auth);
-  const [getUser, setGetUser] = useState([]);
+  // const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch();
-  const userUid = user?.uid;
 
-  useEffect(() => {
-    const userUid = user?.uid;
-    const options = {
-      method: 'GET',
-      url: `https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`
-    };
-    axios.request(options).then((response) => {
-      setGetUser(response.data);
-    })
-  }, [user?.uid, getUser])
+  const { getUser, userRole, setUserRole } = useGetUserData();
 
-  const { userRole } = useGetUserRole(getUser[0]?.user_role);
 
   useEffect(() => {
 
@@ -35,12 +25,9 @@ const Myprofile = () => {
 
   }, [getUser, dispatch])
 
-
   const currentUserId = getUser[0]?._id;
 
-
   const onSubmit = data => {
-
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
     const formData = new FormData();
@@ -50,9 +37,7 @@ const Myprofile = () => {
         .then(data => {
           toast.success('Profile Updated Successfully!');
         })
-        .catch(err => console.log(err))
     }
-
     if (image) {
       fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
         method: 'POST',
@@ -85,8 +70,18 @@ const Myprofile = () => {
     }
   }
 
+  const { viewAsUser, viewAsAuthor, viewAsPublisher } = useViewAs();
+
+
   return (
     <div>
+      {/* View As  */}
+      <div>
+        <span className='ml-6 text-2xl font-bold'>View As </span>
+        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => viewAsUser()}>User</button>
+        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => viewAsAuthor()}>Auther</button>
+        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => viewAsPublisher()}>Publiser</button>
+      </div>
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
       <div className=" flex items-center justify-center pb-10">
         <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
@@ -219,7 +214,7 @@ const Myprofile = () => {
                         }
                       })}
                       type="text"
-                      defaultValue={user?.displayName}
+                      defaultValue={getUser[0]?.user_name ? getUser[0]?.user_name : user?.displayName}
                       className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.author_name?.type === 'required' && `${errors?.author_name?.message}`}</span>
@@ -277,7 +272,7 @@ const Myprofile = () => {
                         }
                       })}
                       type="date"
-                      placeholder={getUser[0]?.user_birthday}
+                      defaultValue={getUser[0]?.user_birthday}
                       className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.date?.type === 'required' && `${errors?.date?.message}`}</span>

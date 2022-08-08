@@ -17,10 +17,7 @@ const Myprofile = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-
-
     const userUid = { uid: user?.uid };
-
     const options = {
       method: 'GET',
       url: 'https://book-shelf-webapp.herokuapp.com/get-user',
@@ -91,8 +88,9 @@ const Myprofile = () => {
               user_birthday: data?.date,
               user_photo_url: result?.data?.url ? result?.data?.url : user?.user_photo_url
             };
-            const updateData = async () => {
-              await axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => console.log(data))
+            const updateData = () => {
+              console.log('APi Call:', updatedProfileData);
+              axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => console.log(data).catch(err => console.log(err)))
             }
             updateData();
           }

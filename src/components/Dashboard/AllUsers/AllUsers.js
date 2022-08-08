@@ -11,22 +11,19 @@ const AllUsers = () => {
   const dispatch = useDispatch();
   const [loading,setLoading] = useState(false)
 
-  // const getUsers = () => {
-  //   fetch('https://book-shelf-webapp.herokuapp.com/all-users').then(res => res.json()).then(data => dispatch(allUsers(data)))
-  // }
+ 
 
   useEffect(() => {
     
-    const fetchPosts = async () => {
+    const fetchUsers = async () => {
       setLoading(true);
       const res = await axios.get('https://book-shelf-webapp.herokuapp.com/all-users');
-      // setPosts(res.data);
       dispatch(allUsers(res.data))
       setLoading(false);
   
     };
   
-    fetchPosts();
+    fetchUsers();
   }, [])
 
   if(loading){

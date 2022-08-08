@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaRegTimesCircle } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 
 const SearchModal = ({ showModal, setShowModal }) => {
@@ -46,7 +47,7 @@ const SearchModal = ({ showModal, setShowModal }) => {
     const closeSearchModal = () => {
         searchModal.classList.remove('left-0');
         searchModal.classList.add('left-full');
-    }
+    };
 
     return (
         <div id='search-modal' className='min-h-screen w-full flex justify-center items-center absolute left-full z-50 bg-[#00124ec0] duration-500'>
@@ -68,10 +69,12 @@ const SearchModal = ({ showModal, setShowModal }) => {
                 {(!error && searchResults) &&
                     <div className='mt-8 max-h-60 overflow-y-scroll'>
                         {
-                            searchResults?.map(results => <div key={results._id} className='flex items-center justify-start h-16 w-full bg-white rounded-lg mb-3 pl-4'>
-                                <img src={results.book_cover_photo_url} className='h-14 mr-5' alt="" />
-                                <h3>{results.book_title}</h3>
-                            </div>)
+                            searchResults?.map(results =>
+                                <NavLink to={`/selectedBook/${results._id}`}><div key={results._id} onClick={() => closeSearchModal()} className='flex items-center justify-start h-16 w-full bg-white hover:bg-primary hover:text-white duration-200 rounded-lg mb-3 pl-4'>
+                                    <img src={results.book_cover_photo_url} className='h-14 mr-5' alt="" />
+                                    <h3>{results.book_title}</h3>
+                                </div>
+                                </NavLink>)
                         }
                     </div>
                 }

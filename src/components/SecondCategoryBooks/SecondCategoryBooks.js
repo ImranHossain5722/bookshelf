@@ -91,7 +91,6 @@ const SecondCategoryBooks = () => {
                     <NavLink to={`/selectedBook/${book._id}`}>
                       <div className="w-44 mt-2">
                         <h3>{book.book_title}</h3>
-                        <p className="mt-2">{book.book_author.author_name}</p>
                         <h2 className="text-xl font-semibold text-primary mt-2 mb-1">
                           ${book.book_price}
                         </h2>

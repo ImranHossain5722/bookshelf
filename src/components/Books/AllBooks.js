@@ -14,16 +14,12 @@ const AllBooks = () => {
   const [pageCount, setPageCount] = useState(1);
   // const [size, setSize] = useState(10);
   const [loading,setLoading] = useState(false)
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]); 
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage,setpostPerPage] = useState(10);
 
-   const { isLoading, error, data } = useQuery('books', () =>
-   fetch('https://book-shelf-webapp.herokuapp.com/all-books').then(res =>
-     res.json()
-   )
- )
+   
 
  useEffect(() => {
   const fetchPosts = async () => {
@@ -47,7 +43,7 @@ const AllBooks = () => {
 
    // Change page
    const paginate = pageNumber => setCurrentPage(pageNumber);
- if(isLoading){
+ if(loading){
    return <Loading/>
  }
  const pageNumbers = [];

@@ -1,18 +1,38 @@
-import React, { useEffect } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../Loading/Loading';
 import { allPublishers } from '../../Redux/actions/bookActions';
 
 const AllPublishers = () => {
   const users = useSelector((state) => state.allPublishers.allPublishers)
   const dispatch = useDispatch();
+  const [loading,setLoading] = useState(false)
 
-  const getUsers = () => {
-    fetch('https://book-shelf-webapp.herokuapp.com/all-publishers').then(res => res.json()).then(data => dispatch(allPublishers(data)))
-  }
+  // const getUsers = () => {
+  //   fetch('https://book-shelf-webapp.herokuapp.com/all-publishers').then(res => res.json()).then(data => dispatch(allPublishers(data)))
+  // }
 
+  // useEffect(() => {
+  //   getUsers()
+  // }, [])
   useEffect(() => {
-    getUsers()
+    
+    const fetchPosts = async () => {
+      setLoading(true);
+      const {data} = await axios.get('https://book-shelf-webapp.herokuapp.com/all-publishers');
+      // setPosts(res.data);
+      dispatch(allPublishers(data))
+        setLoading(false);
+  
+    };
+  
+    fetchPosts();
   }, [])
+
+  if(loading){
+    return <Loading/>
+  }
   return (
     <div className="bg-base-100 my-8 p-3">
        <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>All Publishers</h2>

@@ -18,6 +18,7 @@ import useWindowDimensions from "../windowSize/windowSize";
 import CartButton from "../CartButton/CartButton";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 
 const SecondCategoryBooks = () => {
   const books = useSelector((state) => state?.sellBooks?.books);
@@ -82,18 +83,19 @@ const SecondCategoryBooks = () => {
                       <button className="text-3xl text-white hover:text-primary duration-500">
                         <FaEye />
                       </button>
-                      <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
-                        <FaHeart />
-                      </button>
+                     <Wishlistbutton _id={book._id} />
                       <CartButton _id={book._id} />
                     </div>
-                    <div className="w-44 mt-2">
-                      <h3>{book.book_title}</h3>
-                      <h2 className="text-xl font-semibold text-primary mt-2 mb-1">
-                        ${book.book_price}
-                      </h2>
-                      <Stars />
-                    </div>
+                    {/* navigate to book details page */}
+                    <NavLink to={`/selectedBook/${book._id}`}>
+                      <div className="w-44 mt-2">
+                        <h3>{book.book_title}</h3>
+                        <h2 className="text-xl font-semibold text-primary mt-2 mb-1">
+                          ${book.book_price}
+                        </h2>
+                        <Stars />
+                      </div>
+                    </NavLink>
                   </div>
                 </div>
               </NavLink>

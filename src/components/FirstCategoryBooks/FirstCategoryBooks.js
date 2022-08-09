@@ -18,6 +18,7 @@ import useWindowDimensions from "../windowSize/windowSize";
 import CartButton from "../CartButton/CartButton";
 import { useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 
 const FirstCategoryBooks = () => {
   // const [books, setBooks] = useState([]);
@@ -70,7 +71,9 @@ const FirstCategoryBooks = () => {
         <Swiper
           slidesPerView={size}
           spaceBetween={30}
+          slidesPerGroup={size}
           loop={true}
+
           navigation={true}
           modules={[Navigation]}
           className="mySwiper px-7 py-6"
@@ -78,25 +81,24 @@ const FirstCategoryBooks = () => {
         >
           {books?.map((book) => (
             <SwiperSlide key={book._id}>
-              <NavLink to={`/selectedBook/${book._id}`}>
-                <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
-                  <div className="for-hover relative">
-                    {/* relative */}
-                    <img
-                      src={book.book_cover_photo_url}
-                      className="h-64 w-44 image-full"
-                      alt=""
-                    />
-                    {/* absolute hover effect */}
-                    <div className="bg-[#00124ea4] h-64 w-44 flex items-center justify-center absolute top-0 hover-button hidden">
-                      <button className="text-3xl text-white hover:text-primary duration-500">
-                        <FaEye />
-                      </button>
-                      <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
-                        <FaHeart />
-                      </button>
-                      <CartButton _id={book._id} />
-                    </div>
+              <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
+                <div className="for-hover relative">
+                  {/* relative */}
+                  <img
+                    src={book.book_cover_photo_url}
+                    className="h-64 w-44 image-full"
+                    alt=""
+                  />
+                  {/* absolute hover effect */}
+                  <div className="bg-[#00124ea4] h-64 w-44 flex items-center justify-center absolute top-0 hover-button hidden">
+                    <button className="text-3xl text-white hover:text-primary duration-500">
+                      <FaEye />
+                    </button>
+                    <Wishlistbutton _id={book._id} />
+                    <CartButton _id={book._id} />
+                  </div>
+                  {/* navigate to book details page */}
+                  <NavLink to={`/selectedBook/${book._id}`}>
                     <div className="w-44 mt-2">
                       <h3>{book.book_title}</h3>
                       <h2 className="text-xl font-semibold text-primary mt-2 mb-1">
@@ -104,9 +106,9 @@ const FirstCategoryBooks = () => {
                       </h2>
                       <Stars />
                     </div>
-                  </div>
+                  </NavLink>
                 </div>
-              </NavLink>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -116,4 +118,3 @@ const FirstCategoryBooks = () => {
 };
 
 export default FirstCategoryBooks;
-

@@ -67,7 +67,6 @@ const RecentlyViewed = () => {
             spaceBetween={24}
             slidesPerGroup={size}
             loop={true}
-            loopFillGroupWithBlank={true}
             navigation={false}
             modules={[Autoplay, Navigation]}
             autoplay={true}

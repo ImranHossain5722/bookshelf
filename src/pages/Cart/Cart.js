@@ -10,6 +10,7 @@ const Cart = () => {
   const user = useSelector((state) => state?.newUser?.user) 
   const dispatch = useDispatch()
   let subtotal;
+  
 //  getting subtotal value
   const sub = books?.map(book => book?.book?.book_price * book?.qnt)
   subtotal = sub.reduce((a, b) => a + b, 0)
@@ -33,10 +34,7 @@ const Cart = () => {
       dispatch(cartdata(data))
     console.log(data)
   }
-  // useEffect(() => {
-  
-  //   checkout()
-  // }, [carts])
+ 
   
   return (
     <div className="pt-[60px] md:pt-[80px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">

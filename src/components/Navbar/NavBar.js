@@ -32,12 +32,26 @@ const NavBar = ({ children }) => {
   const currentUser = useSelector((state) => state?.newUser?.user)
   const userId = currentUser?._id
   // dispatch(cartBooks 
-  useEffect(() => {
-    if (userId) {
-      axios.get(`https://book-shelf-webapp.herokuapp.com/get-cart-data?id=${userId}`).then(data => dispatch(cartBooks(data.data.user_cart)))
-      axios.get(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${userId}`).then(data => dispatch(whistlist(data.data[0].user_wishlist)))
+  useEffect( () => {
+    const fetchData = async () => {
+      if (userId) {
+  await  axios.get(`https://book-shelf-webapp.herokuapp.com/get-cart-data?id=${userId}`).then(data => dispatch(cartBooks(data.data.user_cart)))
+
+  }
     }
-  }, [currentUser, wishlistBook, cartBook])
+    fetchData()
+  }, [currentUser, cartBook])
+  useEffect( () => {
+    const fetchData = async () => {
+      if (userId) {
+ 
+
+   await axios.get(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${userId}`).then(data => dispatch(whistlist(data.data[0].user_wishlist)))
+  }
+    }
+    fetchData()
+  }, [currentUser, wishlistBook])
+  
 
   const [showModal, setShowModal] = useState('');
 
@@ -110,8 +124,10 @@ const NavBar = ({ children }) => {
             <div>
               {/* search button */}
               <div className="form-control mx-4">
-              <NavLink to=""><img  onClick={() => showSearchModal()} className="w-[25px] h-[25px]" alt="" src={SearchIcon} /> </NavLink>
-                
+                <button onClick={() => showSearchModal()}>
+                  <img className="w-[25px] h-[25px]" alt="" src={SearchIcon} />
+                </button>
+
               </div>
               {/* wishlist button */}
               <div className="hidden lg:flex user mx-4 mt-1">
@@ -191,7 +207,7 @@ const NavBar = ({ children }) => {
                 </svg>
 
                 {/* <!-- Dark moon icon --> */}
-                <svg  style={{margin:""}}
+                <svg style={{ margin: "" }}
                   className="swap-off fill-current w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -236,8 +252,8 @@ const NavBar = ({ children }) => {
           </ul>
         </div>
       </div>
-    
-    </nav>
+
+    </nav >
   );
 };
 

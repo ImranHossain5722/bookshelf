@@ -5,6 +5,7 @@ import { MdShoppingCart } from 'react-icons/md'
 import { RiDeleteBack2Fill} from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Wishlist = () => {
     const books =  useSelector((state) => state.wishlist.wishlistBooks)
@@ -17,10 +18,13 @@ const Wishlist = () => {
         cart_data : {
             book : id,
             qnt : 2
-        }
+        } 
     }
-    axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data => console.log(data))
-    console.log(cartData)
+    if(userId){
+
+        axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data =>{toast.success('successfully added to cart')})
+    }
+   
       }  
     return (
         <div className="my-5">

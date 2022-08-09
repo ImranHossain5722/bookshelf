@@ -75,13 +75,13 @@ const RecentlyViewed = () => {
           >
             {books?.map((book) => (
               <SwiperSlide key={book._id}>
-                <div class="product_widget26 mb_30">
-                  <div class="product_thumb_upper position-relative">
-                    <span class="offer_badge">-0%</span>
-                    <a href="product_details.php" class="thumb text-center">
+                <div className="product_widget26 mb_30">
+                  <div className="product_thumb_upper position-relative">
+                    <span className="offer_badge">-0%</span>
+                    <a href="product_details.php" className="thumb text-center">
                       <img src={book.image} alt="" />
                     </a>
-                    <div class="product_action">
+                    <div className="product_action">
                       <a href="#">
                         <FaRegHeart />
                       </a>
@@ -93,26 +93,26 @@ const RecentlyViewed = () => {
                       </a>
                     </div>
                   </div>
-                  <div class="product__meta">
+                  <div className="product__meta">
                     <a href="product_details.php">
                       <h4>{book.title}</h4>
                     </a>
-                    <div class="stars">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <span class="text-sm font-medium">(02 Rating)</span>
+                    <div className="stars">
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <span className="text-sm font-medium">(02 Rating)</span>
                     </div>
-                    <div class="product_prise">
+                    <div className="product_prise">
                       <p>${book.price}</p>
                     </div>
-                    <button class="home22_addCard_btn add_to_cart flex border-0 items-center">
-                      <div class="circle_icon">
+                    <button className="home22_addCard_btn add_to_cart flex border-0 items-center">
+                      <div className="circle_icon">
                         <FaShoppingBasket />
                       </div>
-                      <h5 class="text-sm font-bold text-uppercase m-0">
+                      <h5 className="text-sm font-bold text-uppercase m-0">
                         ADD TO CART
                       </h5>
                     </button>

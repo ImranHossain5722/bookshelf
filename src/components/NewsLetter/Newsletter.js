@@ -5,7 +5,7 @@ const Newsletter = () => {
         <div>
              <div className=" flex items-center justify-center py-2">
       <div
-        class=" w-3/4 "
+        className=" w-3/4 "
         style={{
           backgroundImage: `url(${newsBanner})`,
           backgroundSize: "cover",
@@ -15,28 +15,28 @@ const Newsletter = () => {
 
         }}
       >
-        <div class="hero-overlay bg-opacity-60 "></div>
-        <div class="hero-content text-center text-neutral-content py-24">
-          <div class="max-w-lg">
-            <h1 class="mb-5 text-center text-2xl lg:text-4xl md:text-lg font-bold " style={{color:'#00124E'}}> Join Our Subscriptions </h1>
-            <p class="mb-5">
+        <div className="hero-overlay bg-opacity-60 "></div>
+        <div className="hero-content text-center text-neutral-content py-24">
+          <div className="max-w-lg">
+            <h1 className="mb-5 text-center text-2xl lg:text-4xl md:text-lg font-bold " style={{color:'#00124E'}}> Join Our Subscriptions </h1>
+            <p className="mb-5">
             Join Our Subscriptions. Connected our offer related update. also we can update every user about to New books Collections.
             </p>
             <div className='grid grid-cols-2'>
-                {/* <div class="form-control mx-4 mb-10">
+                <div className="form-control mx-4 mb-10">
                 <input
                   type="text"
                   id='text'
                   placeholder="Enter your Name"
-                  class="input input-bordered"
+                  className="input input-bordered"
                 />
-              </div> */}
+              </div> 
               <div class="form-control mx-4">
                 <input
                   type="email"
                   id='email'
                   placeholder="Enter your Email"
-                  class="input input-bordered"
+                  className="input input-bordered"
                 />
               </div>
           </div>

@@ -199,7 +199,7 @@ const AllBooks = () => {
           </button>
         ))}
         <select
-          class="select select-primary "
+          className="select select-primary "
           onChange={(event) => setpostPerPage(event.target.value)}
         >
           <option value="5">5</option>

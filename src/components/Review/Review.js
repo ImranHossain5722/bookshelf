@@ -70,8 +70,8 @@ const Review = () => {
           reviews.map(review => <SwiperSlide key={review.id} className="swiper-review">
             <div className="text-center p-4">
               <p>{review.review}</p>
-              <div class="avatar pt-6">
-                <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+              <div className="avatar pt-6">
+                <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                   <img src={review.image} alt="" />
                 </div>
               </div>

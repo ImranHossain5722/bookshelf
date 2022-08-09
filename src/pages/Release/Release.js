@@ -43,9 +43,9 @@ const Release = () => {
   }, [])
   return (
     <div className='px-10 bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] shadow-xl rounded-xl'>
-      <div class="card lg:card-side p-10">
+      <div className="card lg:card-side p-10">
         <figure><img className='rounded' src="https://images-us.bookshop.org/ingram/9780593353707.jpg?height=500&v=v2" alt="Album" /></figure>
-        <div class="card-body flex justify-center items-center">
+        <div className="card-body flex justify-center items-center">
           <div>
             <p className='  text-xl lg:text-[30px] lg:text-[40px]  my-5 font-semibold text-accent' >Time Remaining For </p>
             <p className=' text-xl lg:text-[30px] lg:text-[40px] mb-5 font-semibold text-accent' >Publishing!

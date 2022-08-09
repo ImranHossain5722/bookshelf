@@ -21,6 +21,7 @@ import {
   currentCartReducer,
 } from "../Features/bookReducers";
 import logger from "redux-logger";
+import thunk from "redux-thunk";
 
 const store = configureStore({
   reducer: {
@@ -44,7 +45,7 @@ const store = configureStore({
 
     cartData : currentCartReducer
   },
-
+  middleware: [thunk],
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 

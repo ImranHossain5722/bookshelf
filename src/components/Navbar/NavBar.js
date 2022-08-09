@@ -73,21 +73,21 @@ const NavBar = ({ children }) => {
       {/* search feature */}
       <SearchModal showModal={showModal} setShowModal={setShowModal} />
 
-      <div class=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
-        <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content flex flex-col">
+      <div className=" drawer drawer-end " data-theme={dark ? "dark" : "light"}>
+        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content flex flex-col">
 
           <NavTopbar />
           {/* <!-- Navbar --> */}
-          <div class="w-full navbar bg-gray-200 px-20 ">
-            <div class="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
+          <div className="w-full navbar bg-gray-200 px-20 ">
+            <div className="flex-1 px-2 mx-2 text-4xl text-blue-400 uppercase font-bold">
               <NavLink to="/" className="rounded-lg">
                 <img className="" alt="" src={logo} />
               </NavLink>
             </div>
             {/* mobile menu button */}
             <div className="flex-none lg:hidden">
-              <label for="my-drawer-3" className="btn btn-square btn-ghost">
+              <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -105,8 +105,8 @@ const NavBar = ({ children }) => {
             </div>
 
             {/* desktop */}
-            <div class="flex-none mx-20 hidden lg:block ">
-              <ul class="menu menu-horizontal  ">
+            <div className="flex-none mx-20 hidden lg:block ">
+              <ul className="menu menu-horizontal  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>
                   <NavLink to="/" className="rounded-lg ">
@@ -131,22 +131,22 @@ const NavBar = ({ children }) => {
               </div>
               {/* wishlist button */}
               <div className="hidden lg:flex user mx-4 mt-1">
-                <div class="indicator ">
-                  <span class="indicator-item badge badge-secondary w-[15px] bg-primary text-white border-primary ">{wishlistBook.length}</span>
+                <div className="indicator ">
+                  <span className="indicator-item badge badge-secondary w-[15px] bg-primary text-white border-primary ">{wishlistBook.length}</span>
                   <NavLink to="/wishlist"><img className="" alt="" src={wishlist} /> </NavLink>
                 </div>
               </div>
               {/* cart button */}
               <div className="user  hidden lg:flex">
-                <div class="indicator ]">
-                  <span class="indicator-item badge badge-secondary w-[15px]  bg-primary text-white border-primary ">{cartBook.length}</span>
+                <div className="indicator ]">
+                  <span className="indicator-item badge badge-secondary w-[15px]  bg-primary text-white border-primary ">{cartBook.length}</span>
                   <NavLink to='/cart'>  <img className="" alt="" src={bag} /></NavLink>
                 </div>
               </div>
               {/* user photo */}
               <div className="user ml-4 ">
                 {user ? (
-                  <span tabindex="0">
+                  <span tabIndex="0">
                     <img
                       style={{ margin: "40px 0px -10px -4px" }}
                       className=" rounded-2xl"
@@ -157,14 +157,14 @@ const NavBar = ({ children }) => {
                     />
 
                     {/* dropdown */}
-                    <div class="flex-none">
-                      <ul class="menu menu-horizontal p-0">
-                        <li tabindex="0">
+                    <div className="flex-none">
+                      <ul className="menu menu-horizontal p-0">
+                        <li tabIndex="0">
                           <img className="" width={45} alt="" src={downArrow} />
 
                           <ul
                             style={{ margin: "-14px 0px 0px 0px" }}
-                            class="p-2 z-40 drop-shadow-md bg-base-100"
+                            className="p-2 z-40 drop-shadow-md bg-base-100"
                           >
                             <li>
                               <Link target={"_blank"} to="dashboard">
@@ -193,7 +193,7 @@ const NavBar = ({ children }) => {
               </div>
 
               {/* dark button */}
-              <label class="swap swap-rotate hidden lg:flex ">
+              <label className="swap swap-rotate hidden lg:flex ">
                 {/* <!-- this hidden checkbox controls the state --> */}
                 <input type="checkbox" onClick={() => setDark(!dark)} />
 

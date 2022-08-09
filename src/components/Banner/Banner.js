@@ -73,7 +73,7 @@ const Banner = () => {
                   data-aos="fade-right"
                   data-aos-delay="750"
                   data-aos-duration="1000"
-                  class="btn btn-primary text-white font-normal mt-8">
+                  className="btn btn-primary text-white font-normal mt-8">
                   Explore More
                 </button> */}
                 <div

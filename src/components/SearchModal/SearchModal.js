@@ -56,11 +56,11 @@ const SearchModal = ({ showModal, setShowModal }) => {
             </button>
             <div className='w-[90%] lg:w-2/5 '>
                 {/* search field */}
-                <div class="form-control duration-300">
-                    <div class="input-group">
-                        <input name='search' type="text" placeholder="Search that you desire..." onChange={e => setSearchText(e.target.value)} class="input input-bordered bg-white w-full" />
-                        <button onClick={() => handleSearch(searchText)} class="btn btn-square bg-primary hover:bg-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                <div className="form-control duration-300">
+                    <div className="input-group">
+                        <input name='search' type="text" placeholder="Search that you desire..." onChange={e => setSearchText(e.target.value)} className="input input-bordered bg-white w-full" />
+                        <button onClick={() => handleSearch(searchText)} className="btn btn-square bg-primary hover:bg-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         </button>
                     </div>
                     {error && <p className='text-white mt-1 ml-1'><small>{error}</small></p>}

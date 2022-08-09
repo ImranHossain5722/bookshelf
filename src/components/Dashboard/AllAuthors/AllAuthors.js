@@ -39,8 +39,8 @@ const AllAuthors = () => {
       {users?.map(user => <div className=" bg-white flex items-center justify-center  mx-[2px] card user-shadow  w-[370px] h-[160px] p-7 font-semibold m-3">
         <p className="pl-8 relative bottom-2">{user.user_name}</p>
         <div className='flex items-center'>
-          <div class="avatar">
-            <div class="w-16 rounded">
+          <div className="avatar">
+            <div className="w-16 rounded">
               <img src={user?.photo_url ? user?.photo_url : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg'} alt="Tailwind-CSS-Avatar-component" />
             </div>
           </div>

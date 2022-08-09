@@ -115,7 +115,7 @@ const AddProduct = () => {
     else if (currentUserRole === 'admin') {
       setUserRole('admin');
     }
-  }, [getUser])
+  }, [getUser]);
 
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);

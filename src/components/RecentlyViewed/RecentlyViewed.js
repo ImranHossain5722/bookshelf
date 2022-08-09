@@ -67,7 +67,6 @@ const RecentlyViewed = () => {
             spaceBetween={24}
             slidesPerGroup={size}
             loop={true}
-            loopFillGroupWithBlank={true}
             navigation={false}
             modules={[Autoplay, Navigation]}
             autoplay={true}
@@ -122,7 +121,6 @@ const RecentlyViewed = () => {
               </SwiperSlide>
             ))}
           </Swiper>
->>>>>>> 00afa1469c66588d4a51bb9b73b3578a2dd928c8
         </div>
       </div>
     </div>

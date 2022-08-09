@@ -1,0 +1,305 @@
+footer.home_six_footer {
+  background: #024701;
+  .footer_top_area {
+    padding-top: 50px;
+    padding-bottom: 55px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .main_footer_wrap {
+    padding-top: 97px;
+    padding-bottom: 60px;
+    @media #{"(max-width: 767.98px)"} {
+      padding-top: 71px;
+      padding-bottom: 15px;
+    }
+  }
+  .footer_widget {
+    margin-bottom: 30px;
+    .footer_logo {
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      color: #7e7e7e;
+      line-height: 1.88;
+      font-family: "Poppins", sans-serif;
+    }
+    .mail_text {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 400;
+      &:hover {
+        color: #27ae61;
+      }
+    }
+    p.synUp_text {
+      font-size: 14px;
+      color: #aaaaaa;
+      font-weight: 500;
+    }
+    .footer_title {
+      h3 {
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 21px;
+        text-transform: uppercase;
+        color: #fff;
+      }
+    }
+    .footer_title2 {
+      h3 {
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 13px;
+        text-transform: uppercase;
+        color: #fff;  
+      }
+    }
+    .footer_links {
+      li {
+        a {
+          font-size: 14px;
+          font-weight: 500;
+          color: #aaaaaa;
+          font-family: "Poppins", sans-serif;
+          line-height: 2.14;
+          &:hover {
+            color: #27ae61;
+          }
+        }
+      }
+    }
+    .address_list {
+      max-width: 270px;
+      p {
+        font-size: 14px;
+        color: #656565;
+        margin-bottom: 0;
+        line-height: 1.86;
+        font-weight: 500;
+        margin-bottom: 15px;
+        &:not(:last-child) {
+          margin-bottom: 0;
+        }
+        span {
+          font-weight: 700;
+        }
+      }
+    }
+    .large_address {
+      font-size: 40px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1px;
+      display: flex;
+      align-items: flex-start;
+      line-height: 0.75;
+      span {
+        font-size: 20px;
+        font-weight: 500;
+        margin-right: 5px;
+        display: inline-block;
+      }
+    }
+    .footer_opening_time {
+      margin: 15px 0 11px 0;
+      padding-bottom: 17px;
+      border-bottom: 1px solid #151515;
+      p {
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.77;
+        color: #666666;
+      }
+    }
+    .help_text {
+      p {
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        a {
+          color: #27ae61;
+        }
+      }
+    }
+    .address_text {
+      font-size: 15px;
+      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+      color: #aaaaaa;
+      margin-bottom: 5px;
+      line-height: 1.73;
+      max-width: 226px;
+    }
+  }
+  .footer_contact {
+    display: flex;
+    align-items: center;
+    grid-gap: 15px;
+    .thumb {
+      img {
+        width: 100%;
+      }
+    }
+    .contact_num {
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        text-transform: uppercase;
+      }
+      h5 {
+        font-size: 30px;
+        font-weight: 900;
+        color: #44a648;
+        margin-bottom: 0;
+        @media #{"(max-width: 767.98px)"} {
+          font-size: 25px;
+        }
+        span {
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  .footer_border {
+    border-top: 1px solid #1c5a1b;
+    border-bottom: 1px solid #1c5a1b;
+    padding-top: 31px;
+    padding-bottom: 7px;
+    margin-bottom: 39px;
+  }
+  .copyright_area {
+    padding-bottom: 47px;
+    @media #{"(max-width: 767.98px)"} {
+      padding-bottom: 8px;
+    }
+
+    .copy_right_text {
+      margin-bottom: 30px;
+      p {
+        margin-bottom: 0;
+        font-size: 16px;
+        color: #ffffff;
+        font-weight: 400;
+        font-family: "Poppins", sans-serif;
+        text-transform: capitalize;
+        a {
+          color: #27ae61;
+        }
+      }
+    }
+    .payment_imgs {
+      text-align: right;
+      margin-bottom: 30px;
+      img {
+        @media #{"(max-width: 575.98px)"} {
+          width: 100%;
+        }
+        @media #{"(max-width: 767.98px)"} {
+          width: 100%;
+        }
+      }
+
+      @media #{"(max-width: 767.98px)"} {
+        text-align: left;
+      }
+    }
+  }
+  // newsletter
+  .theme_mailChimp {
+    background: transparent;
+    flex-wrap: nowrap;
+    border-radius: 5px;
+    position: relative;
+  }
+  .theme_mailChimp form {
+    display: grid;
+    grid-template-columns: auto 120px;
+    grid-gap: 10px;
+    border: 0;
+    border-radius: 0px;
+  }
+
+  @media (max-width: 575.98px) {
+    .theme_mailChimp form {
+      grid-template-columns: auto;
+    }
+  }
+
+  .theme_mailChimp .form-control {
+    background: #fff;
+    color: #00124e;
+    font-weight: 400;
+    padding-left: 20px;
+    border-radius: 0;
+    height: 50px;
+    border: 0;
+    font-family: "Cerebri Sans";
+    font-size: 14px;
+    border: 1px solid #f1f1f1;
+    border-right: 0;
+    border-radius: 5px;
+  }
+
+  @media (max-width: 575.98px) {
+    .theme_mailChimp .form-control {
+      border-radius: 5px;
+    }
+  }
+
+  .theme_mailChimp .form-control::placeholder {
+    color: #676e8b;
+    font-size: 14px;
+  }
+  .theme_mailChimp .form-control:focus {
+    box-shadow: none !important;
+    z-index: 1;
+  }
+  .theme_mailChimp button {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    background: #44a648;
+    text-transform: uppercase;
+    border-radius: 5px !important;
+    padding: 0 18px;
+    box-shadow: none !important;
+    position: relative;
+    right: 0;
+    top: 0;
+    border: 0;
+    height: 50px;
+    font-family: "Cerebri Sans";
+  }
+
+  @media (max-width: 575.98px) {
+    .theme_mailChimp button {
+      border-radius: 5px !important;
+    }
+  }
+
+  .theme_mailChimp .info {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    top: 110%;
+  }
+}
+.social__Links3 a {
+  font-size: 16px;
+  color: #fff;
+}
+
+.social__Links3 a:not(:last-child) {
+  margin-right: 25px;
+}
+.social__Links3 a:hover {
+  color: #44a648;
+}

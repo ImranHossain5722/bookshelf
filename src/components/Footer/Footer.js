@@ -2,73 +2,195 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
 import logo from "../../Assets/images/Logo/bookshelfWhite-removebg-preview.png";
+
 import auth from "../../firebase.init";
+import chat from "../../Assets/images/footer/chat.png";
+import payment_img from "../../Assets/images/footer/payment_img.png";
+import "./footer.scss";
 const Footer = () => {
   const [user] = useAuthState(auth);
   const userUid  = user?.uid
 
   return (
-    <div
-      style={{
-        backgroundColor: "#293661",
-        borderRadius: "30px 30px 0px 0px ",
-      }}
-    >
-      <footer
-        className="footer p-10 
-
-        "
-      >
-        <div>
-          <div className="">
-            <img className="" src={logo} />
+    <>
+      <footer className="home_six_footer">
+        <div className="main_footer_wrap">
+          <div className="container mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="footer_widget">
+                <div className="footer_title">
+                  <h3>QUICK MENU</h3>
+                </div>
+                <ul className="footer_links">
+                  <li>
+                    <NavLink to="/contact">Contact Us</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/about">About Us</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/faq">FAQ</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/privecy_policy">Privacy policy</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/termsCondition">Terms of use</NavLink>
+                  </li>
+                  <li>
+                    <a className="text-white">Return policy</a>
+                  </li>
+                </ul>
+              </div>
+              <div className="footer_widget">
+                <div className="footer_title">
+                  <h3>Partner</h3>
+                </div>
+                <ul className="footer_links">
+                  <li>
+                    <NavLink to="/became">Became Author/Publisher</NavLink>
+                  </li>
+                  <li>
+                    <a href="#">Affiliate</a>
+                  </li>
+                  <li>
+                    <a href="#">Gift Vouchers</a>
+                  </li>
+                  <li>
+                    <a href="contact.php">Site Map</a>
+                  </li>
+                  <li>
+                    <a href="#">Accessories</a>
+                  </li>
+                </ul>
+              </div>
+              <div className="footer_widget">
+                <div className="footer_title">
+                  <h3>MY ACCOUNT</h3>
+                </div>
+                <ul className="footer_links">
+                  <li>
+                    <a href="my_account.php">My Account</a>
+                  </li>
+                  <li>
+                    <a href="order_details.php">Order History</a>
+                  </li>
+                  <li>
+                    <a href="wishlist.php">Wish List</a>
+                  </li>
+                  <li>
+                    <a href="order_details.php">Order History</a>
+                  </li>
+                  <li>
+                    <a href="wishlist.php">Wishlist</a>
+                  </li>
+                </ul>
+              </div>
+              <div className="footer_widget">
+                <div className="footer_title">
+                  <h3>Subscribe to our newsletter</h3>
+                </div>
+                <p className="synUp_text mb-4">
+                  Sign up and get a voucher of worth $250.00
+                </p>
+                <div className="subcribe-form theme_mailChimp">
+                  <form
+                    target="_blank"
+                    action="#"
+                    method="get"
+                    className="subscription relative"
+                  >
+                    <input
+                      name="EMAIL"
+                      className="form-control"
+                      placeholder="Type e-mail address…"
+                      required=""
+                      type="email"
+                    />
+                    <button className="">Join Us</button>
+                    <div className="info"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-white">
-            Our Goal is to reach maximum book lovers <br />and reduce the distance between readers <br />and writers. Become the biggest book readers <br />community. To give the booksellers a virtual<br /> store for selling the books and making <br />the process seamless.
-
-          </p>
         </div>
-        <div className="text-white">
-          <span className="text-white text-xl font-bold">About Us</span>
-          <NavLink to="/contact" className="rounded-lg">
-            Contact Us
-          </NavLink>
-          <NavLink to="/about" className="rounded-lg">
-            About Us
-          </NavLink>
-          <NavLink to="/faq" className="rounded-lg">
-           FAQ
-          </NavLink>
+        <div className="footer_middle_wrap">
+          <div className="container mx-auto">
+            <div className="footer_border ">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="col-xl-4 col-lg-4 col-md-4">
+                  <div className="footer_contact mb_30">
+                    <div className="thumb">
+                      <img className="" src={chat} />
+                    </div>
+                    <div className="contact_num">
+                      <p>CALL US 24/7</p>
+                      <h5>
+                        {" "}
+                        <span>+048</span> 800 456 789
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-3 col-lg-3 col-md-3">
+                  <div className="footer_widget">
+                    <p className="address_text">
+                      9066 Green Lake Drive Chevy Chase, MD 20815
+                    </p>
+                    <a className="mail_text" href="#">
+                      contact@example.com
+                    </a>
+                  </div>
+                </div>
+                <div className="col-xl-2 col-lg-2 col-md-3">
+                  <div className="footer_widget">
+                    <div className="footer_title2">
+                      <h3>Follow us</h3>
+                    </div>
+                    <div className="social__Links3">
+                      <a href="#">
+                        <i className="fab fa-twitter"></i>
+                      </a>
+                      <a href="#">
+                        <i className="fab fa-linkedin-in"></i>
+                      </a>
+                      <a href="#">
+                        <i className="fab fa-instagram"></i>
+                      </a>
+                      <a href="#">
+                        <i className="fab fa-facebook"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-3 col-lg-3 col-md-3">
+                  <div className="footer_widget">
+                    <div className="footer_title2">
+                      <h3>Payment method</h3>
+                    </div>
+                    <img className="img-fluid" src={payment_img} alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="text-white">
-          <span className="text-xl font-bold">Partner</span>
-          <NavLink to="/became" className="rounded-lg">
-            Became Author/Publisher
-          </NavLink>
-          <a className="link link-hover">Affiliate</a>
-        </div>
-        <div className="text-white">
-          <span className="text-xl font-bold text-white">Legal</span>
-          <NavLink to="/privecy_policy" className="rounded-lg">
-          Privacy policy
-          </NavLink>
-          <NavLink to="/termsCondition" className="rounded-lg">
-          Terms of use
-          </NavLink>
-          <a className="text-white">Return policy</a>
-        </div>
-        <div>
-          <span className=" text-xl font-bold text-white ">Follow Us</span>
-          <div class="grid grid-flow-col gap-4">
-            <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current text-white"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg></a>
-            <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current text-white "><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg></a>
-            <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current text-white"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+        <div className="copyright_area">
+          <div className="container mx-auto">
+            <div className="grid">
+              <div className="copy_right_text text-center">
+                <p>
+                  © 2022 <a href="#"> BookSelf .</a> All rights reserved. Made
+                  By <a href="#">BookSelf</a>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 };
 
 export default Footer;
-

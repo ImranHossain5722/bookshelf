@@ -16,4 +16,12 @@ test("input shuld be intaily",()=>{
  
 })
 
+test("submit Button",()=>{
+
+  const submitButton= screen.getByRole("button",{
+    name : /submit/i,
+  })
+  userEvent.click(submitButton)
+})
+
 

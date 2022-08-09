@@ -4,6 +4,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from '../../firebase.init';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 
 const CartButton = ({ _id }) => {
@@ -19,21 +20,13 @@ const CartButton = ({ _id }) => {
       }
     }
 
-    const options = {
-      method: 'POST',
-      url: 'https://book-shelf-webapp.herokuapp.com/add-to-cart',
-      params: cartData
-    };
-    axios.request(options).then(function (response) {
-    console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
+    if(userId){
 
-
-console.log(cartData)
-    axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart', cartData).then(data => console.log(data))
-    // console.log(cartData)
+      axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data =>{toast.success('successfully added to cart')})
+  }else{
+      console.log("user id not found", userId)
+  }
+    console.log(cartData)
   }
 
 

@@ -10,12 +10,12 @@ const Faq = () => {
           </h3>
           <div className="mb-[0px]">
             {/* single collapse  */}
-            <div class="collapse ">
+            <div className="collapse ">
               <input type="checkbox" className="p-0" />
-              <div class="collapse-title text-base font-medium font-base  border-b-[1px] p-0 border-[#e1e2e6] d-flex items-center flex ">
+              <div className="collapse-title text-base font-medium font-base  border-b-[1px] p-0 border-[#e1e2e6] d-flex items-center flex ">
                 Are your product for commercial use?
               </div>
-              <div class="collapse-content   mt-4 p-0">
+              <div className="collapse-content   mt-4 p-0">
                 <div className="collaspe_content bg-[#f7f7f7] p-4 ">
                   <h4 className="font-base font-medium text-black mb-4">
                     Placing your order to cancel or change your mind completely
@@ -32,12 +32,12 @@ const Faq = () => {
               </div>
             </div>
             {/* single collapse  */}
-            <div class="collapse ">
+            <div className="collapse ">
               <input type="checkbox" className="p-0" />
-              <div class="collapse-title text-base font-medium font-base  border-b-[1px] p-0 border-[#e1e2e6] d-flex items-center flex ">
+              <div className="collapse-title text-base font-medium font-base  border-b-[1px] p-0 border-[#e1e2e6] d-flex items-center flex ">
                 Which show our newest and best-selling pieces in real life?
               </div>
-              <div class="collapse-content   mt-4 p-0">
+              <div className="collapse-content   mt-4 p-0">
                 <div className="collaspe_content bg-[#f7f7f7] p-4 ">
                   <h4 className="font-base font-medium text-black mb-4">
                     Placing your order to cancel or change your mind completely
@@ -54,12 +54,12 @@ const Faq = () => {
               </div>
             </div>
             {/* single collapse  */}
-            <div class="collapse ">
+            <div className="collapse ">
               <input type="checkbox" className="p-0" />
-              <div class="collapse-title text-base font-medium font-base  border-b-[1px] p-0 border-[#e1e2e6] d-flex items-center flex ">
+              <div className="collapse-title text-base font-medium font-base  border-b-[1px] p-0 border-[#e1e2e6] d-flex items-center flex ">
                 Can you provide a fabric sample?
               </div>
-              <div class="collapse-content   mt-4 p-0">
+              <div className="collapse-content   mt-4 p-0">
                 <div className="collaspe_content bg-[#f7f7f7] p-4 ">
                   <h4 className="font-base font-medium text-black mb-4">
                     Placing your order to cancel or change your mind completely
@@ -76,12 +76,12 @@ const Faq = () => {
               </div>
             </div>
             {/* single collapse  */}
-            <div class="collapse ">
+            <div className="collapse ">
               <input type="checkbox" className="p-0" />
-              <div class="collapse-title text-base font-medium font-base  border-b-[1px] p-0 border-[#e1e2e6] d-flex items-center flex ">
+              <div className="collapse-title text-base font-medium font-base  border-b-[1px] p-0 border-[#e1e2e6] d-flex items-center flex ">
                 Do you have all your items on display in your showroom?
               </div>
-              <div class="collapse-content   mt-4 p-0">
+              <div className="collapse-content   mt-4 p-0">
                 <div className="collaspe_content bg-[#f7f7f7] p-4 ">
                   <h4 className="font-base font-medium text-black mb-4">
                     Placing your order to cancel or change your mind completely

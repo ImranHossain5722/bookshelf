@@ -12,7 +12,7 @@ const AllUsers = () => {
   const [loading,setLoading] = useState(false)
 
  
-
+console.log("users",users)
   useEffect(() => {
     
     const fetchUsers = async () => {
@@ -22,8 +22,10 @@ const AllUsers = () => {
       setLoading(false);
   
     };
-  
+  if(users.length === 0 ){ 
+    console.log("user is not present")
     fetchUsers();
+  }
   }, [])
 
   if(loading){
@@ -43,8 +45,8 @@ const AllUsers = () => {
         {users?.map(user => <div className="mx-[12px] card user-shadow  w-[370px] h-[160px] p-7 font-semibold m-3 bg-white">
           <p className="pl-8 relative bottom-2 text-secondary text-lg font-semibold capitalize ">{user.user_name}</p>
           <div className='flex items-center'>
-            <div class="avatar">
-              <div class="w-16 rounded">
+            <div className="avatar">
+              <div className="w-16 rounded">
                 <img src={user?.user_photo_url ? user?.user_photo_url : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg'} alt="user photo" />
               </div>
             </div>

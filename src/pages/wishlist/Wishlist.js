@@ -5,6 +5,7 @@ import { MdShoppingCart } from 'react-icons/md'
 import { RiDeleteBack2Fill} from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Wishlist = () => {
     const books =  useSelector((state) => state.wishlist.wishlistBooks)
@@ -17,18 +18,21 @@ const Wishlist = () => {
         cart_data : {
             book : id,
             qnt : 2
-        }
+        } 
     }
-    axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data => console.log(data))
-    console.log(cartData)
+    if(userId){
+
+        axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data =>{toast.success('successfully added to cart')})
+    }
+   
       }  
     return (
         <div className="my-5">
             <p><FaHeart className='text-5xl text-primary mx-auto' /></p>
             <p className="text-5xl text-center mb-3">My Whishlist</p>
             <div className="w-full p-5">
-                <div class="overflow-auto  h-[460px]">
-                    <table class="table w-full ">
+                <div className="overflow-auto  h-[460px]">
+                    <table className="table w-full ">
                         <thead>
                             <tr>
                                 <th className="rounded-none">products</th>
@@ -44,8 +48,8 @@ const Wishlist = () => {
                                 <td className="border-[#e1e2e6]">
                                     <div className="product gap-2">
 
-                                        <div class="avatar">
-                                            <div class="w-20 rounded">
+                                        <div className="avatar">
+                                            <div className="w-20 rounded">
                                                 <img src={book.book?.book_cover_photo_url} />
                                             </div>
                                         </div>

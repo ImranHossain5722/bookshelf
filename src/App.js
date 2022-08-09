@@ -62,12 +62,20 @@ function App() {
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
 
+  const userUid  = user?.uid
   useEffect(() => {
-    const userUid = user?.uid;
-    fetch(`https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`)
-      .then((res) => res.json())
-      .then((data) => dispatch(newUser(data[0])));
-  }, [user?.email]);
+    if(userUid){
+
+      fetch(`https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`)
+        .then((res) => res.json())
+        .then((data) =>{
+          console.log(data)
+          dispatch(newUser(data[0]))
+        }
+        );
+    }
+  }, [user]); 
+
 
   useEffect(() => {
     if (pathname.includes("/dashboard")) {

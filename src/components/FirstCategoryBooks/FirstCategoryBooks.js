@@ -18,6 +18,7 @@ import useWindowDimensions from "../windowSize/windowSize";
 import CartButton from "../CartButton/CartButton";
 import { useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 
 const FirstCategoryBooks = () => {
   // const [books, setBooks] = useState([]);
@@ -72,7 +73,6 @@ const FirstCategoryBooks = () => {
           spaceBetween={30}
           slidesPerGroup={size}
           loop={true}
-          loopFillGroupWithBlank={true}
           navigation={true}
           modules={[Navigation]}
           className="mySwiper px-7 py-6"
@@ -93,9 +93,7 @@ const FirstCategoryBooks = () => {
                     <button className="text-3xl text-white hover:text-primary duration-500">
                       <FaEye />
                     </button>
-                    <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
-                      <FaHeart />
-                    </button>
+                    <Wishlistbutton _id={book._id} />
                     <CartButton _id={book._id} />
                   </div>
                   {/* navigate to book details page */}

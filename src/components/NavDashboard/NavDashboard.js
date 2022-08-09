@@ -68,7 +68,7 @@ const NavDashboard = ({ children }) => {
             </div>
             {/* mobile button */}
             <div className="flex-none lg:hidden mr-5">
-              <label for="my-drawer-3" className="btn btn-square btn-ghost">
+              <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

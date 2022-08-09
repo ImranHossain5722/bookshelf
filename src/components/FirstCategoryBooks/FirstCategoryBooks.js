@@ -73,7 +73,6 @@ const FirstCategoryBooks = () => {
           spaceBetween={30}
           slidesPerGroup={size}
           loop={true}
-
           navigation={true}
           modules={[Navigation]}
           className="mySwiper px-7 py-6"

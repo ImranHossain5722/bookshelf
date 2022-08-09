@@ -27,3 +27,24 @@ test("should be able to type an email", () => {
   expect(emailInput.value).toBe("imran4@gmail.com"); 
 
 });
+
+test("should show email error message on invalid email",()=>{
+
+  render(<Newsletter/>)
+  const emailErrorElement =screen.queryByText(/the email you input id invalid/i)
+  
+  const emailInput = screen.getByRole("textbox", {
+    name: /email/i,
+  });
+  const submitBtn =screen.getByRole("button",{
+    name:/submit/i
+  })
+
+  expect(emailErrorElement).not.toBeInTheDocument()
+ 
+  userEvent.type(emailInput,"imran.com")
+ 
+
+ userEvent.click(submitBtn)
+ expect(emailErrorElement).toBeInTheDocument()
+});

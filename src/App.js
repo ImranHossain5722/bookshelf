@@ -69,7 +69,7 @@ function App() {
       fetch(`https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`)
         .then((res) => res.json())
         .then((data) =>{
-          console.log(data)
+        
           dispatch(newUser(data[0]))
         }
         );

@@ -40,7 +40,7 @@ const Newsletter = () => {
                 />
               </div>
           </div>
-          <button class="btn btn-primary text-white mt-3">Submit</button>
+          <button type='submit' class="btn btn-primary text-white mt-3">Submit</button>
           </div>
 
         </div>

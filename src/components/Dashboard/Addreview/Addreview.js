@@ -33,20 +33,20 @@ const Addreview = () => {
         {/* row-1 */}
         <div className='flex justify-center gap-7'>
           <div>
-            <label class="font-semibold pl-1">Name</label>
-            <input type="text"  value={user?.user_name} disabled={true} class="input input-bordered bg-white w-full max-w-xs mt-2" />
+            <label className="font-semibold pl-1">Name</label>
+            <input type="text"  value={user?.user_name} disabled={true} className="input input-bordered bg-white w-full max-w-xs mt-2" />
           </div> 
           <div>
-            <label class="font-semibold pl-1">Email</label>
-            <input type="text" value={user?.user_email} disabled={true} class="input input-bordered bg-white w-full max-w-xs mt-2" />
+            <label className="font-semibold pl-1">Email</label>
+            <input type="text" value={user?.user_email} disabled={true} className="input input-bordered bg-white w-full max-w-xs mt-2" />
           </div>
         </div>
         {/* row-2 */}
         <div className='mt-4'>
-          <label class="font-semibold pl-1">Add a Review</label>
+          <label className="font-semibold pl-1">Add a Review</label>
           <textarea name="" id="" cols="30" rows="40" {...register("review", {
             required: 'required*',
-          })} placeholder="Write the words of your heart" class="input input-bordered bg-white w-full mt-2 h-[150px]" />
+          })} placeholder="Write the words of your heart" className="input input-bordered bg-white w-full mt-2 h-[150px]" />
           {errors?.review && <p><small className='pl-1 text-red-600'>{errors?.review?.message}</small></p>}
           
         </div>

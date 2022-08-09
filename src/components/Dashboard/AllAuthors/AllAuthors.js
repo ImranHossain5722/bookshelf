@@ -9,14 +9,6 @@ const AllAuthors = () => {
   const dispatch = useDispatch();
   const [loading,setLoading] = useState(false)
 
-
-  // const getUsers = () => {
-  //   fetch('https://book-shelf-webapp.herokuapp.com/all-authors').then(res => res.json()).then(data => dispatch(allAuthors(data)))
-  // }
-
-  // useEffect(() => {
-  //   getUsers()
-  // }, [])
   useEffect(() => {
     
     const fetchPosts = async () => {
@@ -27,7 +19,9 @@ const AllAuthors = () => {
   
     };
   
-    fetchPosts();
+    if(users.length === 0 ){ 
+      fetchPosts();
+    }
   }, [])
 
   if(loading){

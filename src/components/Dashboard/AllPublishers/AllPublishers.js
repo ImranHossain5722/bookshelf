@@ -25,8 +25,9 @@ const AllPublishers = () => {
         setLoading(false);
   
     };
-  
-    fetchPosts();
+    if(users.length === 0 ){ 
+      fetchPosts();
+    }
   }, [])
 
   if(loading){

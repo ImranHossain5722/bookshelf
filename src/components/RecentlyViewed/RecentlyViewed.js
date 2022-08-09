@@ -56,7 +56,7 @@ const RecentlyViewed = () => {
                     spaceBetween={30}
                     slidesPerGroup={size}
                     loop={true}
-                    loopFillGroupWithBlank={true}
+                    // loopFillGroupWithBlank={true}
                     navigation={true}
                     modules={[Navigation]}
                     className="mySwiper px-7 py-6"

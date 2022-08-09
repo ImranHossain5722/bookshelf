@@ -1,7 +1,12 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink } from "react-router-dom";
 import logo from "../../Assets/images/Logo/bookshelfWhite-removebg-preview.png";
+import auth from "../../firebase.init";
 const Footer = () => {
+  const [user] = useAuthState(auth);
+  const userUid  = user?.uid
+
   return (
     <div
       style={{

@@ -54,6 +54,7 @@ const PreOrderBooks = () => {
                     slidesPerView={size}
                     spaceBetween={30}
                     loop={true}
+                    slidesPerGroup={size}
                     navigation={true}
                     modules={[Navigation]}
                     className="mySwiper px-7 py-6"

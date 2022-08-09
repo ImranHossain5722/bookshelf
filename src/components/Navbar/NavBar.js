@@ -32,12 +32,26 @@ const NavBar = ({ children }) => {
   const currentUser = useSelector((state) => state?.newUser?.user)
   const userId = currentUser?._id
   // dispatch(cartBooks 
-  useEffect(() => {
-    if (userId) {
-      axios.get(`https://book-shelf-webapp.herokuapp.com/get-cart-data?id=${userId}`).then(data => dispatch(cartBooks(data.data.user_cart)))
-      axios.get(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${userId}`).then(data => dispatch(whistlist(data.data[0].user_wishlist)))
+  useEffect( () => {
+    const fetchData = async () => {
+      if (userId) {
+  await  axios.get(`https://book-shelf-webapp.herokuapp.com/get-cart-data?id=${userId}`).then(data => dispatch(cartBooks(data.data.user_cart)))
+
+  }
     }
-  }, [currentUser, wishlistBook, cartBook])
+    fetchData()
+  }, [currentUser, cartBook])
+  useEffect( () => {
+    const fetchData = async () => {
+      if (userId) {
+ 
+
+   await axios.get(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${userId}`).then(data => dispatch(whistlist(data.data[0].user_wishlist)))
+  }
+    }
+    fetchData()
+  }, [currentUser, wishlistBook])
+  
 
   const [showModal, setShowModal] = useState('');
 

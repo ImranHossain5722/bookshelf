@@ -18,6 +18,7 @@ import useWindowDimensions from "../windowSize/windowSize";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CartButton from "../CartButton/CartButton";
+import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 
 
 const PreOrderBooks = () => {
@@ -54,6 +55,7 @@ const PreOrderBooks = () => {
                     slidesPerView={size}
                     spaceBetween={30}
                     loop={true}
+                    slidesPerGroup={size}
                     navigation={true}
                     modules={[Navigation]}
                     className="mySwiper px-7 py-6"
@@ -72,9 +74,7 @@ const PreOrderBooks = () => {
                                         <button className="text-3xl text-white hover:text-primary duration-500">
                                             <FaEye />
                                         </button>
-                                        <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
-                                            <FaHeart />
-                                        </button>
+                                      <Wishlistbutton _id={book._id} />
                                        <CartButton _id={book._id}/>
                                     </div>
                                     <div className="w-44 mt-2">

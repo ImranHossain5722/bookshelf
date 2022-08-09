@@ -12,7 +12,7 @@ const AllUsers = () => {
   const [loading,setLoading] = useState(false)
 
  
-
+console.log("users",users)
   useEffect(() => {
     
     const fetchUsers = async () => {
@@ -22,8 +22,10 @@ const AllUsers = () => {
       setLoading(false);
   
     };
-  
+  if(users.length === 0 ){ 
+    console.log("user is not present")
     fetchUsers();
+  }
   }, [])
 
   if(loading){

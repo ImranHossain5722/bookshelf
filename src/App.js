@@ -72,7 +72,7 @@ function App() {
           dispatch(newUser(data[0]));
         });
     }
-  }, [user]);
+  }, [user, userUid]);
 
   useEffect(() => {
     if (pathname.includes("/dashboard")) {

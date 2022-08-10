@@ -5,12 +5,11 @@ const useViewAs = (role) => {
     const { getUser } = useGetUserData();
     const userId = getUser[0]?._id;
 
-    console.log(role);
+    // console.log(role);
     const updatedRole = {
         "user_role": role
     };
-    axios.post('https://book-shelf-webapp.herokuapp.com/update-user-role?id=user_id', updatedRole).then(data => console.log('user role response', data))
-
+    axios.post(`https://book-shelf-webapp.herokuapp.com/update-user-role?id=${role}`, updatedRole).then(data => { })
 
     return { userId };
 };

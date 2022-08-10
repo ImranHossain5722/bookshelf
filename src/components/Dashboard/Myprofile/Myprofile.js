@@ -17,7 +17,7 @@ const Myprofile = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch();
 
-  const { getUser, userRole } = useGetUserData();
+  const { getUser, userRole, setUserRole } = useGetUserData();
 
 
   useEffect(() => {
@@ -70,8 +70,20 @@ const Myprofile = () => {
       updateData(updatedProfileData);
     }
   }
-  const [updateRol, setUpdateRol] = useState('');
-  const updateRole = useViewAs(updateRol);
+
+  const updateRole = role => {
+    const userId = getUser[0]?._id;
+
+
+    const updatedRole = {
+      "user_role": role
+    };
+    axios.patch(`https://book-shelf-webapp.herokuapp.com/update-user-role?id=${userId}`, updatedRole)
+      .then(data => {
+        toast.success(`You are now viewing as ${role}`);
+      })
+  }
+
 
 
 
@@ -80,9 +92,10 @@ const Myprofile = () => {
       {/* View As  */}
       <div>
         <span className='ml-6 text-2xl font-bold'>View As </span>
-        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => updateRole(setUpdateRol('user'))}>User</button>
-        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => updateRole(setUpdateRol('author'))}>Auther</button>
-        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => updateRole(setUpdateRol('publisher'))}>Publiser</button>
+        <button className={userRole === "user" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('user')} disabled={userRole === "user" ? true : false}>User</button>
+        <button className={userRole === "author" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('author')} disabled={userRole === "author" ? true : false}>Auther</button>
+        <button className={userRole === "publisher" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('publisher')} disabled={userRole === "publisher" ? true : false}>Publiser</button>
+        <button className={userRole === "admin" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-grey ml-2 mt-2 text-white'} onClick={() => updateRole('admin')} disabled={userRole === "admin" ? true : false}>Admin</button>
       </div>
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
       <div className=" flex items-center justify-center pb-10">
@@ -304,7 +317,7 @@ const Myprofile = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

@@ -17,7 +17,7 @@ const Newsletter = () => {
           <div className="hero-content text-center text-neutral-content py-24">
             <div className="max-w-lg">
               <h1
-                className="mb-5 text-center text-2xl lg:text-4xl md:text-lg font-bold "
+             className="mb-5 text-center text-2xl lg:text-4xl md:text-lg font-bold "
                 style={{ color: "#00124E" }}
               >
                 {" "}
@@ -27,23 +27,18 @@ const Newsletter = () => {
                 Join Our Subscriptions. Connected our offer related update. also
                 we can update every user about to New books Collections.
               </p>
-              <div className="grid grid-cols-2">
-                <div className="form-control mx-4 mb-10">
-                  <input
-                    type="text"
-                    placeholder="Enter your Name"
-                    className="input input-bordered"
-                  />
-                </div>
+              <div className="grid  items-center justify-center">
+              
                 <div className="form-control mx-4">
                   <input
-                    type="text"
+                    type="email"
+                    id="email"
                     placeholder="Enter your Email"
                     className="input input-bordered"
                   />
                 </div>
               </div>
-              <button className="btn btn-primary text-white mt-3">
+              <button type="submit" className="btn btn-primary text-white mt-3">
                 Submit
               </button>
             </div>

@@ -9,7 +9,7 @@ import sliderBanner from "../../Assets/images/slider__bag.png";
 import "./Aboutus.css";
 const AboutUs = () => {
   return (
-    <div className="">
+    <div className="about-cl">
       <div
         style={{
           background: `url(${aboutBanner})`,
@@ -17,7 +17,7 @@ const AboutUs = () => {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
-        className="h-96 flex items-center justify-center "
+        className="h-96 flex items-center justify-center  "
       >
         <div className=" ">
           <h1 className=" text-5xl font-bold text-white">About Us</h1>

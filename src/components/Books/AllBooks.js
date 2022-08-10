@@ -16,6 +16,7 @@ const AllBooks = () => {
   // const [size, setSize] = useState(10);
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostPerPage] = useState(10);
@@ -31,7 +32,29 @@ const AllBooks = () => {
     };
 
     fetchPosts();
+
+    // get all categories data 
+    const loadCategories = async () => {
+      const categoriesData = await axios.get('https://book-shelf-webapp.herokuapp.com/all-categories');
+      setCategories(categoriesData.data);
+    };
+
+    loadCategories();
+
+    console.log(categories);
   }, []);
+
+  const showOptions = document.getElementById('show-options');
+
+  console.log(showOptions);
+
+  const toggleOptions = () => {
+    showOptions.classList.remove('hidden');
+    console.log('toggle is working');
+  }
+
+
+
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -47,6 +70,11 @@ const AllBooks = () => {
   for (let i = 1; i <= Math.ceil(posts?.length / postsPerPage); i++) {
     pageNumbers.push(i);
   }
+
+
+
+
+
   return (
     <div
       style={{ background: "#FBF6F6" }}
@@ -54,12 +82,21 @@ const AllBooks = () => {
       <div className="md:flex gap-6 items-start ">
         {/* filter options left-side */}
         <div className="border flex-1 mb-4">
+          {/* categories filter */}
           <div className="single_filterBox mb-5 border-b p-6">
-            <div className="flex justify-between items-center">
+            <div onClick={() => toggleOptions()} className="flex justify-between items-center cursor-pointer">
               <h3 className="text-xl font-semibold capitalize">categories</h3>
               <FaPlus />
             </div>
-
+            <ul id="show-options" className="hidden mt-6">
+              {
+                categories?.map(singleCg =>
+                  <li key={singleCg._id} className="flex justify-between items-center mt-4">
+                    <p>{singleCg.category_title}</p>
+                    <span>(1)</span>
+                  </li>)
+              }
+            </ul>
           </div>
         </div>
 

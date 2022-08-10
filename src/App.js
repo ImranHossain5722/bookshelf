@@ -50,7 +50,7 @@ import ViewBySingleCategory from "./components/FirstCategoryBooks/ViewBySingleCa
 import AboutUs from "./pages/AboutUs/AboutUs";
 import { newUser } from "./components/Redux/actions/bookActions";
 import { useDispatch } from "react-redux";
-import CommingSoon from "./components/ommingSoon/CommingSoon";
+import CommingSoon from "./components/CommingSoon/CommingSoon";
 import MyWishlist from "./components/Dashboard/MyWishlist/MyWishlist";
 
 // initialize aos

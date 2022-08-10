@@ -34,7 +34,16 @@ const Cart = () => {
       dispatch(cartdata(data))
     console.log(data)
   }
- 
+ const deleteCart = (id) => {
+console.log(id)
+const cart = user.user_cart
+const match = cart.filter(e => e.book ===id)
+const cartId = match[0]._id
+  if(id){
+    axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-cart?cid=${cartId}`)
+  }
+  
+ }
   
   return (
     <div className="pt-[60px] md:pt-[80px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">
@@ -99,7 +108,7 @@ const Cart = () => {
                     ${book.book?.book_price * book?.qnt}
                   </td>
                   <td className="border-[#e1e2e6]">
-                    <button className="btn btn-error text-white">delete</button>
+                    <button className="btn btn-error text-white" onClick={() => deleteCart(book.book._id)}>delete</button>
                   </td>
                 </tr>)}
 

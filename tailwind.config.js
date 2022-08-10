@@ -5,7 +5,7 @@ module.exports = {
     themes: [
       {
         light: {
-          primary: "#27AE61",
+          primary: "#0cce6b",
           accent: "#00124E",
           secondary: "#293661",
           "base-100": "#FBF6F6",

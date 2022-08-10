@@ -106,7 +106,7 @@ const RecentlyViewed = () => {
                     </div>
                   </div>
                   <div className="product__meta">
-                    <a href="product_details.php">
+                    <a href="product_details">
                       <h4>{book.title}</h4>
                     </a>
                     <div className="stars">

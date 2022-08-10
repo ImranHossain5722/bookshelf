@@ -10,9 +10,7 @@ const Myorder = () => {
     const [order, setOrders] = useState([])
     const userId = user?._id
     const orders = order.map(item => item)
-    const ordersr = order.map(item => console.log("order", item))
-
-    const dumOrders = orders.map(order => console.log("orders", order))
+ 
 
     useEffect(() => {
         console.log("user", userId)

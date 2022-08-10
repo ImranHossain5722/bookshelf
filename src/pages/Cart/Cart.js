@@ -40,7 +40,7 @@ const cart = user.user_cart
 const match = cart.filter(e => e.book ===id)
 const cartId = match[0]._id
   if(id){
-    axios.delete(`https://book-shelf-webapp.herokuapp.com/delete-cart?cid=${cartId}`)
+    axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-cart?cid=${cartId}`)
   }
   
  }

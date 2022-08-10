@@ -24,6 +24,7 @@ const dispatch = useDispatch()
                         <thead>
                             <tr>
                                 <th className="rounded-none">Transiction Id</th>
+                                <th className="w-[20%] text-end">User Name</th>
                                 <th className="w-full text-center">
                                     order details
                                 </th>

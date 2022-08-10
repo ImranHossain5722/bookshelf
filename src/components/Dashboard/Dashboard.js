@@ -6,7 +6,7 @@ import auth from '../../firebase.init'
 
 
 function Dashboard() {
-  const [user] = useAuthState(auth)
+  // const [user] = useAuthState(auth)
 
   return (
 

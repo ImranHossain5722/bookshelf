@@ -7,18 +7,19 @@ import CartButton from "../CartButton/CartButton";
 import Loading from "../Loading/Loading";
 import { allBooks } from "../Redux/actions/bookActions";
 import Stars from "../Stars/Stars";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaMinus } from "react-icons/fa";
 // import { useQuery } from "react-query";
 
 const AllBooks = () => {
-  const [bookpagi, setBookpagi] = useState([]);
-  const [pageCount, setPageCount] = useState(1);
+  // const [bookpagi, setBookpagi] = useState([]);
+  // const [pageCount, setPageCount] = useState(1);
   // const [size, setSize] = useState(10);
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [hidden, setHidden] = useState(false);
+  const [active, setActive] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostPerPage] = useState(10);
@@ -59,12 +60,13 @@ const AllBooks = () => {
   const toggleShow = (id_options) => {
     if (!hidden) {
       document.querySelector(id_options).classList.remove('hidden');
+      setActive(id_options);
     } else {
       document.querySelector(id_options).classList.add('hidden');
+      setActive('');
     }
   };
 
-  console.log(hidden);
 
 
 
@@ -93,7 +95,7 @@ const AllBooks = () => {
       className=" max-w-[1440px] p-6 w-full mx-auto ">
       <div className="md:flex gap-6 items-start ">
         {/* filter options left-side */}
-        <div className="border flex-1 mb-4">
+        <div className="border-x border-t flex-1">
           {/* ======= categories filter ======= */}
           <div className="single_filterBox border-b p-6">
             <div onClick={() => {
@@ -101,7 +103,7 @@ const AllBooks = () => {
               toggleShow("#show-categories");
             }} className="flex justify-between items-center cursor-pointer">
               <h3 className="text-xl font-semibold capitalize">categories</h3>
-              <FaPlus />
+              {active === '#show-categories' ? <FaMinus /> : <FaPlus />}
             </div>
             <ul id="show-categories" className="hidden mt-6">
               {
@@ -121,7 +123,7 @@ const AllBooks = () => {
               toggleShow("#show-authors");
             }} className="flex justify-between items-center cursor-pointer">
               <h3 className="text-xl font-semibold capitalize">Author</h3>
-              <FaPlus />
+              {active === '#show-authors' ? <FaMinus /> : <FaPlus />}
             </div>
             <ul id="show-authors" className="hidden mt-6">
               {

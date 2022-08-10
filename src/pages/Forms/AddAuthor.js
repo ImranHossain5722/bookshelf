@@ -15,6 +15,9 @@ const AddAuthor = () => {
     const navigate = useNavigate();
     const [phoneNo, setPhoneNo] = useState('');
 
+    const [picture, setPicture] = useState(null);
+    const [imgData, setImgData] = useState(null);
+
 
     if (loading || updating || sending) {
         return <Loading></Loading>
@@ -24,13 +27,19 @@ const AddAuthor = () => {
         toast(`Error: ${error?.message}` || uError?.message)
     }
     let confirmPassError;
-    const authorInfo = {
-        user_name: user?.user?.displayName,
-        user_email: user?.user?.email,
-        user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : phoneNo,
-        user_photo_url: user?.user?.photoURL ? user?.user?.photoURL : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
-        uid: user?.user?.uid
-    };
+
+
+
+    const onChangePicture = e => {
+        if (e.target.files[0]) {
+            setPicture(e.target.files[0]);
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+                setImgData(reader.result);
+            });
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    }
 
 
     const onSubmit = async (data) => {
@@ -43,34 +52,78 @@ const AddAuthor = () => {
             await updateProfile({ displayName: data?.author_name });
             await sendEmailVerification();
             toast('Verification Email Sent');
-            // navigate('/dashboard');
             console.log('user created on firebase');
+            if (user) {
+                const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
+                const image = data?.image[0];
+                const formData = new FormData();
+                formData.append('image', image);
 
+                fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(result => {
+                        if (result.success) {
+                            const imgbbUrl = result?.data?.url;
+                            const authorInfo = {
+                                user_name: user?.user?.displayName,
+                                user_email: user?.user?.email,
+                                user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : phoneNo,
+                                user_photo_url: imgbbUrl ? imgbbUrl : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
+                                uid: user?.user?.uid
+                            };
+                            const postAuthorData = async () => {
+                                await axios.post('https://book-shelf-webapp.herokuapp.com/register-author', authorInfo).then(data => {
+                                    console.log('Server Data', data)
+                                    navigate('/dashboard');
+                                })
+                            }
+                            postAuthorData();
+                        }
+                    })
+
+            } else {
+                console.log('user data not found')
+            }
         }
         else {
             toast('Password and Confirm Password Dose not match');
         }
-        reset();
-    }
-    if (user) {
-        console.log('Got User')
-        const postAuthorData = async () => {
-            await axios.post('https://book-shelf-webapp.herokuapp.com/register-author', authorInfo).then(data => {
-                console.log('Server Data', data)
-                navigate('/dashboard');
-            })
-        }
-        postAuthorData();
 
-    } else {
-        console.log('user data not found')
+
     }
     return (
         <div className="pt-0 pb-12 w-1/2 mx-auto">
             <h2 className='text-center font-bold text-3xl mb-3'>Became an Author</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='flex mx-auto py-2 '>
-                    <div className=' flex-1 ' >
+                <div className='md:flex '>
+                    <div className='md:w-[30%]'>
+                        <div className="form-control w-full ">
+                            <label className="label">
+                                <span className="label-text text-lg">Upload Image</span>
+                            </label>
+                            <input
+                                {...register("image", {
+                                    required: {
+                                        value: true,
+                                        message: "image is Required"
+                                    }
+                                })}
+                                type="file"
+                                onChange={onChangePicture}
+                                placeholder="Update Your Address"
+                                className="input input-bordered w-full pt-[5px] bg-secondary text-white" />
+                            <label className="label">
+                                <span className="label-text-alt text-red-500">{errors.image?.type === 'required' && `${errors?.image?.message}`}</span>
+                            </label>
+                        </div>
+                        <div className="previewProfilePic">
+                            <img className="playerProfilePic_home_tile max-w-[100%] mx-auto max-h-[300px] rounded-3xl" src={imgData ? imgData : "https://virtualpaintbrush.com/vpport/wp-content/uploads/2019/07/M-1984.jpg"} alt='' />
+                        </div>
+                    </div>
+                    <div className=' md:w-[70%] mt-12 md:mt-0  md:ml-12' >
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text text-lg">Author Name</span>

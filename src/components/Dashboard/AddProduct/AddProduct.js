@@ -11,7 +11,7 @@ const AddProduct = () => {
   const [user] = useAuthState(auth);
   const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit, reset } = useForm();
   // console.log(getUser, userRole);
 
 
@@ -115,7 +115,7 @@ const AddProduct = () => {
     else if (currentUserRole === 'admin') {
       setUserRole('admin');
     }
-  }, [getUser])
+  }, [getUser]);
 
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
@@ -152,8 +152,6 @@ const AddProduct = () => {
   }
 
   const onSubmit = data => {
-
-
 
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -194,7 +192,7 @@ const AddProduct = () => {
         }
       })
 
-    // reset();
+    reset();
   };
 
   return (

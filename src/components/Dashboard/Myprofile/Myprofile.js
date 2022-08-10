@@ -10,13 +10,14 @@ import { useDispatch } from 'react-redux';
 import { newUser } from '../../Redux/actions/bookActions';
 import useGetUserData from '../../../hooks/useGetUserData';
 import useViewAs from '../../../hooks/useViewAs';
+import { useState } from 'react';
 const Myprofile = () => {
   const [user] = useAuthState(auth);
   // const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch();
 
-  const { getUser, userRole, setUserRole } = useGetUserData();
+  const { getUser, userRole } = useGetUserData();
 
 
   useEffect(() => {
@@ -69,8 +70,9 @@ const Myprofile = () => {
       updateData(updatedProfileData);
     }
   }
+  const [updateRol, setUpdateRol] = useState('');
+  const updateRole = useViewAs(updateRol);
 
-  const { viewAsUser, viewAsAuthor, viewAsPublisher } = useViewAs();
 
 
   return (
@@ -78,9 +80,9 @@ const Myprofile = () => {
       {/* View As  */}
       <div>
         <span className='ml-6 text-2xl font-bold'>View As </span>
-        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => viewAsUser()}>User</button>
-        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => viewAsAuthor()}>Auther</button>
-        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => viewAsPublisher()}>Publiser</button>
+        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => updateRole(setUpdateRol('user'))}>User</button>
+        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => updateRole(setUpdateRol('author'))}>Auther</button>
+        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => updateRole(setUpdateRol('publisher'))}>Publiser</button>
       </div>
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
       <div className=" flex items-center justify-center pb-10">

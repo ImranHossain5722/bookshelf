@@ -130,6 +130,13 @@ const AddProduct = () => {
     }
   }
 
+  // const cat = ['ffksfd','ksdjfsdf'];
+  // const cat2 = [
+  //   { cat_id:'ffksfd'},
+  //   { cat_id:'ffksfd'},
+  //   { cat_id:'ffksfd'}  ]
+
+
   // const [imgbbUrl, setImgbbUrl] = useState('');
   const [bookCat, setBookCat] = useState([]);
   const getChoosenCategory = (choice) => {

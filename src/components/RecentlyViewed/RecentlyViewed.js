@@ -30,14 +30,26 @@ const RecentlyViewed = () => {
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }, []);
-
+  // for swiper slider
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
   return (
     <div className="bg-white sction_padding">
-      <div className="container mx-auto">
+      <div className="container mx-auto relative ">
         {/* ------title section----- */}
-        <h1 className="text-[30px] lg:text-[40px] font-bold text-[#00124E]">
-          Recently View
-        </h1>
+        <div className="flex justify-between items-center ">
+          <h1 className="text-[30px] lg:text-[40px] font-bold text-[#00124E] section_title">
+            Recently View
+          </h1>
+          <div className="swiperSlide_button_group">
+            <div className="swiper_button swiper_button_prev" ref={prevRef}>
+              <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div className="swiper_button swiper_button_next" ref={nextRef}>
+              <i class="fa-solid fa-angle-right"></i>
+            </div>
+          </div>
+        </div>
 
         {/* ------categories slider----- */}
         <div className="mt-8">
@@ -58,11 +70,20 @@ const RecentlyViewed = () => {
             }}
             spaceBetween={24}
             loop={true}
-            navigation={false}
+            navigation={{
+              prevEl: "#prev_slide",
+              nextEl: "#next_slide",
+            }}
             modules={[Autoplay, Navigation]}
             autoplay={true}
             className="mySwiper"
             style={{ "--swiper-theme-color": "#27AE61" }}
+            onInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }}
           >
             {books?.map((book) => (
               <SwiperSlide key={book._id}>

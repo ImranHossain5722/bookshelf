@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 // images
 import img1 from "../../Assets/images/category-images/Open Book.png";
@@ -18,7 +18,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Navigation } from "swiper";
+import { Pagination, Navigation, Autoplay } from "swiper";
 import useWindowDimensions from "../windowSize/windowSize";
 import { useSelector } from "react-redux";
 import Stars from "../Stars/Stars";
@@ -81,79 +81,105 @@ const Categorys = () => {
       setSize(1);
     }
   }, [width]);
-
+  // for swiper slider
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
   return (
-    <div className="mt-[60px] lg:mt-[120px]">
+    <div className="container mx-auto">
       {/* ------title section----- */}
-      <div className="text-center">
-        <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold">
-          Would you like to see any particular books?
-        </h2>
-        <p className="text-xl text-[#00124E] font-bold">
-          Select category to view books of choice - maximum{" "}
-          <span className="text-primary">2</span>
-        </p>
+      <div className="flex justify-between items-center mb-4">
+        <div className="">
+          <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold capitalize ">
+            particular books
+          </h2>
+          <p className="text-xl text-[#00124E] font-normal">
+            books of choice - maximum <span className="text-primary">2</span>
+          </p>
+        </div>
+        <div className="swiperSlide_button_group">
+          <div className="swiper_button swiper_button_prev" ref={prevRef}>
+            <i class="fa-solid fa-angle-left"></i>
+          </div>
+          <div className="swiper_button swiper_button_next" ref={nextRef}>
+            <i class="fa-solid fa-angle-right"></i>
+          </div>
+        </div>
       </div>
-
       {/* ------categories slider----- */}
-      <div className="bg-white max-w-[1240px] mx-auto mt-14 py-16">
+
+      <div>
         <Swiper
-          slidesPerView={size}
-          spaceBetween={30}
-          slidesPerGroup={size}
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            992: {
+              slidesPerView: 4,
+            },
+            1500: {
+              slidesPerView: 4,
+            },
+          }}
+          spaceBetween={24}
           loop={true}
-          loopFillGroupWithBlank={true}
-          navigation={true}
-          modules={[Navigation]}
-          className="mySwiper px-6"
+          navigation={{
+            prevEl: "#prev_slide",
+            nextEl: "#next_slide",
+          }}
+          modules={[Autoplay, Navigation]}
+          autoplay={false}
+          className="mySwiper"
           style={{ "--swiper-theme-color": "#27AE61" }}
+          onInit={(swiper) => {
+            swiper.params.navigation.prevEl = prevRef.current;
+            swiper.params.navigation.nextEl = nextRef.current;
+            swiper.navigation.init();
+            swiper.navigation.update();
+          }}
         >
           {allCategories.map((category) => (
             <SwiperSlide key={category._id}>
               {category._id === selectedCatId ? (
-                <div className=" bg-[#98D8B2] rounded-lg">
-                  <BsCheckLg className="text-[60px] text-[#ffffff] font-extrabold absolute left-[35%] top-[38%]" />
+                <div
+                  class="category_widget text-center relative "
+                  onClick={() =>
+                    getCategoryIdOnClick(category._id, category.category_title)
+                  }
+                >
+                  <div class="icon">
+                    <img src={category?.category_icon_url} alt="" />
+                  </div>
+                  <a href="#">
+                    <h4>{category?.category_title}</h4>
+                  </a>
+                  <span>207 Products</span>
+                  <div className="checked_cat flex absolute top-0 left-0 right-0 bottom-0 items-center justify-center  rounded-[10px]">
+                    <BsCheckLg className="text-[60px] text-[#ffffff] font-extrabold" />
+                  </div>
+                </div>
+              ) : (
+                <>
                   <div
+                    class="category_widget text-center relative"
                     onClick={() =>
                       getCategoryIdOnClick(
                         category._id,
                         category.category_title
                       )
                     }
-                    className="h-56 w-52 opacity-75 text-white rounded-lg flex items-center justify-center p-2"
                   >
-                    <div>
-                      <img
-                        src={category?.category_icon_url}
-                        className="mx-auto"
-                        width={70}
-                        alt=""
-                      />
-                      <h2 className="text-2xl mt-6 text-center text-[#00124E] font-bold">
-                        {category?.category_title}
-                      </h2>
+                    <div class="icon">
+                      <img src={category?.category_icon_url} alt="" />
                     </div>
+                    <a href="#">
+                      <h4>{category?.category_title}</h4>
+                    </a>
+                    <span>207 Products</span>
                   </div>
-                </div>
-              ) : (
-                <div
-                  onClick={() =>
-                    getCategoryIdOnClick(category._id, category.category_title)
-                  }
-                  className="h-56 w-52 bg-[#27AE612B] rounded-lg flex items-center justify-center p-2"
-                >
-                  <div>
-                    <img
-                      src={category?.category_icon_url}
-                      className="mx-auto"
-                      width={70}
-                      alt=""
-                    />
-                    <h2 className="text-2xl mt-6 text-center text-[#00124E] font-bold">
-                      {category?.category_title}
-                    </h2>
-                  </div>
-                </div>
+                </>
               )}
             </SwiperSlide>
           ))}

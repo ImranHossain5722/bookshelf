@@ -208,6 +208,7 @@ $white: #fff;
     justify-content: center;
     margin: 0 auto;
     img {
+      max-width: 40px;
     }
   }
   h4 {
@@ -348,4 +349,31 @@ $white: #fff;
   color: #fff;
   border-color: #28af62;
   background: #28af62;
+}
+
+// swiper  navigation
+.swiperSlide_button_group {
+  display: flex;
+  grid-gap: 10px;
+  @media #{$tab} {
+    display: none;
+  }
+  .swiper_button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid #ebebeb;
+    color: #28af62;
+    font-size: 16px;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      background: #28af62;
+      border-color: #28af62;
+      color: #fff;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-
+import newsBanner from "../../Assets/images/slider-3.png";
 // Banner Images
 import img1 from "../../Assets/images/Banner-images/slider_top_1.png";
 import img2 from "../../Assets/images/Banner-images/slider_top_2.png";
@@ -88,7 +88,12 @@ const Banner = () => {
                 <img src={bnrData.image} className="h-96" alt="" />
               </div>
             </div> */}
-            <div class="banner_single" style={{ backgroundColor: " #000" }}>
+            <div class="banner_single" 
+            style={{
+            backgroundImage: `url(${newsBanner})`,
+            backgroundSize: "content",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat", }}>
               <div class="container mx-auto">
                 <div class="grid">
                   <div class="banner__text">

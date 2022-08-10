@@ -27,7 +27,7 @@ const Review = () => {
       .then(data => setReviews(data.data))
   }, []);
 
-
+  console.log(reviews);
   useEffect(() => {
     //  responsiveness added by width change
     if (width >= 900) {
@@ -70,13 +70,13 @@ const Review = () => {
         {
           reviews?.map(review => <SwiperSlide key={review.id} className="swiper-review">
             <div className="text-center p-4">
-              <p>{review.review}</p>
+              <p>{review?.review}</p>
               <div className="avatar pt-6">
                 <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src={review.image} alt="" />
+                  <img src={review?.user_id?.user_photo_url} alt="" />
                 </div>
               </div>
-              <p className="pt-2 font-semibold">{review.name} </p>
+              <p className="pt-2 font-semibold">{review?.user_id?.user_name} </p>
             </div>
           </SwiperSlide>)
         }

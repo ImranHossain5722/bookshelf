@@ -24,10 +24,10 @@ function Dashboard() {
             <ul className="menu p-4 overflow-y-auto w-full text-base-content active">
               <p className='text-xl text-[#00124E] font-bold'>Dashboard</p>
               <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
+              <li><Link to='/dashboard/addstuff' className='text-lg text-[#00124E] font-bold'>Add Stuff</Link></li>
               <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
               <li><Link to='/dashboard/mywishlist' className='text-lg text-[#00124E] font-bold'>My Wishlist</Link></li>
               <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
-
               <li><Link to='/dashboard/allusers' className='text-lg text-[#00124E] font-bold'>All Users</Link></li>
               <li><Link to='/dashboard/allorders' className='text-lg text-[#00124E] font-bold'>All Orders</Link></li>
               <li><Link to='/dashboard/allauthor' className='text-lg text-[#00124E] font-bold'>All Authors</Link></li>

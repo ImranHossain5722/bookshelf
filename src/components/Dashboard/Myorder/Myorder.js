@@ -25,84 +25,62 @@ const Myorder = () => {
 
     return (
         <div className="my-5">
-            <p><FaHeart className='text-5xl text-primary mx-auto' /></p>
             <p className="text-5xl text-center mb-3">My Orders</p>
             <div className="w-full p-5">
                 <div className="overflow-auto  h-[460px]">
                     <table className="table w-full ">
                         <thead>
                             <tr>
-                                <th className="rounded-none">products</th>
-                                <th className ="w-full">
-                                    <th>
-        name
-                                    </th>
-                                    
-                                <th>price</th>
-                               
-                                <th>author</th>
-                                <th>action</th>
+                                <th className="rounded-none">Transiction Id</th>
+                                <th className="w-full text-center">
+                                    order details
                                 </th>
 
                             </tr>
                         </thead>
 
-                        {orders?.map(order => <tbody className="">
+                        {orders?.map(order => <tbody className="w-full">
                             <tr >
                                 <td className="border-[#e1e2e6]">
                                     <div className="product gap-2">
 
                                         <div className="avatar">
-                                            <div className="w rounded">
-                                                {/* <img src={book.book.book_cover_photo_url} /> */}{order._id}
-                                            </div> 
+                                            <div className="w rounded text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
+                                            {order._id}
+                                            </div>
                                         </div>
 
                                     </div>
                                 </td>
-                                <tr>
+                                {order.ordered_items.map(book => <tr className='w-full'>
                                     <td>
-                                        <div className=" ">
-                                            <h3 className="text-[18px] capitalize text-[#00124E] font-semibold">
-                                                {/* {book.book.book_title}  */} hello
-                                            </h3>
+                                        <div class="avatar">
+                                            <div class="w-16 rounded">
+                                                <img src={book.book_id?.book_cover_photo_url} alt="" />
+                                            </div>
                                         </div>
+
                                     </td>
-                                    <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                        {/* ${book.book.book_price} */} hello
+                                    <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
+                                    {book.book_id?.book_title} 
                                     </td>
-                                    <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                        Author name
+                                    <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
+                                    ${book.book_id?.book_price} 
+                                      
+                                    </td>
+                                    <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
+                                    {order?.createdAt.slice(0,10)}
+                                      
                                     </td>
 
                                     <td className="border-[#e1e2e6] ">
                                         <div className=" flex flex-col my-auto">
-
-
-                                            <button className=" btn btn-xs btn-error text-white w-[155px] h-[24px] rounded-full">delete <RiDeleteBack2Fill className='ml-1 text-[16px]' /></button>
+                                            <button className=" btn btn-xs btn-warning text-white w-[130px] h-[24px] rounded-full">{order?.order_status} </button>
                                         </div>
                                     </td>
-                                </tr>
-                                {order.ordered_items.map(order => <tr>
-                                    <td>
-                                        <div className=" ">
-                                            <h3 className="text-[18px] capitalize text-[#00124E] font-semibold">
-                                                {/* {book.book.book_title}  */} hello
-                                            </h3>
-                                        </div>
-                                    </td>
-                                    <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                        {/* ${book.book.book_price} */} hello
-                                    </td>
-                                    <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                        Author name
-                                    </td>
-
                                     <td className="border-[#e1e2e6] ">
                                         <div className=" flex flex-col my-auto">
-
-
-                                            <button className=" btn btn-xs btn-error text-white w-[155px] h-[24px] rounded-full">delete <RiDeleteBack2Fill className='ml-1 text-[16px]' /></button>
+                                            <button className=" btn btn-xs btn-error text-white w-[130px] h-[24px] rounded-full">Cancel </button>
                                         </div>
                                     </td>
                                 </tr>

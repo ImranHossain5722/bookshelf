@@ -52,6 +52,7 @@ import { newUser } from "./components/Redux/actions/bookActions";
 import { useDispatch } from "react-redux";
 import CommingSoon from "./components/CommingSoon/CommingSoon";
 import MyWishlist from "./components/Dashboard/MyWishlist/MyWishlist";
+import AddStuff from "./components/Dashboard/AddStuff/AddStuff";
 
 // initialize aos
 AOS.init();
@@ -100,6 +101,7 @@ function App() {
               <Route index element={<Myprofile />} />
               <Route path="myorder" element={<Myorder />} />
               <Route path="mywishlist" element={<MyWishlist />} />
+              <Route path="addstuff" element={<AddStuff />} />
               <Route path="addreview" element={<Addreview />} />
               <Route path="addproduct" element={<AddProduct />} />
               <Route path="allpublisher" element={<AllPublishers />} />

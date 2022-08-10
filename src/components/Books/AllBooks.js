@@ -7,6 +7,7 @@ import CartButton from "../CartButton/CartButton";
 import Loading from "../Loading/Loading";
 import { allBooks } from "../Redux/actions/bookActions";
 import Stars from "../Stars/Stars";
+import { FaPlus } from "react-icons/fa";
 // import { useQuery } from "react-query";
 
 const AllBooks = () => {
@@ -49,109 +50,20 @@ const AllBooks = () => {
   return (
     <div
       style={{ background: "#FBF6F6" }}
-      className=" max-w-[1440px] p-6 w-full mx-auto "
-    >
+      className=" max-w-[1440px] p-6 w-full mx-auto ">
       <div className="md:flex gap-6 items-start ">
-        <div className=" p-6 border flex-1 mb-4">
-          <div className="single_filterBox mb-5">
-            <h3 className="text-xl font-semibold capitalize mb-5">
-              categories (0)
-            </h3>
-            <ul>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  category name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  category name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  category name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  category name
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="single_filterBox mb-5">
-            <h3 className="text-xl font-semibold mb-5">Author (0)</h3>
-            <ul>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Author name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Author name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Author name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Author name
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="single_filterBox">
-            <h3 className="text-xl font-semibold mb-5">Price filter</h3>
-            <ul>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Heigh to Low
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Low to Heigh
-                </a>
-              </li>
-            </ul>
+        {/* filter options left-side */}
+        <div className="border flex-1 mb-4">
+          <div className="single_filterBox mb-5 border-b p-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-xl font-semibold capitalize">categories</h3>
+              <FaPlus />
+            </div>
+
           </div>
         </div>
 
+        {/* filter results right-side */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 mb-10 grow">
           {currentPosts?.map((book) => (
             <Link to={`/selectedBook/${book?._id}`}>
@@ -161,7 +73,7 @@ const AllBooks = () => {
                   <img
                     src={book?.book_cover_photo_url}
                     className="h-64 w-44 image-full"
-                    alt="Books image"
+                    alt="Books-images"
                   />
                   {/* absolute hover effect */}
                   <div className="bg-[#00124ea4] h-64 w-44 flex items-center justify-center absolute top-0 hover-button hidden">

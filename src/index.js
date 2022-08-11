@@ -1,13 +1,13 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import "./index.css";
 import { Provider } from "react-redux";
-import store from "./components/Redux/Store/Store";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { BrowserRouter } from "react-router-dom";
 import "../src/Assets/style.scss";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import App from "./App";
+import store from "./components/Redux/Store/Store";
+import "./index.css";
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient();
 
@@ -20,7 +20,7 @@ root.render(
           <App />
         </Provider>
       </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   </React.StrictMode>
 );

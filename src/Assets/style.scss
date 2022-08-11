@@ -35,7 +35,7 @@ $white: #fff;
       visibility: hidden;
       transform: translate(-50%, -50%) scale(1.2);
       z-index: 1200;
-      a {
+      .a {
         width: 47.5px;
         height: 45px;
         color: #202e3b;
@@ -45,7 +45,7 @@ $white: #fff;
         font-size: 15px;
         position: relative;
         &:hover {
-          color: #151214;
+          color: #0cce6b;
         }
         &:not(:last-child)::before {
           height: 15px;

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { FaHeart } from 'react-icons/fa'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import Loading from '../Loading/Loading'
@@ -26,8 +26,8 @@ const Wishlistbutton = ({ _id }) => {
   }
 
   return (
-    <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
-      <FaHeart onClick={() => AddWishlist(_id)} />
+    <button className=" hover:text-primary duration-500 a">
+      <FaRegHeart onClick={() => AddWishlist(_id)} />
     </button>
   )
 }

@@ -29,6 +29,7 @@ function Dashboard() {
                 <li><Link to='/dashboard/mywishlist' className='text-lg text-[#00124E] font-bold'>My Wishlist</Link></li>
                 <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
                 <li><Link to='/dashboard/orderhistory' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
+                <li><Link to='/dashboard/requestbook' className='text-lg text-[#00124E] font-bold'>Request Book</Link></li>
                 <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
               </>}
 

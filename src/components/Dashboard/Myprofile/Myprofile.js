@@ -19,15 +19,17 @@ const Myprofile = () => {
 
   const { getUser, userRole, setUserRole } = useGetUserData();
 
-
+  const [fullName, setFullName] = useState(getUser[0]?.user_name)
   useEffect(() => {
 
     dispatch(newUser(getUser[0]))
+    setFullName(getUser[0]?.user_name ? getUser[0]?.user_name : user?.displayName);
 
   }, [getUser, dispatch])
 
   const currentUserId = getUser[0]?._id;
 
+  console.log(getUser[0]);
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -229,10 +231,10 @@ const Myprofile = () => {
                         }
                       })}
                       type="text"
-                      defaultValue={getUser[0]?.user_name ? getUser[0]?.user_name : user?.displayName}
+                      defaultValue={fullName}
                       className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
-                      <span className="label-text-alt text-red-500">{errors.author_name?.type === 'required' && `${errors?.author_name?.message}`}</span>
+                      <span className="label-text-alt text-red-500">{errors.name?.type === 'required' && `${errors?.name?.message}`}</span>
                     </label>
                   </div>
 

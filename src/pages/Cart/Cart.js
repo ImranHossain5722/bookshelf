@@ -115,20 +115,18 @@ const cartId = match[0]._id
               </tbody>
             </table>
           </div>
-          <div className="flex justify-between border-t-[1px] border-[#e1e2e6] pt-2">
-            <div className="gap-2 flex">
-              <button className="btn btn-primary text-white">
-                update cart
-              </button>
+        
+            <div className="gap-2 flex justify-end">
+          
               <button className="btn btn-primary text-white">
                 Continue shoping
               </button>
-            </div>
             <NavLink to='/checkout'>
-              <button className="btn btn-primary text-white mt-16" onClick={() => checkout(user?._id)}>
+              <button className="btn btn-primary text-white " onClick={() => checkout(user?._id)}>
                 Prossed to checkout 
               </button>
             </NavLink> 
+           
           </div>
         </div>
         <div className="w-4/12 ml-auto mt-4">

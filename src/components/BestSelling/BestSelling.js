@@ -20,9 +20,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loading from "../Loading/Loading";
 import { sellBooks } from "../Redux/actions/bookActions";
 import CartButton from "../CartButton/CartButton";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 import AddCartButton from "../AddCartButton/AddCartButton";
+import QuickViewButton from "../QuickViewButton/QuickViewButton";
 const BestSelling = () => {
     const books = useSelector((state) => state?.sellBooks?.books);
     const [size, setSize] = useState(1);
@@ -115,16 +116,14 @@ const BestSelling = () => {
                     </a>
                     <div className="product_action">
                     <Wishlistbutton _id={book._id} />
-                      <a href="#" className="a">
-                        <FaRegEye />
-                      </a>
+                   <QuickViewButton _id={book._id} />
                     <CartButton _id={book._id}  />
                     </div>
                   </div>
                   <div className="product__meta">
-                    <a href="product_details">
+                    <Link to={`/selectedBook/${book?._id}`}>
                       <h4 >{book.book_title}</h4>
-                    </a>
+                    </Link>
                       <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
                     <div className="stars">
                       <i className="fas fa-star"></i>

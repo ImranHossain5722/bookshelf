@@ -23,6 +23,8 @@ import Stars from "../Stars/Stars";
 import CartButton from "../CartButton/CartButton";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
+import { Link } from "react-router-dom";
+import QuickViewButton from "../QuickViewButton/QuickViewButton";
 
 const RecentlyViewed = () => {
   const [books, setBooks] = useState([]);
@@ -97,16 +99,14 @@ const RecentlyViewed = () => {
                     </a>
                     <div className="product_action">
                     <Wishlistbutton _id={book._id} />
-                      <a href="#" className="a">
-                        <FaRegEye />
-                      </a>
+                    <QuickViewButton _id={book._id} />
                     <CartButton _id={book._id}  />
                     </div>
                   </div>
                   <div className="product__meta">
-                    <a href="product_details">
+                    <Link to={`/selectedBook/${book?._id}`}>
                       <h4 >{book.book_title}</h4>
-                    </a>
+                    </Link>
                       <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
                     <div className="stars">
                       <i className="fas fa-star"></i>

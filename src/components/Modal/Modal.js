@@ -1,6 +1,12 @@
 import React from "react";
+import { useDispatch } from 'react-redux'
+import { quickView } from "../Redux/actions/bookActions";
 
 const Modal = ({ modal, children }) => {
+  const dispatch = useDispatch()
+  const removeItem = () => {
+    dispatch(quickView({}))
+  }
   return (
     <>
       <input type="checkbox" id={modal} className="modal-toggle" />
@@ -9,6 +15,7 @@ const Modal = ({ modal, children }) => {
           <label
             htmlFor={modal}
             className="btn btn-sm btn-circle absolute right-2 top-2"
+            onClick={removeItem}
           >
             ✕
           </label>

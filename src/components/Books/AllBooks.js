@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaEye, FaHeart } from "react-icons/fa";
+import { FaEye, FaHeart, FaRegEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import AddCartButton from "../AddCartButton/AddCartButton";
 import CartButton from "../CartButton/CartButton";
 import Loading from "../Loading/Loading";
+import QuickViewButton from "../QuickViewButton/QuickViewButton";
 import { allBooks } from "../Redux/actions/bookActions";
 import Stars from "../Stars/Stars";
+import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 // import { useQuery } from "react-query";
 
 const AllBooks = () => {
@@ -154,36 +157,37 @@ const AllBooks = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 mb-10 grow">
           {currentPosts?.map((book) => (
-            <Link to={`/selectedBook/${book?._id}`}>
-              <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
-                <div className="for-hover relative">
-                  {/* relative */}
-                  <img
-                    src={book?.book_cover_photo_url}
-                    className="h-64 w-44 image-full"
-                    alt="Books image"
-                  />
-                  {/* absolute hover effect */}
-                  <div className="bg-[#00124ea4] h-64 w-44 flex items-center justify-center absolute top-0 hover-button hidden">
-                    <button className="text-3xl text-white hover:text-primary duration-500">
-                      <FaEye />
-                    </button>
-                    <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
-                      <FaHeart />
-                    </button>
-                    <CartButton _id={book?._id} />
-                  </div>
-                  <div className="w-44 mt-2">
-                    <h3>{book.book_title}</h3>
-                    <p className="mt-2">{book.author}</p>
-                    <h2 className="text-xl font-semibold text-primary mt-2 mb-1">
-                      ${book.book_price}
-                    </h2>
-                    <Stars />
-                  </div>
-                </div>
-              </div>
-            </Link>
+             <div className="product_widget26 mb_30">
+             <div className="product_thumb_upper position-relative">
+               <span className="offer_badge">-0%</span>
+               <a href="product_details.php" className="thumb text-center">
+                 <img src={book.book_cover_photo_url} alt="" />
+               </a>
+               <div className="product_action">
+               <Wishlistbutton _id={book._id} />
+               <QuickViewButton _id={book._id} />
+               <CartButton _id={book._id}  />
+               </div>
+             </div>
+             <div className="product__meta">
+               <Link to={`/selectedBook/${book?._id}`}>
+                 <h4 >{book.book_title}</h4>
+               </Link>
+                 <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
+               <div className="stars">
+                 <i className="fas fa-star"></i>
+                 <i className="fas fa-star"></i>
+                 <i className="fas fa-star"></i>
+                 <i className="fas fa-star"></i>
+                 <i className="fas fa-star"></i>
+                 <span className="text-sm font-medium">(02 Rating)</span>
+               </div>
+               <div className="product_prise">
+                 <p>${book.book_price}</p>
+               </div>
+             <AddCartButton _id={book._id}/>
+             </div>
+           </div>
           ))}
         </div>
       </div>

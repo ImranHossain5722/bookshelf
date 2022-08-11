@@ -42,10 +42,6 @@ const Home = () => {
       {/* Recently veiwed section */}
       <RecentlyViewed />
 
-      <label for="quick-view" class="btn modal-button">
-        open quick view modal
-      </label>
-
       <Modal modal={"quick-view"}>
         <QuickView />
       </Modal>

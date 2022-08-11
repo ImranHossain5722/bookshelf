@@ -8,18 +8,19 @@ import PopularBooks from "../../components/PopularBooks/PopularBooks";
 import BestSelling from "../../components/BestSelling/BestSelling";
 import Categorys from "../../components/Category/Categorys";
 import FirstCategoryBooks from "../../components/FirstCategoryBooks/FirstCategoryBooks";
-import Newsletter from "../../components/NewsLetter/Newsletter";
+import Modal from "../../components/Modal/Modal";
 import PopularAuthor from "../../components/PopularAuthor/PopularAuthor";
 import PreOrderBooks from "../../components/PreOrderBooks/PreOrderBooks";
+import QuickView from "../../components/QuickView/QuickView";
 import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 import Review from "../../components/Review/Review";
 import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCategoryBooks";
 import Release from "../Release/Release";
+
 const Home = () => {
   return (
     <div>
       <Banner />
-    
 
       {/* select catgory */}
       <Categorys />
@@ -36,7 +37,7 @@ const Home = () => {
       <Release />
       <Review />
       <BestSelling />
-   
+
       <ContactClubBanner />
       {/* Recently veiwed section */}
       <RecentlyViewed />
@@ -44,9 +45,10 @@ const Home = () => {
       <label for="quick-view" class="btn modal-button">
         open quick view modal
       </label>
-      {/* <Modal modal={"quick-view"}>
+
+      <Modal modal={"quick-view"}>
         <QuickView />
-      </Modal> */}
+      </Modal>
     </div>
   );
 };

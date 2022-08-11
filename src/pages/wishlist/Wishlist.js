@@ -97,10 +97,11 @@ const Wishlist = () => {
                 </div>
                 <div className="flex justify-end  border-t-[1px] border-[#e1e2e6] pt-2">
                     <div className="gap-2 flex">
-
+                    <NavLink to='/'>
                         <button className="btn btn-primary text-white">
                             Continue shoping
                         </button>
+                        </NavLink>
                         <NavLink to='/cart'>
                             <button className="btn btn-primary text-white ">
                                 View Cart <MdShoppingCart className='ml-1 text-[25px]' />

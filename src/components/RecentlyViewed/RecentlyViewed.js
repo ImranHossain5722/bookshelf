@@ -21,15 +21,17 @@ import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper";
 import Stars from "../Stars/Stars";
 import CartButton from "../CartButton/CartButton";
+import AddCartButton from "../AddCartButton/AddCartButton";
+import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 
 const RecentlyViewed = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch("data.json")
+    fetch("https://book-shelf-webapp.herokuapp.com/all-books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
-  }, []);
+  }, []); 
   // for swiper slider
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -91,24 +93,21 @@ const RecentlyViewed = () => {
                   <div className="product_thumb_upper position-relative">
                     <span className="offer_badge">-0%</span>
                     <a href="product_details.php" className="thumb text-center">
-                      <img src={book.image} alt="" />
+                      <img src={book.book_cover_photo_url} alt="" />
                     </a>
                     <div className="product_action">
-                      <a href="#">
-                        <FaRegHeart />
-                      </a>
-                      <a href="#">
+                    <Wishlistbutton _id={book._id} />
+                      <a href="#" className="a">
                         <FaRegEye />
                       </a>
-                      <a data-bs-toggle="modal" data-bs-target="#theme_modal">
-                        <FaShoppingBasket />
-                      </a>
+                    <CartButton _id={book._id}  />
                     </div>
                   </div>
                   <div className="product__meta">
                     <a href="product_details">
-                      <h4>{book.title}</h4>
+                      <h4 >{book.book_title}</h4>
                     </a>
+                      <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
                     <div className="stars">
                       <i className="fas fa-star"></i>
                       <i className="fas fa-star"></i>
@@ -118,16 +117,9 @@ const RecentlyViewed = () => {
                       <span className="text-sm font-medium">(02 Rating)</span>
                     </div>
                     <div className="product_prise">
-                      <p>${book.price}</p>
+                      <p>${book.book_price}</p>
                     </div>
-                    <button className="home22_addCard_btn add_to_cart flex border-0 items-center">
-                      <div className="circle_icon">
-                        <FaShoppingBasket />
-                      </div>
-                      <h5 className="text-sm font-bold text-uppercase m-0">
-                        ADD TO CART
-                      </h5>
-                    </button>
+                  <AddCartButton _id={book._id}/>
                   </div>
                 </div>
               </SwiperSlide>

@@ -12,7 +12,7 @@ import downArrow from "../../Assets/images/icon/down-arrow.png";
 import NavTopbar from "../NavTopbar/NavTopbar";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { newUser } from "../Redux/actions/bookActions";
+import { newUser, whistlist } from "../Redux/actions/bookActions";
 const NavDashboard = ({ children }) => {
   const [dark, setDark] = useState(false);
 
@@ -52,6 +52,7 @@ const NavDashboard = ({ children }) => {
 
 
   }, [getUser,user])
+
   return (
     <div>
       <div className="drawer drawer-end  " data-theme={dark ? "dark" : "light"}>

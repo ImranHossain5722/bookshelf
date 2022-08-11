@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 
 //icons
-import { FaHeart, FaEye, FaShoppingCart } from "react-icons/fa";
+import { FaHeart, FaEye, FaShoppingCart, FaRegEye } from "react-icons/fa";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,13 +12,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Navigation } from "swiper";
+import { Pagination, Navigation, Autoplay } from "swiper";
 import Stars from "../Stars/Stars";
 import useWindowDimensions from "../windowSize/windowSize";
 import CartButton from "../CartButton/CartButton";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
+import AddCartButton from "../AddCartButton/AddCartButton";
 
 const SecondCategoryBooks = () => {
   const books = useSelector((state) => state?.sellBooks?.books);
@@ -46,62 +47,115 @@ const SecondCategoryBooks = () => {
       setSize(1);
     }
   }, [width]);
+  // The Story
+  const navigate = useNavigate();
+  const catHandeler = (e) => {
+    navigate("/categoryView");
+  };
 
+
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
   return (
-    <div className="bg-white max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] py-10">
-      {/* ------title section----- */}
-      <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">
-        The Story
-      </h1>
+    <div className="bg-white sction_padding">
+      <div className="container mx-auto relative ">
+        {/* ------title section----- */}
+        <div className="flex justify-between items-center ">
+          <h1 className="text-[30px] lg:text-[40px] font-bold text-[#00124E] section_title">
+          The Story
+          </h1>
+          <div className="swiperSlide_button_group">
+            <div className="swiper_button swiper_button_prev" ref={prevRef}>
+              <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div className="swiper_button swiper_button_next" ref={nextRef}>
+              <i class="fa-solid fa-angle-right"></i>
+            </div>
+          </div>
+        </div>
 
-      {/* ------categories slider----- */}
-      <div className="mt-8">
-        <Swiper
-          slidesPerView={size}
-          spaceBetween={30}
-          // slidesPerGroup={5}
-          loop={true}
-          // loopFillGroupWithBlank={true}
-          navigation={true}
-          modules={[Navigation]}
-          className="mySwiper px-7 py-6"
-          style={{ "--swiper-theme-color": "#27AE61" }}
-        >
-          {books?.map((book) => (
-            <SwiperSlide key={book._id}>
-              <NavLink to={`/selectedBook/${book._id}`}>
-                <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center">
-                  <div className="for-hover relative">
-                    {/* relative */}
-                    <img
-                      src={book.book_cover_photo_url}
-                      className="h-64 w-44 image-full"
-                      alt=""
-                    />
-                    {/* absolute hover effect */}
-                    <div className="bg-[#00124ea4] h-64 w-44 flex items-center justify-center absolute top-0 hover-button hidden">
-                      <button className="text-3xl text-white hover:text-primary duration-500">
-                        <FaEye />
-                      </button>
-                     <Wishlistbutton _id={book._id} />
-                      <CartButton _id={book._id} />
+        {/* ------categories slider----- */}
+        <div className="mt-8">
+          <Swiper
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 3,
+              },
+              992: {
+                slidesPerView: 4,
+              },
+              1500: {
+                slidesPerView: 4,
+              },
+            }}
+            spaceBetween={24}
+            loop={true}
+            navigation={{
+              prevEl: "#prev_slide",
+              nextEl: "#next_slide",
+            }}
+            modules={[Autoplay, Navigation]}
+            autoplay={true}
+            className="mySwiper"
+            style={{ "--swiper-theme-color": "#27AE61" }}
+            onInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }}
+          >
+            {books?.map((book) => (
+              <SwiperSlide key={book._id}>
+                <div className="product_widget26 mb_30">
+                  <div className="product_thumb_upper position-relative">
+                    <span className="offer_badge">-0%</span>
+                    <a href="product_details.php" className="thumb text-center">
+                      <img src={book.book_cover_photo_url} alt="" />
+                    </a>
+                    <div className="product_action">
+                    <Wishlistbutton _id={book._id} />
+                      <a href="#" className="a">
+                        <FaRegEye />
+                      </a>
+                    <CartButton _id={book._id}  />
                     </div>
-                    {/* navigate to book details page */}
-                    <NavLink to={`/selectedBook/${book._id}`}>
-                      <div className="w-44 mt-2">
-                        <h3>{book.book_title}</h3>
-                        <h2 className="text-xl font-semibold text-primary mt-2 mb-1">
-                          ${book.book_price}
-                        </h2>
-                        <Stars />
-                      </div>
-                    </NavLink>
+                  </div>
+                  <div className="product__meta">
+                    <a href="product_details">
+                      <h4 >{book.book_title}</h4>
+                    </a>
+                      <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
+                    <div className="stars">
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <span className="text-sm font-medium">(02 Rating)</span>
+                    </div>
+                    <div className="product_prise">
+                      <p>${book.book_price}</p>
+                    </div>
+                  <AddCartButton _id={book._id}/>
                   </div>
                 </div>
-              </NavLink>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div className="mx-auto text-end">
+
+<button
+onClick={() => catHandeler()}
+className="btn btn-primary text-white hover:text-white hover:bg-accent  "
+>
+view all
+</button>
+</div>
       </div>
     </div>
   );

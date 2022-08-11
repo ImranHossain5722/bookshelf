@@ -12,11 +12,11 @@ const AuthorOrPublisher = () => {
 
     return (
         <div>
-            <div class="form-control w-1/6 mx-auto my-12 rounded-3xl " >
-                <label class="label cursor-pointer border p-0 rounded-3xl">
-                    <span class="label-text text-2xl font-bold p-3 bg-[#B4ACAC] text-white pl-8 rounded-l-3xl ">Author</span>
-                    <input onChange={(e) => checkState(e)} type="checkbox" class="toggle rounded-none toggle-primary border-4 py-6 px-7" />
-                    <span class="label-text text-2xl font-bold p-3 bg-primary text-white rounded-r-3xl ">Publisher</span>
+            <div className="form-control w-1/6 mx-auto my-12 rounded-3xl " >
+                <label className="label cursor-pointer border p-0 rounded-3xl">
+                    <span className="label-text text-2xl font-bold p-3 bg-[#B4ACAC] text-white pl-8 rounded-l-3xl ">Author</span>
+                    <input onChange={(e) => checkState(e)} type="checkbox" className="toggle rounded-none toggle-primary border-4 py-6 px-7" />
+                    <span className="label-text text-2xl font-bold p-3 bg-primary text-white rounded-r-3xl ">Publisher</span>
                 </label>
             </div>
             <div>

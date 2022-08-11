@@ -9,7 +9,7 @@ import sliderBanner from "../../Assets/images/slider__bag.png";
 import "./Aboutus.css";
 const AboutUs = () => {
   return (
-    <div className="">
+    <div className="about-cl">
       <div
         style={{
           background: `url(${aboutBanner})`,
@@ -17,18 +17,18 @@ const AboutUs = () => {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
-        className="h-96 flex items-center justify-center "
+        className="h-96 flex items-center justify-center  "
       >
-        <div class=" ">
-          <h1 class=" text-5xl font-bold text-white">About Us</h1>
+        <div className=" ">
+          <h1 className=" text-5xl font-bold text-white">About Us</h1>
         </div>
       </div>
       <div
-        npm class="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 
+        npm className="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 
       grid lg:grid-cols-2
       "
       >
-        <div class="pl-28">
+        <div className="pl-28">
           <p className="text-4xl lg:text-5xl font-semibold text-secondary ">
             What We Are
           </p>
@@ -57,7 +57,7 @@ const AboutUs = () => {
       </div>{" "}
       {/* our misson */}
       <div
-        class="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 
+        className="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 
       grid lg:grid-cols-2
       "
       >
@@ -67,7 +67,7 @@ const AboutUs = () => {
           </figure>
         </div>
 
-        <div class="pl-28">
+        <div className="pl-28">
           <p className="text-4xl lg:text-5xl font-semibold text-secondary ">
             Our Mession
           </p>
@@ -91,11 +91,11 @@ const AboutUs = () => {
       </div>{" "}
       {/* Our Vision  */}
       <div
-        class="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 
+        className="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 
       grid lg:grid-cols-2
       "
       >
-        <div class="pl-28">
+        <div className="pl-28">
           <p className="text-4xl lg:text-5xl font-semibold text-secondary ">
             Our Vision
           </p>

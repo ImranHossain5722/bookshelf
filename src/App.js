@@ -50,8 +50,9 @@ import ViewBySingleCategory from "./components/FirstCategoryBooks/ViewBySingleCa
 import AboutUs from "./pages/AboutUs/AboutUs";
 import { newUser } from "./components/Redux/actions/bookActions";
 import { useDispatch } from "react-redux";
-import CommingSoon from "./components/ommingSoon/CommingSoon";
+import CommingSoon from "./components/CommingSoon/CommingSoon";
 import MyWishlist from "./components/Dashboard/MyWishlist/MyWishlist";
+import AddStuff from "./components/Dashboard/AddStuff/AddStuff";
 
 // initialize aos
 AOS.init();
@@ -62,12 +63,17 @@ function App() {
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
 
+  const userUid = user?.uid;
   useEffect(() => {
-    const userUid = user?.uid;
-    fetch(`https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`)
-      .then((res) => res.json())
-      .then((data) => dispatch(newUser(data[0])));
-  }, [user?.email]);
+    if (userUid) {
+      fetch(`https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          dispatch(newUser(data[0]));
+        });
+    }
+  }, [user, userUid]);
 
   useEffect(() => {
     if (pathname.includes("/dashboard")) {
@@ -95,6 +101,7 @@ function App() {
               <Route index element={<Myprofile />} />
               <Route path="myorder" element={<Myorder />} />
               <Route path="mywishlist" element={<MyWishlist />} />
+              <Route path="addstuff" element={<AddStuff />} />
               <Route path="addreview" element={<Addreview />} />
               <Route path="addproduct" element={<AddProduct />} />
               <Route path="allpublisher" element={<AllPublishers />} />

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FaRegTimesCircle } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 
 const SearchModal = ({ showModal, setShowModal }) => {
@@ -46,7 +47,7 @@ const SearchModal = ({ showModal, setShowModal }) => {
     const closeSearchModal = () => {
         searchModal.classList.remove('left-0');
         searchModal.classList.add('left-full');
-    }
+    };
 
     return (
         <div id='search-modal' className='min-h-screen w-full flex justify-center items-center absolute left-full z-50 bg-[#00124ec0] duration-500'>
@@ -55,11 +56,11 @@ const SearchModal = ({ showModal, setShowModal }) => {
             </button>
             <div className='w-[90%] lg:w-2/5 '>
                 {/* search field */}
-                <div class="form-control duration-300">
-                    <div class="input-group">
-                        <input name='search' type="text" placeholder="Search that you desire..." onChange={e => setSearchText(e.target.value)} class="input input-bordered bg-white w-full" />
-                        <button onClick={() => handleSearch(searchText)} class="btn btn-square bg-primary hover:bg-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                <div className="form-control duration-300">
+                    <div className="input-group">
+                        <input name='search' type="text" placeholder="Search that you desire..." onChange={e => setSearchText(e.target.value)} className="input input-bordered bg-white w-full" />
+                        <button onClick={() => handleSearch(searchText)} className="btn btn-square bg-primary hover:bg-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         </button>
                     </div>
                     {error && <p className='text-white mt-1 ml-1'><small>{error}</small></p>}
@@ -68,10 +69,12 @@ const SearchModal = ({ showModal, setShowModal }) => {
                 {(!error && searchResults) &&
                     <div className='mt-8 max-h-60 overflow-y-scroll'>
                         {
-                            searchResults?.map(results => <div key={results._id} className='flex items-center justify-center h-16 w-full bg-white rounded-lg mb-3'>
-                                <img src={results.book_cover_photo_url} className='h-14 mr-5' alt="" />
-                                <h3>{results.book_title}</h3>
-                            </div>)
+                            searchResults?.map(results =>
+                                <NavLink to={`/selectedBook/${results._id}`}><div key={results._id} onClick={() => closeSearchModal()} className='flex items-center justify-start h-16 w-full bg-white hover:bg-primary hover:text-white duration-200 rounded-lg mb-3 pl-4'>
+                                    <img src={results.book_cover_photo_url} className='h-14 mr-5' alt="" />
+                                    <h3>{results.book_title}</h3>
+                                </div>
+                                </NavLink>)
                         }
                     </div>
                 }

@@ -11,7 +11,7 @@ const AddProduct = () => {
   const [user] = useAuthState(auth);
   const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit, reset } = useForm();
   // console.log(getUser, userRole);
 
 
@@ -115,7 +115,7 @@ const AddProduct = () => {
     else if (currentUserRole === 'admin') {
       setUserRole('admin');
     }
-  }, [getUser])
+  }, [getUser]);
 
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
@@ -129,6 +129,13 @@ const AddProduct = () => {
       reader.readAsDataURL(e.target.files[0]);
     }
   }
+
+  // const cat = ['ffksfd','ksdjfsdf'];
+  // const cat2 = [
+  //   { cat_id:'ffksfd'},
+  //   { cat_id:'ffksfd'},
+  //   { cat_id:'ffksfd'}  ]
+
 
   // const [imgbbUrl, setImgbbUrl] = useState('');
   const [bookCat, setBookCat] = useState([]);
@@ -152,8 +159,6 @@ const AddProduct = () => {
   }
 
   const onSubmit = data => {
-
-
 
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -194,7 +199,7 @@ const AddProduct = () => {
         }
       })
 
-    // reset();
+    reset();
   };
 
   return (
@@ -236,16 +241,16 @@ const AddProduct = () => {
             <div className='md:w-[70%] mt-12 md:mt-0  md:ml-12'>
               <div className='md:flex gap-7'>
                 <div className='w-full'>
-                  <label class="label-text text-lg">Product Name</label>
+                  <label className="label-text text-lg">Product Name</label>
                   <input type="text" {...register("book_title",
                     {
                       required: 'required*',
                     }
-                  )} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                  )} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_title && <p><small className='pl-1 text-red-600'>{errors?.book_title?.message}</small></p>}
                 </div>
                 <div className='w-full mt-4 md:mt-0'>
-                  <label class="label-text text-lg">Select Categories</label>
+                  <label className="label-text text-lg">Select Categories</label>
 
                   <Select isMulti onChange={(choice) => getChoosenCategory(choice)} name='categoryName' className="mt-2 rounded-xl" options={catOption} />
                 </div>
@@ -255,18 +260,18 @@ const AddProduct = () => {
               {/* row-3 */}
               <div className='md:flex gap-7 mt-4'>
                 <div className='w-full'>
-                  <label class="label-text text-lg">Author Name</label>
+                  <label className="label-text text-lg">Author Name</label>
                   {userRole === 'author' ?
-                    <input type="text" disabled defaultValue={getUser[0]?.user_name} class="input-bordered rounded-[4px] text-gray-400 border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-grey-600 w-full mt-2" />
+                    <input type="text" disabled defaultValue={getUser[0]?.user_name} className="input-bordered rounded-[4px] text-gray-400 border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-grey-600 w-full mt-2" />
                     :
                     <Select onChange={(choice) => getChoosenAuthor(choice)} className="mt-2 rounded-xl" options={authorOptions} />
                   }
 
                 </div>
                 <div className='w-full mt-4 md:mt-0'>
-                  <label class="label-text text-lg">Publisher Name</label>
+                  <label className="label-text text-lg">Publisher Name</label>
                   {userRole === 'publisher' ?
-                    <input type="text" disabled defaultValue={getUser[0]?.user_name} class="input-bordered rounded-[4px] text-gray-400 border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-grey-600 w-full mt-2" />
+                    <input type="text" disabled defaultValue={getUser[0]?.user_name} className="input-bordered rounded-[4px] text-gray-400 border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-grey-600 w-full mt-2" />
                     :
                     <Select onChange={(choice) => getChoosenPublisher(choice)} className="mt-2 rounded-xl" options={publisherOptions} />
                   }
@@ -275,64 +280,64 @@ const AddProduct = () => {
               {/* row-4 */}
               <div className='md:flex gap-7 mt-4' >
                 <div className='w-full'>
-                  <label class="label-text text-lg">Price</label>
+                  <label className="label-text text-lg">Price</label>
                   <input type="number" {...register("book_price", {
                     required: 'required*',
                   })} placeholder="Type here"
                     min={1}
-                    class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                    className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_price && <p><small className='pl-1 text-red-600'>{errors?.book_price?.message}</small></p>}
                 </div>
                 <div className='w-full'>
-                  <label class="label-text text-lg">Pages</label>
+                  <label className="label-text text-lg">Pages</label>
                   <input type="number" {...register("book_pages", {
                     required: 'required*',
                   })} placeholder="Type here"
-                    min={1} class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                    min={1} className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_pages && <p><small className='pl-1 text-red-600'>{errors?.book_pages?.message}</small></p>}
                 </div>
               </div >
               <div className='md:flex gap-7 mt-4' >
                 <div className='w-full'>
-                  <label class="label-text text-lg">Quantity</label>
+                  <label className="label-text text-lg">Quantity</label>
                   <input type="number" {...register("book_qnt", {
                     required: 'required*',
                   })} placeholder="Type here"
                     min={1}
-                    class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                    className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_qnt && <p><small className='pl-1 text-red-600'>{errors?.book_qnt?.message}</small></p>}
                 </div>
                 <div className='w-full'>
-                  <label class="label-text text-lg">Edition</label>
+                  <label className="label-text text-lg">Edition</label>
                   <input type="text" {...register("book_edition", {
                     required: 'required*',
                   })} placeholder="Type here"
-                    min={1} class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                    min={1} className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_edition && <p><small className='pl-1 text-red-600'>{errors?.book_edition?.message}</small></p>}
                 </div>
               </div >
               < div className='md:flex gap-7 mt-4' >
                 <div className='w-full'>
-                  <label class="label-text text-lg">Language</label>
+                  <label className="label-text text-lg">Language</label>
                   <input type="text" {...register("translator", {
                     required: 'required*',
-                  })} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                  })} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.translator && <p><small className='pl-1 text-red-600'>{errors?.translator?.message}</small></p>}
                 </div>
                 <div className='w-full mt-4  md:mt-0'>
-                  <label class="label-text text-lg">Country</label>
+                  <label className="label-text text-lg">Country</label>
                   <input type="text" {...register("country", {
                     required: 'required*',
-                  })} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                  })} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_pages && <p><small className='pl-1 text-red-600'>{errors?.country?.message}</small></p>}
                 </div>
               </div >
               {/* row-5 */}
               < div className='mt-4' >
-                <label class="label-text text-lg">Short Details</label>
+                <label className="label-text text-lg">Short Details</label>
                 <input type="text" {...register("book_description", {
                   required: 'required*',
-                })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
+                })} placeholder="Type here" className="input input-bordered bg-white w-full mt-2" />
                 {errors?.book_description && <p><small className='pl-1 text-red-600'>{errors?.book_description?.message}</small></p>}
               </div >
             </div>

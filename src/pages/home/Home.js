@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <ContactClubBanner />
+    
 
       {/* select catgory */}
       <Categorys />
@@ -33,19 +33,11 @@ const Home = () => {
       {/* Pre Order section */}
       <PreOrderBooks />
       <PopularAuthor />
-
-      {/* <Routes>
-        <Route path="/" element={<ProductSwitch />}>
-          <Route path="popular-books" element={<PopularBooks />} />
-          <Route path="popular-authors-books" element={<PopularBooks />} />
-          <Route path="best-offers" element={<PopularBooks />} />
-        </Route>
-      </Routes> */}
-
       <Release />
       <Review />
       <BestSelling />
-      <Newsletter />
+   
+      <ContactClubBanner />
       {/* Recently veiwed section */}
       <RecentlyViewed />
 

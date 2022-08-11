@@ -25,8 +25,9 @@ const AllPublishers = () => {
         setLoading(false);
   
     };
-  
-    fetchPosts();
+    if(users.length === 0 ){ 
+      fetchPosts();
+    }
   }, [])
 
   if(loading){
@@ -43,8 +44,8 @@ const AllPublishers = () => {
 
       {users?.map(user => <div className="mx-[12px] card user-shadow  w-[320px] h-[130px] p-7 font-semibold m-3 bg-white">
         <div className='flex items-center'>
-          <div class="avatar">
-            <div class="w-16 rounded">
+          <div className="avatar">
+            <div className="w-16 rounded">
               <img src={user?.photo_url ? user?.photo_url : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg'} alt="Publishers photo" />
             </div>
           </div>

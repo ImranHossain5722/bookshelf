@@ -143,25 +143,7 @@ const SignUp = () => {
               </label>
             </div>
 
-            {/* <div className="form-control w-full max-w-xs">
-              <input
-                {...register("phone", {
-                  required: {
-                    value: true,
-                    message: "Mobile no is Required",
-                  },
-                })}
-                type="number"
-                placeholder="Enter Your Mobile no"
-                className="input input-bordered w-full max-w-xs bg-secondary text-white"
-              />
-              <label className="label">
-                <span className="label-text-alt text-red-500">
-                  {errors.phone?.type === "required" &&
-                    `${errors?.phone?.message}`}
-                </span>
-              </label>
-            </div> */}
+         \
 
             <div className="form-control w-full max-w-xs">
               <input
@@ -240,8 +222,8 @@ const SignUp = () => {
         </div>
       </div>
 
-      <div class=" hidden lg:flex  outer">
-        <div class="inner"></div>
+      <div className=" hidden lg:flex  outer">
+        <div className="inner"></div>
       </div>
       <div className="hidden lg:flex ">
         <SocialLogin></SocialLogin>

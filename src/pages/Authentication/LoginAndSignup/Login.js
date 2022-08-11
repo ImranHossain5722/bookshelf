@@ -150,8 +150,8 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div class="hidden lg:flex outer">
-        <div class="inner"></div>
+      <div className="hidden lg:flex outer">
+        <div className="inner"></div>
       </div>
       <div className="hidden lg:flex">
         <SocialLogin></SocialLogin>

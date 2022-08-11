@@ -35,7 +35,7 @@ const QuickView = () => {
       }
     }
     if(userId){
-    await  axios.post('https://book-shelf-webapp.herokuapp.com/add-to-wishlist', cartData).then(data => toast.success("added to wishlist"))
+    await  axios.post('https://book-shelf-webapp.herokuapp.com/add-to-wishlist', cartData).then(data => toast.success("Added to wishlist"))
     }else{
       console.log(" the user id is not found")
     }

@@ -27,7 +27,7 @@ const SearchModal = ({ showModal, setShowModal }) => {
                     else {
                         setError('Result not found')
                     }
-                    console.log(searchResults.length);
+                    // console.log(searchResults.length);
                 });
 
             setError('');

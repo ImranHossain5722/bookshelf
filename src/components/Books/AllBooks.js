@@ -25,17 +25,6 @@ const AllBooks = () => {
   const [postsPerPage, setpostPerPage] = useState(10);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      const res = await axios.get(
-        "https://book-shelf-webapp.herokuapp.com/all-books"
-      );
-      setPosts(res.data);
-      setLoading(false);
-    };
-
-    fetchPosts();
-
     // get all categories data 
     const loadCategories = async () => {
       const categoriesData = await axios.get('https://book-shelf-webapp.herokuapp.com/all-categories');
@@ -55,6 +44,26 @@ const AllBooks = () => {
 
     console.log(authors);
   }, []);
+
+  // filtering all books 
+  const filterBooks = async (categoryTitle) => {
+    setLoading(true);
+    const res = await axios.get(
+      "https://book-shelf-webapp.herokuapp.com/all-books"
+    );
+
+    const filteredData = res.data.filter(matched =>
+      matched.book_category.map(eachCg => eachCg?.category_id?.category_title).includes(categoryTitle)
+    )
+
+    console.log(filteredData);
+
+
+    setPosts(filteredData);
+
+    setLoading(false);
+  };
+
 
   // toggle accordian fucntion
   const toggleShow = (id_options) => {
@@ -77,13 +86,15 @@ const AllBooks = () => {
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  if (loading) {
-    return <Loading />;
-  }
+
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(posts?.length / postsPerPage); i++) {
     pageNumbers.push(i);
   }
+
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
 
 
@@ -95,7 +106,7 @@ const AllBooks = () => {
       className=" max-w-[1440px] p-6 w-full mx-auto ">
       <div className="md:flex gap-6 items-start ">
         {/* filter options left-side */}
-        <div className="border-x border-t flex-1">
+        <div className="border-x border-t flex-1 max-w-[240px]">
           {/* ======= categories filter ======= */}
           <div className="single_filterBox border-b p-6">
             <div onClick={() => {
@@ -108,8 +119,9 @@ const AllBooks = () => {
             <ul id="show-categories" className="hidden mt-6">
               {
                 categories?.map(singleCg =>
-                  <li key={singleCg._id} className="flex justify-between items-center mt-4">
-                    <p>{singleCg.category_title}</p>
+                  // filtering books by category
+                  <li onClick={() => filterBooks(singleCg.category_title)} key={singleCg._id} className="flex justify-between items-center mt-4 cursor-pointer">
+                    <p className="hover:text-primary duration-200">{singleCg.category_title}</p>
                     <span>(1)</span>
                   </li>)
               }
@@ -139,7 +151,7 @@ const AllBooks = () => {
 
         {/* filter results right-side */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 mb-10 grow">
-          {currentPosts?.map((book) => (
+          {loading ? <Loading /> : currentPosts?.map((book) => (
             <Link to={`/selectedBook/${book?._id}`}>
               <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
                 <div className="for-hover relative">

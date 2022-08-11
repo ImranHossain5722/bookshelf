@@ -21,10 +21,24 @@ const AllBooks = () => {
   const [hidden, setHidden] = useState(false);
   const [active, setActive] = useState(false);
 
+  const [countBooks, setCountBooks] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostPerPage] = useState(10);
 
   useEffect(() => {
+    const loadBooks = async () => {
+      setLoading(true);
+      const res = await axios.get(
+        "https://book-shelf-webapp.herokuapp.com/all-books"
+      );
+
+      setPosts(res.data);
+
+      setLoading(false);
+    }
+
+    loadBooks();
+
     // get all categories data 
     const loadCategories = async () => {
       const categoriesData = await axios.get('https://book-shelf-webapp.herokuapp.com/all-categories');
@@ -45,23 +59,33 @@ const AllBooks = () => {
     console.log(authors);
   }, []);
 
-  // filtering all books 
-  const filterBooks = async (categoryTitle) => {
+  // filtering all books by category or author
+  const filterBooks = async (categoryTitle, authorTitle) => {
     setLoading(true);
     const res = await axios.get(
       "https://book-shelf-webapp.herokuapp.com/all-books"
     );
 
-    const filteredData = res.data.filter(matched =>
-      matched.book_category.map(eachCg => eachCg?.category_id?.category_title).includes(categoryTitle)
-    )
+    if (categoryTitle) {
+      const filteredCategory = res.data.filter(matched =>
+        matched.book_category.map(eachCg => eachCg?.category_id?.category_title).includes(categoryTitle)
+      );
+      // console.log(filteredCategory);
+      setPosts(filteredCategory);
 
-    console.log(filteredData);
+      console.log(filteredCategory.length);
 
+      setLoading(false);
+    }
+    else if (authorTitle) {
+      const filteredAuthor = res.data.filter(matched =>
+        matched?.book_author?.author_name.includes(authorTitle)
+      );
+      // console.log(filteredAuthor);
+      setPosts(filteredAuthor);
 
-    setPosts(filteredData);
-
-    setLoading(false);
+      setLoading(false);
+    }
   };
 
 
@@ -92,14 +116,6 @@ const AllBooks = () => {
     pageNumbers.push(i);
   }
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
-
-
-
-
-
   return (
     <div
       style={{ background: "#FBF6F6" }}
@@ -120,7 +136,7 @@ const AllBooks = () => {
               {
                 categories?.map(singleCg =>
                   // filtering books by category
-                  <li onClick={() => filterBooks(singleCg.category_title)} key={singleCg._id} className="flex justify-between items-center mt-4 cursor-pointer">
+                  <li onClick={() => filterBooks(singleCg.category_title, '')} key={singleCg._id} className="flex justify-between items-center mt-4 cursor-pointer">
                     <p className="hover:text-primary duration-200">{singleCg.category_title}</p>
                     <span>(1)</span>
                   </li>)
@@ -140,8 +156,8 @@ const AllBooks = () => {
             <ul id="show-authors" className="hidden mt-6">
               {
                 authors?.map(singleAuthor =>
-                  <li key={singleAuthor._id} className="flex justify-between items-center mt-4">
-                    <p>{singleAuthor.author_name}</p>
+                  <li onClick={() => filterBooks('', singleAuthor.author_name)} key={singleAuthor._id} className="flex justify-between items-center mt-4 cursor-pointer">
+                    <p className="hover:text-primary duration-200">{singleAuthor.author_name}</p>
                     <span>(1)</span>
                   </li>)
               }

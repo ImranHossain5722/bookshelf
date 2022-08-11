@@ -1,8 +1,53 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Stars from "../Stars/Stars";
+import { toast } from 'react-toastify'
+import axios from 'axios'
+import Loading from "../Loading/Loading";
 
 const QuickView = () => {
-  return (
+  const selecItem = useSelector((state) => state.quickView.quickView[0])
+  const user = useSelector((state) => state?.newUser?.user)
+  const userId = user?._id
+  const AddCart = (id) => {
+    const cartData = {
+      user_id: userId,
+      cart_data: {
+        book: id,
+        qnt: 2
+      }
+    }
+
+    if(userId){
+
+      axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data =>{toast.success('successfully added to cart')})
+  }else{
+      console.log("user id not found", userId)
+  }
+    
+  }
+
+  const AddWishlist = async (id) => {
+    const cartData = {
+      user_id: userId,
+      wishlist_data: {
+        book: id
+      }
+    }
+    if(userId){
+    await  axios.post('https://book-shelf-webapp.herokuapp.com/add-to-wishlist', cartData).then(data => toast.success("Added to wishlist"))
+    }else{
+      console.log(" the user id is not found")
+    }
+
+
+  }
+
+  if(!selecItem){
+    return <Loading/>
+  }
+
+  return ( 
     <>
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto" bis_skin_checked="1">
@@ -10,32 +55,28 @@ const QuickView = () => {
             <img
               alt="ecommerce"
               className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-              src="https://dummyimage.com/400x400"
+              src={selecItem?.book_cover_photo_url }
             />
             <div
               className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0"
               bis_skin_checked="1"
             >
               <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-                Book's Name
+              {selecItem?.book_title}
               </h1>
               <Stars />
               <p className="leading-relaxed my-10">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aspernatur aut saepe error qui voluptate, optio autem
-                repudiandae, facere consequatur mollitia cum laboriosam
-                excepturi sunt unde distinctio facilis iusto debitis
-                dignissimos?
+                {selecItem?.book_description}
               </p>
 
               <div className="flex" bis_skin_checked="1">
                 <span className="title-font font-medium text-2xl text-gray-900">
-                  $58.00
+                ${selecItem?.book_price}.00
                 </span>
-                <button className="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">
+                <button className="flex ml-auto text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded" onClick={() => AddCart(selecItem._id)}>
                   Add to Cart
                 </button>
-                <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"onClick={() => AddWishlist(selecItem._id)}>
                   <svg
                     fill="currentColor"
                     stroke-linecap="round"

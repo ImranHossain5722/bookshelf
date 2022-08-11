@@ -44,7 +44,7 @@ const Myorder = () => {
 
                                         <div className="avatar">
                                             <div className="w rounded text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
-                                            {order._id}
+                                            {order._id.slice(0,5)}... 
                                             </div>
                                         </div>
 

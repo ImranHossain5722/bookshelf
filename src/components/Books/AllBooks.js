@@ -73,7 +73,7 @@ const AllBooks = () => {
       // console.log(filteredCategory);
       setPosts(filteredCategory);
 
-      console.log(filteredCategory.length);
+      setCountBooks(filteredCategory.length);
 
       setLoading(false);
     }
@@ -138,14 +138,14 @@ const AllBooks = () => {
                   // filtering books by category
                   <li onClick={() => filterBooks(singleCg.category_title, '')} key={singleCg._id} className="flex justify-between items-center mt-4 cursor-pointer">
                     <p className="hover:text-primary duration-200">{singleCg.category_title}</p>
-                    <span>(1)</span>
+                    {/* {countBooks ? <span>({countBooks})</span> : ''} */}
                   </li>)
               }
             </ul>
           </div>
 
           {/* ======= author filter ======= */}
-          <div className="single_filterBox mb-5 border-b p-6">
+          <div className="single_filterBox  border-b p-6">
             <div onClick={() => {
               setHidden(!hidden);
               toggleShow("#show-authors");
@@ -158,10 +158,25 @@ const AllBooks = () => {
                 authors?.map(singleAuthor =>
                   <li onClick={() => filterBooks('', singleAuthor.author_name)} key={singleAuthor._id} className="flex justify-between items-center mt-4 cursor-pointer">
                     <p className="hover:text-primary duration-200">{singleAuthor.author_name}</p>
-                    <span>(1)</span>
+                    {/* <span>(1)</span> */}
                   </li>)
               }
             </ul>
+          </div>
+
+
+          {/* ======= price filter ======= */}
+          <div className="single_filterBox border-b p-6">
+            <div onClick={() => {
+              setHidden(!hidden);
+              toggleShow("#show-price");
+            }} className="flex justify-between items-center cursor-pointer">
+              <h3 className="text-xl font-semibold capitalize">Filter Price</h3>
+              {active === '#show-price' ? <FaMinus /> : <FaPlus />}
+            </div>
+            <div id="show-price" className="hidden mt-6">
+              <input type="range" min="0" max="100" value="70" />
+            </div>
           </div>
         </div>
 
@@ -169,7 +184,7 @@ const AllBooks = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 mb-10 grow">
           {loading ? <Loading /> : currentPosts?.map((book) => (
             <Link to={`/selectedBook/${book?._id}`}>
-              <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
+              <div key={book?._id} className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
                 <div className="for-hover relative">
                   {/* relative */}
                   <img

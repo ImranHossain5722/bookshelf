@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import newsBanner from "../../Assets/images/slider-3.png";
 // Banner Images
-import img1 from "../../Assets/images/Banner-images/slider_top_1.png";
-import img2 from "../../Assets/images/Banner-images/slider_top_2.png";
-import img3 from "../../Assets/images/Banner-images/slider_top_3.png";
+import img1 from "../../Assets/images/slider-1.png";
+import img2 from "../../Assets/images/slider-2.png";
+import img3 from "../../Assets/images/slider-3.png";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -50,47 +50,9 @@ const Banner = () => {
       >
         {data.map((bnrData) => (
           <SwiperSlide>
-            {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0  items-center justify-center px-4 py-16 lg:px-20">
-              <div className="mt-6 mx-auto">
-                <h3
-                  data-aos="fade-up"
-                  data-aos-delay="100"
-                  data-aos-duration="750"
-                  className="text-2xl"
-                >
-                  {bnrData.subtitle}
-                </h3>
-                <h2
-                  data-aos="fade-up"
-                  data-aos-delay="100"
-                  data-aos-duration="1200"
-                  className="text-[30px] lg:text-[40px] font-semibold"
-                >
-                  {bnrData.title} <br />
-                  <span className="font-semibold">{bnrData.month}</span>
-                </h2>
-                <div
-                  data-aos="fade-right"
-                  data-aos-delay="750"
-                  data-aos-duration="1000"
-                  className="mt-8"
-                >
-                  <Button>Explore More</Button>
-                </div>
-              </div>
-
-              <div
-                className="mx-auto"
-                data-aos="fade-left"
-                data-aos-delay="750"
-                data-aos-duration="1000"
-              >
-                <img src={bnrData.image} className="h-96" alt="" />
-              </div>
-            </div> */}
-            <div class="banner_single" 
+          <div class="banner_single" 
             style={{
-            backgroundImage: `url(${newsBanner})`,
+            backgroundImage: `url(${bnrData.image})`,
             backgroundSize: "content",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat", }}>
@@ -132,6 +94,9 @@ const Banner = () => {
               </div>
             </div>
           </SwiperSlide>
+
+           
+          
         ))}
       </Swiper>
     </div>

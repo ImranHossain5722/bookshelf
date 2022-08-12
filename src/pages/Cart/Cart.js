@@ -86,7 +86,7 @@ const cartId = match[0]._id
                                         </div>
                                 </td>
                   <td className="text-[16px] border-[#e1e2e6] text-black">
-                    ${book.book?.book_price}
+                    ${book.book?.book_price}.00
                   </td>
                   <td className="border-[#e1e2e6]">
                     <div className="flex">
@@ -105,7 +105,7 @@ const cartId = match[0]._id
                     </div>
                   </td>
                   <td className="text-[16px] text-black border-[#e1e2e6]">
-                    ${book.book?.book_price * book?.qnt}
+                    ${book.book?.book_price * book?.qnt}.00
                   </td>
                   <td className="border-[#e1e2e6]">
                     <button className="btn btn-error text-white" onClick={() => deleteCart(book.book._id)}>delete</button>
@@ -117,10 +117,11 @@ const cartId = match[0]._id
           </div>
         
             <div className="gap-2 flex justify-end">
-          
+            <NavLink to='/'>
               <button className="btn btn-primary text-white">
                 Continue shoping
               </button>
+              </NavLink>
             <NavLink to='/checkout'>
               <button className="btn btn-primary text-white " onClick={() => checkout(user?._id)}>
                 Prossed to checkout 
@@ -137,23 +138,23 @@ const cartId = match[0]._id
             <div className="">
               <div className="flex justify-between mb-3">
                 <h5 className="text-black text-[18px] font-medium">Subtotal</h5>
-                <p>${subtotal}</p>
+                <p>${subtotal}.00</p>
               </div>
               <div className="flex justify-between mb-3">
                 <h5 className="text-black text-[18px] font-medium">
                   Shiping charge
                 </h5>
-                <p>+ USD 75.35</p>
+                <p>+ 00.00</p>
               </div>
               <div className="flex justify-between mb-3">
                 <h5 className="text-black text-[18px] font-medium">Discount</h5>
-                <p>- USD 75.35</p>
+                <p>- 00.00</p>
               </div>
               <div className="flex justify-between border-t-[1px] border-[#e1e2e6] pt-2 mt-3 items-center">
                 <h5 className="text-black text-[18px] font-medium">
                   Total (Incl. VAT)
                 </h5>
-                <p>USD $1324.35</p>
+                <p> ${subtotal}.00</p>
               </div>
             </div>
           </div>

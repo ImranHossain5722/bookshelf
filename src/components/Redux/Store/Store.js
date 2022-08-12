@@ -19,8 +19,10 @@ import {
   userReducer,
   wishlistReducer,
   currentCartReducer,
+  quickViewReducer,
 } from "../Features/bookReducers";
 import logger from "redux-logger";
+import thunk from "redux-thunk";
 
 const store = configureStore({
   reducer: {
@@ -41,11 +43,11 @@ const store = configureStore({
     OrderHistory: orderHistoryReducer,
     cartBooks: cartBooksReducer,
     selectedBooks: selectedBooksReducer,
-
+    quickView : quickViewReducer,
     cartData : currentCartReducer
   },
-
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: [thunk],
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 export default store;

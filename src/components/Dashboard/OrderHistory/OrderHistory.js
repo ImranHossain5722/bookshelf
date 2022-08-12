@@ -38,8 +38,8 @@ const OrderHistory = () => {
     </div>
     
    </div>
-<div class="overflow-x-auto mx-[12px]">
-<table class="table w-full " >
+<div className="overflow-x-auto mx-[12px]">
+<table className="table w-full " >
 
   <thead className=" ">
     <tr className='w-full base-100'>

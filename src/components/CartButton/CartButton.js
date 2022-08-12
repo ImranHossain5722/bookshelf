@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React from 'react'
-import { FaShoppingCart } from 'react-icons/fa'
+import { FaShoppingBasket} from 'react-icons/fa'
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from '../../firebase.init';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 
 const CartButton = ({ _id }) => {
@@ -18,14 +19,20 @@ const CartButton = ({ _id }) => {
         qnt: 2
       }
     }
-    axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart', cartData).then(data => console.log(data))
-    // console.log(cartData)
+
+    if(userId){
+
+      axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data =>{toast.success('successfully added to cart')})
+  }else{
+      console.log("user id not found", userId)
+  }
+    console.log(cartData)
   }
 
 
   return (
-    <button className="text-3xl text-white hover:text-primary duration-500">
-      <FaShoppingCart onClick={() => AddCart(_id)} />
+    <button className=" hover:text-primary duration-500 a">
+      <FaShoppingBasket onClick={() => AddCart(_id)} />
     </button>
   )
 }

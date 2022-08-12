@@ -10,6 +10,7 @@ const Cart = () => {
   const user = useSelector((state) => state?.newUser?.user) 
   const dispatch = useDispatch()
   let subtotal;
+  
 //  getting subtotal value
   const sub = books?.map(book => book?.book?.book_price * book?.qnt)
   subtotal = sub.reduce((a, b) => a + b, 0)
@@ -31,12 +32,18 @@ const Cart = () => {
       } 
       }
       dispatch(cartdata(data))
-    
+    console.log(data)
   }
-  // useEffect(() => {
+ const deleteCart = (id) => {
+console.log(id)
+const cart = user.user_cart
+const match = cart.filter(e => e.book ===id)
+const cartId = match[0]._id
+  if(id){
+    axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-cart?cid=${cartId}`)
+  }
   
-  //   checkout()
-  // }, [carts])
+ }
   
   return (
     <div className="pt-[60px] md:pt-[80px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">
@@ -44,8 +51,8 @@ const Cart = () => {
       <p className="text-5xl text-center mb-5 flex justify-center">My Cart <span><MdShoppingCart className='text-5xl text-primary ' /></span></p>
       <div className="container m-auto ">
         <div className="w-full">
-          <div class="overflow-auto  h-[460px]">
-            <table class="table w-full ">
+          <div className="overflow-auto  h-[460px]">
+            <table className="table w-full ">
               <thead>
                 <tr>
                   <th className="rounded-none">products</th>
@@ -61,8 +68,8 @@ const Cart = () => {
                   <td className="border-[#e1e2e6]">
                                     <div className="product gap-2">
 
-                                        <div class="avatar">
-                                            <div class="w-20 rounded">
+                                        <div className="avatar">
+                                            <div className="w-20 rounded">
                                                 <img src={book.book?.book_cover_photo_url} />
                                             </div>
                                         </div>
@@ -79,7 +86,7 @@ const Cart = () => {
                                         </div>
                                 </td>
                   <td className="text-[16px] border-[#e1e2e6] text-black">
-                    ${book.book?.book_price}
+                    ${book.book?.book_price}.00
                   </td>
                   <td className="border-[#e1e2e6]">
                     <div className="flex">
@@ -90,7 +97,7 @@ const Cart = () => {
                         type="text"
                         value={book?.qnt}
 
-                        class="input  w-[50px] h-[40px] max-w-xs rounded-none text-center border-[#e1e2e6] border-solid border-y-1 border-x-0 text-black"
+                        className="input  w-[50px] h-[40px] max-w-xs rounded-none text-center border-[#e1e2e6] border-solid border-y-1 border-x-0 text-black"
                       />
                       <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6 border-solid border text-black">
                         -
@@ -98,30 +105,29 @@ const Cart = () => {
                     </div>
                   </td>
                   <td className="text-[16px] text-black border-[#e1e2e6]">
-                    ${book.book?.book_price * book?.qnt}
+                    ${book.book?.book_price * book?.qnt}.00
                   </td>
                   <td className="border-[#e1e2e6]">
-                    <button className="btn btn-error text-white">delete</button>
+                    <button className="btn btn-error text-white" onClick={() => deleteCart(book.book._id)}>delete</button>
                   </td>
                 </tr>)}
 
               </tbody>
             </table>
           </div>
-          <div className="flex justify-between border-t-[1px] border-[#e1e2e6] pt-2">
-            <div className="gap-2 flex">
-              <button className="btn btn-primary text-white">
-                update cart
-              </button>
+        
+            <div className="gap-2 flex justify-end">
+            <NavLink to='/'>
               <button className="btn btn-primary text-white">
                 Continue shoping
               </button>
-            </div>
+              </NavLink>
             <NavLink to='/checkout'>
-              <button className="btn btn-primary text-white mt-16" onClick={() => checkout(user?._id)}>
+              <button className="btn btn-primary text-white " onClick={() => checkout(user?._id)}>
                 Prossed to checkout 
               </button>
             </NavLink> 
+           
           </div>
         </div>
         <div className="w-4/12 ml-auto mt-4">
@@ -132,23 +138,23 @@ const Cart = () => {
             <div className="">
               <div className="flex justify-between mb-3">
                 <h5 className="text-black text-[18px] font-medium">Subtotal</h5>
-                <p>${subtotal}</p>
+                <p>${subtotal}.00</p>
               </div>
               <div className="flex justify-between mb-3">
                 <h5 className="text-black text-[18px] font-medium">
                   Shiping charge
                 </h5>
-                <p>+ USD 75.35</p>
+                <p>+ 00.00</p>
               </div>
               <div className="flex justify-between mb-3">
                 <h5 className="text-black text-[18px] font-medium">Discount</h5>
-                <p>- USD 75.35</p>
+                <p>- 00.00</p>
               </div>
               <div className="flex justify-between border-t-[1px] border-[#e1e2e6] pt-2 mt-3 items-center">
                 <h5 className="text-black text-[18px] font-medium">
                   Total (Incl. VAT)
                 </h5>
-                <p>USD $1324.35</p>
+                <p> ${subtotal}.00</p>
               </div>
             </div>
           </div>

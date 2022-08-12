@@ -4,152 +4,193 @@ import { FaEye, FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartButton from "../CartButton/CartButton";
+import Loading from "../Loading/Loading";
 import { allBooks } from "../Redux/actions/bookActions";
 import Stars from "../Stars/Stars";
+import { FaPlus, FaMinus } from "react-icons/fa";
+// import { useQuery } from "react-query";
 
 const AllBooks = () => {
-  const [bookpagi, setBookpagi] = useState([]);
-  const [pageCount, setPageCount] = useState(1);
-  const [size, setSize] = useState(10);
+  // const [bookpagi, setBookpagi] = useState([]);
+  // const [pageCount, setPageCount] = useState(1);
+  // const [size, setSize] = useState(10);
+  const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [hidden, setHidden] = useState(false);
+  const [active, setActive] = useState(false);
 
-  //  all books data
-  const books = useSelector((state) => state.allBooks.allBooks);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    axios
-      .get("https://book-shelf-webapp.herokuapp.com/all-books")
-      .then((data) => dispatch(allBooks(data.data)));
-  }, [pageCount, size]);
+  const [countBooks, setCountBooks] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setpostPerPage] = useState(10);
 
-  // pagination count
   useEffect(() => {
-    fetch(
-      `https://book-shelf-webapp.herokuapp.com/books?page=${pageCount}&limit=${size}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setPageCount(data.pages);
-        setBookpagi(data.books);
-      });
-  }, [pageCount, size]);
+    const loadBooks = async () => {
+      setLoading(true);
+      const res = await axios.get(
+        "https://book-shelf-webapp.herokuapp.com/all-books"
+      );
+
+      setPosts(res.data);
+
+      setLoading(false);
+    }
+
+    loadBooks();
+
+    // get all categories data 
+    const loadCategories = async () => {
+      const categoriesData = await axios.get('https://book-shelf-webapp.herokuapp.com/all-categories');
+      setCategories(categoriesData.data);
+    };
+
+    loadCategories();
+
+
+    // get all author data
+    const loadAuthors = async () => {
+      const authorsData = await axios.get('https://book-shelf-webapp.herokuapp.com/all-authors');
+      setAuthors(authorsData.data);
+    };
+
+    loadAuthors();
+
+    console.log(authors);
+  }, []);
+
+  // filtering all books by category or author
+  const filterBooks = async (categoryTitle, authorTitle) => {
+    setLoading(true);
+    const res = await axios.get(
+      "https://book-shelf-webapp.herokuapp.com/all-books"
+    );
+
+    if (categoryTitle) {
+      const filteredCategory = res.data.filter(matched =>
+        matched.book_category.map(eachCg => eachCg?.category_id?.category_title).includes(categoryTitle)
+      );
+      // console.log(filteredCategory);
+      setPosts(filteredCategory);
+
+      setCountBooks(filteredCategory.length);
+
+      setLoading(false);
+    }
+    else if (authorTitle) {
+      const filteredAuthor = res.data.filter(matched =>
+        matched?.book_author?.author_name.includes(authorTitle)
+      );
+      // console.log(filteredAuthor);
+      setPosts(filteredAuthor);
+
+      setLoading(false);
+    }
+  };
+
+
+  // toggle accordian fucntion
+  const toggleShow = (id_options) => {
+    if (!hidden) {
+      document.querySelector(id_options).classList.remove('hidden');
+      setActive(id_options);
+    } else {
+      document.querySelector(id_options).classList.add('hidden');
+      setActive('');
+    }
+  };
+
+
+
+
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(posts?.length / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div
       style={{ background: "#FBF6F6" }}
-      className=" max-w-[1440px] p-6 w-full mx-auto "
-    >
+      className=" max-w-[1440px] p-6 w-full mx-auto ">
       <div className="md:flex gap-6 items-start ">
-        <div className=" p-6 border flex-1 mb-4">
-          <div className="single_filterBox mb-5">
-            <h3 className="text-xl font-semibold capitalize mb-5">
-              categories (0)
-            </h3>
-            <ul>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  category name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  category name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  category name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  category name
-                </a>
-              </li>
+        {/* filter options left-side */}
+        <div className="border-x border-t flex-1 max-w-[240px]">
+          {/* ======= categories filter ======= */}
+          <div className="single_filterBox border-b p-6">
+            <div onClick={() => {
+              setHidden(!hidden);
+              toggleShow("#show-categories");
+            }} className="flex justify-between items-center cursor-pointer">
+              <h3 className="text-xl font-semibold capitalize">categories</h3>
+              {active === '#show-categories' ? <FaMinus /> : <FaPlus />}
+            </div>
+            <ul id="show-categories" className="hidden mt-6">
+              {
+                categories?.map(singleCg =>
+                  // filtering books by category
+                  <li onClick={() => filterBooks(singleCg.category_title, '')} key={singleCg._id} className="flex justify-between items-center mt-4 cursor-pointer">
+                    <p className="hover:text-primary duration-200">{singleCg.category_title}</p>
+                    {/* {countBooks ? <span>({countBooks})</span> : ''} */}
+                  </li>)
+              }
             </ul>
           </div>
-          <div className="single_filterBox mb-5">
-            <h3 className="text-xl font-semibold mb-5">Author (0)</h3>
-            <ul>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Author name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Author name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Author name
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Author name
-                </a>
-              </li>
+
+          {/* ======= author filter ======= */}
+          <div className="single_filterBox  border-b p-6">
+            <div onClick={() => {
+              setHidden(!hidden);
+              toggleShow("#show-authors");
+            }} className="flex justify-between items-center cursor-pointer">
+              <h3 className="text-xl font-semibold capitalize">Author</h3>
+              {active === '#show-authors' ? <FaMinus /> : <FaPlus />}
+            </div>
+            <ul id="show-authors" className="hidden mt-6">
+              {
+                authors?.map(singleAuthor =>
+                  <li onClick={() => filterBooks('', singleAuthor.author_name)} key={singleAuthor._id} className="flex justify-between items-center mt-4 cursor-pointer">
+                    <p className="hover:text-primary duration-200">{singleAuthor.author_name}</p>
+                    {/* <span>(1)</span> */}
+                  </li>)
+              }
             </ul>
           </div>
-          <div className="single_filterBox">
-            <h3 className="text-xl font-semibold mb-5">Price filter</h3>
-            <ul>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Heigh to Low
-                </a>
-              </li>
-              <li>
-                <a
-                  className="text-base capitalize py-2 block capitalize"
-                  href="#"
-                >
-                  Low to Heigh
-                </a>
-              </li>
-            </ul>
+
+
+          {/* ======= price filter ======= */}
+          <div className="single_filterBox border-b p-6">
+            <div onClick={() => {
+              setHidden(!hidden);
+              toggleShow("#show-price");
+            }} className="flex justify-between items-center cursor-pointer">
+              <h3 className="text-xl font-semibold capitalize">Filter Price</h3>
+              {active === '#show-price' ? <FaMinus /> : <FaPlus />}
+            </div>
+            <div id="show-price" className="hidden mt-6">
+              <input type="range" min="0" max="100" value="70" />
+            </div>
           </div>
         </div>
 
+        {/* filter results right-side */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 mb-10 grow">
-          {bookpagi.map((book) => (
-            <Link to={`/selectedBook/${book._id}`}>
-              <div className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
+          {loading ? <Loading /> : currentPosts?.map((book) => (
+            <Link to={`/selectedBook/${book?._id}`}>
+              <div key={book?._id} className="book-shadow rounded-lg h-[460px] pt-6 flex justify-center bg-white">
                 <div className="for-hover relative">
                   {/* relative */}
                   <img
-                    src={book.book_cover_photo_url}
+                    src={book?.book_cover_photo_url}
                     className="h-64 w-44 image-full"
-                    alt="Books image"
+                    alt="Books-images"
                   />
                   {/* absolute hover effect */}
                   <div className="bg-[#00124ea4] h-64 w-44 flex items-center justify-center absolute top-0 hover-button hidden">
@@ -159,7 +200,7 @@ const AllBooks = () => {
                     <button className="mx-5 text-3xl text-white hover:text-primary duration-500">
                       <FaHeart />
                     </button>
-                    <CartButton _id={book._id} />
+                    <CartButton _id={book?._id} />
                   </div>
                   <div className="w-44 mt-2">
                     <h3>{book.book_title}</h3>
@@ -178,15 +219,18 @@ const AllBooks = () => {
 
       {/* pagenation */}
       <div className="flex justify-center p-3 ">
-        {[...Array(size).keys()].map((number) => (
+        {pageNumbers.map((number) => (
           <button
-            className="p-2 mr-2 border-2 border-secondary bg-primary text-white hover:bg-secondary active:bg-secondary"
-            onClick={() => setPageCount(number)}
+            onClick={() => paginate(number)}
+            className="page-link btn btn-primary mx-2"
           >
-            {number + 1}
+            {number}
           </button>
         ))}
-        <select onChange={(event) => setSize(event.target.value)}>
+        <select
+          className="select select-primary "
+          onChange={(event) => setpostPerPage(event.target.value)}
+        >
           <option value="5">5</option>
           <option value="10" selected>
             10

@@ -4,15 +4,17 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import auth from '../../../firebase.init';
 import Select from 'react-select'
-// import Async, { useAsync } from 'react-select/async';
+import { toast } from 'react-toastify';
 
 
 const AddProduct = () => {
   const [user] = useAuthState(auth);
-  const [userRole, setUserRole] = useState('user');
+  const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit, reset } = useForm();
   // console.log(getUser, userRole);
+
+
 
   // get all Categories 
   const [allCategories, setAllCategories] = useState([]);
@@ -81,20 +83,19 @@ const AddProduct = () => {
 
 
   useEffect(() => {
-    const userEmail = {
-      email: user?.email
+    const userUid = { uid: user?.uid };
+    const options = {
+      method: 'GET',
+      url: 'https://book-shelf-webapp.herokuapp.com/get-user',
+      params: userUid
     };
-    fetch('https://book-shelf-webapp.herokuapp.com/get-user', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(userEmail)
-    })
-      .then((res) => res.json())
-      .then(data => setGetUser(data)
-      );
-  }, [user?.email])
+    axios.request(options).then(function (response) {
+      setGetUser(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, [user?.uid])
+
 
   // // get current user role form database 
 
@@ -114,7 +115,7 @@ const AddProduct = () => {
     else if (currentUserRole === 'admin') {
       setUserRole('admin');
     }
-  }, [getUser])
+  }, [getUser]);
 
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
@@ -129,18 +130,26 @@ const AddProduct = () => {
     }
   }
 
+  // const cat = ['ffksfd','ksdjfsdf'];
+  // const cat2 = [
+  //   { cat_id:'ffksfd'},
+  //   { cat_id:'ffksfd'},
+  //   { cat_id:'ffksfd'}  ]
+
+
   // const [imgbbUrl, setImgbbUrl] = useState('');
-  const [bookCat, setBookCat] = useState({});
+  const [bookCat, setBookCat] = useState([]);
+  console.log(bookCat);
   const getChoosenCategory = (choice) => {
-    const data = [choice?.value];
-    setBookCat(data);
+    setBookCat(Array.isArray(choice) ? choice.map(x => (
+      { category_id: x.value }
+    )) : []);
   }
 
   const [bookAut, setBookAut] = useState({});
 
   const getChoosenAuthor = (choice) => {
     const data = choice?.value;
-
     setBookAut(data);
 
   }
@@ -153,23 +162,6 @@ const AddProduct = () => {
   }
 
   const onSubmit = data => {
-
-    // const productInfoData = {
-    //   book_title: data?.book_title,
-    //   book_description: data?.book_description,
-    //   book_edition: data?.book_edition,
-    //   book_publisher: bookPub,
-    //   book_author: bookAut,
-    //   book_price: data?.book_price,
-    //   book_pages: data?.book_pages,
-    //   book_qnt: data?.book_qnt,
-    //   discount: 0,
-    //   category: bookCat,
-    //   // book_cover_photo_url: imgbbUrl,
-    //   book_language: data?.translator,
-    //   book_country: data?.country
-    // }
-    // console.log(productInfoData)
 
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -188,35 +180,37 @@ const AddProduct = () => {
             book_title: data?.book_title,
             book_description: data?.book_description,
             book_edition: data?.book_edition,
-            book_publisher: bookPub,
-            book_author: bookAut,
+            book_publisher: userRole === 'publisher' ? getUser[0].uid : bookPub,
+            book_author: userRole === 'author' ? getUser[0].uid : bookAut,
             book_price: data?.book_price,
             book_pages: data?.book_pages,
             book_qnt: data?.book_qnt,
             discount: 0,
-            category: bookCat,
+            book_category: bookCat,
             book_cover_photo_url: imgbbUrl,
             book_language: data?.translator,
             book_country: data?.country
           }
           const postAuthorData = () => {
             console.log('before post:', productInfoData);
-            axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => console.log('Post data:', data))
+            axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => {
+              toast.success('Book Added Successfully');
+              console.log('Post data:', data)
+            })
           }
           postAuthorData();
         }
       })
 
-    // reset();
+    reset();
   };
-
 
   return (
     <div className=''>
-       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'> Add Product</h2>
-       <div className=" flex items-center justify-center pb-10">
-            <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
-          </div>
+      <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'> Add Product</h2>
+      <div className=" flex items-center justify-center pb-10">
+        <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+      </div>
 
       <div className='mt-1 md:w-5/6 mx-8 md:mx-auto bg-white p-10 rounded-xl shadow-md' >
         <form className='' onSubmit={handleSubmit(onSubmit)}>
@@ -250,18 +244,18 @@ const AddProduct = () => {
             <div className='md:w-[70%] mt-12 md:mt-0  md:ml-12'>
               <div className='md:flex gap-7'>
                 <div className='w-full'>
-                  <label class="label-text text-lg">Product Name</label>
+                  <label className="label-text text-lg">Product Name</label>
                   <input type="text" {...register("book_title",
                     {
                       required: 'required*',
                     }
-                  )} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                  )} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_title && <p><small className='pl-1 text-red-600'>{errors?.book_title?.message}</small></p>}
                 </div>
                 <div className='w-full mt-4 md:mt-0'>
-                  <label class="label-text text-lg">Select Categories</label>
+                  <label className="label-text text-lg">Select Categories</label>
 
-                  <Select onChange={(choice) => getChoosenCategory(choice)} name='categoryName' className="mt-2 rounded-xl" options={catOption} />
+                  <Select isMulti onChange={(choice) => getChoosenCategory(choice)} name='categoryName' className="mt-2 rounded-xl" options={catOption} />
                 </div>
 
               </div>
@@ -269,92 +263,93 @@ const AddProduct = () => {
               {/* row-3 */}
               <div className='md:flex gap-7 mt-4'>
                 <div className='w-full'>
-                  <label class="label-text text-lg">Author Name</label>
-                  {/* <input type="text" {...register("book_author", {
-                    required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
-                  {errors?.book_author && <p><small className='pl-1 text-red-600'>{errors?.book_author?.message}</small></p>} */}
-                  <Select onChange={(choice) => getChoosenAuthor(choice)} className="mt-2 rounded-xl" options={authorOptions} />
+                  <label className="label-text text-lg">Author Name</label>
+                  {userRole === 'author' ?
+                    <input type="text" disabled defaultValue={getUser[0]?.user_name} className="input-bordered rounded-[4px] text-gray-400 border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-grey-600 w-full mt-2" />
+                    :
+                    <Select onChange={(choice) => getChoosenAuthor(choice)} className="mt-2 rounded-xl" options={authorOptions} />
+                  }
+
                 </div>
                 <div className='w-full mt-4 md:mt-0'>
-                  <label class="label-text text-lg">Publisher Name</label>
-                  {/* <input type="text" {...register("book_publisher", {
-                    required: 'required*',
-                  })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
-                  {errors?.book_publisher && <p><small className='pl-1 text-red-600'>{errors?.book_publisher?.message}</small></p>} */}
-                  <Select onChange={(choice) => getChoosenPublisher(choice)} className="mt-2 rounded-xl" options={publisherOptions} />
+                  <label className="label-text text-lg">Publisher Name</label>
+                  {userRole === 'publisher' ?
+                    <input type="text" disabled defaultValue={getUser[0]?.user_name} className="input-bordered rounded-[4px] text-gray-400 border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-grey-600 w-full mt-2" />
+                    :
+                    <Select onChange={(choice) => getChoosenPublisher(choice)} className="mt-2 rounded-xl" options={publisherOptions} />
+                  }
                 </div>
               </div >
               {/* row-4 */}
               <div className='md:flex gap-7 mt-4' >
                 <div className='w-full'>
-                  <label class="label-text text-lg">Price</label>
+                  <label className="label-text text-lg">Price</label>
                   <input type="number" {...register("book_price", {
                     required: 'required*',
                   })} placeholder="Type here"
                     min={1}
-                    class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                    className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_price && <p><small className='pl-1 text-red-600'>{errors?.book_price?.message}</small></p>}
                 </div>
                 <div className='w-full'>
-                  <label class="label-text text-lg">Pages</label>
+                  <label className="label-text text-lg">Pages</label>
                   <input type="number" {...register("book_pages", {
                     required: 'required*',
                   })} placeholder="Type here"
-                    min={1} class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                    min={1} className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_pages && <p><small className='pl-1 text-red-600'>{errors?.book_pages?.message}</small></p>}
                 </div>
               </div >
               <div className='md:flex gap-7 mt-4' >
                 <div className='w-full'>
-                  <label class="label-text text-lg">Quantity</label>
+                  <label className="label-text text-lg">Quantity</label>
                   <input type="number" {...register("book_qnt", {
                     required: 'required*',
                   })} placeholder="Type here"
                     min={1}
-                    class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                    className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_qnt && <p><small className='pl-1 text-red-600'>{errors?.book_qnt?.message}</small></p>}
                 </div>
                 <div className='w-full'>
-                  <label class="label-text text-lg">Edition</label>
+                  <label className="label-text text-lg">Edition</label>
                   <input type="text" {...register("book_edition", {
                     required: 'required*',
                   })} placeholder="Type here"
-                    min={1} class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                    min={1} className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_edition && <p><small className='pl-1 text-red-600'>{errors?.book_edition?.message}</small></p>}
                 </div>
               </div >
               < div className='md:flex gap-7 mt-4' >
                 <div className='w-full'>
-                  <label class="label-text text-lg">Language</label>
+                  <label className="label-text text-lg">Language</label>
                   <input type="text" {...register("translator", {
                     required: 'required*',
-                  })} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                  })} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.translator && <p><small className='pl-1 text-red-600'>{errors?.translator?.message}</small></p>}
                 </div>
                 <div className='w-full mt-4  md:mt-0'>
-                  <label class="label-text text-lg">Country</label>
+                  <label className="label-text text-lg">Country</label>
                   <input type="text" {...register("country", {
                     required: 'required*',
-                  })} placeholder="Type here" class="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                  })} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                   {errors?.book_pages && <p><small className='pl-1 text-red-600'>{errors?.country?.message}</small></p>}
                 </div>
               </div >
               {/* row-5 */}
               < div className='mt-4' >
-                <label class="label-text text-lg">Short Details</label>
+                <label className="label-text text-lg">Short Details</label>
                 <input type="text" {...register("book_description", {
                   required: 'required*',
-                })} placeholder="Type here" class="input input-bordered bg-white w-full mt-2" />
+                })} placeholder="Type here" className="input input-bordered bg-white w-full mt-2" />
                 {errors?.book_description && <p><small className='pl-1 text-red-600'>{errors?.book_description?.message}</small></p>}
               </div >
             </div>
             {/* Image Container  */}
-                
+
           </div>
           <input type="submit" className='mt-4 btn btn-primary w-1/2 text-white ml-[350px]' value='Add Book' />
-          
-            
+
+
         </form >
       </div >
     </div >

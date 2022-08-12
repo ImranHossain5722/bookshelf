@@ -6,33 +6,20 @@ import IG from "../../Assets/images/icon/instagram 1.png";
 import FB from "../../Assets/images/icon/facebook-app-symbol 1.png";
 import { useLocation } from "react-router-dom";
 const NavTopbar = () => {
-  
-
   return (
-    <div 
-    className="bg-primary p-2">
-      <div className="grid justify-center	">
-        <div className="grid md:grid-cols-3 lg:grid-cols-4">
-          <div className="flex items-center">
-            <img className="w-5" src={phone}/>
-            <p className="text-white text-base">+8801688615454</p>
+    <div className="bg-primary header_topBar">
+      <div className="container mx-auto">
+        <div className="flex justify-between gap-2">
+          <div className="flex items-center gap-4">
+            <p className="text-white text-base">Hotline: +016 688 615 454</p>
+            <span className="seperator h-3 w-[1px] bg-[#fff]"></span>
+            <p className="text-white text-base">Email: bookshefl@gmail.com</p>
           </div>
-          <div className="flex items-center ">
-            <img className="mr-4 w-5" src={email} />
-            <p className="text-white text-base">bookshefl@gmail.com</p>
-          </div>
-
-          <div className="flex items-center ">
-            <img className=" mx-2 lg:mx-4 w-5" src={liveChat} />
+          <div className="flex items-center  gap-4">
             <p className="text-white text-base">Live Chat</p>
+            <span className="seperator h-3 w-[1px] bg-[#fff]"></span>
+            <p className="text-white text-base">My Account</p>
           </div>
-
-          <div className="flex items-center py-4 md:p-0 lg:p-0 ">
-            <img className="mr-4 w-5 h-5 "src={FB} />
-            <img className="w-5 h-5 "src={IG} />
-            </div>
-
-           
         </div>
       </div>
     </div>

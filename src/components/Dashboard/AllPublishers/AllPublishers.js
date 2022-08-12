@@ -1,18 +1,38 @@
-import React, { useEffect } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../Loading/Loading';
 import { allPublishers } from '../../Redux/actions/bookActions';
 
 const AllPublishers = () => {
   const users = useSelector((state) => state.allPublishers.allPublishers)
   const dispatch = useDispatch();
+  const [loading,setLoading] = useState(false)
 
-  const getUsers = () => {
-    fetch('https://book-shelf-webapp.herokuapp.com/all-publishers').then(res => res.json()).then(data => dispatch(allPublishers(data)))
-  }
+  // const getUsers = () => {
+  //   fetch('https://book-shelf-webapp.herokuapp.com/all-publishers').then(res => res.json()).then(data => dispatch(allPublishers(data)))
+  // }
 
+  // useEffect(() => {
+  //   getUsers()
+  // }, [])
   useEffect(() => {
-    getUsers()
+    
+    const fetchPosts = async () => {
+      setLoading(true);
+      const {data} = await axios.get('https://book-shelf-webapp.herokuapp.com/all-publishers');
+      dispatch(allPublishers(data))
+        setLoading(false);
+  
+    };
+    if(users.length === 0 ){ 
+      fetchPosts();
+    }
   }, [])
+
+  if(loading){
+    return <Loading/>
+  }
   return (
     <div className="bg-base-100 my-8 p-3">
        <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>All Publishers</h2>
@@ -24,8 +44,8 @@ const AllPublishers = () => {
 
       {users?.map(user => <div className="mx-[12px] card user-shadow  w-[320px] h-[130px] p-7 font-semibold m-3 bg-white">
         <div className='flex items-center'>
-          <div class="avatar">
-            <div class="w-16 rounded">
+          <div className="avatar">
+            <div className="w-16 rounded">
               <img src={user?.photo_url ? user?.photo_url : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg'} alt="Publishers photo" />
             </div>
           </div>

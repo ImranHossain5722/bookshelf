@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -8,72 +8,38 @@ import { BsFillBagCheckFill, BsFillHeartFill, BsFillJournalBookmarkFill } from "
 import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { newUser } from '../../Redux/actions/bookActions';
-
+import useGetUserData from '../../../hooks/useGetUserData';
+import { useState } from 'react';
 const Myprofile = () => {
   const [user] = useAuthState(auth);
-  const [userRole, setUserRole] = useState('');
-  const [getUser, setGetUser] = useState([]);
+  // const [getUser, setGetUser] = useState([]);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(() => {
+  const { getUser, userRole } = useGetUserData();
 
-
-    const userUid = { uid: user?.uid };
-
-    const options = {
-      method: 'GET',
-      url: 'https://book-shelf-webapp.herokuapp.com/get-user',
-      params: userUid
-    };
-    axios.request(options).then(function (response) {
-      setGetUser(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
-
-  }, [user?.email])
-
-  // upload image to imgbb and get image url 
-
-
+  const [fullName, setFullName] = useState(getUser[0]?.user_name)
   useEffect(() => {
 
     dispatch(newUser(getUser[0]))
+    setFullName(getUser[0]?.user_name ? getUser[0]?.user_name : user?.displayName);
 
+  }, [getUser, dispatch])
 
-  }, [getUser, user])
-
-
-
-
-  // console.log(getUser);
-  // // get current user role form database 
   const currentUserId = getUser[0]?._id;
-  useEffect(() => {
-    const currentUserRole = getUser[0]?.user_role;
-    if (currentUserRole === 'author') {
-      setUserRole('author');
-    }
-    else if (currentUserRole === 'publisher') {
-      setUserRole('publisher');
-    }
-    else if (currentUserRole === 'user') {
-      setUserRole('user');
-    }
-    else if (currentUserRole === 'admin') {
-      setUserRole('admin');
-    }
-  }, [getUser])
 
-
-  const [upImgUrl, setUpImgUrl] = useState('');
-  console.log(upImgUrl);
+  console.log(getUser[0]);
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
     const formData = new FormData();
     formData.append('image', image);
+    const updateData = (updatedProfileData) => {
+      axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData)
+        .then(data => {
+          toast.success('Profile Updated Successfully!');
+        })
+    }
     if (image) {
       fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
         method: 'POST',
@@ -82,7 +48,6 @@ const Myprofile = () => {
         .then(res => res.json())
         .then(result => {
           if (result.success) {
-            setUpImgUrl(result?.data?.url)
             const phoneNo = parseInt(data?.phone)
             const updatedProfileData = {
               user_name: data?.name ? data?.name : user?.user?.displayName,
@@ -91,10 +56,7 @@ const Myprofile = () => {
               user_birthday: data?.date,
               user_photo_url: result?.data?.url ? result?.data?.url : user?.user_photo_url
             };
-            const updateData = async () => {
-              await axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => console.log(data))
-            }
-            updateData();
+            updateData(updatedProfileData);
           }
         })
 
@@ -106,35 +68,35 @@ const Myprofile = () => {
         user_address: data?.address,
         user_birthday: data?.date,
       };
-
-      const updateData = async () => {
-        await axios.put(`https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`, updatedProfileData).then(data => console.log(data))
-      }
-      updateData();
-
+      updateData(updatedProfileData);
     }
   }
-  const viewAsUser = () => {
-    setUserRole('user');
+
+  const updateRole = role => {
+    const userId = getUser[0]?._id;
+
+
+    const updatedRole = {
+      "user_role": role
+    };
+    axios.patch(`https://book-shelf-webapp.herokuapp.com/update-user-role?id=${userId}`, updatedRole)
+      .then(data => {
+        toast.success(`You are now viewing as ${role}`);
+      })
   }
 
-  const viewAsAuthor = () => {
-    setUserRole('author');
-  }
 
-  const viewAsPublisher = () => {
-    setUserRole('publisher');
-  }
 
   return (
     <div>
-
       {/* View As  */}
       <div>
         <span className='ml-6 text-2xl font-bold'>View As </span>
-        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => viewAsUser()}>User</button>
-        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => viewAsAuthor()}>Auther</button>
-        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => viewAsPublisher()}>Publiser</button>
+        <button className={userRole === "admin" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-grey ml-2 mt-2 text-white'} onClick={() => updateRole('admin')} disabled={userRole === "admin" ? true : false}>Admin</button>
+        <button className={userRole === "author" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('author')} disabled={userRole === "author" ? true : false}>Auther</button>
+        <button className={userRole === "publisher" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('publisher')} disabled={userRole === "publisher" ? true : false}>Publiser</button>
+        <button className={userRole === "user" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('user')} disabled={userRole === "user" ? true : false}>User</button>
+        <button className={userRole === "delivery" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-grey ml-2 mt-2 text-white'} onClick={() => updateRole('delivery')} disabled={userRole === "delivery" ? true : false}>Delivery</button>
       </div>
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
       <div className=" flex items-center justify-center pb-10">
@@ -144,8 +106,8 @@ const Myprofile = () => {
 
       <div className='md:flex  mr-auto mx-[20px] md:ml-20'>
         <div className='md:w-[50%] p-[20px] md:p-[78px] rounded-xl shadow-lg drop-shadow-lg text-black bg-white' >
-          <img className='block mx-auto' height={200} width={200} src={user?.photoURL ? user?.photoURL : 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg '} alt="" />
-          <h2 className='text-[20px] font-bold mt-3 mb-1 text-center text-black'>{user?.displayName}</h2>
+          <img className='block mx-auto' height={200} width={200} src={getUser[0]?.user_photo_url ? getUser[0]?.user_photo_url : (user?.photoURL || 'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ')} alt="" />
+          <h2 className='text-[20px] font-bold mt-3 mb-1 text-center text-black'>{getUser[0]?.user_name ? getUser[0]?.user_name : user?.displayName}</h2>
           <p className='text-center mb-3 font-semibold text-[16px]'>{userRole}</p>
           <h3 className='font-bold text-[25px] uppercase text-secondary mb-[19px]'>Contact Informatin</h3>
           <div>
@@ -268,10 +230,10 @@ const Myprofile = () => {
                         }
                       })}
                       type="text"
-                      defaultValue={user?.displayName}
+                      defaultValue={fullName}
                       className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
-                      <span className="label-text-alt text-red-500">{errors.author_name?.type === 'required' && `${errors?.author_name?.message}`}</span>
+                      <span className="label-text-alt text-red-500">{errors.name?.type === 'required' && `${errors?.name?.message}`}</span>
                     </label>
                   </div>
 
@@ -326,7 +288,7 @@ const Myprofile = () => {
                         }
                       })}
                       type="date"
-                      placeholder={getUser[0]?.user_birthday}
+                      defaultValue={getUser[0]?.user_birthday}
                       className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.date?.type === 'required' && `${errors?.date?.message}`}</span>
@@ -356,7 +318,7 @@ const Myprofile = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

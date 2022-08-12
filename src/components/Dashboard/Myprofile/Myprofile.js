@@ -9,7 +9,6 @@ import { FaCommentDollar, FaDollarSign } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { newUser } from '../../Redux/actions/bookActions';
 import useGetUserData from '../../../hooks/useGetUserData';
-import useViewAs from '../../../hooks/useViewAs';
 import { useState } from 'react';
 const Myprofile = () => {
   const [user] = useAuthState(auth);
@@ -17,7 +16,7 @@ const Myprofile = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch();
 
-  const { getUser, userRole, setUserRole } = useGetUserData();
+  const { getUser, userRole } = useGetUserData();
 
   const [fullName, setFullName] = useState(getUser[0]?.user_name)
   useEffect(() => {
@@ -88,16 +87,16 @@ const Myprofile = () => {
 
 
 
-
   return (
     <div>
       {/* View As  */}
       <div>
         <span className='ml-6 text-2xl font-bold'>View As </span>
-        <button className={userRole === "user" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('user')} disabled={userRole === "user" ? true : false}>User</button>
+        <button className={userRole === "admin" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-grey ml-2 mt-2 text-white'} onClick={() => updateRole('admin')} disabled={userRole === "admin" ? true : false}>Admin</button>
         <button className={userRole === "author" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('author')} disabled={userRole === "author" ? true : false}>Auther</button>
         <button className={userRole === "publisher" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('publisher')} disabled={userRole === "publisher" ? true : false}>Publiser</button>
-        <button className={userRole === "admin" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-grey ml-2 mt-2 text-white'} onClick={() => updateRole('admin')} disabled={userRole === "admin" ? true : false}>Admin</button>
+        <button className={userRole === "user" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('user')} disabled={userRole === "user" ? true : false}>User</button>
+        <button className={userRole === "delivery" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-grey ml-2 mt-2 text-white'} onClick={() => updateRole('delivery')} disabled={userRole === "delivery" ? true : false}>Delivery</button>
       </div>
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
       <div className=" flex items-center justify-center pb-10">

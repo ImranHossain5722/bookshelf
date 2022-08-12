@@ -142,7 +142,7 @@ const AddProduct = () => {
   console.log(bookCat);
   const getChoosenCategory = (choice) => {
     setBookCat(Array.isArray(choice) ? choice.map(x => (
-      { cat_id: x.value }
+      { category_id: x.value }
     )) : []);
   }
 
@@ -186,7 +186,7 @@ const AddProduct = () => {
             book_pages: data?.book_pages,
             book_qnt: data?.book_qnt,
             discount: 0,
-            category: bookCat,
+            book_category: bookCat,
             book_cover_photo_url: imgbbUrl,
             book_language: data?.translator,
             book_country: data?.country

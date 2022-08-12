@@ -58,7 +58,7 @@ const RequestBook = () => {
                             book_publisher: data?.publisher,
                             book_author: data?.author,
                             book_qnt: data?.book_qnt,
-                            category: data?.book_category,
+                            book_category: data?.book_category,
                             book_cover_photo_url: imgbbUrl,
                             book_language: data?.translator,
                             book_country: data?.country
@@ -75,7 +75,7 @@ const RequestBook = () => {
                 book_publisher: data?.publisher,
                 book_author: data?.author,
                 book_qnt: data?.book_qnt,
-                category: data?.book_category,
+                book_category: data?.book_category,
                 book_language: data?.translator,
                 book_country: data?.country
             }
@@ -101,12 +101,7 @@ const RequestBook = () => {
                                     <span className="label-text text-lg">Book Cover (Optional)</span>
                                 </label>
                                 <input
-                                    {...register("image", {
-                                        required: {
-                                            value: true,
-                                            message: "image is Required"
-                                        }
-                                    })}
+                                    {...register("image")}
                                     type="file"
                                     onChange={onChangePicture}
                                     placeholder="Update Your Address"
@@ -133,11 +128,7 @@ const RequestBook = () => {
                                 <div className='w-full mt-4 md:mt-0'>
                                     <label className="label-text text-lg">Book Categories</label>
 
-                                    <input type="text" {...register("book_category",
-                                        {
-                                            required: 'required*',
-                                        }
-                                    )} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                                    <input type="text" {...register("book_category")} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                                     {errors?.book_category && <p><small className='pl-1 text-red-600'>{errors?.book_category?.message}</small></p>}
                                 </div>
 
@@ -156,11 +147,7 @@ const RequestBook = () => {
                                 </div>
                                 <div className='w-full mt-4 md:mt-0'>
                                     <label className="label-text text-lg">Publisher Name</label>
-                                    <input type="text" {...register("publisher",
-                                        {
-                                            required: 'required*',
-                                        }
-                                    )} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                                    <input type="text" {...register("publisher")} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                                     {errors?.publisher && <p><small className='pl-1 text-red-600'>{errors?.publisher?.message}</small></p>}
                                 </div>
                             </div >
@@ -168,18 +155,14 @@ const RequestBook = () => {
                             <div className='md:flex gap-7 mt-4' >
                                 <div className='w-full'>
                                     <label className="label-text text-lg">Quantity</label>
-                                    <input type="number" {...register("book_qnt", {
-                                        required: 'required*',
-                                    })} placeholder="Type here"
+                                    <input type="number" {...register("book_qnt")} placeholder="Type here"
                                         min={1}
                                         className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                                     {errors?.book_qnt && <p><small className='pl-1 text-red-600'>{errors?.book_qnt?.message}</small></p>}
                                 </div>
                                 <div className='w-full'>
                                     <label className="label-text text-lg">Edition</label>
-                                    <input type="text" {...register("book_edition", {
-                                        required: 'required*',
-                                    })} placeholder="Type here"
+                                    <input type="text" {...register("book_edition")} placeholder="Type here"
                                         min={1} className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                                     {errors?.book_edition && <p><small className='pl-1 text-red-600'>{errors?.book_edition?.message}</small></p>}
                                 </div>
@@ -187,27 +170,16 @@ const RequestBook = () => {
                             < div className='md:flex gap-7 mt-4' >
                                 <div className='w-full'>
                                     <label className="label-text text-lg">Language</label>
-                                    <input type="text" {...register("translator", {
-                                        required: 'required*',
-                                    })} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                                    <input type="text" {...register("translator")} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                                     {errors?.translator && <p><small className='pl-1 text-red-600'>{errors?.translator?.message}</small></p>}
                                 </div>
                                 <div className='w-full mt-4  md:mt-0'>
                                     <label className="label-text text-lg">Country</label>
-                                    <input type="text" {...register("country", {
-                                        required: 'required*',
-                                    })} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
+                                    <input type="text" {...register("country")} placeholder="Type here" className="input-bordered rounded-[4px] border-[1px] border-[#DBDBDB] p-[7px] placeholder:text-[14px] bg-white w-full mt-2" />
                                     {errors?.book_pages && <p><small className='pl-1 text-red-600'>{errors?.country?.message}</small></p>}
                                 </div>
                             </div >
-                            {/* row-5 */}
-                            < div className='mt-4' >
-                                <label className="label-text text-lg">Short Details</label>
-                                <input type="text" {...register("book_description", {
-                                    required: 'required*',
-                                })} placeholder="Type here" className="input input-bordered bg-white w-full mt-2" />
-                                {errors?.book_description && <p><small className='pl-1 text-red-600'>{errors?.book_description?.message}</small></p>}
-                            </div >
+
                         </div>
 
 

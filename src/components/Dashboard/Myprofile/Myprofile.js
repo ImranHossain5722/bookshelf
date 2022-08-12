@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { newUser } from '../../Redux/actions/bookActions';
 import useGetUserData from '../../../hooks/useGetUserData';
 import useViewAs from '../../../hooks/useViewAs';
+import { useState } from 'react';
 const Myprofile = () => {
   const [user] = useAuthState(auth);
   // const [getUser, setGetUser] = useState([]);
@@ -18,15 +19,17 @@ const Myprofile = () => {
 
   const { getUser, userRole, setUserRole } = useGetUserData();
 
-
+  const [fullName, setFullName] = useState(getUser[0]?.user_name)
   useEffect(() => {
 
     dispatch(newUser(getUser[0]))
+    setFullName(getUser[0]?.user_name ? getUser[0]?.user_name : user?.displayName);
 
   }, [getUser, dispatch])
 
   const currentUserId = getUser[0]?._id;
 
+  console.log(getUser[0]);
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -70,7 +73,20 @@ const Myprofile = () => {
     }
   }
 
-  const { viewAsUser, viewAsAuthor, viewAsPublisher } = useViewAs();
+  const updateRole = role => {
+    const userId = getUser[0]?._id;
+
+
+    const updatedRole = {
+      "user_role": role
+    };
+    axios.patch(`https://book-shelf-webapp.herokuapp.com/update-user-role?id=${userId}`, updatedRole)
+      .then(data => {
+        toast.success(`You are now viewing as ${role}`);
+      })
+  }
+
+
 
 
   return (
@@ -78,9 +94,10 @@ const Myprofile = () => {
       {/* View As  */}
       <div>
         <span className='ml-6 text-2xl font-bold'>View As </span>
-        <button className='btn btn-primary ml-2 mt-2 text-white' onClick={() => viewAsUser()}>User</button>
-        <button className='btn btn-secondary ml-2 mt-2 text-white' onClick={() => viewAsAuthor()}>Auther</button>
-        <button className='btn btn-red ml-2 mt-2 text-white' onClick={() => viewAsPublisher()}>Publiser</button>
+        <button className={userRole === "user" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('user')} disabled={userRole === "user" ? true : false}>User</button>
+        <button className={userRole === "author" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('author')} disabled={userRole === "author" ? true : false}>Auther</button>
+        <button className={userRole === "publisher" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('publisher')} disabled={userRole === "publisher" ? true : false}>Publiser</button>
+        <button className={userRole === "admin" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-grey ml-2 mt-2 text-white'} onClick={() => updateRole('admin')} disabled={userRole === "admin" ? true : false}>Admin</button>
       </div>
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
       <div className=" flex items-center justify-center pb-10">
@@ -214,10 +231,10 @@ const Myprofile = () => {
                         }
                       })}
                       type="text"
-                      defaultValue={getUser[0]?.user_name ? getUser[0]?.user_name : user?.displayName}
+                      defaultValue={fullName}
                       className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
                     <label className="label">
-                      <span className="label-text-alt text-red-500">{errors.author_name?.type === 'required' && `${errors?.author_name?.message}`}</span>
+                      <span className="label-text-alt text-red-500">{errors.name?.type === 'required' && `${errors?.name?.message}`}</span>
                     </label>
                   </div>
 
@@ -302,7 +319,7 @@ const Myprofile = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

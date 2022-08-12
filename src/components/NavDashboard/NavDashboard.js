@@ -12,13 +12,13 @@ import downArrow from "../../Assets/images/icon/down-arrow.png";
 import NavTopbar from "../NavTopbar/NavTopbar";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { newUser } from "../Redux/actions/bookActions";
+import { newUser, whistlist } from "../Redux/actions/bookActions";
 const NavDashboard = ({ children }) => {
   const [dark, setDark] = useState(false);
 
   const [user] = useAuthState(auth);
 
-  const handelSignOut = () => {    
+  const handelSignOut = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
   };
@@ -28,7 +28,7 @@ const NavDashboard = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-   
+
     const userUid = { uid: user?.uid };
 
     const options = {
@@ -50,8 +50,7 @@ const NavDashboard = ({ children }) => {
 
     dispatch(newUser(getUser[0]))
 
-
-  }, [getUser,user])
+  }, [getUser, user]) 
   return (
     <div>
       <div className="drawer drawer-end  " data-theme={dark ? "dark" : "light"}>
@@ -169,6 +168,7 @@ const NavDashboard = ({ children }) => {
             {/* <!-- Sidebar content here --> */}
             <li><Link to='/' className='text-lg text-[#00124E] font-bold'>Home</Link></li>
             <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
+            <li><Link to='/addstuff' className='text-lg text-[#00124E] font-bold'>Add Stuff</Link></li>
             <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
             <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
 

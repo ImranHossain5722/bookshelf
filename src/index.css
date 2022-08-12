@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: #FBF6F6;
+  background-color: #fbf6f6;
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
@@ -44,5 +44,13 @@ code {
   content: "\f005 \f005 \f005 \f005 \f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-  color: #FFC107;
+  color: #ffc107;
+}
+
+/*
+  Modal daisy ui modified
+*/
+
+.modal-box {
+  max-width: 90% !important;
 }

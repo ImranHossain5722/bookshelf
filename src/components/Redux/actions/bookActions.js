@@ -22,6 +22,14 @@ export const newUser = (user) =>{
     }
 }
 
+export const quickView = (data) =>{
+    return {
+        type : ActionTypes.QUICKVIEW,
+        payload: data
+    }
+}
+
+
 export const author = (author) =>{
     return {
         type : ActionTypes.AUTHOR,

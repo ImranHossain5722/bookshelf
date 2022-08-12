@@ -130,10 +130,20 @@ const AddProduct = () => {
     }
   }
 
+  // const cat = ['ffksfd','ksdjfsdf'];
+  // const cat2 = [
+  //   { cat_id:'ffksfd'},
+  //   { cat_id:'ffksfd'},
+  //   { cat_id:'ffksfd'}  ]
+
+
   // const [imgbbUrl, setImgbbUrl] = useState('');
   const [bookCat, setBookCat] = useState([]);
+  console.log(bookCat);
   const getChoosenCategory = (choice) => {
-    setBookCat(Array.isArray(choice) ? choice.map(x => x.value) : []);
+    setBookCat(Array.isArray(choice) ? choice.map(x => (
+      { cat_id: x.value }
+    )) : []);
   }
 
   const [bookAut, setBookAut] = useState({});

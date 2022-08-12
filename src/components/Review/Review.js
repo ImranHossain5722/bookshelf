@@ -14,6 +14,7 @@ import './review.css'
 import useWindowDimensions from "../windowSize/windowSize";
 
 import sliderBanner from "../../Assets/images/slider__bag.png"
+import axios from "axios";
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);
@@ -22,11 +23,11 @@ const Review = () => {
 
   // fetched  review data
   useEffect(() => {
-    fetch('reviews/review.json')
-      .then(res => res.json())
-      .then(data => setReviews(data))
+    axios.get(`https://book-shelf-webapp.herokuapp.com/all-reviews`)
+      .then(data => setReviews(data.data))
   }, []);
 
+  console.log(reviews);
   useEffect(() => {
     //  responsiveness added by width change
     if (width >= 900) {
@@ -42,18 +43,18 @@ const Review = () => {
   }, [width])
 
   return (
-    <div 
-    style={{
-      background: `url(${sliderBanner})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-    }}
-    className=" px-8 mx-auto  mt-[60px] lg:mt-[120px] py-4">
+    <div
+      style={{
+        background: `url(${sliderBanner})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+      className=" px-8 mx-auto  mt-[60px] lg:mt-[120px] py-4">
       <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold text-center pb-1">Our Clients Feedback</h2>
-      
+
       <div className=" flex justify-center ">
-      <progress className="progress progress-success  h-2 w-5  "></progress>
+        <progress className="progress progress-success  h-2 w-5  "></progress>
       </div>
       <Swiper
         slidesPerView={size}
@@ -67,15 +68,15 @@ const Review = () => {
         style={{ "--swiper-theme-color": "#27AE61" }}
       >
         {
-          reviews.map(review => <SwiperSlide key={review.id} className="swiper-review">
+          reviews?.map(review => <SwiperSlide key={review.id} className="swiper-review">
             <div className="text-center p-4">
-              <p>{review.review}</p>
+              <p>{review?.review}</p>
               <div className="avatar pt-6">
                 <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src={review.image} alt="" />
+                  <img src={review?.user_id?.user_photo_url} alt="" />
                 </div>
               </div>
-              <p className="pt-2 font-semibold">{review.name} </p>
+              <p className="pt-2 font-semibold">{review?.user_id?.user_name} </p>
             </div>
           </SwiperSlide>)
         }

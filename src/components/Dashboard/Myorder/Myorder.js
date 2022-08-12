@@ -60,7 +60,7 @@ const Myorder = () => {
 
                                     </td>
                                     <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
-                                    {book.book_id?.book_title} 
+                                    {book.book_id?.book_title.slice(0,20)} 
                                     </td>
                                     <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
                                     ${book.book_id?.book_price} 

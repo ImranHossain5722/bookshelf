@@ -38,7 +38,7 @@ console.log(orders)
 
                                         <div className="avatar">
                                             <div className="w rounded text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
-                                            {order?._id.slice(0,15)}... 
+                                            {order?._id.slice(0,10)}... 
                                             
                                         </div>
                                         

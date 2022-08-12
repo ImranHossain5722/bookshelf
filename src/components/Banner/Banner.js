@@ -91,8 +91,8 @@ const Banner = () => {
             <div class="banner_single" 
             style={{
             backgroundImage: `url(${newsBanner})`,
-            backgroundSize: "content",
-            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundPosition: "top center !importent",
             backgroundRepeat: "no-repeat", }}>
               <div class="container mx-auto">
                 <div class="grid">

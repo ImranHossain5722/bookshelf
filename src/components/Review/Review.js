@@ -50,7 +50,7 @@ const Review = () => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className=" px-8 mx-auto  mt-[60px] lg:mt-[120px] py-4">
+      className=" px-8 mx-auto  mt-[60px] lg:mt-[120px] py-[120px] " >
       <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold text-center pb-1">Our Clients Feedback</h2>
 
       <div className=" flex justify-center ">

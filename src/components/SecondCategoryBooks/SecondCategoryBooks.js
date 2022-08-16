@@ -58,7 +58,7 @@ const SecondCategoryBooks = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white sction_padding">
+    <div className="bg-white sction_padding_2 my-[120px] ">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">

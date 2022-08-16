@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const ClubBanner = () => {
   return (
-    <div className="max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px]">
+    <div className="max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] mb-[120px]">
       <div
         className="w-full"
         style={{

@@ -179,13 +179,9 @@ $white: #fff;
   color: #fff;
 }
 
-.sction_padding {
-  padding: 120px 0;
-}
-
 // category
 .category_widget {
-  background: rgba(12, 207, 106,0.8);
+  background: rgba(12, 207, 106, 0.8);
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
   padding: 55px 30px 52px 30px;
@@ -243,13 +239,14 @@ $white: #fff;
   border-radius: 10px;
   overflow: hidden;
   .banner_single {
-    padding: 123px 0 128px 0;
+    padding: 123px 30px 128px 30px;
     border-radius: 10px;
     background-size: cover;
     background-position: center center !important;
     border-radius: 10px;
     @media #{$tab} {
-      padding: 100px 0 100px 0;
+      padding: 100px 30px 100px 30px;
+      background-position: left center !important;
     }
     .banner__text {
       max-width: 576px;
@@ -381,5 +378,39 @@ $white: #fff;
 }
 
 .header_topBar {
-  padding: 13px;
+  padding: 13px 115px;
+  @media #{$tab} {
+    padding: 13px 30px;
+  }
+}
+
+.main_header {
+  padding: 13px 115px 13px 105px !important;
+  @media #{$tab} {
+    padding: 13px 15px 13px 5px !important;
+  }
+}
+
+.sction_padding {
+  padding: 120px 30px;
+  @media #{$tab} {
+    padding: 60px 15px;
+  }
+}
+.sction_padding_2 {
+  padding: 80px 30px 120px 30px;
+  @media #{$tab} {
+    padding: 60px 15px;
+  }
+}
+
+.sction_padding_bottom {
+  padding: 0 30px 120px 30px;
+  @media #{$tab} {
+    padding: 0 15px 60px 15px;
+  }
+}
+
+// heder
+.main_header {
 }

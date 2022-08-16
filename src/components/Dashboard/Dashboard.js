@@ -51,9 +51,9 @@ function Dashboard() {
                 <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
                 <li><Link to='/dashboard/addstuff' className='text-lg text-[#00124E] font-bold'>Add Stuff</Link></li>
                 <li><Link to='/dashboard/allusers' className='text-lg text-[#00124E] font-bold'>All Users</Link></li>
-                <li><Link to='/dashboard/allorders' className='text-lg text-[#00124E] font-bold'>All Orders</Link></li>
                 <li><Link to='/dashboard/allauthor' className='text-lg text-[#00124E] font-bold'>All Authors</Link></li>
                 <li><Link to='/dashboard/allpublisher' className='text-lg text-[#00124E] font-bold'>All Publishers</Link></li>
+                <li><Link to='/dashboard/allorders' className='text-lg text-[#00124E] font-bold'>All Orders</Link></li>
                 <li><Link to='/dashboard/orderhistory' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
                 <li><Link to='/dashboard/addproduct' className='text-lg text-[#00124E] font-bold'>Add Product</Link></li>
                 <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>

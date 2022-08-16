@@ -1,15 +1,19 @@
 import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
-
+import { BsCartCheckFill } from 'react-icons/bs';
+import { toast } from 'react-toastify'
 const Checkout = () => {
   const cart = useSelector((state) => state.cartData.cartData)
+  const user = useSelector((state) => state?.newUser?.user) 
+  const userId = user?._id
 
-  const sendOrder = () => {
+  const sendOrder = async () => {
     console.log(cart)
     if(cart){
 
-      axios.post('https://book-shelf-webapp.herokuapp.com/place-order',cart).then(data => console.log(data))
+     await axios.post('https://book-shelf-webapp.herokuapp.com/place-order',cart).then(data => toast.success("Thanks for Ordering"))
+     await axios.delete(`https://book-shelf-webapp.herokuapp.com/delete-cart?id=${userId}`)
     }else{
       console.log('cart not found')
     }
@@ -131,7 +135,7 @@ const Checkout = () => {
               </div>
               <div className="flex justify-between items-center">
                 <h5 className="text-black text-[18px] font-medium">
-                  Total (Incl. VAT)
+                  Total (Incl. VAT) 
                 </h5>
                 <p>USD $1324.35</p>
               </div>
@@ -157,8 +161,8 @@ const Checkout = () => {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="btn btn-primary text-white w-full " onClick={() =>sendOrder()}>
-                  + update cart
+                <button className="btn btn-primary text-white w-full " onClick={() => sendOrder()}>
+                  Checkout <BsCartCheckFill className="text-[18px] ml-1"/>
                 </button>
               </div>
             </div>

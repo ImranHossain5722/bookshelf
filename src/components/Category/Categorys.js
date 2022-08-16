@@ -88,7 +88,7 @@ const Categorys = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="container mx-auto sction_padding_2">
+    <div className="container mx-auto py-[120px]">
       {/* ------title section----- */}
       <div className="flex justify-between items-center mb-4">
         <div className="">

@@ -44,7 +44,7 @@ const Myorder = () => {
 
                                         <div className="avatar">
                                             <div className="w rounded text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
-                                            {order._id.slice(0,5)}... 
+                                            {order._id.slice(0,20)}
                                             </div>
                                         </div>
 
@@ -60,7 +60,7 @@ const Myorder = () => {
 
                                     </td>
                                     <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
-                                    {book.book_id?.book_title} 
+                                    {book.book_id?.book_title.slice(0,20)} 
                                     </td>
                                     <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
                                     ${book.book_id?.book_price} 

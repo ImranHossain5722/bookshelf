@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import AddCartButton from '../AddCartButton/AddCartButton';
 import Button from '../Button/Button';
 import CartButton from '../CartButton/CartButton';
+import Loading from '../Loading/Loading';
 import QuickViewButton from '../QuickViewButton/QuickViewButton';
 import Stars from '../Stars/Stars';
 import Wishlistbutton from '../wishlistButton/Wishlistbutton';
@@ -12,12 +13,17 @@ import './BestSellingBooks.css';
 
 const BestSellingBooks = () => {
     const [books, setBooks] = useState([]);
-
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
+      setLoading(true);
         fetch('https://book-shelf-webapp.herokuapp.com/all-books')
             .then(res => res.json())
             .then(data => setBooks(data));
+            setLoading(false)
     }, []);
+    if(loading){
+      return <Loading/>
+    }
 
     console.log(books);
 

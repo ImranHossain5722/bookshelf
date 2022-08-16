@@ -37,6 +37,13 @@ export const author = (author) =>{
     }
 }
 
+export const orderView = (order) =>{
+    return {
+        type : ActionTypes.ORDERVIEW,
+        payload: order
+    }
+}
+
 export const popularBooks = (books) =>{
     return {
         type : ActionTypes.POPULARBOOKS,

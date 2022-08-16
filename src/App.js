@@ -54,6 +54,7 @@ import CommingSoon from "./components/CommingSoon/CommingSoon";
 import MyWishlist from "./components/Dashboard/MyWishlist/MyWishlist";
 import AddStuff from "./components/Dashboard/AddStuff/AddStuff";
 import RequestBook from "./components/Dashboard/RequestBook/RequestBook";
+import Payment from "./components/Dashboard/Payments/Payment";
 
 // initialize aos
 AOS.init();
@@ -135,6 +136,7 @@ function App() {
               element={<Products_details />}
             ></Route>
             <Route path="/became" element={<AuthorOrPublisher />}></Route>
+            <Route path="/payment" element={<Payment />}></Route>
             <Route path="/books" element={<AllBooks />}></Route>
             <Route
               path="/addbook"

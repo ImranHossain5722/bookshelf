@@ -21,7 +21,9 @@ const defState = {
     wishlistBooks : [],
     allBooks : [],
     cartData : {},
-    quickView : {}
+    quickView : {},
+    orderView : {}
+
 }
 
 export const sellBookReducer = (state = defState, {type, payload} ) => {
@@ -244,6 +246,18 @@ export const quickViewReducer = (state = defState, {type, payload} ) => {
           
             return {
                 quickView : payload
+            };
+    
+        default:
+            return state;
+    }
+}
+export const orderViewReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.ORDERVIEW:
+          
+            return {
+                orderView : payload
             };
     
         default:

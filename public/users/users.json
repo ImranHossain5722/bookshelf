@@ -6,7 +6,7 @@
         " user_email": "publisher3@mm.com",
         "user_phone": 12222211221,
         "user_role": "publisher",
-        "user_photo_url": "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jp...",
+        "user_photo_url": "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jp..."
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@
         " user_email": "admin@mm.com",
         "user_phone": 22223123233212,
         "user_role": "admin",
-        "user_photo_url": "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jp...",
+        "user_photo_url": "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jp..."
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@
         " user_email": "author@mm.com",
         "user_phone": 333323,
         "user_role": "author",
-        "user_photo_url": "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jp...",
+        "user_photo_url": "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jp..."
     },
     {
         "id": 4,
@@ -33,6 +33,6 @@
         " user_email": "imabuyusuf@gmail.com",
         "user_phone": 12222211221,
         "user_role": "admin",
-        "user_photo_url": "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jp...",
-    },
+        "user_photo_url": "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jp..."
+    }
 ]

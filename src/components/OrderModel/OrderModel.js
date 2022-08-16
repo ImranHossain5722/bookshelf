@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react'
 import { useDispatch } from 'react-redux'
-import { quickView } from "../Redux/actions/bookActions";
+import { orderView } from '../Redux/actions/bookActions'
 
-const Modal = ({ modal, children }) => {
-  const dispatch = useDispatch()
-  const removeItem = () => {
-    dispatch(quickView({}))
-  }
+const OrderModel = ({ modal, children }) => {
+    const dispatch = useDispatch()
+    const removeItem = () => {
+      dispatch(orderView({}))
+    }
+  
   return (
     <>
       <input type="checkbox" id={modal} className="modal-toggle" />
@@ -23,7 +24,7 @@ const Modal = ({ modal, children }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Modal;
+export default OrderModel

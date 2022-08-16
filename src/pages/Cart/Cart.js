@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { MdShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import productImg from "../../Assets/images/clubB.jpg";
+import CartDeleteButton from "../../components/CartDeleteButton/CartDeleteButton";
 import { cartBooks, cartdata } from "../../components/Redux/actions/bookActions";
 const Cart = () => {
   const books = useSelector((state) => state?.cartBooks?.cartBooks)
@@ -34,16 +34,7 @@ const Cart = () => {
       dispatch(cartdata(data))
     console.log(data)
   }
- const deleteCart = (id) => {
-console.log(id)
-const cart = user.user_cart
-const match = cart.filter(e => e.book ===id)
-const cartId = match[0]._id
-  if(id){
-    axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-cart?cid=${cartId}`)
-  }
-  
- }
+
   
   return (
     <div className="pt-[60px] md:pt-[80px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">
@@ -108,7 +99,8 @@ const cartId = match[0]._id
                     ${book.book?.book_price * book?.qnt}.00
                   </td>
                   <td className="border-[#e1e2e6]">
-                    <button className="btn btn-error text-white" onClick={() => deleteCart(book.book._id)}>delete</button>
+                    {/* <button className="btn btn-error text-white" onClick={() => deleteCart(book.book._id)}>delete</button> */}
+                    <CartDeleteButton _id={book.book._id} />
                   </td>
                 </tr>)}
 

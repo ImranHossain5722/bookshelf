@@ -3,11 +3,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { BsCartCheckFill } from 'react-icons/bs';
 import { toast } from 'react-toastify'
+import { Link, useNavigate } from "react-router-dom";
 const Checkout = () => {
   const cart = useSelector((state) => state.cartData.cartData)
   const user = useSelector((state) => state?.newUser?.user) 
   const userId = user?._id
-
+  const navigate = useNavigate()
   const sendOrder = async () => {
     console.log(cart)
     if(cart){
@@ -18,6 +19,9 @@ const Checkout = () => {
       console.log('cart not found')
     }
  
+  }
+  if(!cart.user_id){
+    navigate("/cart")
   }
   return (
     <div className="pt-[60px] md:pt-[80px] lg:pt-[120px]  pb-[60px] md:pb-[80px] lg:pb-[120px] ">
@@ -156,9 +160,11 @@ const Checkout = () => {
                 <div className="single_payment_box border-[1px] text-black p-4 mb-3 font-semibold">
                   CHEQUE PAYMENT
                 </div>
-                <div className="single_payment_box border-[1px] text-black p-4 mb-3 font-semibold">
+                <Link to="/payment">
+                <div className="single_payment_box border-[1px] text-black p-4 mb-3 font-semibold" >
                   PAYPAL
                 </div>
+                </Link>
               </div>
               <div className="mt-6">
                 <button className="btn btn-primary text-white w-full " onClick={() => sendOrder()}>

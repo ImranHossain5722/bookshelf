@@ -87,6 +87,8 @@ const Categorys = () => {
   // for swiper slider
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const cardNextRef = useRef(null);
+  const cardPrevRef = useRef(null);
   return (
     <div className="container mx-auto py-[120px]">
       {/* ------title section----- */}
@@ -186,15 +188,31 @@ const Categorys = () => {
               )}
             </SwiperSlide>
           ))}
+
         </Swiper>
       </div>
+      
+        
       {/* show book after category select  */}
-
+      
       {selectedCatId && (
         <div className="bg-white max-w-[1240px] mx-auto mt-[10px] lg:mt-[10px] py-10">
-          <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">
+          <div className="flex justify-between items-center mb-4n">
+            <div>
+            <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">
             {selectedCatTitle}
           </h1>
+            </div>
+
+          <div className="swiperSlide_button_group  pt-3">
+            <div className="swiper_button swiper_button_prev" ref={cardPrevRef}>
+              <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div className="swiper_button swiper_button_next" ref={cardNextRef}>
+              <i class="fa-solid fa-angle-right"></i>
+            </div>
+          </div>
+          </div>
           {books.length === 0 && (
             <h2 className="pl-6 text-[15px] lg:text-[20px] font-bold text-red-600 mb-8">
               No Books Found
@@ -202,20 +220,41 @@ const Categorys = () => {
           )}
           {books.length === 0 || (
             <div className="mt-1">
-              <Swiper
-                slidesPerView={size}
-                spaceBetween={30}
-                slidesPerGroup={size}
-                loop={true}
-                loopFillGroupWithBlank={true}
-                navigation={true}
-                modules={[Navigation]}
-                className="mySwiper px-7 py-6"
-                style={{ "--swiper-theme-color": "#27AE61" }}
-              >
-                {books?.map((book) => (
-                  <SwiperSlide key={book._id}>
-                     <div className="product_widget26 mb_30">
+               <Swiper
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 3,
+              },
+              992: {
+                slidesPerView: 4,
+              },
+              1500: {
+                slidesPerView: 4,
+              },
+            }}
+            spaceBetween={24}
+            loop={true}
+            navigation={{
+              prevEl: "#prev_slide",
+              nextEl: "#next_slide",
+            }}
+            modules={[Autoplay, Navigation]}
+            autoplay={true}
+            className="mySwiper"
+            style={{ "--swiper-theme-color": "#27AE61" }}
+            onInit={(swiper) => {
+              swiper.params.navigation.prevEl = cardPrevRef.current;
+              swiper.params.navigation.nextEl = cardNextRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }}
+          >
+            {books?.map((book) => (
+              <SwiperSlide key={book._id}>
+                <div className="product_widget26 mb_30">
                   <div className="product_thumb_upper position-relative">
                     <span className="offer_badge">-0%</span>
                     <a href="product_details.php" className="thumb text-center">
@@ -223,7 +262,7 @@ const Categorys = () => {
                     </a>
                     <div className="product_action">
                     <Wishlistbutton _id={book._id} />
-                    <QuickViewButton _id={book._id} />
+                   <QuickViewButton _id={book._id} />
                     <CartButton _id={book._id}  />
                     </div>
                   </div>
@@ -246,9 +285,9 @@ const Categorys = () => {
                   <AddCartButton _id={book._id}/>
                   </div>
                 </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
             </div>
           )}
         </div>

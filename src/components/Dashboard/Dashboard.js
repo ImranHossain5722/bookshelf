@@ -3,6 +3,8 @@ import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import auth from '../../firebase.init'
 import useGetUserData from '../../hooks/useGetUserData'
+import OrderModel from '../OrderModel/OrderModel'
+import OrderView from '../OrderModel/OrderView'
 
 
 function Dashboard() {
@@ -66,16 +68,15 @@ function Dashboard() {
                 <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
               </>}
 
-
-
-
             </ul>
-
+            <OrderModel modal={"order-view"}>
+    <OrderView/>  
+    </OrderModel>
           </div>
         </div>
       </div>
-    </div>
 
+    </div>
 
   )
 }

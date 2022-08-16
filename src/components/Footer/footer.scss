@@ -8,6 +8,8 @@ footer.home_six_footer {
   .main_footer_wrap {
     padding-top: 97px;
     padding-bottom: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
     @media #{"(max-width: 767.98px)"} {
       padding-top: 71px;
       padding-bottom: 15px;
@@ -55,7 +57,7 @@ footer.home_six_footer {
         font-weight: 700;
         margin-bottom: 13px;
         text-transform: uppercase;
-        color: #fff;  
+        color: #fff;
       }
     }
     .footer_links {
@@ -175,6 +177,8 @@ footer.home_six_footer {
   }
   .copyright_area {
     padding-bottom: 47px;
+    padding-left: 15px;
+    padding-right: 15px;
     @media #{"(max-width: 767.98px)"} {
       padding-bottom: 8px;
     }
@@ -302,4 +306,8 @@ footer.home_six_footer {
 }
 .social__Links3 a:hover {
   color: #44a648;
+}
+.footer_middle_wrap {
+  padding-left: 15px;
+  padding-right: 15px;
 }

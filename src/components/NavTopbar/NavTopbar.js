@@ -7,8 +7,8 @@ import FB from "../../Assets/images/icon/facebook-app-symbol 1.png";
 import { useLocation } from "react-router-dom";
 const NavTopbar = () => {
   return (
-    <div className="bg-primary header_topBar">
-      <div className="container mx-auto">
+    <div className="bg-primary header_topBar hidden lg:block">
+      <div className="w-full">
         <div className="flex justify-between gap-2">
           <div className="flex items-center gap-4">
             <p className="text-white text-base">Hotline: +016 688 615 454</p>

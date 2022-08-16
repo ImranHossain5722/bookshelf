@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaShoppingBasket} from 'react-icons/fa'
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from '../../firebase.init';
@@ -8,9 +8,11 @@ import { toast } from 'react-toastify';
 
 
 const CartButton = ({ _id }) => {
-
+  const [includeCart, setincludeCart] = useState(false)
   const user = useSelector((state) => state?.newUser?.user)
   const userId = user?._id
+  const userCart = user?.user_cart?.map(book => book?.book)
+
   const AddCart = (id) => {
     const cartData = {
       user_id: userId,
@@ -29,11 +31,21 @@ const CartButton = ({ _id }) => {
     console.log(cartData)
   }
 
+  useEffect(() => {
+  
+    if(userCart?.includes(_id)){
+       setincludeCart(true)
+    }else{
+     setincludeCart(false)
+    }
+  }, [user,_id]) 
+  
 
   return (
-    <button className=" hover:text-primary duration-500 a">
-      <FaShoppingBasket onClick={() => AddCart(_id)} />
-    </button>
+    <button className=" hover:text-primar duration-500 a" >
+      {includeCart ? <FaShoppingBasket className='text-primary'/> : <FaShoppingBasket onClick={() => AddCart(_id)} />}
+  
+  </button>
   )
 }
 

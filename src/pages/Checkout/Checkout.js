@@ -1,27 +1,29 @@
 import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
-import { BsCartCheckFill } from 'react-icons/bs';
-import { toast } from 'react-toastify'
+import { BsCartCheckFill } from "react-icons/bs";
+import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 const Checkout = () => {
-  const cart = useSelector((state) => state.cartData.cartData)
-  const user = useSelector((state) => state?.newUser?.user) 
-  const userId = user?._id
-  const navigate = useNavigate()
+  const cart = useSelector((state) => state.cartData.cartData);
+  const user = useSelector((state) => state?.newUser?.user);
+  const userId = user?._id;
+  const navigate = useNavigate();
   const sendOrder = async () => {
-    console.log(cart)
-    if(cart){
-
-     await axios.post('https://book-shelf-webapp.herokuapp.com/place-order',cart).then(data => toast.success("Thanks for Ordering"))
-     await axios.delete(`https://book-shelf-webapp.herokuapp.com/delete-cart?id=${userId}`)
-    }else{
-      console.log('cart not found')
+    console.log(cart);
+    if (cart) {
+      await axios
+        .post("https://book-shelf-webapp.herokuapp.com/place-order", cart)
+        .then((data) => toast.success("Thanks for Ordering"));
+      await axios.delete(
+        `https://book-shelf-webapp.herokuapp.com/delete-cart?id=${userId}`
+      );
+    } else {
+      console.log("cart not found");
     }
- 
-  }
-  if(!cart.user_id){
-    navigate("/cart")
+  };
+  if (!cart.user_id) {
+    navigate("/cart");
   }
   return (
     <div className="pt-[60px] md:pt-[80px] lg:pt-[120px]  pb-[60px] md:pb-[80px] lg:pb-[120px] ">
@@ -61,7 +63,8 @@ const Checkout = () => {
               <input
                 type="text"
                 placeholder="House Number and street address"
-                className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none" required
+                className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                required
               />
             </div>
             <div className="w-full flex ">
@@ -75,14 +78,16 @@ const Checkout = () => {
               <input
                 type="text"
                 placeholder="Enter city/town name"
-                className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none" required
+                className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                required
               />
             </div>
             <div className="w-full flex ">
               <input
                 type="text"
                 placeholder="01XXXXXXXXXX"
-                className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none" required
+                className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                required
               />
             </div>
             <div className="w-full flex ">
@@ -134,41 +139,54 @@ const Checkout = () => {
                 <p>Shipping type</p>
               </div>
               <div className="flex justify-between mb-3 pb-3 border-b-[1px]">
-                <h5 className="text-black text-[18px] font-medium">Order Total</h5>
+                <h5 className="text-black text-[18px] font-medium">
+                  Order Total
+                </h5>
                 <p>$215.00</p>
               </div>
               <div className="flex justify-between items-center">
                 <h5 className="text-black text-[18px] font-medium">
-                  Total (Incl. VAT) 
+                  Total (Incl. VAT)
                 </h5>
                 <p>USD $1324.35</p>
               </div>
               <div className="payment_boxes mt-12">
                 <div className="single_payment_box mb-3">
                   <div className="single_payment_box border-[1px] text-black p-4 font-semibold">
-                    DIRECT BANK TRANSFER
+                    PAYMENT TYPE
                   </div>
                   <div className="single_payment_box border-[1px] border-t-[0] p-4 font-normal">
-                    <p>
-                      Make your payment directly into our bank account. Please
-                      use your Order ID as the payment reference. Your order
-                      won’t be shipped until the funds have cleared in our
-                      account.
-                    </p>
+                    <div class="single_lists">
+                      <div class="select_list">
+                        <label class="primary_checkbox flex mb-2">
+                          <input type="checkbox" />
+                          <span class="checkmark mr-2.5"></span>
+                          <span class="label_name">Cash on delivery</span>
+                        </label>
+                        <label class="primary_checkbox flex ">
+                          <input type="checkbox" />
+                          <span class="checkmark mr-2.5"></span>
+                          <span class="label_name">Online Payment</span>
+                        </label>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="single_payment_box border-[1px] text-black p-4 mb-3 font-semibold">
                   CHEQUE PAYMENT
                 </div>
                 <Link to="/payment">
-                <div className="single_payment_box border-[1px] text-black p-4 mb-3 font-semibold" >
-                  PAYPAL
-                </div>
+                  <div className="single_payment_box border-[1px] text-black p-4 mb-3 font-semibold">
+                    PAYPAL
+                  </div>
                 </Link>
               </div>
               <div className="mt-6">
-                <button className="btn btn-primary text-white w-full " onClick={() => sendOrder()}>
-                  Checkout <BsCartCheckFill className="text-[18px] ml-1"/>
+                <button
+                  className="btn btn-primary text-white w-full "
+                  onClick={() => sendOrder()}
+                >
+                  Checkout <BsCartCheckFill className="text-[18px] ml-1" />
                 </button>
               </div>
             </div>

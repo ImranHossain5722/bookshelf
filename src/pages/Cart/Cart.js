@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import CartDeleteButton from "../../components/CartDeleteButton/CartDeleteButton";
 import { cartBooks, cartdata } from "../../components/Redux/actions/bookActions";
+import {toast } from "react-toastify"
 const Cart = () => {
   const books = useSelector((state) => state?.cartBooks?.cartBooks)
   const user = useSelector((state) => state?.newUser?.user) 
@@ -32,7 +33,7 @@ const Cart = () => {
       } 
       }
       dispatch(cartdata(data))
-    console.log(data)
+   
   }
 
   const increaseQnt =(_id,qnt) => {
@@ -42,8 +43,11 @@ const Cart = () => {
  
   }
   const decreaseQnt =(_id,qnt) => {
-    if(_id && qnt !==0){
+    if(_id && qnt !==1){
       axios.patch(`https://book-shelf-webapp.herokuapp.com/update-cart-quantity?cid=${_id}&qnt=${qnt-1}`)
+    }
+    else if(qnt === 1){
+      toast.error("Quantity can't be decreaced below 1")
     }
 
   }

@@ -42,7 +42,7 @@ const Cart = () => {
     }
  
   }
-  const decreaseQnt =(_id,qnt) => {
+  const decreaseQnt = (_id,qnt) => {
     if(_id && qnt !==1){
       axios.patch(`https://book-shelf-webapp.herokuapp.com/update-cart-quantity?cid=${_id}&qnt=${qnt-1}`)
     }

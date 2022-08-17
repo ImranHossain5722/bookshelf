@@ -9,36 +9,36 @@ import Loading from '../../Loading/Loading'
 const AllUsers = () => {
   const users = useSelector((state) => state.allUser.allUsers)
   const dispatch = useDispatch();
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
- 
-console.log("users",users)
+
+  console.log("users", users)
   useEffect(() => {
-    
+
     const fetchUsers = async () => {
       setLoading(true);
       const res = await axios.get('https://book-shelf-webapp.herokuapp.com/all-users');
       dispatch(allUsers(res.data))
       setLoading(false);
-  
+
     };
-  if(users.length === 0 ){ 
-    console.log("user is not present")
-    fetchUsers();
-  }
+    if (users.length === 0) {
+      console.log("user is not present")
+      fetchUsers();
+    }
   }, [])
 
-  if(loading){
-    return <Loading/>
+  if (loading) {
+    return <Loading />
   }
 
   return (
     <div className="bg-base-100 my-8 p-3">
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>All Users </h2>
-       <div className=" flex items-center justify-center pb-10">
-       
-            <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
-          </div>
+      <div className=" flex items-center justify-center pb-10">
+
+        <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+      </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 g-4 gy-8'>
 
 

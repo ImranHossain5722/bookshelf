@@ -18,7 +18,7 @@ const CartButton = ({ _id }) => {
       user_id: userId,
       cart_data: {
         book: id,
-        qnt: 2
+        qnt: 1
       }
     }
 

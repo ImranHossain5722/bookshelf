@@ -11,14 +11,14 @@ const Wishlist = () => {
     const books = useSelector((state) => state.wishlist.wishlistBooks)
 
     const user = useSelector((state) => state?.newUser?.user)
-    
+    console.log(books)
     const userId = user?._id
     const addToCart = (id) => {
         const cartData = {
             user_id: userId,
             cart_data: {
-                book: id,
-                qnt: 2
+                book: id, 
+                qnt: 1
             }
         }
         if (userId) {
@@ -51,8 +51,8 @@ const Wishlist = () => {
                                 <th className="rounded-none">products</th>
                                 <th>name</th>
                                 <th>price</th>
-                                <th>author</th>
-                                <th>action</th>
+                                <th className="relative pl-[50px]">author</th>  
+                                <th className="relative pl-[60px]" >action</th>
 
                             </tr>
                         </thead>
@@ -80,7 +80,7 @@ const Wishlist = () => {
                                     ${book.book?.book_price}
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                    Author name
+                                {book.book.book_author.author_name}
                                 </td>
 
                                 <td className="border-[#e1e2e6] ">

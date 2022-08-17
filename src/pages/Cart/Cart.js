@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import CartDeleteButton from "../../components/CartDeleteButton/CartDeleteButton";
 import { cartBooks, cartdata } from "../../components/Redux/actions/bookActions";
+import {toast } from "react-toastify"
 const Cart = () => {
   const books = useSelector((state) => state?.cartBooks?.cartBooks)
   const user = useSelector((state) => state?.newUser?.user) 
@@ -32,9 +33,24 @@ const Cart = () => {
       } 
       }
       dispatch(cartdata(data))
-    console.log(data)
+   
   }
 
+  const increaseQnt =(_id,qnt) => {
+    if(_id){
+      axios.patch(`https://book-shelf-webapp.herokuapp.com/update-cart-quantity?cid=${_id}&qnt=${qnt+1}`)
+    }
+ 
+  }
+  const decreaseQnt = (_id,qnt) => {
+    if(_id && qnt !==1){
+      axios.patch(`https://book-shelf-webapp.herokuapp.com/update-cart-quantity?cid=${_id}&qnt=${qnt-1}`)
+    }
+    else if(qnt === 1){
+      toast.error("Quantity can't be decreaced below 1")
+    }
+
+  }
   
   return (
     <div className="pt-[60px] md:pt-[80px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">
@@ -81,7 +97,7 @@ const Cart = () => {
                   </td>
                   <td className="border-[#e1e2e6]">
                     <div className="flex">
-                      <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6] border-solid border text-black" >
+                      <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6] border-solid border text-black" onClick={() => increaseQnt(book._id,book?.qnt)}>
                         +
                       </button>
                       <input
@@ -89,8 +105,8 @@ const Cart = () => {
                         value={book?.qnt}
 
                         className="input  w-[50px] h-[40px] max-w-xs rounded-none text-center border-[#e1e2e6] border-solid border-y-1 border-x-0 text-black"
-                      />
-                      <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6 border-solid border text-black">
+                      /> 
+                      <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6 border-solid border text-black" onClick={() => decreaseQnt(book._id,book?.qnt)} >
                         -
                       </button>
                     </div>
@@ -99,7 +115,7 @@ const Cart = () => {
                     ${book.book?.book_price * book?.qnt}.00
                   </td>
                   <td className="border-[#e1e2e6]">
-                    {/* <button className="btn btn-error text-white" onClick={() => deleteCart(book.book._id)}>delete</button> */}
+                 
                     <CartDeleteButton _id={book.book._id} />
                   </td>
                 </tr>)}

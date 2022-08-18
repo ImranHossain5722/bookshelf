@@ -58,6 +58,7 @@ import RequestBook from "./components/Dashboard/RequestBook/RequestBook";
 import Payment from "./components/Dashboard/Payments/Payment";
 import AllProducts from "./components/Dashboard/AllProducts/AllProducts";
 import ReadersHome from "./components/ReadersHomePage/ReadersHome";
+import ProductReleaseLandingPage from "./components/ProductReleaseLandingPage/ProductReleaseLandingPage";
 
 // initialize aos
 AOS.init();
@@ -227,6 +228,7 @@ function App() {
             <Route path="/comingsoon" element={<CommingSoon />}></Route>
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="/readershome" element={<ReadersHome />}></Route>
+            <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

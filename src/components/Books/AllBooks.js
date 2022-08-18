@@ -124,7 +124,7 @@ const AllBooks = () => {
       <div style={{ background: "#FBF6F6" }} className=" container mx-auto ">
         <div className="md:flex gap-6 items-start ">
           {/* filter options left-side */}
-          <div className="flex-1 w-1/4">
+          <div className="flex-1 md:w-1/4 mb-4">
             <h5 className="mb-3 text-xl text-xl font-semibold capitalize">
               filter category
             </h5>
@@ -211,7 +211,7 @@ const AllBooks = () => {
             </div>
           </div>
           {/* filter results right-side */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 w-3/4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
             {loading ? (
               <Loading />
             ) : (

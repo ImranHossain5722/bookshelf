@@ -9,7 +9,10 @@ import payment_img from "../../Assets/images/footer/payment_img.png";
 import "./footer.scss";
 const Footer = () => {
   const [user] = useAuthState(auth);
+
+
   const userUid = user?.uid;
+
 
   return (
     <>
@@ -70,7 +73,9 @@ const Footer = () => {
                     <a href="#">Order History</a>
                   </li>
                   <li>
-                    <a href="#">Wish List</a>
+
+                    <a href="trackorder">Track Order</a>
+
                   </li>
                   <li>
                     <a href="#">Order History</a>

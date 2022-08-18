@@ -34,6 +34,9 @@ const useGetUserData = () => {
         else if (currentUserRole === 'admin') {
             setUserRole('admin');
         }
+        else if (currentUserRole === 'delivery') {
+            setUserRole('delivery');
+        }
     }, [getUser])
 
 

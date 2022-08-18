@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -7,17 +6,18 @@ import { useForm } from 'react-hook-form';
 const TrackOrder = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [orderData, setOrderData] = useState([]);
+    // const [orderStatus, setOrderStatus] = useState('');
     const order = orderData[0];
     console.log(orderData);
-    const onSubmit = data => {
 
+    const onSubmit = data => {
         console.log(data)
         fetch(`https://book-shelf-webapp.herokuapp.com/get-order-details?oid=${data?.invoice}`)
             .then(res => res.json())
             .then(data => setOrderData(data))
-
-
     }
+
+
     return (
         <div className='py-12'>
             <div>
@@ -58,6 +58,13 @@ const TrackOrder = () => {
             <div>
                 {order &&
                     <div className='w-4/6 mx-auto '>
+                        <div className='p-8 mt-8 bg-white rounded-lg'>
+                            <ul className="steps steps-vertical lg:steps-horizontal w-full">
+                                <li className="step step-primary text-xl" data-content="✓">Order</li>
+                                <li className={order?.picked_status === true ? "step step-primary text-xl" : "step text-xl"} data-content={order?.picked_status === true ? "✓" : "✕"}>Picked</li>
+                                <li className={order?.delivered_status === true ? "step step-primary text-xl" : "step text-xl"} data-content={order?.delivered_status === true ? "✓" : "✕"}>Delivered</li>
+                            </ul>
+                        </div>
                         {/* order Summury  */}
                         <div className='p-8 mt-8 bg-white rounded-lg '>
                             <h2 className='font-bold text-xl border-b-2 pb-4'>Order Summury</h2>

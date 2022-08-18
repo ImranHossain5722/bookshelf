@@ -11,7 +11,7 @@ const Wishlist = () => {
     const books = useSelector((state) => state.wishlist.wishlistBooks)
 
     const user = useSelector((state) => state?.newUser?.user)
-    console.log(books)
+   
     const userId = user?._id
     const addToCart = (id) => {
         const cartData = {
@@ -30,7 +30,7 @@ const Wishlist = () => {
     }
 
     const deleteWishlist = (id) => {
-        console.log(id)
+        
         const cart = user?.user_wishlist
         const match = cart.filter(e => e?.book === id)
         const cartId = match[0]._id

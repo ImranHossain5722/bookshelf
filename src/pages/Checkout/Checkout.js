@@ -13,7 +13,7 @@ const Checkout = () => {
     console.log(cart)
     if(cart){
 
-     await axios.post('https://book-shelf-webapp.herokuapp.com/place-order',cart).then(data => toast.success("Thanks for Ordering"))
+     await axios.post('https://book-shelf-webapp.herokuapp.com/place-order',cart).then(data => console.log(data))
      await axios.delete(`https://book-shelf-webapp.herokuapp.com/delete-cart?id=${userId}`)
     }else{
       console.log('cart not found')

@@ -9,7 +9,10 @@ import payment_img from "../../Assets/images/footer/payment_img.png";
 import "./footer.scss";
 const Footer = () => {
   const [user] = useAuthState(auth);
-  const userUid = user?.uid
+
+
+  const userUid = user?.uid;
+
 
   return (
     <>
@@ -56,12 +59,6 @@ const Footer = () => {
                   <li>
                     <a href="#">Gift Vouchers</a>
                   </li>
-                  <li>
-                    <a href="contact.php">Site Map</a>
-                  </li>
-                  <li>
-                    <a href="#">Accessories</a>
-                  </li>
                 </ul>
               </div>
               <div className="footer_widget">
@@ -70,19 +67,21 @@ const Footer = () => {
                 </div>
                 <ul className="footer_links">
                   <li>
-                    <a href="my_account.php">My Account</a>
+                    <a href="#">My Account</a>
                   </li>
                   <li>
-                    <a href="order_details.php">Order History</a>
+                    <a href="#">Order History</a>
                   </li>
                   <li>
+
                     <a href="trackorder">Track Order</a>
+
                   </li>
                   <li>
-                    <a href="order_details.php">Order History</a>
+                    <a href="#">Order History</a>
                   </li>
                   <li>
-                    <a href="wishlist.php">Wishlist</a>
+                    <a href="#">Wishlist</a>
                   </li>
                 </ul>
               </div>

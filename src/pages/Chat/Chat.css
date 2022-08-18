@@ -1,0 +1,11 @@
+.grid{
+    grid-template-columns: 30% 70%;
+}
+
+
+aside.emoji-picker-react{
+    position:absolute !important;
+    bottom:40px;
+    
+   
+}

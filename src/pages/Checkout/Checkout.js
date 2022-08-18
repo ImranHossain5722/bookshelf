@@ -10,7 +10,9 @@ const Checkout = () => {
   const userId = user?._id;
   const navigate = useNavigate();
   const sendOrder = async () => {
-    console.log(cart);
+
+
+    
     if (cart) {
       await axios
         .post("https://book-shelf-webapp.herokuapp.com/place-order", cart)
@@ -20,6 +22,7 @@ const Checkout = () => {
       );
     } else {
       console.log("cart not found");
+
     }
   };
   if (!cart.user_id) {

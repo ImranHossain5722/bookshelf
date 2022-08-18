@@ -56,8 +56,12 @@ import MyWishlist from "./components/Dashboard/MyWishlist/MyWishlist";
 import AddStuff from "./components/Dashboard/AddStuff/AddStuff";
 import RequestBook from "./components/Dashboard/RequestBook/RequestBook";
 import Payment from "./components/Dashboard/Payments/Payment";
+
+import Chat from "./pages/Chat/Chat";
+
 import AllProducts from "./components/Dashboard/AllProducts/AllProducts";
 import ReadersHome from "./components/ReadersHomePage/ReadersHome";
+
 import OrderDelivery from "./components/Dashboard/OrderDelivery/OrderDelivery";
 import Orders from "./components/Dashboard/OrderDelivery/Orders";
 import DeliveredOrder from "./components/Dashboard/OrderDelivery/DeliveredOrder";
@@ -179,6 +183,14 @@ function App() {
               }
             ></Route>
             <Route
+              path="/chat"
+              element={
+                <RequireAuth>
+                  <Chat />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
               path="/addpublisher"
               element={
                 <RequireAuth>
@@ -243,7 +255,7 @@ function App() {
               {" "}
             </Route>
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </NavBar>
       )}
 

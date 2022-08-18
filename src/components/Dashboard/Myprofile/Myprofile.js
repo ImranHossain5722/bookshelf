@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { newUser } from '../../Redux/actions/bookActions';
 import useGetUserData from '../../../hooks/useGetUserData';
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 const Myprofile = () => {
   const [user] = useAuthState(auth);
   // const [getUser, setGetUser] = useState([]);
@@ -28,7 +29,21 @@ const Myprofile = () => {
 
   const currentUserId = getUser[0]?._id;
 
-  console.log(getUser[0]);
+  const { data: wishlist } = useQuery(['wishlist'], () =>
+    fetch(`https://book-shelf-webapp.herokuapp.com//get-wishlist-data?id=${currentUserId}`).then(res =>
+      res.json()
+    )
+  )
+  // console.log('wL', wishlist);
+
+  const { data: brought } = useQuery(['brought'], () =>
+    fetch(`https://book-shelf-webapp.herokuapp.com//get-brought-data?id=${currentUserId}`).then(res =>
+      res.json()
+    )
+  )
+
+  // console.log('brought', brought)
+  // console.log(getUser[0]);
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -134,14 +149,14 @@ const Myprofile = () => {
           {userRole === 'user' && <div className='flex mt-[22px]'>
             <div className='flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
               <div className='w-[70%]  text-[#00124E]'>
-                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{103}</h2>
+                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{brought ? brought : '0'}</h2>
                 <p className='text-[18px] font-[600]'>Brought</p>
               </div>
               <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><BsFillBagCheckFill /></div>
             </div>
             <div className=' ml-[24px] flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
               <div className='w-[70%] text-[#00124E]'>
-                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{1053}</h2>
+                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{wishlist ? wishlist : '0'}</h2>
                 <p className='text-[18px] font-[600]'>Wish List</p>
               </div>
               <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><BsFillHeartFill /></div>

@@ -1,0 +1,217 @@
+[
+    {
+        
+        "user_data" : [
+            
+                {
+                    "user_id" : "1",
+                    "user_name" : "Imran Hossain",
+                    "user_photo_url" : "https://i.ibb.co/9rLFjYR/story-image.jpg"
+
+                },
+                {
+                    "user_id" : "2",
+                    "user_name" : "Adom Jhon",
+                    "user_photo_url" : "https://i.ibb.co/j3n0czz/doctor-small.png"
+                },
+                {
+                    "user_id" : "3",
+                    "user_name" : "Don",
+                    "user_photo_url" : "https://i.ibb.co/rdvKmKH/photo-man.jpg"
+                },
+                {
+                    "user_id" : "4",
+                    "user_name" : "Sammy",
+                    "user_photo_url" : "https://i.ibb.co/74fHTJ4/people3.png"
+                },
+                {
+                    "user_id" : "5",
+                    "user_name" : "Sumy",
+                    "user_photo_url" : "https://i.ibb.co/SmnzRvD/people1.png"
+                },
+                {
+                    "user_id" : "6",
+                    "user_name" : "Arman",
+                    "user_photo_url" : "https://i.ibb.co/SmnzRvD/people1.png"
+                },
+                {
+                    "user_id" : "7",
+                    "user_name" : "Imon",
+                    "user_photo_url" : "https://i.ibb.co/SmnzRvD/people1.png"
+                }
+        ]
+    },
+    {
+        "post_data" : [
+
+            {   
+                "post_user_id" : "1",
+                "user_name" : "Imran Hossain",
+                "user_photo_url" : "https://i.ibb.co/9rLFjYR/story-image.jpg",
+                "post" : "JavaScript, often abbreviated JS, is a programming language that is one of the core technologies of the World Wide Web, alongside HTML and CSS. As of 2022, 98% of websites use JavaScript on the client side for webpage behavior, often incorporating third-party libraries",
+                "post_image_url" : "https://i.ibb.co/y8WbgrM/post1.jpg",
+                "post_likes" : 12,
+                "post_time" :  "1 hrs",
+                "conments" : [
+                    {
+                        "user_id" : "1",
+                        "user_name" : "Imran Hossain",
+                        "user_photo_url" : "https://i.ibb.co/9rLFjYR/story-image.jpg",
+                        "comment" : "comment form"
+                    },
+                    {
+                        "user_id" : "2",
+                        "comment" : "nice"
+                    },
+                    {
+                        "user_id" : "3",
+                        "comment" : "good"
+                    }
+                ]
+            },
+            {   
+                "post_user_id" : "2",
+                "user_name" : "Adom Jhon",
+                "user_photo_url":"https://i.ibb.co/mhYZvr0/photo-man.jpg",
+                "post" : "This is post from 2",
+                "post_image_url" : "https://i.ibb.co/99Dq11d/agricultural-machine-bangladesh-evergreen-green-rever-wallpaper-preview.jpg",
+                "post_likes" : 10,
+                "post_time" :  "20 hrs",
+                "conments" : [
+                    {
+                        "user_id" : "1",
+                        "comment" : "comment form"
+                    },
+                    {
+                        "user_id" : "2",
+                        "comment" : "good"
+                    },
+                    {
+                        "user_id" : "3",
+                        "comment" : "great"
+                    }
+                ]
+            },
+            {   
+                "post_user_id" : "3",
+                "post" : "This is post from 2",
+                "user_name" : "Don",
+                "user_photo_url" : "https://i.ibb.co/rdvKmKH/photo-man.jpg",
+                "post_image_url" : "https://i.ibb.co/y8xbqF2/thumb-1572360695.jpg",
+                "post_likes" : 2,
+                "conments" : [
+                    {
+                        "user_id" : "1",
+                        "comment" : "comment form"
+                    },
+                    {
+                        "user_id" : "3",
+                        "comment" : "awsome"
+                    },
+                    {
+                        "user_id" : "4",
+                        "comment" : "happy"
+                    }
+                ]
+            },
+            {   
+                "post_user_id" : "4",
+                "user_name" : "Same",
+                "user_photo_url" : "https://i.ibb.co/74fHTJ4/people3.png",
+                "post" : "Nice village view ",
+                "post_image_url" : "https://i.ibb.co/99Dq11d/agricultural-machine-bangladesh-evergreen-green-rever-wallpaper-preview.jpg",
+                "post_likes" : 52,
+                "post_time" :  "5 hrs",
+                "conments" : [
+                    {
+                        "user_id" : "1",
+                        "comment" : "comment form"
+                    },
+                    {
+                        "user_id" : "2",
+                        "comment" : "wow"
+                    },
+                    {
+                        "user_id" : "3",
+                        "comment" : "lovely"
+                    },
+                    {
+                        "user_id" : "4",
+                        "comment" : "lovely"
+                    }
+                ]
+            },
+            {   
+                "post_user_id" : "5",
+                "user_name" : "Sumy",
+                "user_photo_url" : "https://i.ibb.co/SmnzRvD/people1.png",
+                "post" : "This is post from 2",
+                "post_image_url" : "https://i.ibb.co/b2TTzdS/What-is-Unit-Testing-and-Why-Developer-Should-Learn-It.png",
+                "post_likes" :19,
+                "post_time" :  "8 hrs",
+                "conments" : [
+                    {
+                        "user_id" : "1",
+                        "comment" : "comment form"
+                    },
+                    {
+                        "user_id" : "good",
+                        "comment" : "2"
+                    },
+                    {
+                        "user_id" : "3",
+                        "comment" : "nice "
+                    }
+                ]
+            },
+            {   
+                "post_user_id" : "6",
+                "user_name" : "Arman",
+                "user_photo_url" : "https://i.ibb.co/SmnzRvD/people1.png",
+                "post" : "This is post from 2",
+                "post_image_url" : "https://i.ibb.co/y8xbqF2/thumb-1572360695.jpg",
+                "post_likes" : 32,
+                "post_time" :  "2 hrs",
+                "conments" : [
+                    {
+                        "user_id" : "1",
+                        "comment" : "comment form"
+                    },
+                    {
+                        "user_id" : "2",
+                        "comment" : "good"
+                    },
+                    {
+                        "user_id" : "3",
+                        "comment" : "cool"
+                    }
+                ]
+            },
+            {   
+                "post_user_id" : "7",
+                "post" : "This is post from 2",
+                "user_name" : "Imon",
+                "user_photo_url" : "https://i.ibb.co/SmnzRvD/people1.png",
+                "post_image_url" : "https://i.ibb.co/y8WbgrM/post1.jpg",
+                "post_likes" : 12,
+                "post_time" :  "10 hrs",
+                "conments" : [
+                    {
+                        "user_id" : "1",
+                        "comment" : "comment form"
+                    },
+                    {
+                        "user_id" : "2",
+                        "comment" : "nice"
+                    },
+                    {
+                        "user_id" : "3",
+                        "comment" : "like please"
+                    }
+                ]
+            }
+            
+        ] 
+            
+    }
+]

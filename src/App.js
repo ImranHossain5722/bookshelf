@@ -1,3 +1,4 @@
+import React, { Component } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 // aos animation
@@ -55,7 +56,12 @@ import MyWishlist from "./components/Dashboard/MyWishlist/MyWishlist";
 import AddStuff from "./components/Dashboard/AddStuff/AddStuff";
 import RequestBook from "./components/Dashboard/RequestBook/RequestBook";
 import Payment from "./components/Dashboard/Payments/Payment";
+<<<<<<< HEAD
 import Chat from "./pages/Chat/Chat";
+=======
+import AllProducts from "./components/Dashboard/AllProducts/AllProducts";
+import ReadersHome from "./components/ReadersHomePage/ReadersHome";
+>>>>>>> 40f50073b55786e4d37aae72b32d5300cb6bff89
 
 // initialize aos
 AOS.init();
@@ -105,6 +111,7 @@ function App() {
               <Route path="myorder" element={<Myorder />} />
               <Route path="mywishlist" element={<MyWishlist />} />
               <Route path="addstuff" element={<AddStuff />} />
+              <Route path="allproducts" element={<AllProducts />} />
               <Route path="requestbook" element={<RequestBook />} />
               <Route path="addreview" element={<Addreview />} />
               <Route path="addproduct" element={<AddProduct />} />
@@ -231,6 +238,7 @@ function App() {
             <Route path="/faq" element={<Faq />}></Route>
             <Route path="/comingsoon" element={<CommingSoon />}></Route>
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
+            <Route path="/readershome" element={<ReadersHome />}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

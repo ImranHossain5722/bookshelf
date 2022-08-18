@@ -30,7 +30,7 @@ const ClubBanner = () => {
             <p className="my-5 ">
               Join Our Readers Club. It's a coummuity for books lover. we can discus every user about to books details.
             </p>
-            <Link to='/comingsoon' className="btn btn-primary text-white hover:text-white hover:bg-accent">Join <FaArrowRight className='ml-2' /></Link>
+            <Link to='/readershome' className="btn btn-primary text-white hover:text-white hover:bg-accent">Join Readers Club <FaArrowRight className='ml-2' /></Link>
           </div>
         </div>
       </div>

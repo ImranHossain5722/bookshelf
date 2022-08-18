@@ -44,7 +44,7 @@ const Addreview = () => {
         {/* row-2 */}
         <div className='mt-4'>
           <label className="font-semibold pl-1">Add a Review</label>
-          <textarea name="" id="" cols="30" rows="40" {...register("review", {
+          <textarea name="" id="textarea" cols="30" rows="40" {...register("review", {
             required: 'required*',
           })} placeholder="Write the words of your heart" className="input input-bordered bg-white w-full mt-2 h-[150px]" />
           {errors?.review && <p><small className='pl-1 text-red-600'>{errors?.review?.message}</small></p>}

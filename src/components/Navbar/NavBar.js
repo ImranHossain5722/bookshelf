@@ -66,8 +66,8 @@ const NavBar = ({ children }) => {
 
   // show search modal
   const showSearchModal = () => {
-    showModal.classList.remove("left-full");
-    showModal.classList.add("left-0");
+    showModal.classList.remove("right-full");
+    showModal.classList.add("right-0");
   };
 
   return (

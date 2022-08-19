@@ -1,15 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { BsTruckFlatbed } from "react-icons/bs";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import useGetUserData from '../../../hooks/useGetUserData';
+import { format } from "date-fns";
 
 
 
 const Orders = () => {
     const [orderQty, setOrderQty] = useState(0);
 
-
-
-    const { data: allOrders } = useQuery(['allOrders'], () =>
+    const { getUser } = useGetUserData();
+    // console.log('userData', getUser);
+    const { data: allOrders, refetch } = useQuery(['allOrders'], () =>
         fetch(`https://book-shelf-webapp.herokuapp.com/all-orders`).then(res =>
             res.json()
         )
@@ -21,10 +25,23 @@ const Orders = () => {
             newOrders.push(order);
         }
     })
+
+    const today = new Date();
+    const formatedData = format(today, 'dd.MM.yyyy');
     const pickOrder = (id) => {
-        fetch(`https://book-shelf-webapp.herokuapp.com/update-order-tracking`).then(res =>
-            res.json()
-        )
+        console.log('picked hit')
+
+        const pickedData = {
+            picked_status: true,
+            picked_date: formatedData,
+            picked_by: getUser[0]?.uid
+        }
+        axios.patch(`https://book-shelf-webapp.herokuapp.com/update-order-tracking?oid=${id}`, pickedData)
+            .then(data => {
+                console.log('patch', data)
+                toast.success(`Order Picked for delivery`);
+            })
+        refetch();
     }
 
 

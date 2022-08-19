@@ -56,12 +56,11 @@ import MyWishlist from "./components/Dashboard/MyWishlist/MyWishlist";
 import AddStuff from "./components/Dashboard/AddStuff/AddStuff";
 import RequestBook from "./components/Dashboard/RequestBook/RequestBook";
 import Payment from "./components/Dashboard/Payments/Payment";
-
 import Chat from "./pages/Chat/Chat";
-
 import AllProducts from "./components/Dashboard/AllProducts/AllProducts";
 import ReadersHome from "./components/ReadersHomePage/ReadersHome";
 
+import ProductReleaseLandingPage from "./components/ProductReleaseLandingPage/ProductReleaseLandingPage";
 import OrderDelivery from "./components/Dashboard/OrderDelivery/OrderDelivery";
 import Orders from "./components/Dashboard/OrderDelivery/Orders";
 import DeliveredOrder from "./components/Dashboard/OrderDelivery/DeliveredOrder";
@@ -251,11 +250,12 @@ function App() {
             <Route path="/comingsoon" element={<CommingSoon />}></Route>
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="/readershome" element={<ReadersHome />}></Route>
+            <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </NavBar>
       )}
 

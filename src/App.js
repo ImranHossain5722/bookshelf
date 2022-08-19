@@ -244,7 +244,7 @@ function App() {
               {" "}
             </Route>
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </NavBar>
       )}
 

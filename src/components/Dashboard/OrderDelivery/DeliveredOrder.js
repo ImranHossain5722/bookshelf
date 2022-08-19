@@ -2,9 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useState } from 'react';
 
+import useGetUserData from '../../../hooks/useGetUserData';
+
 
 const DeliveredOrder = () => {
     const [orderQty, setOrderQty] = useState(0);
+
+    const { getUser } = useGetUserData();
 
     const calOrderQty = (qty) => {
         const newOrderQty = orderQty + qty;
@@ -12,7 +16,8 @@ const DeliveredOrder = () => {
     }
 
     const { data: allOrders } = useQuery(['allOrders'], () =>
-        fetch(`https://book-shelf-webapp.herokuapp.com/all-orders`).then(res =>
+
+        fetch(`https://book-shelf-webapp.herokuapp.com/delivered-orders?uid=${getUser[0]?.uid}`).then(res =>
             res.json()
         )
     )

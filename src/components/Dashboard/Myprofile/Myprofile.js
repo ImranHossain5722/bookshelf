@@ -30,14 +30,14 @@ const Myprofile = () => {
   const currentUserId = getUser[0]?._id;
 
   const { data: wishlist } = useQuery(['wishlist'], () =>
-    fetch(`https://book-shelf-webapp.herokuapp.com//get-wishlist-data?id=${currentUserId}`).then(res =>
+    fetch(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${currentUserId}`).then(res =>
       res.json()
     )
   )
   // console.log('wL', wishlist);
 
   const { data: brought } = useQuery(['brought'], () =>
-    fetch(`https://book-shelf-webapp.herokuapp.com//get-brought-data?id=${currentUserId}`).then(res =>
+    fetch(`https://book-shelf-webapp.herokuapp.com/get-brought-data?id=${currentUserId}`).then(res =>
       res.json()
     )
   )

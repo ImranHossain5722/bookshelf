@@ -11,7 +11,7 @@ const Cart = () => {
   const user = useSelector((state) => state?.newUser?.user) 
   const dispatch = useDispatch()
   let subtotal;
-  
+  const userId = user?._id
 //  getting subtotal value
   const sub = books?.map(book => book?.book?.book_price * book?.qnt)
   subtotal = sub.reduce((a, b) => a + b, 0)
@@ -22,9 +22,9 @@ const Cart = () => {
     }; 
 })
 
-  const checkout = (id) => {
+  const checkout = async (id) => {
 
-      const data = {
+      const cart = {
         user_id : id,
       ordered_items: carts ,
       ordered_price_amount : subtotal,
@@ -32,7 +32,14 @@ const Cart = () => {
           payment_type : "cash_on",
       } 
       }
-      dispatch(cartdata(data))
+     
+        await axios.post("https://book-shelf-webapp.herokuapp.com/place-order", cart)
+          .then((data) => dispatch(cartdata(data.data))); 
+        await axios.delete(
+          `https://book-shelf-webapp.herokuapp.com/delete-cart?id=${userId}`
+        );
+      
+      // dispatch(cartdata(data))
    
   }
 

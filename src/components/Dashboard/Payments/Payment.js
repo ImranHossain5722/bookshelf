@@ -7,15 +7,13 @@ import { useSelector } from 'react-redux';
 const stripePromise = loadStripe('pk_test_51L26U9AgMm9RRJ7pUcXRrqvzh1l97MSE67ouqD91yeStOldtECYDRodWCnsFPvzd95yoDu0m2LW5ybpFB8FFoWFL00pnLC2Pvv');
 function Payment() {
     
-    const [payItem, setpayItem] = useState([])
+   
   const cart = useSelector((state) => state.cartData.cartData)
+  
   const navigate = useNavigate()
 
-    
-    if(!cart.user_id){
-      navigate("/cart")
-    }
-  
+  console.log("cartd",cart) 
+
   return (
     <div>
         <p className='text-3xl text-center text-[#00124E] font-bold'>Place your payment here</p>
@@ -28,7 +26,7 @@ function Payment() {
     <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
       <div class="card-body w-50">
       <Elements stripe={stripePromise}>
-      <CheckoutForm payItem={payItem}/>
+      <CheckoutForm />
     </Elements>
       </div>
     </div>

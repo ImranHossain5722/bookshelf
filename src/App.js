@@ -56,12 +56,10 @@ import MyWishlist from "./components/Dashboard/MyWishlist/MyWishlist";
 import AddStuff from "./components/Dashboard/AddStuff/AddStuff";
 import RequestBook from "./components/Dashboard/RequestBook/RequestBook";
 import Payment from "./components/Dashboard/Payments/Payment";
-<<<<<<< HEAD
 import Chat from "./pages/Chat/Chat";
-=======
 import AllProducts from "./components/Dashboard/AllProducts/AllProducts";
 import ReadersHome from "./components/ReadersHomePage/ReadersHome";
->>>>>>> 40f50073b55786e4d37aae72b32d5300cb6bff89
+
 
 // initialize aos
 AOS.init();
@@ -243,7 +241,7 @@ function App() {
               {" "}
             </Route>
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </NavBar>
       )}
 

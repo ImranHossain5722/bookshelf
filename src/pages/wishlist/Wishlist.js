@@ -36,9 +36,12 @@ const Wishlist = () => {
         const cartId = match[0]._id
         console.log(cartId)
         if (id) {
-            axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-wishlist?wid=${cartId}`)
+            axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-wishlist?id=${userId}&wid=${cartId}`).then(data => console.log(data))
         }
     }
+     
+            //   axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-cart?id=${userId}&cid=${cartId}`).then(data => toast.success("deleted from cart"))
+            
     return (
         <div className="my-5">
             <p><FaHeart className='text-5xl text-primary mx-auto' /></p>

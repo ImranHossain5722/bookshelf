@@ -9,11 +9,11 @@ function CheckoutForm() {
   const user = useSelector((state) => state?.newUser?.user)
 
 
-    const {ordered_price_amount} = cart
-    const {email,_id,user_name} = user
+    const {ordered_price_amount,_id} = cart
+    const {email,user_name} = user
+    console.log(cart)
   useEffect(() => {
-
-   if(ordered_price_amount){
+   if(cart){
 
      fetch("https://book-shelf-webapp.herokuapp.com/create-payment-intent", {
        method: "POST",
@@ -22,13 +22,13 @@ function CheckoutForm() {
           
           },
  
-       body: JSON.stringify({ordered_price_amount}),
+       body: JSON.stringify(_id),
      })
        .then((res) => res.json())
        .then((data) => console.log("data",data));
    }
 
-  }, [ordered_price_amount]);
+  }, [user]);
 
     const stripe= useStripe()
     const elements = useElements()

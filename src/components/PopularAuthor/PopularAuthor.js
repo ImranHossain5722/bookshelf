@@ -15,65 +15,69 @@ import { useDispatch, useSelector } from "react-redux";
 import { author } from "../Redux/actions/bookActions";
 
 const PopularAuthor = () => {
-   const authors = useSelector((state)=> state.author.author)
-   const dispatch = useDispatch()
-    const [size, setSize] = useState(1);
-    const { width } = useWindowDimensions();
+  const authors = useSelector((state) => state.author.author);
+  const dispatch = useDispatch();
+  const [size, setSize] = useState(1);
+  const { width } = useWindowDimensions();
 
-    useEffect(() => {
-        // add author route 
-        fetch('reviews/review.json')
-            .then(res => res.json())
-            .then(data => dispatch(author(data))); 
-    }, []);
+  useEffect(() => {
+    // add author route
+    fetch("reviews/review.json")
+      .then((res) => res.json())
+      .then((data) => dispatch(author(data)));
+  }, []);
 
-    useEffect(() => {
-        //  responsiveness added by width change
-        if (width >=1110) {
-            setSize(5)
-        }
-        else if (width >= 768) {
-            setSize(3)
-        }
-       
-        else if (width >= 576) {
-            setSize(2)
-        }
-        else {
-            setSize(1)
-        }
-    }, [width]);
+  useEffect(() => {
+    //  responsiveness added by width change
+    if (width >= 1110) {
+      setSize(5);
+    } else if (width >= 768) {
+      setSize(3);
+    } else if (width >= 576) {
+      setSize(2);
+    } else {
+      setSize(1);
+    }
+  }, [width]);
 
-    return (
-        <div className="bg-white max-w-[1240px] mx-auto my-[120px] py-10">
-            {/* ------title section----- */}
-            <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">Popular Author</h1>
+  return (
+    <div className="bg-white max-w-[1240px] mx-auto my-[120px] py-[120px]">
+      {/* ------title section----- */}
+      <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">
+        Popular Author
+      </h1>
 
-            {/* ------categories slider----- */}
-            <div className="mt-8">
-                <Swiper
-                    slidesPerView={size}
-                    spaceBetween={30}
-                    loop={true}
-                    navigation={true}
-                    modules={[Navigation]}
-                    className="mySwiper px-9 py-6"
-                    style={{ "--swiper-theme-color": "#27AE61" }}
-                >
-                    {
-                        authors?.map(author => <SwiperSlide key={author.id}>
-                            <div className="py-6 flex items-center justify-center hover:fill-blue-500">
-                                <div>
-                                    <img src={author.image} className="w-48 h-48 rounded-full image-full bg-cover" alt="" />
-                                    <p className="mt-2 text-center text-xl font-bold">{author.name}</p>
-                                </div>
-                            </div>
-                        </SwiperSlide>)
-                    }
-                </Swiper>
-            </div>
-        </div>
-    );
+      {/* ------categories slider----- */}
+      <div className="mt-8">
+        <Swiper
+          slidesPerView={size}
+          spaceBetween={30}
+          loop={true}
+          navigation={true}
+          modules={[Navigation]}
+          className="mySwiper px-9 py-6"
+          style={{ "--swiper-theme-color": "#27AE61" }}
+        >
+          {authors?.map((author) => (
+            <SwiperSlide key={author.id}>
+              <div className="py-6 flex items-center justify-center hover:fill-blue-500">
+                <div>
+                  <img
+                    src={author.image}
+                    className="w-48 h-48 rounded-full image-full bg-cover"
+                    alt=""
+                  />
+                  <p className="mt-2 text-center text-xl font-bold">
+                    {author.name}
+                  </p>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </div>
+  );
 };
 
 export default PopularAuthor;

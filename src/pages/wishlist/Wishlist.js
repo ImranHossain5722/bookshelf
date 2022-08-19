@@ -11,14 +11,14 @@ const Wishlist = () => {
     const books = useSelector((state) => state.wishlist.wishlistBooks)
 
     const user = useSelector((state) => state?.newUser?.user)
-    
+   
     const userId = user?._id
     const addToCart = (id) => {
         const cartData = {
             user_id: userId,
             cart_data: {
-                book: id,
-                qnt: 2
+                book: id, 
+                qnt: 1
             }
         }
         if (userId) {
@@ -30,15 +30,18 @@ const Wishlist = () => {
     }
 
     const deleteWishlist = (id) => {
-        console.log(id)
+        
         const cart = user?.user_wishlist
         const match = cart.filter(e => e?.book === id)
         const cartId = match[0]._id
         console.log(cartId)
         if (id) {
-            axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-wishlist?wid=${cartId}`)
+            axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-wishlist?id=${userId}&wid=${cartId}`).then(data => console.log(data))
         }
     }
+     
+            //   axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-cart?id=${userId}&cid=${cartId}`).then(data => toast.success("deleted from cart"))
+            
     return (
         <div className="my-5">
             <p><FaHeart className='text-5xl text-primary mx-auto' /></p>
@@ -51,8 +54,8 @@ const Wishlist = () => {
                                 <th className="rounded-none">products</th>
                                 <th>name</th>
                                 <th>price</th>
-                                <th>author</th>
-                                <th>action</th>
+                                <th className="relative pl-[50px]">author</th>  
+                                <th className="relative pl-[60px]" >action</th>
 
                             </tr>
                         </thead>
@@ -80,7 +83,7 @@ const Wishlist = () => {
                                     ${book.book?.book_price}
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                    Author name
+                                {book.book.book_author.author_name}
                                 </td>
 
                                 <td className="border-[#e1e2e6] ">

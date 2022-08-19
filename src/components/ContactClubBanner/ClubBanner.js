@@ -1,5 +1,5 @@
 import React from "react";
-import clubBanner from '../../Assets/images/clubB.jpg';
+import clubBanner from '../../Assets/images/cul-books-banner.jpg';
 import { FaChevronRight, FaArrowRight } from 'react-icons/fa';
 
 import Typewriter from 'typewriter-effect';
@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 
 const ClubBanner = () => {
   return (
-    <div className="max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px]">
+    <div className="max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] mb-[120px]">
       <div
-        className="w-full"
+        className="w-full py-11 shadow-xl rounded-lg"
         style={{
           backgroundImage: `url(${clubBanner})`,
           backgroundSize: "cover",
@@ -21,16 +21,16 @@ const ClubBanner = () => {
         {/* <div className="hero-overlay bg-opacity-75 "></div> */}
         <div className="hero-content text-center text-neutral-content py-24">
           <div className="max-w-[625px]">
-            <h1 className="text-primary text-center text-2xl lg:text-5xl md:text-lg font-bold inline">  <Typewriter options={{
+            <h1 className="text-secondary text-center text-2xl lg:text-5xl md:text-lg font-bold inline">  <Typewriter options={{
               autoStart: true,
               loop: true,
-              delay: 40,
+              delay: 45,
               strings: ["Join Our Readers Club"]
             }} /> </h1>
-            <p className="my-5 ">
+            <p className="my-5 text-lg text-secondary ">
               Join Our Readers Club. It's a coummuity for books lover. we can discus every user about to books details.
             </p>
-            <Link to='/comingsoon' className="btn btn-primary text-white hover:text-white hover:bg-accent">Join <FaArrowRight className='ml-2' /></Link>
+            <Link to='/readershome' className="btn btn-primary text-white hover:text-white hover:bg-accent">Join Readers Club <FaArrowRight className='ml-2' /></Link>
           </div>
         </div>
       </div>

@@ -55,7 +55,7 @@ const BestSelling = () => {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     return (
-        <div className="bg-white sction_padding">
+        <div className="bg-white sction_padding mt-[120px] py-[110px]">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">

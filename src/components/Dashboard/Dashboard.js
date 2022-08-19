@@ -3,6 +3,8 @@ import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import auth from '../../firebase.init'
 import useGetUserData from '../../hooks/useGetUserData'
+import OrderModel from '../OrderModel/OrderModel'
+import OrderView from '../OrderModel/OrderView'
 
 
 function Dashboard() {
@@ -54,6 +56,7 @@ function Dashboard() {
                 <li><Link to='/dashboard/allauthor' className='text-lg text-[#00124E] font-bold'>All Authors</Link></li>
                 <li><Link to='/dashboard/allpublisher' className='text-lg text-[#00124E] font-bold'>All Publishers</Link></li>
                 <li><Link to='/dashboard/allorders' className='text-lg text-[#00124E] font-bold'>All Orders</Link></li>
+                <li><Link to='/dashboard/allproducts' className='text-lg text-[#00124E] font-bold'>All Products</Link></li>
                 <li><Link to='/dashboard/orderhistory' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
                 <li><Link to='/dashboard/addproduct' className='text-lg text-[#00124E] font-bold'>Add Product</Link></li>
                 <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
@@ -62,20 +65,19 @@ function Dashboard() {
               {userRole === 'delivery' && <>
                 <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
                 <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
-                <li><Link to='/dashboard/orderhistory' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
+                <li><Link to='/dashboard/orderdelivery/orders' className='text-lg text-[#00124E] font-bold'>Order Delivery</Link></li>
                 <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
               </>}
 
-
-
-
             </ul>
-
+            <OrderModel modal={"order-view"}>
+              <OrderView />
+            </OrderModel>
           </div>
         </div>
       </div>
-    </div>
 
+    </div>
 
   )
 }

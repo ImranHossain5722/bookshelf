@@ -3,14 +3,15 @@ import React, { useEffect, useState } from "react";
 import { MdShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import productImg from "../../Assets/images/clubB.jpg";
+import CartDeleteButton from "../../components/CartDeleteButton/CartDeleteButton";
 import { cartBooks, cartdata } from "../../components/Redux/actions/bookActions";
+import {toast } from "react-toastify"
 const Cart = () => {
   const books = useSelector((state) => state?.cartBooks?.cartBooks)
   const user = useSelector((state) => state?.newUser?.user) 
   const dispatch = useDispatch()
   let subtotal;
-  
+  const userId = user?._id
 //  getting subtotal value
   const sub = books?.map(book => book?.book?.book_price * book?.qnt)
   subtotal = sub.reduce((a, b) => a + b, 0)
@@ -21,9 +22,9 @@ const Cart = () => {
     }; 
 })
 
-  const checkout = (id) => {
+  const checkout = async (id) => {
 
-      const data = {
+      const cart = {
         user_id : id,
       ordered_items: carts ,
       ordered_price_amount : subtotal,
@@ -31,19 +32,32 @@ const Cart = () => {
           payment_type : "cash_on",
       } 
       }
-      dispatch(cartdata(data))
-    console.log(data)
+     
+        await axios.post("https://book-shelf-webapp.herokuapp.com/place-order", cart)
+          .then((data) => dispatch(cartdata(data.data))); 
+        await axios.delete(
+          `https://book-shelf-webapp.herokuapp.com/delete-cart?id=${userId}`
+        );
+      
+      // dispatch(cartdata(data))
+   
   }
- const deleteCart = (id) => {
-console.log(id)
-const cart = user.user_cart
-const match = cart.filter(e => e.book ===id)
-const cartId = match[0]._id
-  if(id){
-    axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-cart?cid=${cartId}`)
+
+  const increaseQnt =(_id,qnt) => {
+    if(_id){
+      axios.patch(`https://book-shelf-webapp.herokuapp.com/update-cart-quantity?cid=${_id}&qnt=${qnt+1}`)
+    }
+ 
   }
-  
- }
+  const decreaseQnt = (_id,qnt) => {
+    if(_id && qnt !==1){
+      axios.patch(`https://book-shelf-webapp.herokuapp.com/update-cart-quantity?cid=${_id}&qnt=${qnt-1}`)
+    }
+    else if(qnt === 1){
+      toast.error("Quantity can't be decreaced below 1")
+    }
+
+  }
   
   return (
     <div className="pt-[60px] md:pt-[80px]  pb-[60px] md:pb-[80px] lg:pb-[120px]  ">
@@ -90,7 +104,7 @@ const cartId = match[0]._id
                   </td>
                   <td className="border-[#e1e2e6]">
                     <div className="flex">
-                      <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6] border-solid border text-black" >
+                      <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6] border-solid border text-black" onClick={() => increaseQnt(book._id,book?.qnt)}>
                         +
                       </button>
                       <input
@@ -98,8 +112,8 @@ const cartId = match[0]._id
                         value={book?.qnt}
 
                         className="input  w-[50px] h-[40px] max-w-xs rounded-none text-center border-[#e1e2e6] border-solid border-y-1 border-x-0 text-black"
-                      />
-                      <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6 border-solid border text-black">
+                      /> 
+                      <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6 border-solid border text-black" onClick={() => decreaseQnt(book._id,book?.qnt)} >
                         -
                       </button>
                     </div>
@@ -108,7 +122,8 @@ const cartId = match[0]._id
                     ${book.book?.book_price * book?.qnt}.00
                   </td>
                   <td className="border-[#e1e2e6]">
-                    <button className="btn btn-error text-white" onClick={() => deleteCart(book.book._id)}>delete</button>
+                 
+                    <CartDeleteButton _id={book.book._id} />
                   </td>
                 </tr>)}
 

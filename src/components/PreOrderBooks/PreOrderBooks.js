@@ -49,7 +49,7 @@ const PreOrderBooks = () => {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     return (
-      <div className="bg-white sction_padding">
+      <div className="bg-white py-[104px]">
         <div className="container mx-auto relative ">
           {/* ------title section----- */}
           <div className="flex justify-between items-center ">

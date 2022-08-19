@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 
 const PopularBooks = () => {
   return (
-    <div className="bg-white max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] py-6 px-7">
+    <div className="bg-white max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] py-[120px] px-7">
       <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E] text-center">
         Popular Books
       </h1>

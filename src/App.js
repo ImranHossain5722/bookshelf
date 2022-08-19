@@ -60,6 +60,12 @@ import Chat from "./pages/Chat/Chat";
 import AllProducts from "./components/Dashboard/AllProducts/AllProducts";
 import ReadersHome from "./components/ReadersHomePage/ReadersHome";
 
+import ProductReleaseLandingPage from "./components/ProductReleaseLandingPage/ProductReleaseLandingPage";
+import OrderDelivery from "./components/Dashboard/OrderDelivery/OrderDelivery";
+import Orders from "./components/Dashboard/OrderDelivery/Orders";
+import DeliveredOrder from "./components/Dashboard/OrderDelivery/DeliveredOrder";
+import PickedOrder from "./components/Dashboard/OrderDelivery/PickedOrder";
+import TrackOrder from "./pages/TrackOrder/TrackOrder";
 
 // initialize aos
 AOS.init();
@@ -118,6 +124,12 @@ function App() {
               <Route path="allorders" element={<AllOrders />} />
               <Route path="allauthor" element={<AllAuthors />} />
               <Route path="orderhistory" element={<OrderHistory />} />
+              <Route path="orderdelivery" element={<OrderDelivery />}>
+                <Route path="orders" element={<Orders />} />
+                <Route path="deliveredorders" element={<DeliveredOrder />} />
+                <Route path="pickedorders" element={<PickedOrder />} />
+              </Route>
+
             </Route>
           </Routes>
         </NavDashboard>
@@ -133,6 +145,7 @@ function App() {
               <Route path="/best-offers" element={<BestOffersBooks />} />
             </Route>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/trackorder" element={<TrackOrder />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
             <Route path="/wishlist" element={<Wishlist />}></Route>
@@ -237,6 +250,7 @@ function App() {
             <Route path="/comingsoon" element={<CommingSoon />}></Route>
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="/readershome" element={<ReadersHome />}></Route>
+            <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

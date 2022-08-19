@@ -65,7 +65,7 @@ function Dashboard() {
               {userRole === 'delivery' && <>
                 <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
                 <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
-                <li><Link to='/dashboard/orderhistory' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
+                <li><Link to='/dashboard/orderdelivery/orders' className='text-lg text-[#00124E] font-bold'>Order Delivery</Link></li>
                 <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
               </>}
 

@@ -41,7 +41,7 @@ const PopularAuthor = () => {
   }, [width]);
 
   return (
-    <div className="bg-white max-w-[1240px] mx-auto my-[120px] py-[120px]">
+    <div className="bg-white max-w-[1240px] container mx-auto my-[120px] py-[120px]">
       {/* ------title section----- */}
       <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">
         Popular Author

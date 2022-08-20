@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <UpScrollButton />
+      {/* <UpScrollButton /> */}
 
       {/* select catgory */}
       <Categorys />

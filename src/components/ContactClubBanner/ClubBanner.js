@@ -9,7 +9,7 @@ const ClubBanner = () => {
   return (
     <div className="max-w-[1240px] mx-auto mt-[60px] lg:mt-[120px] mb-[120px]">
       <div
-        className="w-full py-11 shadow-xl rounded-lg"
+        className="w-full py-11 shadow-xl rounded-lg container mx-auto"
         style={{
           backgroundImage: `url(${clubBanner})`,
           backgroundSize: "cover",

@@ -50,10 +50,10 @@ const Review = () => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className=" px-8 mx-auto  mt-[60px] lg:mt-[120px] py-[120px] " >
+      className=" px-8  mt-[60px] lg:mt-[120px] py-[120px] " >
       <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold text-center pb-1">Our Clients Feedback</h2>
 
-      <div className=" flex justify-center ">
+      <div className=" flex justify-center container mx-auto ">
         <progress className="progress progress-success  h-2 w-5  "></progress>
       </div>
       <Swiper

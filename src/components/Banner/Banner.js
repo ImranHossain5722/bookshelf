@@ -40,7 +40,7 @@ const data = [
 
 const Banner = () => {
   return (
-    <div className="hero_Banner">
+    <div className="hero_Banner  ">
       <Swiper
         navigation={false}
         pagination={{ clickable: true }}

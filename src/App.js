@@ -66,6 +66,7 @@ import Orders from "./components/Dashboard/OrderDelivery/Orders";
 import DeliveredOrder from "./components/Dashboard/OrderDelivery/DeliveredOrder";
 import PickedOrder from "./components/Dashboard/OrderDelivery/PickedOrder";
 import TrackOrder from "./pages/TrackOrder/TrackOrder";
+import ChatPopup from "./components/ChatPopup/ChatPopup";
 
 // initialize aos
 AOS.init();
@@ -251,6 +252,7 @@ function App() {
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="/readershome" element={<ReadersHome />}></Route>
             <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
+            <Route path="/chatpopup" element={<ChatPopup/>}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

@@ -349,9 +349,9 @@ const AddProduct = () => {
               </div >
               < div className='mt-4' >
                 <label className="label-text text-lg">Short Details</label>
-                <input type="text" {...register("book_description", {
+                <textarea type="text" {...register("book_description", {
                   required: 'required*',
-                })} placeholder="Type here" className="input input-bordered bg-white w-full mt-2" />
+                })} placeholder="Type here" className="textarea textarea-bordered  bg-white w-full mt-2" />
                 {errors?.book_description && <p><small className='pl-1 text-red-600'>{errors?.book_description?.message}</small></p>}
               </div >
             </div>

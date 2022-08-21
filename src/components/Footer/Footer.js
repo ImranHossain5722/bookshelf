@@ -7,6 +7,7 @@ import auth from "../../firebase.init";
 import chat from "../../Assets/images/footer/chat.png";
 import payment_img from "../../Assets/images/footer/payment_img.png";
 import "./footer.scss";
+import ScrollToTop from "react-scroll-to-top";
 const Footer = () => {
   const [user] = useAuthState(auth);
 
@@ -17,6 +18,11 @@ const Footer = () => {
   return (
     <>
       <footer className="home_six_footer">
+        <div>
+
+   
+        </div>
+
         <div className="main_footer_wrap">
           <div className="container mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

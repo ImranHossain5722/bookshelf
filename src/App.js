@@ -66,6 +66,7 @@ import Orders from "./components/Dashboard/OrderDelivery/Orders";
 import DeliveredOrder from "./components/Dashboard/OrderDelivery/DeliveredOrder";
 import PickedOrder from "./components/Dashboard/OrderDelivery/PickedOrder";
 import TrackOrder from "./pages/TrackOrder/TrackOrder";
+import ScrollToTop from "react-scroll-to-top";
 
 // initialize aos
 AOS.init();
@@ -100,6 +101,8 @@ function App() {
 
   return (
     <div className="App">
+     
+       
       {dash ? (
         <NavDashboard>
           <Routes>

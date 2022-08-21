@@ -143,7 +143,7 @@ const SignUp = () => {
               </label>
             </div>
 
-         \
+       
 
             <div className="form-control w-full max-w-xs">
               <input

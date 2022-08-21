@@ -26,7 +26,6 @@ import Myorder from "./components/Dashboard/Myorder/Myorder";
 import Myprofile from "./components/Dashboard/Myprofile/Myprofile";
 import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
 import AuthorOrPublisher from "./pages/Forms/AuthorOrPublisher";
-
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
@@ -39,10 +38,8 @@ import Checkout from "./pages/Checkout/Checkout";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import Products_details from "./pages/Products_details/Products_details";
-
 import axios from "axios";
 import Wishlist from "./pages/wishlist/Wishlist";
-
 import Contact from "./pages/Contact/Contact";
 import Faq from "./pages/Faq/Faq";
 import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
@@ -59,7 +56,6 @@ import Payment from "./components/Dashboard/Payments/Payment";
 import Chat from "./pages/Chat/Chat";
 import AllProducts from "./components/Dashboard/AllProducts/AllProducts";
 import ReadersHome from "./components/ReadersHomePage/ReadersHome";
-
 import ProductReleaseLandingPage from "./components/ProductReleaseLandingPage/ProductReleaseLandingPage";
 import OrderDelivery from "./components/Dashboard/OrderDelivery/OrderDelivery";
 import Orders from "./components/Dashboard/OrderDelivery/Orders";
@@ -67,6 +63,8 @@ import DeliveredOrder from "./components/Dashboard/OrderDelivery/DeliveredOrder"
 import PickedOrder from "./components/Dashboard/OrderDelivery/PickedOrder";
 import TrackOrder from "./pages/TrackOrder/TrackOrder";
 import ScrollToTop from "react-scroll-to-top";
+import ChatPopup from "./components/ChatPopup/ChatPopup";
+
 
 // initialize aos
 AOS.init();
@@ -254,6 +252,7 @@ function App() {
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="/readershome" element={<ReadersHome />}></Route>
             <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
+            <Route path="/chatpopup" element={<ChatPopup/>}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

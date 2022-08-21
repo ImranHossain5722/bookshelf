@@ -24,8 +24,7 @@ const Home = () => {
   return (
     <div>
       <Banner />
-{/* component	={<UpScrollButton/>} */}
-     
+
       {/* select catgory */}
       <Categorys />
       <FirstCategoryBooks />

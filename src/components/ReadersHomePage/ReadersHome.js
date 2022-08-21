@@ -11,7 +11,7 @@ const ReadersHome = () => {
         <div className=" bg-[#F0F2F5] overflow-y-scroll w-[20%]  hidden lg:block">
           <LeftSideBar />
         </div>
-        <div className="NewFeed  flex justify-center items-center  bg-[#F0F2F5] w-[55%]">
+        <div className="NewFeed  flex justify-center   bg-[#F0F2F5] w-[55%]">
           <NewsFeed />
         </div>
         <div

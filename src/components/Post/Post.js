@@ -15,11 +15,10 @@ const Post = () => {
       
   }, []);
 
-  // console.log(userPost);
   return (
     <div className="">
-      <div className="post mt-6 bg-white rounded-xl shadow-md  mx-auto max-w-sm md:max-w-md lg:max-w-[100%]">
-        <div className="flex items-center">
+      <div className="post  bg-white rounded-xl shadow-md  mx-auto max-w-sm md:max-w-md lg:max-w-[100%]">
+        <div className="flex justify-center items-center">
           <div
             className="w-14 h-14 bg-gray-300 m-4 rounded-full"
             style={{
@@ -29,9 +28,9 @@ const Post = () => {
               backgroundRepeat: "no-repeat",
             }}
           ></div>
-          {/* search input field  */}
+          {/* input field  */}
           <input
-            className="flex justify-center mr-3  bg-gray-200 px-7 mx-auto  w-5/6 h-12 rounded-xl focus:outline-none hover:bg-gray-100"
+            className="flex justify-center  mr-3  bg-gray-200 px-7 mx-auto  w-5/6 h-12 rounded-xl focus:outline-none hover:bg-gray-100"
             placeholder="Whats on your mind"
           />
         </div>

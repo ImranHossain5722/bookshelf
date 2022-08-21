@@ -44,7 +44,7 @@ const Release = () => {
   }, []);
   return (
     <div className="px-10 bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] shadow-xl rounded-xl border-solid border-2 border-primary">
-      <div className="card lg:card-side p-10">
+      <div className="card lg:card-side p-10 container mx-auto">
         <figure>
           <img
             className="rounded w-full h-96"

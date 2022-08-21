@@ -97,8 +97,8 @@ const Categorys = () => {
           <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold capitalize ">
             particular books
           </h2>
-          <p className="text-xl text-[#00124E] font-normal">
-            books of choice - maximum <span className="text-primary">2</span>
+          <p className="text-md font-semibold text-[#00124E] ">
+          Select your categories of books
           </p>
         </div>
         <div className="swiperSlide_button_group">
@@ -160,7 +160,7 @@ const Categorys = () => {
                   <a href="#">
                     <h4>{category?.category_title}</h4>
                   </a>
-                  <span>207 Products</span>
+             
                   <div className="checked_cat flex absolute top-0 left-0 right-0 bottom-0 items-center justify-center  rounded-[10px]">
                     <BsCheckLg className="text-[60px] text-[#ffffff] font-extrabold" />
                   </div>
@@ -182,7 +182,7 @@ const Categorys = () => {
                     <a href="#">
                       <h4>{category?.category_title}</h4>
                     </a>
-                    <span>207 Products</span>
+                   
                   </div>
                 </>
               )}

@@ -43,8 +43,10 @@ const Banner = () => {
     <div className="hero_Banner  ">
       <Swiper
         navigation={false}
+        loop={true}
+        autoplay={true}
         pagination={{ clickable: true }}
-        modules={[Pagination, Navigation]}
+        modules={[Autoplay,Pagination, Navigation]}
         className="mySwiper my-auto"
         style={{ "--swiper-theme-color": "#27AE61" }}
       >

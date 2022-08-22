@@ -53,4 +53,8 @@
    .post_button:active .icon {
     transform: scale(0.95);
    }
+   .post_container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
    

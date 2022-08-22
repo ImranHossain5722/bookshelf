@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import { MdOutlinePhotoLibrary } from 'react-icons/md'
 import {  useSelector } from "react-redux";
 import axios from "axios";
+import {toast} from 'react-toastify'
 
 
 
@@ -33,7 +34,7 @@ const PostModalView = () => {
             if(postData){
               console.log(postData);
               console.log(postData.user_id)
-              axios.post("https://book-shelf-webapp.herokuapp.com/add-post",postData).then(data => console.log(data))
+              axios.post("https://book-shelf-webapp.herokuapp.com/add-post",postData).then(data => toast.success("Successfully uploaded your post"))
             }
           }})
     }

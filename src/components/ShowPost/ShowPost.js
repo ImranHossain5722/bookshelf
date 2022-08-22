@@ -16,59 +16,51 @@ import { BiComment } from "react-icons/bi";
 import { RiShareForwardLine } from "react-icons/ri";
 const ShowPost = ({ singlePost }) => {
   //  console.log(singlePost)
-  const {
-    post,
-    post_image_url,
-    user_photo_url,
-    user_name,
-    post_time,
-    conments,
-  } = singlePost;
+  const [allPosts, setAllPosts] = useState([]);
+  
+  // const {
+  //   post,
+  //   post_image_url,
+  //   user_photo_url,
+  //   user_name,
+  //   post_time,
+  //   conments,
+  // } = singlePost;
 
-  const [post_likes, setPost_likes] = useState(singlePost.post_likes);
-  const [islike, seIstLike] = useState(false);
-  const likeHandeler = () => {
-    setPost_likes(islike ? post_likes - 1 : post_likes + 1);
-    seIstLike(!islike);
-  };
+  // const [post_likes, setPost_likes] = useState(singlePost.post_likes);
+  // const [islike, seIstLike] = useState(false);
+  // const likeHandeler = () => {
+  //   setPost_likes(islike ? post_likes - 1 : post_likes + 1);
+  //   seIstLike(!islike);
+  // };
 
   const [userComments, setUseComments] = useState([]);
   useEffect(() => {
-    fetch("user.json")
+    fetch("https://book-shelf-webapp.herokuapp.com/get-posts")
       .then((response) => response.json())
-      .then((data) => console.log(data.post_data?.comments));
+      .then((data) => setAllPosts(data));
+      
   }, []);
   return (
-    <div className="">
-      <div className="">
-        <div className=" mx-auto max-w-sm md:max-w-md lg:max-w-[750px] bg-white shadow-md rounded-xl mb-4 ">
-          <div className="flex items-start">
-            <div
-              className="w-14 h-14 bg-gray-300 m-4 rounded-full"
-              style={{
-                background: `url(${user_photo_url})`,
-                backgroundSize: "content",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-            >
-              <div className="">
-                {/* post time */}
-                <small className="flex gap-1 items-center relative top-8 left-16 text-gray-500 font-semibold">
-                  {post_time}. <GiEarthAmerica />{" "}
-                </small>
-              </div>
-            </div>
-
+    <div >
+      {allPosts?.map(post => 
+        <div className=" mx-auto max-w-sm md:max-w-md lg:max-w-[750px] bg-white shadow-md rounded-xl mb-4 " key={post._id}>
+          <div  className="flex justify-start items-center relative ">
+           
+       <div class="avatar">
+<div class="w-14 m-4  rounded-full">
+ <img src={post?.user_photo_url} />
+</div>
+</div>
             <h3 className="text-[18px] font-semibold mt-3 ml-[-8px]">
-              {user_name}
+              {post?.user_name}
             </h3>
-            <BsThreeDots className="relative  left-[130px] md:left-[202px] lg:left-[200px]  top-4" />
+            
           </div>
           <div>
             {/* post des */}
-            <p className="px-4">{post}</p>
-            <img className="pt-4 w-full " src={post_image_url} alt="" />
+            <p className="px-4">{post.post_content}</p>
+            <img className="pt-4 w-full " src={post?.post_image} alt="" />
           </div>
           {/* like comment share */}
           <div className="likeCommentShar mb- ">
@@ -77,7 +69,7 @@ const ShowPost = ({ singlePost }) => {
               <div className="flex gap-1">
                 <img className="w-6 h-6" src={likeImage} alt="" />
                 <img className="w-6 h-6" src={heart} alt="" />
-                <p>{post_likes}</p>
+                <p>{post?.post_likes}</p>
                 {/* <img className="w-6 h-6" src={care} alt=""/>
                   <img className="w-6 h-6" src={angry} alt=""/>
                   <img className="w-6 h-6" src={sad} alt=""/>
@@ -86,7 +78,7 @@ const ShowPost = ({ singlePost }) => {
               </div>
               {/* comment */}
               <div className="flex hover:underline cursor-pointer">
-                <p> {conments.length} Comments</p>
+                <p> {post?.length} Comments</p>
               </div>
             </div>
 
@@ -97,7 +89,7 @@ const ShowPost = ({ singlePost }) => {
             >
               <div
                 className="flex items-center gap-1 hover:bg-gray-200 p-2 cursor-pointer"
-                onClick={likeHandeler}
+        
               >
                 <AiOutlineLike />
                 <p>Like</p>
@@ -113,7 +105,8 @@ const ShowPost = ({ singlePost }) => {
             </div>
           </div>
         </div>
-      </div>
+        )}
+      
     </div>
   );
 };

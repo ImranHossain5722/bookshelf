@@ -10,7 +10,7 @@ import auth from "../../firebase.init";
 import './Post.css'
 import {  useSelector } from "react-redux";
 import axios from "axios";
-
+import {toast} from 'react-toastify'
 const Post = () => {
   const [userPost, setUserPost] = useState([]);
   const [showBtn, setShowBtn] = useState(false);
@@ -34,10 +34,11 @@ const Post = () => {
         if(postData){
           console.log(postData);
           console.log(postData.user_id)
-          axios.post("https://book-shelf-webapp.herokuapp.com/add-post",postData).then(data => console.log(data))
+          axios.post("https://book-shelf-webapp.herokuapp.com/add-post",postData).then(data => toast.success("Successfully uploaded your post"))
 
         }
         text.current.value = ""
+        setShowBtn(false)
   }
 
   const handleChange = () => {
@@ -54,7 +55,7 @@ const Post = () => {
   }
 
   return (
-    <div className="">
+    <div className="h-[285vh] overflow-auto post_container">
       <div className="post  bg-white rounded-xl shadow-md  mx-auto max-w-sm md:max-w-md lg:max-w-[100%]">
       <form onSubmit={handlePost} onChange={handleChange}>
 
@@ -101,9 +102,9 @@ const Post = () => {
       </div> */}
 
       <div className="mt-6">
-        {userPost?.map(singlePost => (
-          <ShowPost key={singlePost?.id} singlePost={singlePost} />
-        ))}
+        
+          <ShowPost   />
+       
       </div>
     </div>
   );

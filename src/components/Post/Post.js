@@ -25,7 +25,7 @@ const Post = () => {
   const text = useRef()
   const handlePost = (e) => {
     e.preventDefault()
-    console.log(text.current.value)
+   
         const postData = {
           user_id : currentUser?._id, 
           post_content : text.current?.value 
@@ -35,7 +35,9 @@ const Post = () => {
           console.log(postData);
           console.log(postData.user_id)
           axios.post("https://book-shelf-webapp.herokuapp.com/add-post",postData).then(data => console.log(data))
+
         }
+        text.current.value = ""
   }
 
   const handleChange = () => {

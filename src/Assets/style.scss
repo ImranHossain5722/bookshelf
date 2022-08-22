@@ -185,6 +185,7 @@ $white: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
   padding: 55px 30px 52px 30px;
+  min-height: 300px;
   &.catwiz_bg2 {
     background: #83cccf;
   }
@@ -212,6 +213,9 @@ $white: #fff;
     font-weight: 700;
     color: #00124e;
     margin: 25px 0 11px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   span {
     font-size: 14px;
@@ -229,7 +233,9 @@ $white: #fff;
     display: inline-block;
   }
 }
-
+.checked_cat {
+  background: rgba(#00124e, 0.4);
+}
 // banner
 .hero_Banner {
   @media #{'(min-width: 1600px)'} {
@@ -540,4 +546,67 @@ $white: #fff;
       }
     }
   }
+}
+
+// testmonial
+.single_testmonial {
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  background: #fff;
+  padding: 50px 50px 58px 50px;
+}
+
+@media (max-width: 767.98px) {
+  .single_testmonial {
+    padding: 40px 40px 48px 40px;
+  }
+}
+
+.single_testmonial .testmonial_header {
+  margin-bottom: 25px;
+}
+
+.single_testmonial .testmonial_header .thumb {
+  margin-right: 30px;
+  width: 80px;
+  height: 80px;
+  flex: 80px 0 0;
+}
+
+@media (max-width: 767.98px) {
+  .single_testmonial .testmonial_header .thumb {
+    width: 50px;
+    height: 50px;
+    flex: 50px 0 0;
+    margin-right: 20px;
+  }
+}
+
+.single_testmonial .testmonial_header .thumb img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.single_testmonial .testmonial_header .reviewer_name h4 {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Cerebri Sans";
+  margin-bottom: 7px;
+}
+
+.single_testmonial .testmonial_header .reviewer_name .rate i {
+  font-size: 15px;
+  color: #ffc107;
+}
+
+.single_testmonial .testmonial_header .reviewer_name .rate i:not(:last-child) {
+  margin-right: 5px;
+}
+
+.single_testmonial p {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #202e3b;
+  margin-bottom: 0;
 }

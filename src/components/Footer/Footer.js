@@ -5,23 +5,17 @@ import logo from "../../Assets/images/Logo/bookshelfWhite-removebg-preview.png";
 
 import auth from "../../firebase.init";
 import chat from "../../Assets/images/footer/chat.png";
-import payment_img from "../../Assets/images/footer/payment_img.png";
 import "./footer.scss";
 import ScrollToTop from "react-scroll-to-top";
 const Footer = () => {
   const [user] = useAuthState(auth);
 
-
   const userUid = user?.uid;
-
 
   return (
     <>
       <footer className="home_six_footer">
-        <div>
-
-   
-        </div>
+        <div></div>
 
         <div className="main_footer_wrap">
           <div className="container mx-auto">
@@ -79,9 +73,7 @@ const Footer = () => {
                     <a href="#">Order History</a>
                   </li>
                   <li>
-
                     <a href="trackorder">Track Order</a>
-
                   </li>
                   <li>
                     <a href="#">Order History</a>
@@ -120,76 +112,13 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="footer_middle_wrap">
-          <div className="container mx-auto">
-            <div className="footer_border ">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <div className="col-xl-4 col-lg-4 col-md-4">
-                  <div className="footer_contact mb_30">
-                    <div className="thumb">
-                      <img className="" src={chat} />
-                    </div>
-                    <div className="contact_num">
-                      <p>CALL US 24/7</p>
-                      <h5>
-                        {" "}
-                        <span>+048</span> 800 456 789
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-3 col-md-3">
-                  <div className="footer_widget">
-                    <p className="address_text">
-                      9066 Green Lake Drive Chevy Chase, MD 20815
-                    </p>
-                    <a className="mail_text" href="#">
-                      contact@example.com
-                    </a>
-                  </div>
-                </div>
-                <div className="col-xl-2 col-lg-2 col-md-3">
-                  <div className="footer_widget">
-                    <div className="footer_title2">
-                      <h3>Follow us</h3>
-                    </div>
-                    <div className="social__Links3">
-                      <a href="#">
-                        <i className="fab fa-twitter"></i>
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-linkedin-in"></i>
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-instagram"></i>
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-facebook"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-3 col-md-3">
-                  <div className="footer_widget">
-                    <div className="footer_title2">
-                      <h3>Payment method</h3>
-                    </div>
-                    <img className="img-fluid" src={payment_img} alt="" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="copyright_area">
           <div className="container mx-auto">
-            <div className="grid">
-              <div className="copy_right_text text-center">
-                <p>
-                  © 2022 <a href="#"> BookSelf .</a> All rights reserved. Made
-                  By <a href="#">BookSelf</a>
-                </p>
-              </div>
+            <div className="copy_right_text text-center">
+              <p>
+                © 2022 <a href="#"> BookSelf .</a> All rights reserved. Made By{" "}
+                <a href="#">BookSelf</a>
+              </p>
             </div>
           </div>
         </div>

@@ -12,20 +12,16 @@ import {  useSelector } from "react-redux";
 import axios from "axios";
 import {toast} from 'react-toastify'
 const Post = () => {
-  const [userPost, setUserPost] = useState([]);
+
   const [showBtn, setShowBtn] = useState(false);
+
+  // showModal
   const [user] = useAuthState(auth)
   const currentUser = useSelector((state) => state?.newUser?.user) 
-  useEffect(() => {
-    fetch("user.json")
-      .then((response) => response.json())
-      .then((data) => setUserPost(data[1].post_data));
-      
-  }, []);
+
   const text = useRef()
   const handlePost = (e) => {
     e.preventDefault()
-   
         const postData = {
           user_id : currentUser?._id, 
           post_content : text.current?.value 
@@ -35,21 +31,17 @@ const Post = () => {
           console.log(postData);
           console.log(postData.user_id)
           axios.post("https://book-shelf-webapp.herokuapp.com/add-post",postData).then(data => toast.success("Successfully uploaded your post"))
-
         }
         text.current.value = ""
         setShowBtn(false)
   }
 
   const handleChange = () => {
-
-
     if( text.current?.value){
    setShowBtn(true)
 
   }else{
     setShowBtn(false)
-
     }
 
   }
@@ -68,7 +60,7 @@ const Post = () => {
 </div>
           {/* input field  */}
           <input
-            className="flex justify-center pr-24  mr-3  bg-gray-200 px-7 mx-auto  w-5/6 h-12 rounded-xl focus:outline-none "
+            className="flex justify-center pr-24  mr-3  bg-gray-200 pl-3 mx-auto  w-5/6 h-12 rounded-xl focus:outline-none "
             placeholder="Whats on your mind" ref={text}
           />
         <button class={`${showBtn ? "flex ease-linear duration-500 post_button bg-primary" :"hidden ease-linear duration-500 post_button bg-primary"} focus:outline-none  `} type="submit" > Post
@@ -82,7 +74,7 @@ const Post = () => {
         <div className="  h-[1px] bg-gray-200 "> </div>
 
         <div className="flex mx-auto max-w-sm md:max-w-md lg:max-w-lg py-3">
-        <label for="post_modal" className=" flex items-center gap-2 ml-3" >
+        <label for="post_modal" className=" flex items-center gap-2 ml-3 cursor-pointer" >
   
       
             <MdOutlinePhotoLibrary className=" text-[16px] lg:text-[20px] text-green-800 " />

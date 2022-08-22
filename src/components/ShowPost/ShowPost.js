@@ -5,19 +5,22 @@ import { BsThreeDots } from "react-icons/bs";
 import Pogramming from "../../Assets/images/post1.jpg";
 import likeImage from "../../Assets/images/like.svg";
 import heart from "../../Assets/images/heart.svg";
-import care from "../../Assets/images/care.svg";
-import sad from "../../Assets/images/sad.svg";
-import haha from "../../Assets/images/haha.svg";
-import angry from "../../Assets/images/angry.svg";
-import wow from "../../Assets/images/wow.svg";
 import { comment } from "postcss";
 import { AiOutlineLike } from "react-icons/ai";
 import { BiComment } from "react-icons/bi";
 import { RiShareForwardLine } from "react-icons/ri";
+import './ShowPost.css'
+import CommentModal from "./CommentModal";
+import CommentView from "./CommentView";
+import { useDispatch } from "react-redux";
+
+import { commentId } from "../Redux/actions/bookActions";
+
 const ShowPost = ({ singlePost }) => {
   //  console.log(singlePost)
   const [allPosts, setAllPosts] = useState([]);
-  
+  const [showModal, setshowModal] = useState(false);
+  const dispatch = useDispatch()
   // const {
   //   post,
   //   post_image_url,
@@ -40,7 +43,11 @@ const ShowPost = ({ singlePost }) => {
       .then((response) => response.json())
       .then((data) => setAllPosts(data));
       
-  }, []);
+  }, [allPosts,showModal]);
+  const showCommentModal = (id) =>  {
+    dispatch(commentId(id))
+   setshowModal(!showModal)
+  }
   return (
     <div >
       {allPosts?.map(post => 
@@ -70,15 +77,11 @@ const ShowPost = ({ singlePost }) => {
                 <img className="w-6 h-6" src={likeImage} alt="" />
                 <img className="w-6 h-6" src={heart} alt="" />
                 <p>{post?.post_likes}</p>
-                {/* <img className="w-6 h-6" src={care} alt=""/>
-                  <img className="w-6 h-6" src={angry} alt=""/>
-                  <img className="w-6 h-6" src={sad} alt=""/>
-                  <img className="w-6 h-6" src={haha} alt=""/>
-                  <img className="w-6 h-6" src={wow} alt=""/> */}
+               
               </div>
               {/* comment */}
               <div className="flex hover:underline cursor-pointer">
-                <p> {post?.length} Comments</p>
+                <p> {post?.post_comments.length} Comments</p>
               </div>
             </div>
 
@@ -94,19 +97,34 @@ const ShowPost = ({ singlePost }) => {
                 <AiOutlineLike />
                 <p>Like</p>
               </div>
-              <div className="flex items-center gap-1">
+              <label for="comment_modal" className="flex items-center gap-1 cursor-pointer" onClick={() => showCommentModal(post._id)}>
                 <BiComment />
                 <p>Comment</p>
-              </div>
+              </label>
               <div className="flex items-center gap-1">
                 <RiShareForwardLine />
                 <p>Share</p>
               </div>
             </div>
+            {/* // input field */}
+          { post?.post_comments?.map(comment => <div className="flex items-center">
+          <div class="avatar">
+<div class="w-14 m-4  rounded-full">
+ <img src={post?.user_photo_url} />
+</div>
+</div>
+<div>
+<p className="text-[13px] font-semibold">user name</p>
+
+  <p>{comment?.comment}</p>
+</div>
+          </div>)}
           </div>
         </div>
         )}
-      
+        {showModal && <CommentModal modal={"comment_modal"}>
+           <CommentView setshowModal={setshowModal}  />
+         </CommentModal>}
     </div>
   );
 };

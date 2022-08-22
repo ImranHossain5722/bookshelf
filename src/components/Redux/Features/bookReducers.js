@@ -22,7 +22,8 @@ const defState = {
     allBooks : [],
     cartData : {},
     quickView : {},
-    orderView : {}
+    orderView : {},
+    commentId : undefined
 
 }
 
@@ -264,7 +265,18 @@ export const orderViewReducer = (state = defState, {type, payload} ) => {
             return state;
     }
 }
-
+export const commentIdReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.COMMENTID:
+          
+            return {
+                commentId : payload
+            };
+    
+        default:
+            return state;
+    }
+}
 export const currentCartReducer = (state = defState, {type, payload} ) => {
     switch (type) {
         case ActionTypes.CURRENT_CART:

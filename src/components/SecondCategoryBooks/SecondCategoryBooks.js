@@ -54,16 +54,15 @@ const SecondCategoryBooks = () => {
     navigate("/categoryView");
   };
 
-
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white sction_padding_2 my-[120px] ">
+    <div className="bg-white sction_padding_2 ">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
           <h1 className="text-[30px] lg:text-[40px] font-bold text-[#00124E] section_title">
-          The Story
+            The Story
           </h1>
           <div className="swiperSlide_button_group">
             <div className="swiper_button swiper_button_prev" ref={prevRef}>
@@ -118,16 +117,18 @@ const SecondCategoryBooks = () => {
                       <img src={book.book_cover_photo_url} alt="" />
                     </a>
                     <div className="product_action">
-                    <Wishlistbutton _id={book._id} />
-                    <QuickViewButton _id={book._id} />
-                    <CartButton _id={book._id}  />
+                      <Wishlistbutton _id={book._id} />
+                      <QuickViewButton _id={book._id} />
+                      <CartButton _id={book._id} />
                     </div>
                   </div>
                   <div className="product__meta">
                     <Link to={`/selectedBook/${book?._id}`}>
-                      <h4 >{book.book_title}</h4>
+                      <h4>{book.book_title}</h4>
                     </Link>
-                      <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
+                    <p className="text-[16px] text-[#00124e] font-semibold">
+                      {book?.book_author?.author_name}
+                    </p>
                     <div className="stars">
                       <i className="fas fa-star"></i>
                       <i className="fas fa-star"></i>
@@ -139,22 +140,21 @@ const SecondCategoryBooks = () => {
                     <div className="product_prise">
                       <p>${book.book_price}</p>
                     </div>
-                  <AddCartButton _id={book._id}/>
+                    <AddCartButton _id={book._id} />
                   </div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-        <div className=" text-end mt-4">
-
-<button
-onClick={() => catHandeler()}
-className="btn btn-primary text-white hover:text-white hover:bg-accent  "
->
-view all
-</button>
-</div>
+        <div className=" text-center mt-8">
+          <button
+            onClick={() => catHandeler()}
+            className="btn btn-primary text-white hover:text-white hover:bg-accent  "
+          >
+            view all
+          </button>
+        </div>
       </div>
     </div>
   );

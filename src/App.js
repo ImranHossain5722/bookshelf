@@ -66,6 +66,7 @@ import ScrollToTop from "react-scroll-to-top";
 import ChatPopup from "./components/ChatPopup/ChatPopup";
 
 
+
 // initialize aos
 AOS.init();
 
@@ -99,8 +100,8 @@ function App() {
 
   return (
     <div className="App">
-     
-       
+
+
       {dash ? (
         <NavDashboard>
           <Routes>
@@ -252,12 +253,12 @@ function App() {
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="/readershome" element={<ReadersHome />}></Route>
             <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
-            <Route path="/chatpopup" element={<ChatPopup/>}></Route>
+            <Route path="/chatpopup" element={<ChatPopup />}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </NavBar>
       )}
 

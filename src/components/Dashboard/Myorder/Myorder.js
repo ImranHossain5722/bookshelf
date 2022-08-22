@@ -67,7 +67,7 @@ const Myorder = () => {
                                 </td>
                                 <td className=" border-[#e1e2e6] text-[#00124E] font-bold">
                                 <button className=" btn btn-xs btn-error text-white  mb-3 rounded mr-1" ><FiDelete className='font-bold text-[16px] '/></button>
-                                <label for="order-view" className=" text-primary duration-500 a  btn btn-xs btn-info text-white  mb-3 rounded"  onClick={() => viewOrder(orderDetails)} >
+                                <label for="order-view" className=" duration-500 a  btn btn-xs btn-info text-white  mb-3 rounded"  onClick={() => viewOrder(orderDetails)} >
   
                                <AiFillEye className='font-bold text-[16px]'/>
                              </label>

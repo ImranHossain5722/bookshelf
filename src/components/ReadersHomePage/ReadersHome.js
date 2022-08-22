@@ -2,6 +2,8 @@ import React from "react";
 // import CreateRoom from "../../Components/CreateRoom/CreateRoom";
 import LeftSideBar from "../LeftSideBar/LeftSideBar";
 import NewsFeed from "../NewsFeed/NewsFeed";
+import PostModal from "../Post/PostModal";
+import PostModalView from "../Post/PostModalView";
 import RightSideBar from "../RightSideBar/RightSideBar";
 
 const ReadersHome = () => {
@@ -20,6 +22,10 @@ const ReadersHome = () => {
         </div>
       </div>
       <div className=""></div>
+      <PostModal modal={"post_modal"}>
+        <PostModalView/>
+      </PostModal>
+      
     </div>
   );
 };

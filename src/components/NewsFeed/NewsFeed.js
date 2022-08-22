@@ -12,9 +12,6 @@ import Post from '../Post/Post';
 const NewsFeed = () => {
     return (
         <div className=' mx-auto mt-6 max-w-sm md:max-w-md lg:max-w-lg'>
-            
-            
-           
            {/* post  */}
            <Post/>
 

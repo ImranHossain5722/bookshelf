@@ -64,6 +64,7 @@ import PickedOrder from "./components/Dashboard/OrderDelivery/PickedOrder";
 import TrackOrder from "./pages/TrackOrder/TrackOrder";
 import ScrollToTop from "react-scroll-to-top";
 import ChatPopup from "./components/ChatPopup/ChatPopup";
+import UpdateProduct from "./components/Dashboard/AllProducts/UpdateProduct";
 
 
 
@@ -121,6 +122,7 @@ function App() {
               <Route path="requestbook" element={<RequestBook />} />
               <Route path="addreview" element={<Addreview />} />
               <Route path="addproduct" element={<AddProduct />} />
+              <Route path="updateproduct/:bookid" element={<UpdateProduct />} />
               <Route path="allpublisher" element={<AllPublishers />} />
               <Route path="allusers" element={<AllUsers />} />
               <Route path="allorders" element={<AllOrders />} />

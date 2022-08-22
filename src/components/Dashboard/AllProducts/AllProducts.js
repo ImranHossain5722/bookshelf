@@ -3,17 +3,16 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import { BsFillTrashFill, BsPencilSquare } from "react-icons/bs";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AllProducts = () => {
+    const navigate = useNavigate();
     const { isLoading, error, data: books, refetch } = useQuery(['repoData'], () =>
         fetch(`https://book-shelf-webapp.herokuapp.com/all-books`).then(res =>
             res.json()
         )
     )
-    const bigBtn = (i) => {
-        console.log(i)
 
-    }
     const handleProductDelete = (id, title) => {
         axios.delete(`https://book-shelf-webapp.herokuapp.com/delete-book?id=${id}`)
             .then(data => {
@@ -23,7 +22,8 @@ const AllProducts = () => {
     }
 
     const handleUpdateProduct = (id) => {
-
+        // console.log(`/dashboard/updateproduct/${id}`)
+        navigate(`/dashboard/updateproduct/${id}`);
     }
     return (
         <div>
@@ -64,7 +64,7 @@ const AllProducts = () => {
                                 <td className='border border-[#666666]'>{book?.book_edition}</td>
                                 <td className='border border-[#666666]'>{book?.book_country}</td>
                                 <td className='border border-[#666666]'>
-                                    <button onClick={() => handleUpdateProduct()} className='btn btn-primary text-xl mr-1 text-white'><BsPencilSquare /></button>
+                                    <button onClick={() => handleUpdateProduct(book?._id)} className='btn btn-primary text-xl mr-1 text-white'><BsPencilSquare /></button>
                                     <button onClick={() => handleProductDelete(book?._id, book?.book_title)} className='btn btn-red text-xl mr-1 text-white'><BsFillTrashFill /></button>
                                 </td>
                             </tr>)}

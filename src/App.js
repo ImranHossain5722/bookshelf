@@ -59,7 +59,6 @@ import Payment from "./components/Dashboard/Payments/Payment";
 import Chat from "./pages/Chat/Chat";
 import AllProducts from "./components/Dashboard/AllProducts/AllProducts";
 import ReadersHome from "./components/ReadersHomePage/ReadersHome";
-
 import ProductReleaseLandingPage from "./components/ProductReleaseLandingPage/ProductReleaseLandingPage";
 import OrderDelivery from "./components/Dashboard/OrderDelivery/OrderDelivery";
 import Orders from "./components/Dashboard/OrderDelivery/Orders";
@@ -67,6 +66,7 @@ import DeliveredOrder from "./components/Dashboard/OrderDelivery/DeliveredOrder"
 import PickedOrder from "./components/Dashboard/OrderDelivery/PickedOrder";
 import TrackOrder from "./pages/TrackOrder/TrackOrder";
 import ChatPopup from "./components/ChatPopup/ChatPopup";
+import UpScrollButton from "./components/UpScrollButton/UpScrollButton";
 
 // initialize aos
 AOS.init();
@@ -257,10 +257,12 @@ function App() {
               {" "}
             </Route>
           </Routes>
+          
           <Footer />
+        
         </NavBar>
       )}
-
+      
       <ToastContainer />
     </div>
   );

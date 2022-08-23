@@ -11,9 +11,12 @@ import './Post.css'
 import {  useSelector } from "react-redux";
 import axios from "axios";
 import {toast} from 'react-toastify'
-const Post = () => {
 
+const Post = () => {
+  const [open, setOpen] = useState(0);
+ 
   const [showBtn, setShowBtn] = useState(false);
+ 
 
   // showModal
   const [user] = useAuthState(auth)

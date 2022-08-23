@@ -120,7 +120,7 @@ const AllBooks = () => {
   }
 
   return (
-    <div className="sction_padding">
+    <div className="section_padding">
       <div style={{ background: "#FBF6F6" }} className=" container mx-auto ">
         <div className="md:flex gap-6 items-start ">
           {/* filter options left-side */}

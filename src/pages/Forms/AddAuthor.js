@@ -107,7 +107,7 @@ const AddAuthor = () => {
     }
   };
   return (
-    <div className="sction_padding pt-0">
+    <div className="section_padding pt-0">
       <div className="pt-0  w-1/2 mx-auto">
         <h2 className="text-center font-bold text-3xl mb-3">
           Became an Author

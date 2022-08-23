@@ -51,7 +51,7 @@ const Login = () => {
     toast(`Error: ${error?.message}`);
   }
   if (loading) {
-    <Loading></Loading>;
+   return <Loading/>;
   }
 
   const onSubmit = async (data) => {

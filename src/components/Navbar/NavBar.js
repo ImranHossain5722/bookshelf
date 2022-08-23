@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import auth from "../../firebase.init";
-import logo from "../../Assets/images/Logo/bookshelf-.png";
+import logo from "../../Assets/images/Logo/logoBookself-.png";
 import userImg from "../../Assets/images/icon/001-user.png";
 import bag from "../../Assets/images/icon//002-bag.png";
 import wishlist from "../../Assets/images/icon/003-heart.png";
@@ -100,14 +100,14 @@ const NavBar = ({ children }) => {
                 </svg>
               </label>
             </div>
-            <div className="flex-1  text-4xl text-blue-400 uppercase font-bold">
-              <NavLink to="/" className="rounded-lg">
+            <div className="text-4xl text-blue-400 uppercase font-bold">
+              <NavLink to="/" className="">
                 <img className="" alt="" src={logo} />
               </NavLink>
             </div>
 
             {/* desktop */}
-            <div className="flex-none mx-20 hidden lg:block ">
+            <div className="flex-none mx-2 hidden lg:block ">
               <ul className="menu menu-horizontal  ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>

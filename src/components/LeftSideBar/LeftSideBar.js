@@ -31,10 +31,10 @@ const LeftSideBar = () => {
   }
   return (
     <div className="mt-6">
-      <h2 className="px-4 text-lg font-semibold">Authors</h2>
+      <h2 className="px-4 text-lg font-semibold">Meet Authors</h2>
       {/* profile */}
       {authors?.map(author=>
-        <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4 mt-2">
+        <div class="flex items-center   dark:bg-gray-700 hover:bg-slate-200 cursor-pointer dark:border-gray-600 dark:text-white px-4 mt-2">
 
         <img
           className=" w-9 h-9  text-[#056BE1] rounded-full"
@@ -42,10 +42,11 @@ const LeftSideBar = () => {
         alt='author' />
         <p
           
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
+          className="py-2 px-4 w-full text-black text-lg  dark:bg-gray-800 dark:border-gray-600"
         >
           {author?.author_name}
         </p>
+        
       </div>
         )}
       

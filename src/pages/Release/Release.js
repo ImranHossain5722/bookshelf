@@ -1,14 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ReleaseBook from "../../Assets/images/Banner-images/ebook3-slider-pic1.png";
 import { FaChevronRight, FaArrowRight } from "react-icons/fa";
 import "./Release.css";
+import Button from "../../components/Button/Button";
 
 const Release = () => {
   const [countDays, setCountDays] = useState("00");
   const [countMinutes, setCountMinutes] = useState("00");
   const [countHour, setCountHour] = useState("00");
   const [countSeconds, setCountSeconds] = useState("00");
+  const navigate = useNavigate();
+
+  // const ProductDetailHandaler = (e) => {
+  //   navigate("/productReleaseLandingpage");
+  // };
 
   let interval = useRef();
   const startCounting = () => {
@@ -60,7 +66,7 @@ const Release = () => {
             {/* <p className=' text-xl lg:text-[30px] lg:text-[40px] mb-5 font-semibold text-accent' >Publishing!
             </p> */}
 
-            <div className="lg:flex lg:justify-around ">
+            <div className="lg:flex lg:justify-around mb-4">
               <div className="text-center bg-">
                 <p className="text-5xl text-accent font-semibold bg-base-100 p-10 rounded-xl ">
                   {countDays}
@@ -86,17 +92,13 @@ const Release = () => {
                 <p className="text-accent font-semibold pt-4">Seconds</p>
               </div>
             </div>
-            <Link to="/productReleaseLandingpage" className="button w-[190px] ">
-              <div class="svg-wrapper-1 ">
-                <div class="svg-wrapper">
-                  <FaArrowRight className="ml-2" />
-                </div>
-              </div>
-              <span>See Details</span>
-            </Link>
+            <NavLink className='bg-primary p-3 text-white rounded-lg font-semibold' to='/productReleaseLandingpage' >See Details </NavLink>
           </div>
+         
         </div>
+        
       </div>
+      
     </div>
   );
 };

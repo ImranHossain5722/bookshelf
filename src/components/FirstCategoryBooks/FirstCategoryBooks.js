@@ -147,7 +147,7 @@ const FirstCategoryBooks = () => {
           </Swiper>
 
         </div>
-        <div className="text-end mt-4">
+        <div className="text-center mt-8">
 
           <button
             onClick={() => catHandeler()}

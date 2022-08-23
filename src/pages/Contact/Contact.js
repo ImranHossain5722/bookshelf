@@ -2,7 +2,7 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="sction_padding ">
+    <div className="section_padding ">
       <div className="container m-auto ">
         <div className="block lg:grid grid-cols-2 gap-4 max-w-5xl m-auto">
           <div className="col-span-1 mt-0 md:mt-12 mb-4">

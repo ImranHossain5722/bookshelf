@@ -120,7 +120,7 @@ const ShowPost = ({ singlePost }) => {
               </label>
             </div>
             
-              <Accordion open={open === i + 1} icon={<div className="flex   relative  bottom-[120px] left-[320px]  cursor-pointer">
+              <Accordion open={open === i + 1} icon={<div className="flex   relative  bottom-[115px] left-[320px]  cursor-pointer">
                 <p className="hover:underline flex"> <span className="mr-2"> {post?.post_comments.length}</span> Comments</p>
               </div>} onClick={() => handleOpen(i+1)}>
               <AccordionHeader className="h-[0px]">
@@ -137,7 +137,7 @@ const ShowPost = ({ singlePost }) => {
 </div>
 </div>
 <div>
-<p className="text-[13px] font-semibold">user name</p>
+<p className="text-[13px] font-semibold">   {comment?.user_id.user_name} </p>
 
   <p>{comment?.comment}</p>
 </div>

@@ -58,7 +58,7 @@ const Post = () => {
        
           <div class="avatar">
   <div class="w-14 m-4  rounded-full">
-    <img src={user?.photoURL} />
+    <img src={user?.photoURL || `https://api.multiavatar.com/${user.displayName}.png`} /> 
   </div>
 </div>
           {/* input field  */}

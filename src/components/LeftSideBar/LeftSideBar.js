@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { allAuthors } from '../Redux/actions/bookActions';
 import Loading from '../Loading/Loading';
+import {RiWechatPayLine} from 'react-icons/ri';
+import {toast } from "react-toastify"
 import './LeftSideBar.css'
 
 const LeftSideBar = () => {
@@ -29,23 +31,32 @@ const LeftSideBar = () => {
   if(loading){
     return <Loading/>
   }
+
+
+  const  reqHndeler =()=>{
+    toast.success("Your request sent successfully.We are notified you")
+  }
+
+
   return (
     <div className="mt-6">
-      <h2 className="px-4 text-lg font-semibold">Authors</h2>
+      <h2 className="px-4 text-lg font-semibold">Meet Your Favorite Authors</h2>
       {/* profile */}
       {authors?.map(author=>
-        <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4 mt-2">
+        <div class="flex items-center   dark:bg-gray-700 hover:bg-slate-200 cursor-pointer dark:border-gray-600 dark:text-white px-4 mt-2">
 
         <img
           className=" w-9 h-9  text-[#056BE1] rounded-full"
           src={author?.photo_url?author?.photo_url:'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg'}
         alt='author' />
-        <p
-          
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
+        <div className="flex items-center " onClick={reqHndeler} >
+
+        <p className="py-2 px-4 w-full text-black text-sm  dark:bg-gray-800 dark:border-gray-600"
         >
-          {author?.author_name}
+          {author?.author_name} 
         </p>
+        <RiWechatPayLine  className="text-primary"/>
+        </div>
       </div>
         )}
       

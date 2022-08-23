@@ -57,7 +57,7 @@ const SecondCategoryBooks = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white sction_padding_2 ">
+    <div className="bg-white section_padding_2 ">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
@@ -113,9 +113,9 @@ const SecondCategoryBooks = () => {
                 <div className="product_widget26 mb_30">
                   <div className="product_thumb_upper position-relative">
                     <span className="offer_badge">-0%</span>
-                    <a href="product_details.php" className="thumb text-center">
+                    <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
                       <img src={book.book_cover_photo_url} alt="" />
-                    </a>
+                    </Link>
                     <div className="product_action">
                       <Wishlistbutton _id={book._id} />
                       <QuickViewButton _id={book._id} />

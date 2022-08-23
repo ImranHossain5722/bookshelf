@@ -65,7 +65,6 @@ const Myprofile = () => {
       .then(data => setSales(data))
   }, [currentUserId])
 
-  console.log('sales', sales);
 
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
@@ -123,8 +122,6 @@ const Myprofile = () => {
       })
   }
 
-
-
   return (
     <div>
       {/* View As  */}
@@ -136,6 +133,7 @@ const Myprofile = () => {
         <button className={userRole === "user" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('user')} disabled={userRole === "user" ? true : false}>User</button>
         <button className={userRole === "delivery" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-grey ml-2 mt-2 text-white'} onClick={() => updateRole('delivery')} disabled={userRole === "delivery" ? true : false}>Delivery</button>
       </div>
+
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
       <div className=" flex items-center justify-center pb-10">
         <progress className="progress progress-primary bg-white h-2 w-10  "></progress>

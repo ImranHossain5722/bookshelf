@@ -53,7 +53,7 @@ const BestSellingBooks = () => {
                             <i className="fas fa-star"></i>
                             <i className="fas fa-star"></i>
                             <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i> 
                             <i className="fas fa-star"></i>
                             <span className="text-sm font-medium">(02 Rating)</span>
                           </div>

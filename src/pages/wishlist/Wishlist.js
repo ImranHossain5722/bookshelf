@@ -40,7 +40,6 @@ const Wishlist = () => {
         }
     }
      
-            //   axios.delete(`https://book-shelf-webapp.herokuapp.com/remove-from-cart?id=${userId}&cid=${cartId}`).then(data => toast.success("deleted from cart"))
             
     return (
         <div className="my-5">
@@ -51,11 +50,11 @@ const Wishlist = () => {
                     <table className="table w-full ">
                         <thead>
                             <tr>
-                                <th className="rounded-none">products</th>
-                                <th>name</th>
-                                <th>price</th>
-                                <th className="relative pl-[50px]">author</th>  
-                                <th className="relative pl-[60px]" >action</th>
+                                <th className="rounded-none">Products</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th className="relative pl-[50px]">Author</th>  
+                                <th className="relative pl-[60px]" >Action</th>
 
                             </tr>
                         </thead>

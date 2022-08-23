@@ -8,6 +8,12 @@ export const sellBooks = (books) =>{
     }
 }
 
+export const commentId = (books) =>{
+    return {
+        type : ActionTypes.COMMENTID,
+        payload: books
+    }
+}
 export const addCart = (books) =>{
     return {
         type : ActionTypes.ADD_CART,

@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{ useState, useEffect} from "react";
 import AddBanner from "../../components/AddBanner/AddBanner";
 import Banner from "../../components/Banner/Banner";
 import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner";
@@ -13,18 +13,19 @@ import PreOrderBooks from "../../components/PreOrderBooks/PreOrderBooks";
 import QuickView from "../../components/QuickView/QuickView";
 import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 import Review from "../../components/Review/Review";
-import ScrollToTop from "react-scroll-to-top";
-
 import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCategoryBooks";
 import Release from "../Release/Release";
 
 
 
-const Home = () => {
+
+const Home = () => { 
+
   return (
     <div >
       <Banner />
   
+     
       {/* select catgory */}
       <Categorys />
       <FirstCategoryBooks />

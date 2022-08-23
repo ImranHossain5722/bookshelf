@@ -65,6 +65,8 @@ import TrackOrder from "./pages/TrackOrder/TrackOrder";
 import ScrollToTop from "react-scroll-to-top";
 import ChatPopup from "./components/ChatPopup/ChatPopup";
 import UpScrollButton from "./components/UpScrollButton/UpScrollButton";
+import UpdateProduct from "./components/Dashboard/AllProducts/UpdateProduct";
+
 
 
 // initialize aos
@@ -100,8 +102,8 @@ function App() {
 
   return (
     <div className="App">
-     
-       
+
+
       {dash ? (
         <NavDashboard>
           <Routes>
@@ -121,6 +123,7 @@ function App() {
               <Route path="requestbook" element={<RequestBook />} />
               <Route path="addreview" element={<Addreview />} />
               <Route path="addproduct" element={<AddProduct />} />
+              <Route path="updateproduct/:bookid" element={<UpdateProduct />} />
               <Route path="allpublisher" element={<AllPublishers />} />
               <Route path="allusers" element={<AllUsers />} />
               <Route path="allorders" element={<AllOrders />} />
@@ -253,7 +256,7 @@ function App() {
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
             <Route path="/readershome" element={<ReadersHome />}></Route>
             <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
-            <Route path="/chatpopup" element={<ChatPopup/>}></Route>
+            <Route path="/chatpopup" element={<ChatPopup />}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

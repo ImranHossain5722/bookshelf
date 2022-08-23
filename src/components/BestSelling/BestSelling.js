@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 
 //icons
-import { FaHeart, FaEye, FaShoppingCart, FaRegEye } from 'react-icons/fa';
+import { FaHeart, FaEye, FaShoppingCart, FaRegEye } from "react-icons/fa";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,10 +13,10 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Navigation,Autoplay } from "swiper";
+import { Pagination, Navigation, Autoplay } from "swiper";
 import Stars from "../Stars/Stars";
 import useWindowDimensions from "../windowSize/windowSize";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../Loading/Loading";
 import { sellBooks } from "../Redux/actions/bookActions";
 import CartButton from "../CartButton/CartButton";
@@ -25,42 +25,40 @@ import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
 const BestSelling = () => {
-    const books = useSelector((state) => state?.sellBooks?.books);
-    const [size, setSize] = useState(1);
-    const { width } = useWindowDimensions();
-    const dispatch = useDispatch();
+  const books = useSelector((state) => state?.sellBooks?.books);
+  const [size, setSize] = useState(1);
+  const { width } = useWindowDimensions();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    fetch("https://book-shelf-webapp.herokuapp.com/all-books")
+      .then((res) => res.json())
+      .then((data) => dispatch(sellBooks(data)));
+  }, []);
 
-    useEffect(() => {
-        fetch('https://book-shelf-webapp.herokuapp.com/all-books')
-            .then(res => res.json())
-            .then(data => dispatch(sellBooks(data)));
-    }, [])
-
-    useEffect(() => {
-        //  responsiveness added by width change
-        if (width >= 992) {
-            setSize(4)
-        }
-        // else if (width >= 768) {
-        //     setSize(3)
-        // }
-        else if (width >= 576) {
-            setSize(2)
-        }
-        else {
-            setSize(1)
-        }
-    }, [width]);
-    const prevRef = useRef(null);
-    const nextRef = useRef(null);
-    return (
-        <div className="bg-white sction_padding mt-[120px] py-[110px]">
+  useEffect(() => {
+    //  responsiveness added by width change
+    if (width >= 992) {
+      setSize(4);
+    }
+    // else if (width >= 768) {
+    //     setSize(3)
+    // }
+    else if (width >= 576) {
+      setSize(2);
+    } else {
+      setSize(1);
+    }
+  }, [width]);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  return (
+    <div className="bg-white section_padding mt-[120px] py-[110px]">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
           <h1 className="text-[30px] lg:text-[40px] font-bold text-[#00124E] section_title">
-        Last Week Best Sellings
+            Last Week Best Sellings
           </h1>
           <div className="swiperSlide_button_group">
             <div className="swiper_button swiper_button_prev" ref={prevRef}>
@@ -115,16 +113,18 @@ const BestSelling = () => {
                       <img src={book.book_cover_photo_url} alt="" />
                     </a>
                     <div className="product_action">
-                    <Wishlistbutton _id={book._id} />
-                   <QuickViewButton _id={book._id} />
-                    <CartButton _id={book._id}  />
+                      <Wishlistbutton _id={book._id} />
+                      <QuickViewButton _id={book._id} />
+                      <CartButton _id={book._id} />
                     </div>
                   </div>
                   <div className="product__meta">
                     <Link to={`/selectedBook/${book?._id}`}>
-                      <h4 >{book.book_title}</h4>
+                      <h4>{book.book_title}</h4>
                     </Link>
-                      <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
+                    <p className="text-[16px] text-[#00124e] font-semibold">
+                      {book?.book_author?.author_name}
+                    </p>
                     <div className="stars">
                       <i className="fas fa-star"></i>
                       <i className="fas fa-star"></i>
@@ -136,7 +136,7 @@ const BestSelling = () => {
                     <div className="product_prise">
                       <p>${book.book_price}</p>
                     </div>
-                  <AddCartButton _id={book._id}/>
+                    <AddCartButton _id={book._id} />
                   </div>
                 </div>
               </SwiperSlide>
@@ -145,7 +145,7 @@ const BestSelling = () => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default BestSelling;

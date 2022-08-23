@@ -58,7 +58,7 @@ const FirstCategoryBooks = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white sction_padding">
+    <div className="bg-white section_padding">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
@@ -119,15 +119,17 @@ const FirstCategoryBooks = () => {
                     </a>
                     <div className="product_action">
                       <Wishlistbutton _id={book._id} />
-                    <QuickViewButton _id={book._id} />
+                      <QuickViewButton _id={book._id} />
                       <CartButton _id={book._id} />
                     </div>
                   </div>
                   <div className="product__meta">
                     <Link to={`/selectedBook/${book?._id}`}>
-                      <h4 >{book.book_title}</h4>
+                      <h4>{book.book_title}</h4>
                     </Link>
-                    <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
+                    <p className="text-[16px] text-[#00124e] font-semibold">
+                      {book?.book_author?.author_name}
+                    </p>
                     <div className="stars">
                       <i className="fas fa-star"></i>
                       <i className="fas fa-star"></i>
@@ -145,10 +147,8 @@ const FirstCategoryBooks = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-
         </div>
         <div className="text-end mt-4">
-
           <button
             onClick={() => catHandeler()}
             className="btn btn-primary text-white hover:text-white hover:bg-accent  "

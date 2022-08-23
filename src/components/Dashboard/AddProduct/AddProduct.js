@@ -185,7 +185,7 @@ const AddProduct = () => {
             book_price: data?.book_price,
             book_pages: data?.book_pages,
             book_qnt: data?.book_qnt,
-            discount: 0,
+            discount: data?.discount ? data?.discount : 0,
             book_category: bookCat,
             book_cover_photo_url: imgbbUrl,
             book_language: data?.translator,
@@ -337,10 +337,21 @@ const AddProduct = () => {
               </div >
               {/* row-5 */}
               < div className='mt-4' >
-                <label className="label-text text-lg">Short Details</label>
-                <input type="text" {...register("book_description", {
+                <label className="label-text text-lg">Discount %</label>
+                <input type="number" {...register("discount", {
                   required: 'required*',
-                })} placeholder="Type here" className="input input-bordered bg-white w-full mt-2" />
+                })}
+                  placeholder="Discount %"
+                  max={100}
+                  min={0}
+                  className="input input-bordered bg-white w-full mt-2" />
+                {errors?.discount && <p><small className='pl-1 text-red-600'>{errors?.discount?.message}</small></p>}
+              </div >
+              < div className='mt-4' >
+                <label className="label-text text-lg">Short Details</label>
+                <textarea type="text" {...register("book_description", {
+                  required: 'required*',
+                })} placeholder="Type here" className="textarea textarea-bordered  bg-white w-full mt-2" />
                 {errors?.book_description && <p><small className='pl-1 text-red-600'>{errors?.book_description?.message}</small></p>}
               </div >
             </div>

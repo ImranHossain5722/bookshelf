@@ -33,7 +33,7 @@ const RecentlyViewed = () => {
     fetch("https://book-shelf-webapp.herokuapp.com/all-books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
-  }, []); 
+  }, []);
   // for swiper slider
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -98,16 +98,18 @@ const RecentlyViewed = () => {
                       <img src={book.book_cover_photo_url} alt="" />
                     </a>
                     <div className="product_action">
-                    <Wishlistbutton _id={book._id} />
-                    <QuickViewButton _id={book._id} />
-                    <CartButton _id={book._id}  />
+                      <Wishlistbutton _id={book._id} />
+                      <QuickViewButton _id={book._id} />
+                      <CartButton _id={book._id} />
                     </div>
                   </div>
                   <div className="product__meta">
                     <Link to={`/selectedBook/${book?._id}`}>
-                      <h4 >{book.book_title}</h4>
+                      <h4>{book.book_title}</h4>
                     </Link>
-                      <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
+                    <p className="text-[16px] text-[#00124e] font-semibold">
+                      {book?.book_author?.author_name}
+                    </p>
                     <div className="stars">
                       <i className="fas fa-star"></i>
                       <i className="fas fa-star"></i>
@@ -119,7 +121,7 @@ const RecentlyViewed = () => {
                     <div className="product_prise">
                       <p>${book.book_price}</p>
                     </div>
-                  <AddCartButton _id={book._id}/>
+                    <AddCartButton _id={book._id} />
                   </div>
                 </div>
               </SwiperSlide>

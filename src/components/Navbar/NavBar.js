@@ -81,7 +81,7 @@ const NavBar = ({ children }) => {
           <NavTopbar />
 
           {/* <!-- Navbar --> */}
-          <div className="w-full navbar bg-gray-200 main_header ">
+          <div className="w-full navbar bg-gray-200 main_header sticky top-0 z-50">
             {/* mobile menu button */}
             <div className="flex-none lg:hidden">
               <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
@@ -118,6 +118,21 @@ const NavBar = ({ children }) => {
                 <li>
                   <NavLink to="/books" className="rounded-lg">
                     Books
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/bestSelling" className="rounded-lg">
+                   Best Selling Books
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/about" className="rounded-lg">
+                    About Us
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/contact" className="rounded-lg">
+                    Contact US
                   </NavLink>
                 </li>
               </ul>

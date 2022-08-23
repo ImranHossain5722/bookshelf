@@ -17,6 +17,9 @@ export const ActionTypes = {
     AUTHOR: "AUTHOR",
     // Al USERS 
     ALLUSER : "ALLUSER",
+    // COMMENT_ID
+    COMMENTID : "COMMENTID",
+
     QUICKVIEW : "QUICKVIEW",
     ORDERVIEW : "ORDERVIEW",
     ALLPUBLISHER : "ALLPUBLISHER",

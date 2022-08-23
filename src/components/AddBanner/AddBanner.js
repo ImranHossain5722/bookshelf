@@ -8,7 +8,7 @@ const AddBanner = () => {
 
   return (
     <div className="card lg:card-side bg-white mx-auto max-w-[1240px] mt-[60px] lg:mt-[120px] py-10 mb-[120px] ">
-      <div className="card-body">
+      <div className="card-body container mx-auto">
         <h2 className="card-title ml-28 text-4xl">
           <span className="text-black">Get</span>
           <span className="text-accent">Extra</span>

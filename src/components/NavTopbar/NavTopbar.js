@@ -20,7 +20,9 @@ const NavTopbar = () => {
             <p className="text-white text-base">Live Chat</p>
             </Link>
             <span className="seperator h-3 w-[1px] bg-[#fff]"></span>
-            <p className="text-white text-base">My Account</p>
+            <Link to="/readershome">
+            <p className="text-white text-base">Join Readers Club</p>
+            </Link>
           </div>
         </div>
       </div>

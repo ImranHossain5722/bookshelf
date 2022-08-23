@@ -12,7 +12,7 @@ const AllUsers = () => {
   const [loading, setLoading] = useState(false)
 
 
-  console.log("users", users)
+  // console.log("users", users)
   useEffect(() => {
 
     const fetchUsers = async () => {

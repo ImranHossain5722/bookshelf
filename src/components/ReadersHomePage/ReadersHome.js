@@ -2,6 +2,8 @@ import React from "react";
 // import CreateRoom from "../../Components/CreateRoom/CreateRoom";
 import LeftSideBar from "../LeftSideBar/LeftSideBar";
 import NewsFeed from "../NewsFeed/NewsFeed";
+import PostModal from "../Post/PostModal";
+import PostModalView from "../Post/PostModalView";
 import RightSideBar from "../RightSideBar/RightSideBar";
 
 const ReadersHome = () => {
@@ -11,7 +13,7 @@ const ReadersHome = () => {
         <div className=" bg-[#F0F2F5] overflow-y-scroll w-[20%]  hidden lg:block">
           <LeftSideBar />
         </div>
-        <div className="NewFeed  flex justify-center items-center  bg-[#F0F2F5] w-[55%]">
+        <div className="NewFeed  flex justify-center   bg-[#F0F2F5] w-[55%]">
           <NewsFeed />
         </div>
         <div
@@ -20,6 +22,10 @@ const ReadersHome = () => {
         </div>
       </div>
       <div className=""></div>
+      <PostModal modal={"post_modal"}>
+        <PostModalView/>
+      </PostModal>
+      
     </div>
   );
 };

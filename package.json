@@ -24,7 +24,7 @@
     "react-dom": "^18.2.0",
     "react-file-input": "^0.2.5",
     "react-firebase-hooks": "^5.0.3",
-    "react-hook-form": "^7.33.1",
+    "react-hook-form": "^7.34.2",
     "react-icons": "^4.4.0",
     "react-query": "^4.0.0",
     "react-query-devtools": "^2.6.3",

@@ -1,5 +1,5 @@
 /*css file of upScrollButton */
-.upScrollButton {
+/* .upScrollButton {
     width: 140px;
     height: 56px;
     overflow: hidden;
@@ -74,7 +74,7 @@
     transition-delay: 0.3s;
   }
   /* icon style and hover */
-  .upScrollButton svg {
+/* .upScrollButton svg {
     width: 20px;
     right: 0;
     top: 50%;
@@ -84,4 +84,4 @@
   
   .upScrollButton:hover svg {
     transform: translateY(-50%) rotate(-90deg);
-  }
+  }  */

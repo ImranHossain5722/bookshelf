@@ -180,7 +180,8 @@ const AddProduct = () => {
             book_category: bookCat,
             book_cover_photo_url: imgbbUrl,
             book_language: data?.translator,
-            book_country: data?.country
+            book_country: data?.country,
+            seller_id: getUser[0]._id
           }
           const postAuthorData = () => {
             console.log('before post:', productInfoData);

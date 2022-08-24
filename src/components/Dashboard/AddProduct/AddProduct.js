@@ -5,9 +5,12 @@ import { useForm } from "react-hook-form";
 import auth from '../../../firebase.init';
 import Select from 'react-select'
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddProduct = () => {
+  const navigate = useNavigate();
+
   const [user] = useAuthState(auth);
   const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
@@ -129,7 +132,7 @@ const AddProduct = () => {
   }
 
   const [bookCat, setBookCat] = useState([]);
-  console.log(bookCat);
+  // console.log(bookCat);
   const getChoosenCategory = (choice) => {
     setBookCat(Array.isArray(choice) ? choice.map(x => (
       { category_id: x.value }
@@ -184,17 +187,17 @@ const AddProduct = () => {
             seller_id: getUser[0]._id
           }
           const postAuthorData = () => {
-            console.log('before post:', productInfoData);
+            // console.log('before post:', productInfoData);
             axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => {
               toast.success('Book Added Successfully');
-              console.log('Post data:', data)
+              navigate(`/dashboard/myproducts`);
             })
           }
           postAuthorData();
         }
       })
 
-    reset();
+    // reset();
   };
 
   return (

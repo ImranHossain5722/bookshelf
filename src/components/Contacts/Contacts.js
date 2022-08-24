@@ -13,7 +13,7 @@ const Contacts = ({ user,handleContact }) => {
             src={
               user?.user_photo_url
                 ? user?.user_photo_url
-                : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg"
+                : `https://xsgames.co/randomusers/assets/avatars/male/${user?.user_name.length}.jpg`
             }
             alt="author"
           />

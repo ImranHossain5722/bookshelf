@@ -10,7 +10,7 @@ const ReadersHome = () => {
   return (
     <div>
       <div className="flex justify-between ">
-        <div className=" bg-[#F0F2F5] overflow-y-scroll w-[20%]  hidden lg:block">
+        <div className=" bg-[#F0F2F5] overflow-y-scroll w-[22%]  hidden lg:block">
           <LeftSideBar />
         </div>
         <div className="NewFeed  flex justify-center   bg-[#F0F2F5] w-[55%]">

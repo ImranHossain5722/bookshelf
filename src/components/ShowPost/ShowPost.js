@@ -94,7 +94,12 @@ const ShowPost = ({ singlePost }) => {
 
 
   console.log(id)
-   
+  //  import QuickViewButton from '../QuickViewButton/QuickViewButton';
+// import Wishlistbutton from '../wishlistButton/Wishlistbutton';
+// import { Link } from 'react-router-dom';
+// import AddCartButton from '../AddCartButton/AddCartButton';
+// import Button from '../Button/Button';
+
   }
   return (
     <div >

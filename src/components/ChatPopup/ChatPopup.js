@@ -1,21 +1,18 @@
 
 import imran from "../../Assets/images/left-side_profile_imran_hossain.jpg";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { FaCommentSlash } from "react-icons/fa";
 import ChatContainer from "../ChatContainer/ChatContainer";
-import { io } from "socket.io-client";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import ChatInput from "../ChatContainer/ChatInput";
 import ChatPopupInput from "./ChatPopupInput";
-
-const ChatPopup = ({currentChat}) => {
+import './ChatPopup.css'
+const ChatPopup = ({currentChat,setCurrentChat,socket}) => {
   const {user_name,user_photo_url,_id} = currentChat
-  const socket = useRef(); 
   const currentUser = useSelector((state) => state?.newUser?.user);
   const [messages, setMessages] = useState([]);
-  const scrollRef = useRef();
+  const scrollRef = useRef(); 
   const [arrivalMessage, setArrivalMessage] = useState(null);
 
  
@@ -66,12 +63,7 @@ const ChatPopup = ({currentChat}) => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  useEffect(() => {
-    if (currentUser) {
-      socket.current = io("https://book-shelf-webapp.herokuapp.com");
-      socket.current.emit("add-user", currentUser._id);
-    }
-  }, [currentUser]);
+
 
   return (
     <div>
@@ -82,8 +74,8 @@ const ChatPopup = ({currentChat}) => {
             <img className="rounded-full w-9 h-9" src={user_photo_url || `https://xsgames.co/randomusers/assets/avatars/male/${user_name.length}.jpg`} alt="" />
             <p>{user_name}</p>
           </div>
-          <div className="">
-            <AiOutlineCloseCircle />
+          <div className="text-[18px] mt-2 mr-2 cursor-pointer" onClick={() => setCurrentChat(undefined)}>
+            <FaCommentSlash />
           </div>
         </div>
       <div className="h-[300px] overflow-auto">
@@ -91,15 +83,19 @@ const ChatPopup = ({currentChat}) => {
           <div
             className={`${
               msgs.fromSelf
-                ? "text-start max-w-fit ml-auto"
-                : "text-end max-w-fit mr-auto"
+                ? "text-start max-w-fit ml-auto sender"
+                : "text-end max-w-fit mr-auto reciver"
             }  `}
             ref={scrollRef}
             key={uuidv4()}
           >
             <p
-              className="bg-[#0CCF6A] py-2 px-4  m-2 to text-white"
-              style={{ borderRadius: "30px 0px 30px 30px" }}
+              className={`${
+                msgs.fromSelf
+                  ? " sender"
+                  : " reciver"
+              } bg-[#0CCF6A] py-2 px-4  m-2 to text-white     `}
+       
             >
               {msgs.message}
             </p>

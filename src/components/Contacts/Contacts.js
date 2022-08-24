@@ -1,11 +1,11 @@
 import React from "react";
 import ChatPopup from "../ChatPopup/ChatPopup";
-const Contacts = ({ user }) => {
+const Contacts = ({ user,handleContact }) => {
 
   
   // console.log(user)
   return (
-    <div>
+    <div     onClick={() => handleContact(user)}>
       <div className="flex items-center hover:bg-[#E4E6E9] cursor-pointer">
         <div className=" flex items-center">
           <img

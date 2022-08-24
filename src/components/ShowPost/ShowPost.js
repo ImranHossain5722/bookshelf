@@ -80,21 +80,21 @@ const ShowPost = ({ singlePost }) => {
 
   const UnLovePost = (id) => {
     // "https://book-shelf-webapp.herokuapp.com/upvote-post"
-  //   const data = {
+    const data = {
       
-  //     user_id :currentUser._id,
-  //     post_id : id
+      user_id :currentUser._id,
+      post_id : id
   
-  // }
+  }
 
-  // if(data){
+  if(data){
 
-  //   axios.patch("https://book-shelf-webapp.herokuapp.com/upvote-post",data).then(data => console.log(data))
-  // }
+    axios.patch("https://book-shelf-webapp.herokuapp.com/downvote-post",data).then(data => console.log(data))
+  }
 
 
-  // console.log(id)
-    console.log(id)
+  console.log(id)
+   
   }
   return (
     <div >

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
 import {
   useCreateUserWithEmailAndPassword,
@@ -12,21 +13,13 @@ import Loading from "../../components/Loading/Loading";
 import auth from "../../firebase.init";
 
 const AddAuthor = () => {
-  const [sendEmailVerification, sending, vError] =
-    useSendEmailVerification(auth);
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  const [sendEmailVerification, sending, vError] = useSendEmailVerification(auth);
+  const [createUserWithEmailAndPassword, user1, loading, error] = useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, uError] = useUpdateProfile(auth);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const [phoneNo, setPhoneNo] = useState("");
 
-  const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
 
   if (loading || updating || sending) {
@@ -40,7 +33,6 @@ const AddAuthor = () => {
 
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
-      setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
@@ -57,51 +49,56 @@ const AddAuthor = () => {
     if (pass === confirmPass) {
       await createUserWithEmailAndPassword(data?.author_email, data?.password);
       await updateProfile({ displayName: data?.author_name });
+
       await sendEmailVerification();
       toast("Verification Email Sent");
       console.log("user created on firebase");
-      if (user) {
-        const imgbbKey = "5e72e46e329464d233a1bc1128fc1a76";
-        const image = data?.image[0];
-        const formData = new FormData();
-        formData.append("image", image);
 
-        fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
-          method: "POST",
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((result) => {
-            if (result.success) {
-              const imgbbUrl = result?.data?.url;
-              const authorInfo = {
-                user_name: user?.user?.displayName,
-                user_email: user?.user?.email,
-                user_phone: user?.user?.phoneNumber
-                  ? user?.user?.phoneNumber
-                  : phoneNo,
-                user_photo_url: imgbbUrl
-                  ? imgbbUrl
-                  : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
-                uid: user?.user?.uid,
-              };
-              const postAuthorData = async () => {
-                await axios
-                  .post(
-                    "https://book-shelf-webapp.herokuapp.com/register-author",
-                    authorInfo
-                  )
-                  .then((data) => {
-                    console.log("Server Data", data);
-                    navigate("/dashboard");
-                  });
-              };
-              postAuthorData();
-            }
-          });
-      } else {
-        console.log("user data not found");
-      }
+      await onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          console.log('user', user);
+          const imgbbKey = "5e72e46e329464d233a1bc1128fc1a76";
+          const image = data?.image[0];
+          const formData = new FormData();
+          formData.append("image", image);
+
+          fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              if (result.success) {
+                const imgbbUrl = result?.data?.url;
+                const authorInfo = {
+                  user_name: user?.user?.displayName ? user?.user?.displayName : data?.author_name,
+                  user_email: user?.user?.email ? user?.user?.email : data?.author_email,
+                  user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : phoneNo,
+                  user_photo_url: imgbbUrl ? imgbbUrl : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
+                  uid: user?.uid
+                };
+
+                const postAuthorData = async () => {
+                  await axios
+                    .post(
+                      "https://book-shelf-webapp.herokuapp.com/register-author",
+                      authorInfo
+                    )
+                    .then((data) => {
+                      console.log("Server Data", data);
+                      navigate("/dashboard");
+                    });
+                };
+                postAuthorData();
+              }
+            });
+        }
+        else {
+          console.log("user data not found");
+        }
+      });
+
+
     } else {
       toast("Password and Confirm Password Dose not match");
     }

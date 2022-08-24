@@ -18,16 +18,15 @@ const Myorder = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log("user", userId)
         if (userId) {
 
             axios.get(`https://book-shelf-webapp.herokuapp.com/get-order-data?id=${userId}`).then(data => setOrders(data.data))
         }
-    }, [user])
-    
+    }, [userId])
+
     const viewOrder = (selectedOrder) => {
         console.log(selectedOrder)
-        dispatch(orderView(selectedOrder)) 
+        dispatch(orderView(selectedOrder))
     }
 
     return (
@@ -35,7 +34,7 @@ const Myorder = () => {
             <p className="text-5xl text-center mb-3">My Orders</p>
             <div className="w-full p-5">
                 <div className="overflow-auto  h-[460px]">
-                <table className="table w-full ">
+                    <table className="table w-full ">
                         <thead>
                             <tr>
                                 <th className="rounded-none">code</th>
@@ -49,37 +48,37 @@ const Myorder = () => {
                             {orders?.map((orderDetails) => <tr >
                                 <td className="border-[#e1e2e6]">
                                     <div className="">
-                                <p>{orderDetails._id.slice(0,18)}</p>
+                                        <p>{orderDetails._id.slice(0, 18)}</p>
                                     </div>
                                 </td>
                                 <td>
                                     <div className=" ">
                                         <p className=" capitalize text-[#00124E] font-semibold">
-                                          {orderDetails.createdAt.slice(0,10)}
+                                            {orderDetails.createdAt.slice(0, 10)}
                                         </p>
                                     </div>
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
-                                   ${orderDetails.ordered_price_amount}
+                                    ${orderDetails.ordered_price_amount}
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                <button className=" btn btn-xs btn-warning text-white w-[155px] h-[24px] mb-3 rounded-full" >{orderDetails.order_status} </button>
+                                    <button className=" btn btn-xs btn-warning text-white w-[155px] h-[24px] mb-3 rounded-full" >{orderDetails.order_status} </button>
                                 </td>
                                 <td className=" border-[#e1e2e6] text-[#00124E] font-bold">
-                                <button className=" btn btn-xs btn-error text-white  mb-3 rounded mr-1" ><FiDelete className='font-bold text-[16px] '/></button>
-                                <label for="order-view" className=" duration-500 a  btn btn-xs btn-info text-white  mb-3 rounded"  onClick={() => viewOrder(orderDetails)} >
-  
-                               <AiFillEye className='font-bold text-[16px]'/>
-                             </label>
+                                    <button className=" btn btn-xs btn-error text-white  mb-3 rounded mr-1" ><FiDelete className='font-bold text-[16px] ' /></button>
+                                    <label for="order-view" className=" duration-500 a  btn btn-xs btn-info text-white  mb-3 rounded" onClick={() => viewOrder(orderDetails)} >
+
+                                        <AiFillEye className='font-bold text-[16px]' />
+                                    </label>
                                 </td>
 
-                            
+
                             </tr>)}
 
                         </tbody>
                     </table>
                 </div>
-               
+
             </div>
 
         </div>

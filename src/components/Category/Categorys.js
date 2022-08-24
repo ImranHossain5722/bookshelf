@@ -261,12 +261,12 @@ const Categorys = () => {
                     <div className="product_widget26 mb_30">
                       <div className="product_thumb_upper position-relative">
                         <span className="offer_badge">-0%</span>
-                        <a
-                          href="product_details.php"
+                        <Link
+                          to={`/selectedBook/${book?._id}`}
                           className="thumb text-center"
                         >
                           <img src={book.book_cover_photo_url} alt="" />
-                        </a>
+                        </Link>
                         <div className="product_action">
                           <Wishlistbutton _id={book._id} />
                           <QuickViewButton _id={book._id} />

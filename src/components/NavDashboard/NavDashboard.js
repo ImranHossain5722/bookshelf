@@ -25,44 +25,47 @@ const NavDashboard = ({ children }) => {
   // h-13vh
 
   const [getUser, setGetUser] = useState([]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-
     const userUid = { uid: user?.uid };
 
     const options = {
-      method: 'GET',
-      url: 'https://book-shelf-webapp.herokuapp.com/get-user',
-      params: userUid
+      method: "GET",
+      url: "https://book-shelf-webapp.herokuapp.com/get-user",
+      params: userUid,
     };
-    axios.request(options).then(function (response) {
-      setGetUser(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
-  }, [user])
+    axios
+      .request(options)
+      .then(function (response) {
+        setGetUser(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, [user]);
 
-  // upload image to imgbb and get image url 
-
+  // upload image to imgbb and get image url
 
   useEffect(() => {
-
-    dispatch(newUser(getUser[0]))
-
-  }, [getUser, user]) 
+    dispatch(newUser(getUser[0]));
+  }, [getUser, user]);
   return (
     <div>
       <div className="drawer drawer-end  " data-theme={dark ? "dark" : "light"}>
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
-
           {/* <!-- Navbar --> */}
           <div className="w-full  navbar bg-white p-20 border-b-2 border-primary ">
-            <div style={{ margin: "0px 0px 0px -45px" }} className=" hidden lg:flex  flex-1 px-2 ">
-              <NavLink to="/" className="text-white text-sm p-2 bg-primary rounded-md">
-
-                Back to home
+            <div
+              style={{ margin: "0px 0px 0px -45px" }}
+              className=" hidden lg:flex  flex-1 px-2 "
+            >
+              <NavLink
+                to="/"
+                className="text-white text-sm p-2 bg-primary rounded-md"
+              >
+                Home
               </NavLink>
             </div>
             {/* mobile button */}
@@ -86,19 +89,19 @@ const NavDashboard = ({ children }) => {
 
             {/* desktop */}
             <div className="flex-none mx-96 hidden lg:block">
-              <ul className="menu menu-vertical  ">
-                {/* <!-- Navbar menu content here --> */}
-                <li className="text-2xl text-primary uppercase text-center font-bold">
+              {/* <!-- Navbar menu content here --> */}
+              <div className="flex items-center justify-center">
+                <p className="text-2xl text-primary uppercase text-center font-bold">
                   Weclome to
-                </li>
-                <li>
-                  <img className="" height={45}
-                    width={150} alt="" src={logo} />
-                </li>
-                <li className="text-2xl text-secondary uppercase text-center font-bold">
+                </p>{" "}
+                <p className="text-2xl text-primary uppercase text-center font-bold">
+                  <span className="text-secondary">Book</span>
+                  <span className="">Shef</span>
+                </p>{" "}
+                <p className="text-2xl text-secondary uppercase text-center font-bold">
                   Dashboard
-                </li>
-              </ul>
+                </p>
+              </div>
             </div>
 
             {/* dark button */}
@@ -116,7 +119,6 @@ const NavDashboard = ({ children }) => {
                       width={30}
                       src={user?.photoURL ? user?.photoURL : userImg}
                     />
-
                   </span>
                 ) : (
                   <NavLink to="/login" className="rounded-lg">
@@ -166,19 +168,95 @@ const NavDashboard = ({ children }) => {
           <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
           <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
             {/* <!-- Sidebar content here --> */}
-            <li><Link to='/' className='text-lg text-[#00124E] font-bold'>Home</Link></li>
-            <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
-            <li><Link to='/addstuff' className='text-lg text-[#00124E] font-bold'>Add Stuff</Link></li>
-            <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
-            <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
+            <li>
+              <Link to="/" className="text-lg text-[#00124E] font-bold">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard"
+                className="text-lg text-[#00124E] font-bold"
+              >
+                My profile
+              </Link>
+            </li>
+            <li>
+              <Link to="/addstuff" className="text-lg text-[#00124E] font-bold">
+                Add Stuff
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/myorder"
+                className="text-lg text-[#00124E] font-bold"
+              >
+                My Order
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/addreview"
+                className="text-lg text-[#00124E] font-bold"
+              >
+                Add a review
+              </Link>
+            </li>
 
-            <li><Link to='/dashboard/allusers' className='text-lg text-[#00124E] font-bold'>All Users</Link></li>
-            <li><Link to='/dashboard/allorders' className='text-lg text-[#00124E] font-bold'>All Orders</Link></li>
-            <li><Link to='/dashboard/allauthor' className='text-lg text-[#00124E] font-bold'>All Authors</Link></li>
-            <li><Link to='/dashboard/allpublisher' className='text-lg text-[#00124E] font-bold'>All Publishers</Link></li>
-            <li><Link to='/dashboard/orderhistory' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
-            <li><Link to='/dashboard/addproduct' className='text-lg text-[#00124E] font-bold'>All Product</Link></li>
-            <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
+            <li>
+              <Link
+                to="/dashboard/allusers"
+                className="text-lg text-[#00124E] font-bold"
+              >
+                All Users
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/allorders"
+                className="text-lg text-[#00124E] font-bold"
+              >
+                All Orders
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/allauthor"
+                className="text-lg text-[#00124E] font-bold"
+              >
+                All Authors
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/allpublisher"
+                className="text-lg text-[#00124E] font-bold"
+              >
+                All Publishers
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/orderhistory"
+                className="text-lg text-[#00124E] font-bold"
+              >
+                Order History
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/addproduct"
+                className="text-lg text-[#00124E] font-bold"
+              >
+                All Product
+              </Link>
+            </li>
+            <li
+              className="text-lg text-[#00124E] font-bold pl-5"
+              onClick={() => signOut(auth)}
+            >
+              Logout
+            </li>
           </ul>
         </div>
       </div>
@@ -187,4 +265,4 @@ const NavDashboard = ({ children }) => {
 };
 
 export default NavDashboard;
-// 
+//

@@ -14,7 +14,6 @@ const Footer = () => {
 
   return (
     <>
-
       <footer className="home_six_footer">
         <div></div>
         <ScrollToTop smooth >jjj</ScrollToTop>
@@ -124,6 +123,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        
       </footer>
 
     </>

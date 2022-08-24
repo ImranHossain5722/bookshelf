@@ -27,23 +27,45 @@ const Myprofile = () => {
 
   }, [getUser, dispatch])
 
+
+
   const currentUserId = getUser[0]?._id;
+  const [wishlist, setWishlist] = useState([])
+  useEffect(() => {
+    fetch(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${currentUserId}`)
+      .then(res => res.json())
+      .then(data => setWishlist(data))
+  }, [currentUserId])
 
-  const { data: wishlist } = useQuery(['wishlist'], () =>
-    fetch(`https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${currentUserId}`).then(res =>
-      res.json()
-    )
-  )
-  // console.log('wL', wishlist);
 
-  const { data: brought } = useQuery(['brought'], () =>
-    fetch(`https://book-shelf-webapp.herokuapp.com/get-brought-data?id=${currentUserId}`).then(res =>
-      res.json()
-    )
-  )
+  // wishlist count 
+  let wishCount = 0;
+  wishlist?.map(wish => wish.user_wishlist?.map(w => wishCount++))
 
-  // console.log('brought', brought)
-  // console.log(getUser[0]);
+
+  const [brought, setBrought] = useState([])
+  useEffect(() => {
+    fetch(`https://book-shelf-webapp.herokuapp.com/get-order-data?id=${currentUserId}`)
+      .then(res => res.json())
+      .then(data => setBrought(data))
+  }, [currentUserId])
+
+  // sum of brought quantity
+  let broughtSumQty = 0;
+  brought?.map(buy => buy.ordered_items?.map(b => broughtSumQty = broughtSumQty + b.qnt))
+
+
+  // Get Sales data 
+  const [sales, setSales] = useState([])
+  useEffect(() => {
+
+    fetch(`https://book-shelf-webapp.herokuapp.com/get-sells-data?id=${currentUserId}`)
+      // fetch(`https://book-shelf-webapp.herokuapp.com/get-sells-data?id=62e969f82b99d5b6e7d806c2`)
+      .then(res => res.json())
+      .then(data => setSales(data))
+  }, [currentUserId])
+
+
   const onSubmit = data => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const image = data?.image[0];
@@ -100,8 +122,6 @@ const Myprofile = () => {
       })
   }
 
-
-
   return (
     <div>
       {/* View As  */}
@@ -113,6 +133,7 @@ const Myprofile = () => {
         <button className={userRole === "user" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-red ml-2 mt-2 text-white'} onClick={() => updateRole('user')} disabled={userRole === "user" ? true : false}>User</button>
         <button className={userRole === "delivery" ? 'btn btn-primary ml-2 mt-2 text-white' : 'btn btn-grey ml-2 mt-2 text-white'} onClick={() => updateRole('delivery')} disabled={userRole === "delivery" ? true : false}>Delivery</button>
       </div>
+
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'>My Profile</h2>
       <div className=" flex items-center justify-center pb-10">
         <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
@@ -149,14 +170,14 @@ const Myprofile = () => {
           {userRole === 'user' && <div className='flex mt-[22px]'>
             <div className='flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
               <div className='w-[70%]  text-[#00124E]'>
-                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{brought ? brought : '0'}</h2>
+                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{broughtSumQty ? broughtSumQty : '0'}</h2>
                 <p className='text-[18px] font-[600]'>Brought</p>
               </div>
               <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><BsFillBagCheckFill /></div>
             </div>
             <div className=' ml-[24px] flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
               <div className='w-[70%] text-[#00124E]'>
-                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{wishlist ? wishlist : '0'}</h2>
+                <h2 className='text-[30px] md:text-[40px]  font-[600]'>{wishCount ? wishCount : '0'}</h2>
                 <p className='text-[18px] font-[600]'>Wish List</p>
               </div>
               <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><BsFillHeartFill /></div>
@@ -170,14 +191,14 @@ const Myprofile = () => {
               <div className='flex mt-[22px]'>
                 <div className='flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
                   <div className='w-[70%]  text-[#00124E]'>
-                    <h2 className='text-[30px] md:text-[40px] font-[600]'>{10}</h2>
+                    <h2 className='text-[30px] md:text-[40px] font-[600]'>{sales.length > 0 ? sales[0]?.books_list.length : '0'}</h2>
                     <p className='text-[16px] font-[600]'>Total Books</p>
                   </div>
                   <div className=' flex align-items-center justify-center text-primary text-[70px] w-[30%]'><BsFillJournalBookmarkFill /></div>
                 </div>
                 <div className=' ml-[24px] flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
                   <div className='w-[70%]  text-[#00124E]'>
-                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{50}</h2>
+                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{sales.length > 0 ? sales[0]?.total_sells_qnt : '0'}</h2>
                     <p className='text-[18px] font-[600]'>Total Sell</p>
                   </div>
                   <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaCommentDollar /></div>
@@ -188,14 +209,14 @@ const Myprofile = () => {
               <div className='flex mt-[22px]'>
                 <div className='flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
                   <div className='w-[70%]  text-[#00124E]'>
-                    <h2 className='text-[30px] md:text-[40px] font-[600]'>{100}</h2>
+                    <h2 className='text-[30px] md:text-[40px] font-[600]'>{0}</h2>
                     <p className='text-[18px] font-[600]'>This Month Earning</p>
                   </div>
                   <div className=' flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaDollarSign /></div>
                 </div>
                 <div className=' ml-[24px] flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
                   <div className='w-[70%]  text-[#00124E]'>
-                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{500}</h2>
+                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{sales.length > 0 ? sales[0]?.total_sells_amount : '0'}</h2>
                     <p className='text-[18px] font-[600]'>Total Earning</p>
                   </div>
                   <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaDollarSign /></div>
@@ -206,14 +227,14 @@ const Myprofile = () => {
               <div className='flex mt-[22px]'>
                 <div className='flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] drop-shadow-md shadow-xl'>
                   <div className='w-[70%]  text-[#00124E]'>
-                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{100}</h2>
+                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{sales.length > 0 ? sales[0]?.balance_amount : '0'}</h2>
                     <p className='text-[18px] font-[600]'>Balance</p>
                   </div>
                   <div className=' flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaDollarSign /></div>
                 </div>
                 <div className=' ml-[24px] flex w-[50%] border-[#27AE61] border-[1px] p-[29px] rounded-[15px] shadow-xl'>
                   <div className='w-[70%]  text-[#00124E]'>
-                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{500}</h2>
+                    <h2 className='text-[30px] md:text-[40px]  font-[600]'>{sales.length > 0 ? sales[0]?.total_withdrawal_amount : '0'}</h2>
                     <p className='text-[18px] font-[600]'>Withdrawn</p>
                   </div>
                   <div className='flex align-items-center justify-center text-primary text-[70px] w-[30%]'><FaDollarSign /></div>
@@ -225,7 +246,7 @@ const Myprofile = () => {
           {/* Information Update Form  */}
 
           <div>
-            <h2 className='font-semibold uppercase text-secondary mt-2 text-[16px]'>Update Form</h2>
+            <h2 className='font-semibold uppercase text-secondary mt-4 text-[16px]'>Update Information</h2>
             <div className="">
 
               <progress className="progress progress-primary bg-white h-2 w-5  "></progress>

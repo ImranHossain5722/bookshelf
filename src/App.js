@@ -64,6 +64,7 @@ import PickedOrder from "./components/Dashboard/OrderDelivery/PickedOrder";
 import TrackOrder from "./pages/TrackOrder/TrackOrder";
 import ScrollToTop from "react-scroll-to-top";
 import ChatPopup from "./components/ChatPopup/ChatPopup";
+import UpScrollButton from "./components/UpScrollButton/UpScrollButton";
 import UpdateProduct from "./components/Dashboard/AllProducts/UpdateProduct";
 
 
@@ -260,10 +261,12 @@ function App() {
               {" "}
             </Route>
           </Routes>
+          
           <Footer />
+        
         </NavBar>
       )}
-
+      
       <ToastContainer />
     </div>
   );

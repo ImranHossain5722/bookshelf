@@ -17,10 +17,12 @@ import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCate
 import Release from "../Release/Release";
 
 
+
+
 const Home = () => { 
 
   return (
-    <div>
+    <div >
       <Banner />
 
       {/* select catgory */}
@@ -45,6 +47,7 @@ const Home = () => {
       <Modal modal={"quick-view"}>
         <QuickView />
       </Modal>
+   
     </div>
   );
 };

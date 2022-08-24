@@ -133,12 +133,11 @@ const ShowPost = ({ singlePost }) => {
           { post?.post_comments?.map(comment => <div className="flex items-center">
           <div class="avatar">
 <div class="w-14 m-4  rounded-full">
- <img src={post?.user_photo_url} />
+<img src={comment?.user_id.user_photo_url ? comment?.user_id.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${i+1}.jpg`||`https://api.multiavatar.com/${comment?.user_id.user_name}.png`} />
 </div>
 </div>
 <div>
 <p className="text-[13px] font-semibold">   {comment?.user_id.user_name} </p>
-
   <p>{comment?.comment}</p>
 </div>
           </div>)}

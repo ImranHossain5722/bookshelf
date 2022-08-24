@@ -117,11 +117,9 @@ const AddProduct = () => {
     }
   }, [getUser]);
 
-  const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
   const onChangePicture = e => {
     if (e.target.files[0]) {
-      setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
@@ -130,14 +128,6 @@ const AddProduct = () => {
     }
   }
 
-  // const cat = ['ffksfd','ksdjfsdf'];
-  // const cat2 = [
-  //   { cat_id:'ffksfd'},
-  //   { cat_id:'ffksfd'},
-  //   { cat_id:'ffksfd'}  ]
-
-
-  // const [imgbbUrl, setImgbbUrl] = useState('');
   const [bookCat, setBookCat] = useState([]);
   console.log(bookCat);
   const getChoosenCategory = (choice) => {
@@ -168,6 +158,7 @@ const AddProduct = () => {
     const formData = new FormData();
     formData.append('image', image);
 
+
     fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
       method: 'POST',
       body: formData
@@ -189,7 +180,8 @@ const AddProduct = () => {
             book_category: bookCat,
             book_cover_photo_url: imgbbUrl,
             book_language: data?.translator,
-            book_country: data?.country
+            book_country: data?.country,
+            seller_id: getUser[0]._id
           }
           const postAuthorData = () => {
             console.log('before post:', productInfoData);

@@ -27,12 +27,15 @@ const BestOffersBooks = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {books?.splice(0, 8).map((book) => (
-          <div className="product_widget26 mb_30">
+          <div className="product_widget26 bg-white mb_30">
             <div className="product_thumb_upper position-relative">
               <span className="offer_badge">-0%</span>
-              <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+              <Link
+                to={`/selectedBook/${book?._id}`}
+                className="thumb text-center"
+              >
                 <img src={book.book_cover_photo_url} alt="" />
               </Link>
               <div className="product_action">

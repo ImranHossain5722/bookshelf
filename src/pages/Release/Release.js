@@ -92,13 +92,15 @@ const Release = () => {
                 <p className="text-accent font-semibold pt-4">Seconds</p>
               </div>
             </div>
-            <NavLink className='bg-primary p-3 text-white rounded-lg font-semibold' to='/productReleaseLandingpage' >See Details </NavLink>
+            <NavLink
+              className="bg-primary p-3 text-white rounded-lg font-semibold"
+              to="/productReleaseLandingpage"
+            >
+              See Details{" "}
+            </NavLink>
           </div>
-         
         </div>
-        
       </div>
-      
     </div>
   );
 };

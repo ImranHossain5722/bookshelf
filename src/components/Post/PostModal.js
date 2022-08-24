@@ -1,4 +1,5 @@
 import React from 'react'
+import { BsBoxArrowLeft } from 'react-icons/bs'
 
 const PostModal = ({ modal, children }) => {
   return (
@@ -8,11 +9,11 @@ const PostModal = ({ modal, children }) => {
         <div className="modal-box relative h-[400px]  py-4">
           <label
             htmlFor={modal}
-            className="btn btn-sm btn-circle absolute right-2 top-2 btn-primary text-white hover:bg-white hover:text-primary hover:border-2"
+            className="btn btn-sm btn-circle absolute left-2  top-2 btn-primary text-white "
             
-        //  Customize icon
+      
           >
-            ✕
+            <BsBoxArrowLeft className="text-[18px] relative right-[2px] font-bold"/>
           </label>
           {children}
         </div>

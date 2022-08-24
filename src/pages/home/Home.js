@@ -1,4 +1,4 @@
-import React ,{ useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import AddBanner from "../../components/AddBanner/AddBanner";
 import Banner from "../../components/Banner/Banner";
 import ContactClubBanner from "../../components/ContactClubBanner/ClubBanner";
@@ -16,16 +16,11 @@ import Review from "../../components/Review/Review";
 import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCategoryBooks";
 import Release from "../Release/Release";
 
-
-
-
-const Home = () => { 
-
+const Home = () => {
   return (
-    <div >
+    <div>
       <Banner />
-  
-     
+
       {/* select catgory */}
       <Categorys />
       <FirstCategoryBooks />
@@ -48,7 +43,6 @@ const Home = () => {
       <Modal modal={"quick-view"}>
         <QuickView />
       </Modal>
-   
     </div>
   );
 };

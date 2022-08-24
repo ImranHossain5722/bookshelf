@@ -32,33 +32,12 @@ const FirstCategoryBooks = () => {
     navigate("/categoryView");
   };
 
-  // useEffect(() => {
-  //     fetch('data.json')
-  //         .then(res => res.json())
-  //         .then(data => setBooks(data));
-  // }, []);
-
-  useEffect(() => {
-    //  responsiveness added by width change
-    if (width >= 992) {
-      setSize(4);
-    }
-    // else if (width >= 768) {
-    //     setSize(3)
-    // }
-    else if (width >= 576) {
-      setSize(2);
-    } else {
-      setSize(1);
-    }
-  }, [width]);
-
   // The Novel
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white section_padding">
+    <div className="bg-white section_spacing">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
@@ -114,7 +93,10 @@ const FirstCategoryBooks = () => {
                 <div className="product_widget26 mb_30">
                   <div className="product_thumb_upper position-relative">
                     <span className="offer_badge">-0%</span>
-                    <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                    <Link
+                      to={`/selectedBook/${book?._id}`}
+                      className="thumb text-center"
+                    >
                       <img src={book.book_cover_photo_url} alt="" />
                     </Link>
                     <div className="product_action">
@@ -149,7 +131,6 @@ const FirstCategoryBooks = () => {
           </Swiper>
         </div>
         <div className="text-center mt-8">
-
           <button
             onClick={() => catHandeler()}
             className="btn btn-primary text-white hover:text-white hover:bg-accent  "

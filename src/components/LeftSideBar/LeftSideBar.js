@@ -26,8 +26,8 @@ const LeftSideBar = () => {
     if(authors.length === 0 ){ 
       fetchPosts();
     }
-  }, [])
-
+  }, [authors])
+ 
   if(loading){
     return <Loading/>
   }
@@ -36,18 +36,18 @@ const LeftSideBar = () => {
   const  reqHndeler =()=>{
     toast.success("Your request sent successfully.We are notified you")
   }
-
+console.log("authors",authors)
 
   return (
     <div className="mt-6">
       <h2 className="px-4 text-lg font-semibold">Meet Your Favorite Authors</h2>
       {/* profile */}
-      {authors?.map(author=>
+      {authors && authors?.map(author=>
         <div class="flex items-center   dark:bg-gray-700 hover:bg-slate-200 cursor-pointer dark:border-gray-600 dark:text-white px-4 mt-2">
 
         <img
           className=" w-9 h-9  text-[#056BE1] rounded-full"
-          src={author?.photo_url?author?.photo_url:'https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg'}
+          src={author?.photo_url?author?.photo_url:`https://xsgames.co/randomusers/assets/avatars/male/${author?.author_name.length}.jpg`}
         alt='author' />
         <div className="flex items-center " onClick={reqHndeler} >
 

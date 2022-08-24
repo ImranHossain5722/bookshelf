@@ -251,7 +251,7 @@ $white: #fff;
     background-position: center center !important;
     border-radius: 10px;
     @media #{$tab} {
-      padding: 100px 30px 100px 30px;
+      padding: 60px 30px 60px 30px;
       background-position: left center !important;
     }
     .banner__text {
@@ -375,6 +375,7 @@ $white: #fff;
     font-size: 16px;
     transition: 0.3s;
     cursor: pointer;
+    background: #fff;
     &:hover {
       background: #28af62;
       border-color: #28af62;
@@ -398,7 +399,7 @@ $white: #fff;
 }
 
 .section_padding {
-  padding: 120px 30px;
+  padding: 107px 30px 120px 30px;
   @media #{$tab} {
     padding: 60px 15px;
   }
@@ -414,6 +415,38 @@ $white: #fff;
   padding: 0 30px 120px 30px;
   @media #{$tab} {
     padding: 0 15px 60px 15px;
+  }
+}
+.section_padding_top {
+  padding: 107px 0px 0px 0px;
+  @media #{$tab} {
+    padding: 60px 0 0 0;
+  }
+}
+
+// new added section spacing
+.section_spacing {
+  padding: 107px 30px 120px 30px;
+  @media #{$tab} {
+    padding: 60px 15px;
+  }
+}
+.section_spacing_2 {
+  padding: 80px 30px 120px 30px;
+  @media #{$tab} {
+    padding: 60px 15px;
+  }
+}
+.section_spacing_top {
+  padding: 107px 0px 0px 0px;
+  @media #{$tab} {
+    padding: 60px 0 0 0;
+  }
+}
+.section_spacing_bottom {
+  padding: 0px 0px 120px 0px;
+  @media #{$tab} {
+    padding: 0px 0 60px 0;
   }
 }
 
@@ -624,4 +657,47 @@ $white: #fff;
 }
 .flex_1 {
   flex: 1 1 0 !important;
+}
+
+// menu
+.main_header {
+  background: #fff;
+  border-bottom: 1px solid #ebebeb;
+  .main_middle_menu {
+    li {
+      a {
+        color: #090b17;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0px;
+        padding: 22.5px 19px;
+        display: inline-block;
+        text-transform: uppercase;
+        &::before {
+          background: #28af62;
+          bottom: 0;
+          content: "";
+          height: 2px;
+          left: auto;
+          position: absolute;
+          right: 0;
+          transition: 0.3s;
+          width: 0;
+        }
+        &.active {
+          background: rgba(#28af62, 0.1);
+        }
+        &.active,
+        &:hover {
+          background: transparent;
+          color: #28af62;
+          &::before {
+            left: 0;
+            right: auto;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 }

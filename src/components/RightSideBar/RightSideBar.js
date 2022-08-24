@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { AiFillHome } from "react-icons/ai";
-import { BsGiftFill } from "react-icons/bs";
-import group2 from "../../Assets/images/group2.jpg";
+import React, { useEffect, useRef, useState } from "react";
 import wp from "../../Assets/images/wp.png";
-import jira from "../../Assets/images/jira.jfif";
-import giftbox from "../../Assets/images/giftbox.png";
 import "./RightSideBar.css";
-import { RiVideoAddFill } from "react-icons/ri";
-import {GrSearch} from "react-icons/gr";
-import {BsThreeDots} from "react-icons/bs";
 import Contacts from "../Contacts/Contacts";
 import { useDispatch, useSelector } from 'react-redux'
 import { allUsers, sellBooks } from '../Redux/actions/bookActions'
 import axios from 'axios'
 import Loading from '../Loading/Loading'
 import ChatPopup from "../ChatPopup/ChatPopup";
+import { io } from "socket.io-client";
 
 const RightSideBar = () => {
+  const currentUser = useSelector((state) => state?.newUser?.user);
 
   const users = useSelector((state) => state.allUser.allUsers)
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false)
-
+  const [currentChat, setCurrentChat] = useState(undefined);
+  const socket = useRef(); 
+  
 
   // console.log("users", users)
   useEffect(() => {
@@ -38,7 +34,16 @@ const RightSideBar = () => {
       fetchUsers();
     }
   }, [])
-
+  useEffect(() => {
+    if (currentUser) {
+      socket.current = io("https://book-shelf-webapp.herokuapp.com");
+      socket.current.emit("add-user", currentUser._id);
+    }
+  }, [currentUser]);
+  const handleContact = (chat) => {
+    setCurrentChat(chat);
+    console.log(chat);
+  };
   if (loading) {
     return <Loading />
   }
@@ -69,9 +74,12 @@ const RightSideBar = () => {
       </div>
       {
         users.map((user) =>(
-          <Contacts key={user.id} user={user} />
+          <Contacts key={user.id} user={user} handleContact={handleContact} />
         ))}
-       
+        <div className="fixed bottom-0 right-[50px]">
+
+      {currentChat && <ChatPopup  currentChat={currentChat} setCurrentChat={setCurrentChat} socket={socket}/>}
+        </div>
     </div>
   );
 };

@@ -24,8 +24,7 @@ const Home = () => {
   return (
     <div >
       <Banner />
-  
-     
+
       {/* select catgory */}
       <Categorys />
       <FirstCategoryBooks />

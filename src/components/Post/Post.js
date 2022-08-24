@@ -11,9 +11,12 @@ import './Post.css'
 import {  useSelector } from "react-redux";
 import axios from "axios";
 import {toast} from 'react-toastify'
-const Post = () => {
 
+const Post = () => {
+  const [open, setOpen] = useState(0);
+ 
   const [showBtn, setShowBtn] = useState(false);
+ 
 
   // showModal
   const [user] = useAuthState(auth)
@@ -28,8 +31,7 @@ const Post = () => {
         }
         // sending post
         if(postData){
-          console.log(postData);
-          console.log(postData.user_id)
+         
           axios.post("https://book-shelf-webapp.herokuapp.com/add-post",postData).then(data => toast.success("Successfully uploaded your post"))
         }
         text.current.value = ""
@@ -55,7 +57,7 @@ const Post = () => {
        
           <div class="avatar">
   <div class="w-14 m-4  rounded-full">
-    <img src={user?.photoURL} />
+    <img src={user?.photoURL || `https://xsgames.co/randomusers/assets/avatars/male/${user?.displayName.length}.jpg`} /> 
   </div>
 </div>
           {/* input field  */}

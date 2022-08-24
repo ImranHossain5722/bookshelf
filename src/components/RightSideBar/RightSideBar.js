@@ -21,7 +21,8 @@ const RightSideBar = () => {
   const users = useSelector((state) => state.allUser.allUsers)
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false)
-
+  const [currentChat, setCurrentChat] = useState(undefined);
+  
 
   // console.log("users", users)
   useEffect(() => {
@@ -38,7 +39,10 @@ const RightSideBar = () => {
       fetchUsers();
     }
   }, [])
-
+  const handleContact = (chat) => {
+    setCurrentChat(chat);
+    console.log(chat);
+  };
   if (loading) {
     return <Loading />
   }
@@ -69,9 +73,12 @@ const RightSideBar = () => {
       </div>
       {
         users.map((user) =>(
-          <Contacts key={user.id} user={user} />
+          <Contacts key={user.id} user={user} handleContact={handleContact} />
         ))}
-       
+        <div className="fixed bottom-0 right-[50px]">
+
+      {currentChat && <ChatPopup  currentChat={currentChat} />}
+        </div>
     </div>
   );
 };

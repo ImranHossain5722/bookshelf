@@ -8,7 +8,7 @@ import {toast} from 'react-toastify'
 
 const CommentView = ({setshowModal}) => {
     const [user] = useAuthState(auth)
-    const userPhoto = user?.photoURL
+    const userPhoto = user?.photoURL || `https://xsgames.co/randomusers/assets/avatars/male/${user?.displayName.length}.jpg`
     const currentUser = useSelector((state) => state?.newUser?.user) 
     const commentId = useSelector((state) => state?.commentId?.commentId)
     const comment = useRef()

@@ -36,24 +36,10 @@ const BestSelling = () => {
       .then((data) => dispatch(sellBooks(data)));
   }, []);
 
-  useEffect(() => {
-    //  responsiveness added by width change
-    if (width >= 992) {
-      setSize(4);
-    }
-    // else if (width >= 768) {
-    //     setSize(3)
-    // }
-    else if (width >= 576) {
-      setSize(2);
-    } else {
-      setSize(1);
-    }
-  }, [width]);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white section_padding mt-[120px] py-[110px]">
+    <div className="bg-white section_spacing">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
@@ -109,7 +95,10 @@ const BestSelling = () => {
                 <div className="product_widget26 mb_30">
                   <div className="product_thumb_upper position-relative">
                     <span className="offer_badge">-0%</span>
-                    <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                    <Link
+                      to={`/selectedBook/${book?._id}`}
+                      className="thumb text-center"
+                    >
                       <img src={book.book_cover_photo_url} alt="" />
                     </Link>
                     <div className="product_action">

@@ -38,7 +38,7 @@ const RecentlyViewed = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white py-[120px]">
+    <div className="bg-white  section_spacing">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
@@ -94,7 +94,10 @@ const RecentlyViewed = () => {
                 <div className="product_widget26 mb_30">
                   <div className="product_thumb_upper position-relative">
                     <span className="offer_badge">-0%</span>
-                    <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                    <Link
+                      to={`/selectedBook/${book?._id}`}
+                      className="thumb text-center"
+                    >
                       <img src={book.book_cover_photo_url} alt="" />
                     </Link>
                     <div className="product_action">

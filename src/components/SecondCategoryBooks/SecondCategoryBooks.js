@@ -25,29 +25,6 @@ import QuickViewButton from "../QuickViewButton/QuickViewButton";
 const SecondCategoryBooks = () => {
   const books = useSelector((state) => state?.sellBooks?.books);
 
-  const [size, setSize] = useState(1);
-  const { width } = useWindowDimensions();
-
-  // useEffect(() => {
-  //     fetch('data.json')
-  //         .then(res => res.json())
-  //         .then(data => setBooks(data));
-  // }, []);
-
-  useEffect(() => {
-    //  responsiveness added by width change
-    if (width >= 992) {
-      setSize(4);
-    }
-    // else if (width >= 768) {
-    //     setSize(3)
-    // }
-    else if (width >= 576) {
-      setSize(2);
-    } else {
-      setSize(1);
-    }
-  }, [width]);
   // The Story
   const navigate = useNavigate();
   const catHandeler = (e) => {
@@ -57,7 +34,7 @@ const SecondCategoryBooks = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white section_padding_2 ">
+    <div className="bg-white section_spacing_bottom ">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
@@ -113,7 +90,10 @@ const SecondCategoryBooks = () => {
                 <div className="product_widget26 mb_30">
                   <div className="product_thumb_upper position-relative">
                     <span className="offer_badge">-0%</span>
-                    <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                    <Link
+                      to={`/selectedBook/${book?._id}`}
+                      className="thumb text-center"
+                    >
                       <img src={book.book_cover_photo_url} alt="" />
                     </Link>
                     <div className="product_action">

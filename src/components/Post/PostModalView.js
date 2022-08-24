@@ -10,13 +10,13 @@ const PostModalView = () => {
   const image = useRef()
   const text = useRef()
   const currentUser = useSelector((state) => state?.newUser?.user) 
-
+  // console.log("user",currentUser)
   const sentPost = () => {
     const imgbbKey = '5e72e46e329464d233a1bc1128fc1a76';
     const img = image?.current?.files[0];
     const formData = new FormData();
     formData.append('image', img);
-   
+    console.log(text.current.value)
     if (img) {
       fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
         method: 'POST',
@@ -27,19 +27,21 @@ const PostModalView = () => {
           if(result.data.url){
             const postData = {
               user_id : currentUser?._id, 
-              post_content : text.current?.value,
+              post_content : text.current.value,
               post_image :  result.data.url
             }
             // sending post
             if(postData){
               console.log(postData);
               console.log(postData.user_id)
-              axios.post("https://book-shelf-webapp.herokuapp.com/add-post",postData).then(data => toast.success("Successfully uploaded your post"))
+              axios.post("https://book-shelf-webapp.herokuapp.com/add-post",postData).then(data => {
+                toast.success("Successfully uploaded your post")
+                text.current.value = ""
+                image.current.value = ""
+            })
             }
           }})
     }
-    text.current.value = ""
-    image.current.value = ""
  
 }
 

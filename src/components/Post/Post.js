@@ -11,9 +11,12 @@ import './Post.css'
 import {  useSelector } from "react-redux";
 import axios from "axios";
 import {toast} from 'react-toastify'
-const Post = () => {
 
+const Post = () => {
+  const [open, setOpen] = useState(0);
+ 
   const [showBtn, setShowBtn] = useState(false);
+ 
 
   // showModal
   const [user] = useAuthState(auth)
@@ -55,7 +58,7 @@ const Post = () => {
        
           <div class="avatar">
   <div class="w-14 m-4  rounded-full">
-    <img src={user?.photoURL} />
+    <img src={user?.photoURL || `https://api.multiavatar.com/${user?.displayName}.png`} /> 
   </div>
 </div>
           {/* input field  */}

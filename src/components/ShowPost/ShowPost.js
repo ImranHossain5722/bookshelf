@@ -11,7 +11,7 @@ import { FcDislike,FcLike } from "react-icons/fc";
 import './ShowPost.css'
 import CommentModal from "./CommentModal";
 import CommentView from "./CommentView";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { commentId } from "../Redux/actions/bookActions";
 import {
@@ -19,6 +19,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+import axios from "axios";
  
 
 const ShowPost = ({ singlePost }) => {
@@ -43,6 +44,7 @@ const ShowPost = ({ singlePost }) => {
   //   setPost_likes(islike ? post_likes - 1 : post_likes + 1);
   //   seIstLike(!islike);
   // };
+  const currentUser = useSelector((state) => state?.newUser?.user) 
 
   const [userComments, setUseComments] = useState([]);
   useEffect(() => {
@@ -59,10 +61,39 @@ const ShowPost = ({ singlePost }) => {
     setOpen(open === value ? 0 : value);
   };
   const lovePost =(id) => {
+    // "https://book-shelf-webapp.herokuapp.com/get-posts"
+    const data = {
+      
+        user_id :currentUser._id,
+        post_id : id
+    
+    }
+
+    if(data){
+
+      axios.patch("https://book-shelf-webapp.herokuapp.com/upvote-post",data).then(data => console.log(data))
+    }
+
+
     console.log(id)
   }
 
   const UnLovePost = (id) => {
+    // "https://book-shelf-webapp.herokuapp.com/upvote-post"
+  //   const data = {
+      
+  //     user_id :currentUser._id,
+  //     post_id : id
+  
+  // }
+
+  // if(data){
+
+  //   axios.patch("https://book-shelf-webapp.herokuapp.com/upvote-post",data).then(data => console.log(data))
+  // }
+
+
+  // console.log(id)
     console.log(id)
   }
   return (
@@ -73,7 +104,7 @@ const ShowPost = ({ singlePost }) => {
            
        <div class="avatar">
 <div class="w-14 m-4  rounded-full">
- <img src={post?.user_id.user_photo_url ? post?.user_id.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${i+1}.jpg`||`https://api.multiavatar.com/${post?.user_id.user_name}.png`} />
+ <img src={post?.user_id.user_photo_url ? post?.user_id.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${post?.user_id.user_name.length}.jpg`||`https://api.multiavatar.com/${post?.user_id.user_name}.png`} />
 </div>
 </div>
             <p className="text-[18px] font-semibold mt- ml-1">
@@ -110,7 +141,8 @@ const ShowPost = ({ singlePost }) => {
                 <FcLike />
                 <p>Love</p>
               </div>
-              <div className="flex items-center gap-1 cursor-pointer"    onClick={() => UnLovePost(post._id)}>
+              <div className="border-2"></div>
+              <div className="flex items-center gap-1 cursor-pointer "    onClick={() => UnLovePost(post._id)}>
                 <FcDislike />
                
               </div>
@@ -120,7 +152,7 @@ const ShowPost = ({ singlePost }) => {
               </label>
             </div>
             
-              <Accordion open={open === i + 1} icon={<div className="flex   relative  bottom-[115px] left-[320px]  cursor-pointer">
+              <Accordion open={open === i + 1} icon={<div className="flex text-[18px]   relative  bottom-[115px] left-[320px]  cursor-pointer">
                 <p className="hover:underline flex"> <span className="mr-2"> {post?.post_comments.length}</span> Comments</p>
               </div>} onClick={() => handleOpen(i+1)}>
               <AccordionHeader className="h-[0px]">
@@ -133,7 +165,7 @@ const ShowPost = ({ singlePost }) => {
           { post?.post_comments?.map(comment => <div className="flex items-center">
           <div class="avatar">
 <div class="w-14 m-4  rounded-full">
-<img src={comment?.user_id.user_photo_url ? comment?.user_id.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${i+1}.jpg`||`https://api.multiavatar.com/${comment?.user_id.user_name}.png`} />
+<img src={comment?.user_id.user_photo_url ? comment?.user_id.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${comment?.user_id.user_name.length}.jpg`||`https://api.multiavatar.com/${comment?.user_id.user_name}.png`} />
 </div>
 </div>
 <div>

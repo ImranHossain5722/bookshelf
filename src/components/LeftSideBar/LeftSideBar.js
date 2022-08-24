@@ -26,8 +26,8 @@ const LeftSideBar = () => {
     if(authors.length === 0 ){ 
       fetchPosts();
     }
-  }, [])
-
+  }, [authors])
+ 
   if(loading){
     return <Loading/>
   }
@@ -42,7 +42,7 @@ const LeftSideBar = () => {
     <div className="mt-6">
       <h2 className="px-4 text-lg font-semibold">Meet Your Favorite Authors</h2>
       {/* profile */}
-      {authors?.map(author=>
+      {/* {authors && authors?.map(author=>
         <div class="flex items-center   dark:bg-gray-700 hover:bg-slate-200 cursor-pointer dark:border-gray-600 dark:text-white px-4 mt-2">
 
         <img
@@ -58,7 +58,7 @@ const LeftSideBar = () => {
         <RiWechatPayLine  className="text-primary"/>
         </div>
       </div>
-        )}
+        )} */}
       
   
     </div>

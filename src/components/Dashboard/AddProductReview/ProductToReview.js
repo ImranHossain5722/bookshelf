@@ -31,7 +31,7 @@ const ProductToReview = () => {
     }
     return (
         <div className="my-5">
-            <p className="text-5xl text-center mb-3">Deliverd Orders</p>
+            <p className="text-5xl text-center mb-3">Make Review</p>
             <div className="w-full p-5">
                 <div className="overflow-auto  h-[460px]">
                     <table className="table w-full ">

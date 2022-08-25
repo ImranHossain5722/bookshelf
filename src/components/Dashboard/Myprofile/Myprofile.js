@@ -218,7 +218,7 @@ const Myprofile = () => {
               getUser[0]?.user_photo_url
                 ? getUser[0]?.user_photo_url
                 : user?.photoURL ||
-                  "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg "
+                "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg "
             }
             alt=""
           />

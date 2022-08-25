@@ -76,7 +76,7 @@ const Footer = () => {
                     <a href="#">Order History</a>
                   </li>
                   <li>
-                    <a href="trackorder">Track Order</a>
+                    <a href="/trackorder">Track Order</a>
                   </li>
                   <li>
                     <a href="#">Order History</a>
@@ -125,9 +125,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
            <Modal modal={"quick-view"}>
         <QuickView />    
       </Modal>
+
       </footer>
 
     </>

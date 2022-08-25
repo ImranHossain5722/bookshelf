@@ -15,8 +15,7 @@ const UpdateProduct = () => {
     queryClient.clear();
     const { isLoading, data: book } = useQuery(['getBookDatasss'], () => fetch(`https://book-shelf-webapp.herokuapp.com/get-book?id=${bookid}`).then(res =>
         res.json()
-    ), { cacheTime: 1 }
-    )
+    ), { cacheTime: 1 })
 
     // get all Categories 
     const [allCategories, setAllCategories] = useState([]);

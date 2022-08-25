@@ -38,10 +38,12 @@ const LeftSideBar = () => {
 
   return (
     <div className="mt-6">
-      <h2 className="px-4 text-lg font-semibold">Meet Your Favorite Authors</h2>
+      <h2 className="px-4 text-lg font-semibold capitalize">
+        Send Request to author
+      </h2>
       {/* profile */}
       {authors?.map((author) => (
-        <div class="flex items-center   dark:bg-gray-700 hover:bg-slate-200 cursor-pointer dark:border-gray-600 dark:text-white px-4 mt-2">
+        <div class="flex items-center   dark:bg-gray-700 hover:bg-slate-200 cursor-pointer dark:border-gray-600 dark:text-white px-4 py-2">
           <img
             className=" w-9 h-9  text-[#056BE1] rounded-full"
             src={
@@ -51,12 +53,17 @@ const LeftSideBar = () => {
             }
             alt="author"
           />
-          <div className="flex items-center " onClick={reqHndeler}>
+          <div className="flex items-center flex-1" onClick={reqHndeler}>
             <p className="py-2 px-4 w-full text-black text-sm  dark:bg-gray-800 dark:border-gray-600">
               {author?.author_name}
             </p>
-            <div className="tooltip tooltip-secondary text-white" data-tip="Meet your Authors">
-              <button className="btn btn-primary text-white">Send Request</button>
+            <div
+              className="tooltip tooltip-secondary text-white"
+              data-tip="Meet your Authors"
+            >
+              <button className="btn btn-sm btn-primary text-white">
+                send
+              </button>
             </div>
           </div>
         </div>

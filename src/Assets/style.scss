@@ -1,5 +1,6 @@
 $body_text: #687083;
 $tab: "(max-width: 767.98px)";
+$max_lg: "(min-width: 992.98px)";
 $white: #fff;
 .product_widget26 {
   border: 1px solid #ebebeb;
@@ -700,4 +701,20 @@ $white: #fff;
       }
     }
   }
+}
+
+// dashboard
+.drawer-mobile > .drawer-toggle ~ .drawer-side {
+  @media #{$max_lg} {
+    overflow-y: auto;
+    width: 240px;
+  }
+  border-right: 1px solid #e3e6ef;
+}
+.dashboard_header {
+  border-bottom: 1px solid #e3e6ef;
+}
+.commentModal {
+  max-width: 600px;
+  height: auto;
 }

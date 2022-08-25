@@ -73,6 +73,7 @@ import AddProductReview from "./components/Dashboard/AddProductReview/AddProduct
 
 import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
 import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
+import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
 
 
 
@@ -134,6 +135,7 @@ function App() {
               <Route path="myproducts" element={<MyProducts />} />
               <Route path="updateproduct/:bookid" element={<UpdateProduct />} />
               <Route path="addproductreviews/:bookid" element={<AddProductReview />} />
+              <Route path="addproductreviews" element={<ProductToReview />} />
               <Route path="trackorder/:bookid" element={<TrackOrders />} />
               <Route path="allpublisher" element={<AllPublishers />} />
               <Route path="allusers" element={<AllUsers />} />

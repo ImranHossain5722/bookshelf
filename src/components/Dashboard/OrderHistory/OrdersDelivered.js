@@ -1,12 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { FaCommentAlt } from "react-icons/fa";
 
 import { AiFillEye } from 'react-icons/ai';
 import { orderView } from '../../Redux/actions/bookActions'
 import Loading from '../../Loading/Loading';
-import { useNavigate } from 'react-router-dom';
+
 
 const OrdersDelivered = () => {
     const user = useSelector((state) => state?.newUser?.user)
@@ -29,11 +28,8 @@ const OrdersDelivered = () => {
         // console.log(selectedOrder)
         dispatch(orderView(selectedOrder))
     }
-    const navigate = useNavigate();
-    const handleAddReview = id => {
-        console.log(id);
-        navigate(`/dashboard/addproductreviews/${id}`);
-    }
+
+
     return (
         <div className="my-5">
             <p className="text-5xl text-center mb-3">Deliverd Orders</p>
@@ -80,7 +76,7 @@ const OrdersDelivered = () => {
                                         <button className=" btn btn-xs btn-warning text-white w-[155px] h-[24px] mb-3 rounded-full" >{orderDetails.order_status} </button>
                                     </td>
                                     <td className=" border-[#e1e2e6] text-[#00124E] font-bold">
-                                        <button onClick={() => handleAddReview(orderDetails._id)} title='Add Review' className=" btn btn-xs btn-error text-white  mb-3 rounded mr-1" ><FaCommentAlt className='font-bold text-[16px] ' /></button>
+
 
                                         <label title='View details' for="order-view" className=" duration-500 a  btn btn-xs btn-info text-white  mb-3 rounded" onClick={() => viewOrder(orderDetails)} >
 

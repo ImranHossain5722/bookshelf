@@ -9,8 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Navigation } from "swiper";
-import useWindowDimensions from "../windowSize/windowSize";
+import { Pagination, Navigation, Autoplay } from "swiper";
 import { useDispatch, useSelector } from "react-redux";
 import { author } from "../Redux/actions/bookActions";
 
@@ -18,7 +17,6 @@ const PopularAuthor = () => {
   const authors = useSelector((state) => state.author.author);
   const dispatch = useDispatch();
   const [size, setSize] = useState(1);
-  const { width } = useWindowDimensions();
 
   useEffect(() => {
     // add author route
@@ -27,54 +25,69 @@ const PopularAuthor = () => {
       .then((data) => dispatch(author(data)));
   }, []);
 
-  useEffect(() => {
-    //  responsiveness added by width change
-    if (width >= 1110) {
-      setSize(5);
-    } else if (width >= 768) {
-      setSize(3);
-    } else if (width >= 576) {
-      setSize(2);
-    } else {
-      setSize(1);
-    }
-  }, [width]);
-
   return (
-    <div className="bg-white max-w-[1240px] mx-auto my-[120px] py-[120px]">
-      {/* ------title section----- */}
-      <h1 className="pl-6 text-[30px] lg:text-[40px] font-bold text-[#00124E]">
-        Popular Author
-      </h1>
-
-      {/* ------categories slider----- */}
-      <div className="mt-8">
-        <Swiper
-          slidesPerView={size}
-          spaceBetween={30}
-          loop={true}
-          navigation={true}
-          modules={[Navigation]}
-          className="mySwiper px-9 py-6"
-          style={{ "--swiper-theme-color": "#27AE61" }}
-        >
-          {authors?.map((author) => (
-            <SwiperSlide key={author.id}>
-              <div className="py-6 flex items-center justify-center hover:fill-blue-500">
-                <div>
-                  <img
-                    src={author.image}
-                    className="w-48 h-48 rounded-full image-full bg-cover"
-                    alt=""
-                  />
-                  <p className="mt-2 text-center text-xl font-bold">
+    <div className="bg-white section_spacing_bottom">
+      <div className="container mx-auto relative ">
+        {/* ------title section----- */}
+        <h1 className="text-[30px] lg:text-[40px] font-bold text-[#00124E] section_title">
+          Popular Author
+        </h1>
+        {/* ------categories slider----- */}
+        <div className="mt-8">
+          <Swiper
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              992: {
+                slidesPerView: 3,
+              },
+              1500: {
+                slidesPerView: 4,
+              },
+            }}
+            spaceBetween={24}
+            loop={true}
+            navigation={{
+              prevEl: "#prev_slide",
+              nextEl: "#next_slide",
+            }}
+            modules={[Autoplay, Navigation]}
+            autoplay={true}
+            className="mySwiper"
+            style={{ "--swiper-theme-color": "#27AE61" }}
+            onInit={(swiper) => {
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }}
+          >
+            {authors?.map((author) => (
+              <SwiperSlide key={author.id}>
+                <div className="flex flex-col justify-center hover:fill-blue-500">
+                  <div
+                    className="thumb w-52 h-52 rounded-full bg-cover bg-center mx-auto"
+                    style={{
+                      backgroundImage: `url(${author.image})`,
+                    }}
+                  ></div>
+                  <span className="uppercase font-normal text-center text-sm mt-6 mb-[7px]">
+                    FOUNDER & CEO
+                  </span>
+                  <h4 className="text-center text-xl font-semibold mb-[7px] capitalize">
                     {author.name}
+                  </h4>
+                  <p className="text-base font-normal text-center max-w-[240px] mx-auto">
+                    Except sint occaecat cupidatat nonproid sunt culpa qui
+                    officia deserunt
                   </p>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </div>
   );

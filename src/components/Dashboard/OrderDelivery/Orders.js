@@ -9,8 +9,6 @@ import { format } from "date-fns";
 
 
 const Orders = () => {
-    const [orderQty, setOrderQty] = useState(0);
-
     const { getUser } = useGetUserData();
     // console.log('userData', getUser);
     const { data: allOrders, refetch } = useQuery(['allOrders'], () =>
@@ -20,12 +18,9 @@ const Orders = () => {
     )
     // console.log(allOrders)
     let newOrders = [];
-    allOrders?.map(order => {
-        if (order?.picked_status === false) {
-            newOrders.push(order);
-        }
-    })
+    allOrders?.map(order => (order?.picked_status === false) && newOrders.push(order))
 
+    // console.log(newOrders)
     const today = new Date();
     const formatedData = format(today, 'dd.MM.yyyy');
     const pickOrder = (id) => {
@@ -33,7 +28,7 @@ const Orders = () => {
 
         const pickedData = {
             picked_status: true,
-            picked_date: formatedData,
+            placed_date: formatedData,
             picked_by: getUser[0]?.uid
         }
         axios.patch(`https://book-shelf-webapp.herokuapp.com/update-order-tracking?oid=${id}`, pickedData)
@@ -67,7 +62,6 @@ const Orders = () => {
                                 <th className='border border-[#666666]'>Order Qty</th>
                                 <th className='border border-[#666666]'>Payment Type</th>
                                 <th className='border border-[#666666]'>Order Date</th>
-
                                 <th className='border border-[#666666]'>Action</th>
                             </tr>
                         </thead>
@@ -78,10 +72,9 @@ const Orders = () => {
                                 <td className='border border-[#666666]'>Dhaka</td>
                                 <td className='border border-[#666666]'>01</td>
                                 <td className='border border-[#666666]'>{order?.ordered_price_amount}</td>
-                                <td className='border border-[#666666]'>0</td>
+                                <td className='border border-[#666666]'>{0}</td>
                                 <td className='border border-[#666666]'>{order?.payment_info?.payment_type}</td>
                                 <td className='border border-[#666666]'>{order?.placed_date}</td>
-
                                 <td className='border border-[#666666]'>
                                     <button onClick={() => pickOrder(order?._id)} className='btn btn-error  text-white'><BsTruckFlatbed /> <span className='ml-1'>Pick order</span> </button>
                                 </td>

@@ -5,115 +5,163 @@ import { BsThreeDots } from "react-icons/bs";
 import Pogramming from "../../Assets/images/post1.jpg";
 import likeImage from "../../Assets/images/like.svg";
 import heart from "../../Assets/images/heart.svg";
-import care from "../../Assets/images/care.svg";
-import sad from "../../Assets/images/sad.svg";
-import haha from "../../Assets/images/haha.svg";
-import angry from "../../Assets/images/angry.svg";
-import wow from "../../Assets/images/wow.svg";
 import { comment } from "postcss";
-import { AiOutlineLike } from "react-icons/ai";
 import { BiComment } from "react-icons/bi";
-import { RiShareForwardLine } from "react-icons/ri";
+import { FcDislike,FcLike } from "react-icons/fc"; 
+import './ShowPost.css'
+import CommentModal from "./CommentModal";
+import CommentView from "./CommentView";
+import { useDispatch, useSelector } from "react-redux";
+
+import { commentId } from "../Redux/actions/bookActions";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
+import axios from "axios";
+ 
+
 const ShowPost = ({ singlePost }) => {
   //  console.log(singlePost)
-  const {
-    post,
-    post_image_url,
-    user_photo_url,
-    user_name,
-    post_time,
-    conments,
-  } = singlePost;
+  const [allPosts, setAllPosts] = useState([]);
+  const [showModal, setshowModal] = useState(false);
+  const [open, setOpen] = useState(0);
 
-  const [post_likes, setPost_likes] = useState(singlePost.post_likes);
-  const [islike, seIstLike] = useState(false);
-  const likeHandeler = () => {
-    setPost_likes(islike ? post_likes - 1 : post_likes + 1);
-    seIstLike(!islike);
-  };
+  const dispatch = useDispatch()
+  // const {
+  //   post,
+  //   post_image_url,
+  //   user_photo_url,
+  //   user_name,
+  //   post_time,
+  //   conments,
+  // } = singlePost;
+
+  // const [post_likes, setPost_likes] = useState(singlePost.post_likes);
+  // const [islike, seIstLike] = useState(false);
+  // const likeHandeler = () => {
+  //   setPost_likes(islike ? post_likes - 1 : post_likes + 1);
+  //   seIstLike(!islike);
+  // };
+  const currentUser = useSelector((state) => state?.newUser?.user) 
 
   const [userComments, setUseComments] = useState([]);
   useEffect(() => {
-    fetch("user.json")
+    fetch("https://book-shelf-webapp.herokuapp.com/get-posts")
       .then((response) => response.json())
-      .then((data) => console.log(data.post_data?.comments));
-  }, []);
-  return (
-    <div className="">
-      <div className="">
-        <div className=" mx-auto max-w-sm md:max-w-md lg:max-w-[750px] bg-white shadow-md rounded-xl mb-4 ">
-          <div className="flex items-start">
-            <div
-              className="w-14 h-14 bg-gray-300 m-4 rounded-full"
-              style={{
-                background: `url(${user_photo_url})`,
-                backgroundSize: "content",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-            >
-              <div className="">
-                {/* post time */}
-                <small className="flex gap-1 items-center relative top-8 left-16 text-gray-500 font-semibold">
-                  {post_time}. <GiEarthAmerica />{" "}
-                </small>
-              </div>
-            </div>
+      .then((data) => setAllPosts(data));
+      
+  }, [allPosts,showModal]);
+  const showCommentModal = (id) =>  {
+    dispatch(commentId(id))
+   setshowModal(!showModal)
+  }
+  const handleOpen = (value) => {
+    setOpen(open === value ? 0 : value);
+  };
+  const lovePost =(postLoves,id) => {
+   const ids =  postLoves.map(post => post.user_email)
+    console.log(currentUser)
 
-            <h3 className="text-[18px] font-semibold mt-3 ml-[-8px]">
-              {user_name}
-            </h3>
-            <BsThreeDots className="relative  left-[130px] md:left-[202px] lg:left-[200px]  top-4" />
+    const data = {
+      
+        user_id :currentUser._id,
+        post_id : id
+    
+    }
+    if(ids.includes(currentUser.user_email)){
+      axios.patch("https://book-shelf-webapp.herokuapp.com/downvote-post",data).then(data => console.log(data))
+
+    }
+    else{
+   
+      axios.patch("https://book-shelf-webapp.herokuapp.com/upvote-post",data).then(data => console.log(data))
+    }
+    console.log(ids,id)
+  }
+
+  return (
+    <div >
+      {allPosts?.map((post,i) => 
+        <div className=" mx-auto max-w-sm md:max-w-md lg:max-w-[750px] bg-white shadow-md rounded-xl mb-4 " key={post._id}>
+          <div  className="flex justify-start items-center relative ">
+           
+       <div class="avatar">
+<div class="w-14 m-4  rounded-full">
+<img src={post?.user_id?.user_photo_url ? post?.user_id?.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${post?.user_id?.user_name.length}.jpg` ||`https://api.multiavatar.com/${post?.user_id?.user_name}.png`} />
+</div>
+</div>
+            <p className="text-[18px] font-semibold mt- ml-1">
+              {post?.user_id?.user_name} 
+            </p>
+            
           </div>
           <div>
-            {/* post des */}
-            <p className="px-4">{post}</p>
-            <img className="pt-4 w-full " src={post_image_url} alt="" />
+            {/* post details */}
+            <p className="px-4">{post?.post_content}</p>
+            <img className="pt-4 w-full " src={post?.post_image} alt="" />
           </div>
           {/* like comment share */}
-          <div className="likeCommentShar mb- ">
+          <div className="likeCommentShar mb- relative ">
             <div className="flex justify-between p-2 pb-4">
-              {/* imoje */}
-              <div className="flex gap-1">
-                <img className="w-6 h-6" src={likeImage} alt="" />
+              {/* imoge */}
+              <div className="flex ml-2">
+               
                 <img className="w-6 h-6" src={heart} alt="" />
-                <p>{post_likes}</p>
-                {/* <img className="w-6 h-6" src={care} alt=""/>
-                  <img className="w-6 h-6" src={angry} alt=""/>
-                  <img className="w-6 h-6" src={sad} alt=""/>
-                  <img className="w-6 h-6" src={haha} alt=""/>
-                  <img className="w-6 h-6" src={wow} alt=""/> */}
+                <p className="pl-1" >{post?.up_votes?.length}</p>
+               
               </div>
               {/* comment */}
-              <div className="flex hover:underline cursor-pointer">
-                <p> {conments.length} Comments</p>
-              </div>
+              {/* bottom-[60px] right-[150px] */}
             </div>
-
             <div
               className=" flex justify-between p-4 px-8 mx-8 pb-4 border-y-2
-
 "
             >
               <div
-                className="flex items-center gap-1 hover:bg-gray-200 p-2 cursor-pointer"
-                onClick={likeHandeler}
+                className="flex items-center gap-1 hover:bg-gray-200 p-2 cursor-pointer "
+                onClick={() => lovePost(post?.up_votes,post._id)}
               >
-                <AiOutlineLike />
-                <p>Like</p>
+                <FcLike />
+                <p>Love</p>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="border-2"></div>
+              <label for="comment_modal" className="flex items-center gap-1 cursor-pointer" onClick={() => showCommentModal(post._id)}>
                 <BiComment />
                 <p>Comment</p>
-              </div>
-              <div className="flex items-center gap-1">
-                <RiShareForwardLine />
-                <p>Share</p>
-              </div>
+              </label>
             </div>
+            
+              <Accordion open={open === i + 1} icon={<div className="flex text-[18px]   relative  bottom-[115px] left-[320px]  cursor-pointer">
+                <p className="hover:underline flex"> <span className="mr-2"> {post?.post_comments.length}</span> Comments</p>
+              </div>} onClick={() => handleOpen(i+1)}>
+              <AccordionHeader className="h-[0px]">
+
+</AccordionHeader>
+          
+             
+            {/* // input field */}
+            <AccordionBody>
+          { post?.post_comments?.map(comment => <div className="flex items-center">
+          <div class="avatar">
+<div class="w-14 m-4  rounded-full">
+<img src={comment?.user_id?.user_photo_url ? comment?.user_id?.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${comment?.user_id?.user_name.length}.jpg`||`https://api.multiavatar.com/${comment?.user_id?.user_name}.png`} />
+</div>
+</div>
+<div>
+<p className="text-[13px] font-semibold">   {comment?.user_id?.user_name} </p>
+  <p>{comment?.comment}</p>
+</div>
+          </div>)}
+          </AccordionBody>
+          </Accordion>
           </div>
         </div>
-      </div>
+        )}
+        {showModal && <CommentModal modal={"comment_modal"}>
+           <CommentView setshowModal={setshowModal}  />
+         </CommentModal>}
     </div>
   );
 };

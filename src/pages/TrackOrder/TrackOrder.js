@@ -114,16 +114,20 @@ const TrackOrder = () => {
                             <table className="table w-full">
                                 <thead>
                                     <tr>
+                                        <th className='text-lg'>Photo</th>
                                         <th className='text-lg'>Product Name</th>
                                         <th className='text-lg'>Unit Price</th>
                                         <th className='text-lg'>Order Qty</th>
+                                        <th className='text-lg'>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {order?.ordered_items?.map(book => <tr key={book?._id}>
+                                        <th><img src={book?.book_id?.book_cover_photo_url} width={50} height={50} alt="" /></th>
                                         <th>{book?.book_id?.book_title}</th>
                                         <td>{book?.book_id?.book_price}</td>
                                         <td>{book?.qnt}</td>
+                                        <td>{book?.book_id?.book_price * book?.qnt}</td>
 
                                     </tr>)}
 

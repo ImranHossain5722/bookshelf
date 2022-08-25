@@ -33,12 +33,12 @@ const RecentlyViewed = () => {
     fetch("https://book-shelf-webapp.herokuapp.com/all-books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
-  }, []); 
+  }, []);
   // for swiper slider
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white py-[120px]">
+    <div className="bg-white  section_spacing">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
@@ -93,21 +93,26 @@ const RecentlyViewed = () => {
               <SwiperSlide key={book._id}>
                 <div className="product_widget26 mb_30">
                   <div className="product_thumb_upper position-relative">
-                    <span className="offer_badge">-0%</span>
-                    <a href="product_details.php" className="thumb text-center">
+                      {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
+                    <Link
+                      to={`/selectedBook/${book?._id}`}
+                      className="thumb text-center"
+                    >
                       <img src={book.book_cover_photo_url} alt="" />
-                    </a>
+                    </Link>
                     <div className="product_action">
-                    <Wishlistbutton _id={book._id} />
-                    <QuickViewButton _id={book._id} />
-                    <CartButton _id={book._id}  />
+                      <Wishlistbutton _id={book._id} />
+                      <QuickViewButton _id={book._id} />
+                      <CartButton _id={book._id} />
                     </div>
                   </div>
                   <div className="product__meta">
                     <Link to={`/selectedBook/${book?._id}`}>
-                      <h4 >{book.book_title}</h4>
+                      <h4>{book.book_title}</h4>
                     </Link>
-                      <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
+                    <p className="text-[16px] text-[#00124e] font-semibold">
+                      {book?.book_author?.author_name}
+                    </p>
                     <div className="stars">
                       <i className="fas fa-star"></i>
                       <i className="fas fa-star"></i>
@@ -119,7 +124,7 @@ const RecentlyViewed = () => {
                     <div className="product_prise">
                       <p>${book.book_price}</p>
                     </div>
-                  <AddCartButton _id={book._id}/>
+                    <AddCartButton _id={book._id} />
                   </div>
                 </div>
               </SwiperSlide>

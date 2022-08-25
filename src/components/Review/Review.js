@@ -9,11 +9,9 @@ import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
 
 // import required modules
-import { Navigation } from "swiper";
-import './review.css'
+import { Autoplay, Navigation } from "swiper";
+import "./review.css";
 import useWindowDimensions from "../windowSize/windowSize";
-
-import sliderBanner from "../../Assets/images/slider__bag.png"
 import axios from "axios";
 
 const Review = () => {
@@ -23,66 +21,64 @@ const Review = () => {
 
   // fetched  review data
   useEffect(() => {
-    axios.get(`https://book-shelf-webapp.herokuapp.com/all-reviews`)
-      .then(data => setReviews(data.data))
+    axios
+      .get(`https://book-shelf-webapp.herokuapp.com/all-reviews`)
+      .then((data) => setReviews(data.data));
   }, []);
 
-  console.log(reviews);
-  useEffect(() => {
-    //  responsiveness added by width change
-    if (width >= 900) {
-      setSize(3)
-    }
-    else if (width >= 576) {
-      setSize(2)
-    }
-    else {
-      setSize(1)
-    }
-
-  }, [width])
-
   return (
-    <div
-      style={{
-        background: `url(${sliderBanner})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-      className=" px-8 mx-auto  mt-[60px] lg:mt-[120px] py-[120px] " >
-      <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold text-center pb-1">Our Clients Feedback</h2>
-
-      <div className=" flex justify-center ">
-        <progress className="progress progress-success  h-2 w-5  "></progress>
-      </div>
-      <Swiper
-        slidesPerView={size}
-        spaceBetween={30}
-        slidesPerGroup={size}
-        loop={true}
-        loopFillGroupWithBlank={true}
-        navigation={true}
-        modules={[Navigation]}
-        className="mySwiper px-7 py-6"
-        style={{ "--swiper-theme-color": "#27AE61" }}
-      >
-        {
-          reviews?.map(review => <SwiperSlide key={review.id} className="swiper-review">
-            <div className="text-center p-4">
-              <p>{review?.review}</p>
-              <div className="avatar pt-6">
-                <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src={review?.user_id?.user_photo_url} alt="" />
+    <div className="bg-white section_spacing_top">
+      <div className="container mx-auto relative">
+        <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold  pb-1">
+          Client Testimonial
+        </h2>
+        <Swiper
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            992: {
+              slidesPerView: 2,
+            },
+            1500: {
+              slidesPerView: 3,
+            },
+          }}
+          spaceBetween={24}
+          loop={true}
+          modules={[Autoplay]}
+          autoplay={true}
+          className="mySwiper mt-8"
+        >
+          {reviews?.map((review) => (
+            <SwiperSlide key={review.id} className="swiper-review">
+              <div class="single_testmonial">
+                <div class="testmonial_header flex items-center">
+                  <div class="thumb">
+                    <img src={review?.user_id?.user_photo_url?   review?.user_id?.user_photo_url  : `https://xsgames.co/randomusers/assets/avatars/male/${review?.user_id?.user_name.length}.jpg`} alt="" />
+                  </div>
+                  <div class="reviewer_name">
+                    <h4>{review?.user_id?.user_name}</h4>
+                    <div class="rate flex items-center">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
                 </div>
+                <p>“{review?.review}”</p>
               </div>
-              <p className="pt-2 font-semibold">{review?.user_id?.user_name} </p>
-            </div>
-          </SwiperSlide>)
-        }
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Review;

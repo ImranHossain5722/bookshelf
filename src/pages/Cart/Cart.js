@@ -32,16 +32,16 @@ const Cart = () => {
           payment_type : "cash_on",
       } 
       }
-     
+      
         await axios.post("https://book-shelf-webapp.herokuapp.com/place-order", cart)
           .then((data) => dispatch(cartdata(data.data))); 
         await axios.delete(
           `https://book-shelf-webapp.herokuapp.com/delete-cart?id=${userId}`
         );
       
-      // dispatch(cartdata(data))
    
   }
+  
 
   const increaseQnt =(_id,qnt) => {
     if(_id){
@@ -94,9 +94,7 @@ const Cart = () => {
                                 <div className=" ">
                                             <h3 className="text-[18px] capitalize text-[#00124E] font-semibold">
                                                 {book.book?.book_title} 
-
                                             </h3>
-                                            <p>By Author name</p>
                                         </div>
                                 </td>
                   <td className="text-[16px] border-[#e1e2e6] text-black">
@@ -123,7 +121,7 @@ const Cart = () => {
                   </td>
                   <td className="border-[#e1e2e6]">
                  
-                    <CartDeleteButton _id={book.book._id} />
+                    <CartDeleteButton _id={book.book?._id} />
                   </td>
                 </tr>)}
 

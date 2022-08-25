@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import {
   useAuthState,
   useCreateUserWithEmailAndPassword,
@@ -15,23 +16,24 @@ import useToken from "../../../hooks/useToken";
 import "./Login.css";
 import SocialLogin from "./SocialLogin";
 
+import { onAuthStateChanged } from "firebase/auth";
+
+// import { onAuthStateChanged } from "firebase/auth";
+// import axios from "axios";
+
+
 const SignUp = () => {
-  const [sendEmailVerification, sending, vError] =
-    useSendEmailVerification(auth);
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+
+  const [sendEmailVerification, sending, vError] = useSendEmailVerification(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, uError] = useUpdateProfile(auth);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [socialUser] = useAuthState(auth);
-  //   const [phoneNo, setPhoneNo] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
 
   const navigate = useNavigate();
   const { token } = useToken();
+
 
   //   const userInfo = {
   //     user_name: user?.user?.displayName,
@@ -55,7 +57,8 @@ const SignUp = () => {
   //   } else {
   //     console.log("user data not found");
   //   }
-  console.log(socialUser);
+  // console.log(socialUser);
+
   if (loading || updating || sending) {
     return <Loading></Loading>;
   }
@@ -65,9 +68,13 @@ const SignUp = () => {
   }
 
   if (user || socialUser || token) {
+
+    // navigate("/dashboard");
+
     navigate("/dashboard");
 
-    console.log(user);
+    // console.log(user);
+
   }
 
   let confirmPassError;
@@ -75,14 +82,35 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     const pass = data?.password;
     const confirmPass = data?.cpassword;
-    // setPhoneNo(data?.phone);
+    setPhoneNo(data?.phone);
 
     if (pass === confirmPass) {
       await createUserWithEmailAndPassword(data.email, data.password);
       await updateProfile({ displayName: data.name });
+      // await onAuthStateChanged(auth, async (user) => {
+      //   if (user) {
+      //     const data = await axios.post(
+      //       "https://book-shelf-webapp.herokuapp.com/login-user", user);
+      //     console.log(user)
+      //   }
+      // });
       await sendEmailVerification();
       toast("Verification Email Sent");
-      reset();
+
+      await onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const data = await axios.post(
+            "https://book-shelf-webapp.herokuapp.com/login-user", user);
+          if (data.data._id) {
+            navigate("/dashboard");
+          }
+
+        } else {
+          console.log("user data not found");
+        }
+      })
+
+
     } else {
       toast("Password and Confirm Password Dose not match");
     }
@@ -143,7 +171,7 @@ const SignUp = () => {
               </label>
             </div>
 
-         \
+
 
             <div className="form-control w-full max-w-xs">
               <input

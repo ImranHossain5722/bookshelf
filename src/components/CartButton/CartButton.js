@@ -1,8 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { FaShoppingBasket} from 'react-icons/fa'
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from '../../firebase.init';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -12,6 +10,7 @@ const CartButton = ({ _id }) => {
   const user = useSelector((state) => state?.newUser?.user)
   const userId = user?._id
   const userCart = user?.user_cart?.map(book => book?.book)
+  const books = useSelector((state) => state?.cartBooks?.cartBooks)
 
   const AddCart = (id) => {
     const cartData = {
@@ -38,7 +37,7 @@ const CartButton = ({ _id }) => {
     }else{
      setincludeCart(false)
     }
-  }, [user,_id]) 
+  }, [user,_id,books]) 
   
 
   return (

@@ -120,7 +120,7 @@ const AllBooks = () => {
   }
 
   return (
-    <div className="sction_padding">
+    <div className="section_padding">
       <div style={{ background: "#FBF6F6" }} className=" container mx-auto ">
         <div className="md:flex gap-6 items-start ">
           {/* filter options left-side */}
@@ -219,10 +219,10 @@ const AllBooks = () => {
                 // <Link to={`/selectedBook/${book?._id}`}>
                 <div className="product_widget26 mb_30 bg-white">
                   <div className="product_thumb_upper position-relative">
-                    <span className="offer_badge">-0%</span>
-                    <a href="product_details.php" className="thumb text-center">
+                      {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
+                    <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
                       <img src={book?.book_cover_photo_url} alt="" />
-                    </a>
+                    </Link>
                     <div className="product_action">
                       <Wishlistbutton _id={book._id} />
                       <QuickViewButton _id={book._id} />

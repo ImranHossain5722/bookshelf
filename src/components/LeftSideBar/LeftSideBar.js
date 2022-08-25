@@ -1,239 +1,73 @@
-import React from "react";
-import { AiFillHome } from "react-icons/ai";
-import { CgMenuGridO } from "react-icons/cg";
+import React, { useEffect, useState } from "react";
 import leftSideProfileImage from "../../Assets/images/left-side_profile_imran_hossain.jpg";
-import leftSideWatch from "../../Assets/images/watch.png";
-import leftSideMarket from "../../Assets/images/marcket.png";
-import gaming from "../../Assets/images/gmaing.png";
-import { MdGroups } from "react-icons/md";
-import group1 from "../../Assets/images/group1.png";
-import group2 from "../../Assets/images/group2.jpg";
-import group3 from "../../Assets/images/group3.jpg";
-import group4 from "../../Assets/images/grp.jpg";
-import { FiLink } from "react-icons/fi";
-import JS from "../../Assets/images/js.png";
-import './LeftSideBar.css'
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { allAuthors } from "../Redux/actions/bookActions";
+import Loading from "../Loading/Loading";
+import { RiWechatPayLine } from "react-icons/ri";
+import { toast } from "react-toastify";
+import "./LeftSideBar.css";
 
 const LeftSideBar = () => {
+  const authors = useSelector((state) => state.allAuthors.allAuthors);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const { data } = await axios.get(
+        "https://book-shelf-webapp.herokuapp.com/all-authors"
+      );
+      dispatch(allAuthors(data));
+      setLoading(false);
+    };
+
+    if (authors.length === 0) {
+      fetchPosts();
+    }
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  const reqHndeler = () => {
+    toast.success("Your request sent successfully.We are notified you");
+  };
+
   return (
-    <div className="">
-      {/* home */}
-      <div className="leftSidebar flex items-center  hover:bg-[#E4E6E9] border-l-4 border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <AiFillHome className=" text-3xl text-[#056BE1] " />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg    dark:bg-gray-800 dark:border-gray-600"
-        >
-          Home
-        </a>
-      </div>
+    <div className="mt-6">
+      <h2 className="px-4 text-lg font-semibold capitalize">
+        Send Request to author
+      </h2>
       {/* profile */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img
-          className=" w-8 h-8 text-[#056BE1] rounded-full"
-          src={leftSideProfileImage}
-        />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Md.Imran Hossain
-        </a>
-      </div>
-      {/* menu */}
-      <div class="flex items-center  hover:bg-[#E4E6E9] mt-3   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <CgMenuGridO className=" text-3xl text-[#000] bg-gray-200 rounded-full" />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg    dark:bg-gray-800 dark:border-gray-600"
-        >
-          Menu
-        </a>
-      </div>
-
-      {/* watch */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img
-          className=" w-8 h-8 text-[#056BE1] rounded-full"
-          src={leftSideWatch}
-        />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Watch
-        </a>
-      </div>
-      {/* market place  */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img
-          className=" w-8 h-8 text-[#056BE1] rounded-full"
-          src={leftSideMarket}
-        />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Merketplace
-        </a>
-      </div>
-
-      {/* Gaming  */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={gaming} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Gaming
-        </a>
-      </div>
-
-      {/* group */}
-      <div class="flex items-center  hover:bg-[#E4E6E9] mt-3   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <MdGroups className=" text-3xl text-[#000] bg-gray-200 rounded-full" />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg    dark:bg-gray-800 dark:border-gray-600"
-        >
-          Groups
-        </a>
-      </div>
-
-      {/* group1 */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={group1} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Bangladesh payton..
-        </a>
-      </div>
-      {/* group2 */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={group2} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Poramming Hero...
-        </a>
-      </div>
-
-      {/* group3 */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={group3} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          React Js Bd Group...
-        </a>
-      </div>
-      {/* group4 */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={group4} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Jobs Searc Bd Group...
-        </a>
-      </div>
-
-      {/* group5 */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={group2} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          CSS Tricks Bd Group...
-        </a>
-      </div>
-
-      {/* shortcut */}
-      <div class="flex items-center mt-3 hover:bg-[#E4E6E9] dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <FiLink className=" text-3xl text-black " />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg    dark:bg-gray-800 dark:border-gray-600"
-        >
-          Shortcuts
-        </a>
-      </div>
-      {/* shortcut Js */}
-
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={JS} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          JavaScript Tricks Bd Group...
-        </a>
-      </div>
-
-      {/* shortcut Js */}
-
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={group4} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Java, C, React Group
-        </a>
-      </div>
-
-      {/*  */}
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={group2} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Poramming Hero...
-        </a>
-      </div>
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={group2} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Poramming Hero...
-        </a>
-      </div>
-      <div class="flex items-center   dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4">
-        <img className=" w-8 h-8 text-[#056BE1] rounded-full" src={group2} />
-        <a
-          href="#"
-          aria-current="true"
-          className="py-2 px-4 w-full text-black text-lg   dark:bg-gray-800 dark:border-gray-600"
-        >
-          Poramming Hero...
-        </a>
-      </div>
-
+      {authors?.map((author) => (
+        <div class="flex items-center   dark:bg-gray-700 hover:bg-slate-200 cursor-pointer dark:border-gray-600 dark:text-white px-4 py-2">
+          <img
+            className=" w-9 h-9  text-[#056BE1] rounded-full"
+            src={
+              author?.photo_url
+                ? author?.photo_url
+                : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg"
+            }
+            alt="author"
+          />
+          <div className="flex items-center flex-1" onClick={reqHndeler}>
+            <p className="py-2 px-4 w-full text-black text-sm  dark:bg-gray-800 dark:border-gray-600">
+              {author?.author_name}
+            </p>
+            <div
+              className="tooltip tooltip-secondary text-white"
+              data-tip="Meet your Authors"
+            >
+              <button className="btn btn-sm btn-primary text-white">
+                send
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

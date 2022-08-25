@@ -5,9 +5,12 @@ import { useForm } from "react-hook-form";
 import auth from '../../../firebase.init';
 import Select from 'react-select'
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddProduct = () => {
+  const navigate = useNavigate();
+
   const [user] = useAuthState(auth);
   const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
@@ -117,11 +120,9 @@ const AddProduct = () => {
     }
   }, [getUser]);
 
-  const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
   const onChangePicture = e => {
     if (e.target.files[0]) {
-      setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
@@ -130,16 +131,8 @@ const AddProduct = () => {
     }
   }
 
-  // const cat = ['ffksfd','ksdjfsdf'];
-  // const cat2 = [
-  //   { cat_id:'ffksfd'},
-  //   { cat_id:'ffksfd'},
-  //   { cat_id:'ffksfd'}  ]
-
-
-  // const [imgbbUrl, setImgbbUrl] = useState('');
   const [bookCat, setBookCat] = useState([]);
-  console.log(bookCat);
+  // console.log(bookCat);
   const getChoosenCategory = (choice) => {
     setBookCat(Array.isArray(choice) ? choice.map(x => (
       { category_id: x.value }
@@ -168,6 +161,7 @@ const AddProduct = () => {
     const formData = new FormData();
     formData.append('image', image);
 
+
     fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
       method: 'POST',
       body: formData
@@ -185,24 +179,25 @@ const AddProduct = () => {
             book_price: data?.book_price,
             book_pages: data?.book_pages,
             book_qnt: data?.book_qnt,
-            discount: 0,
+            discount: data?.discount ? data?.discount : 0,
             book_category: bookCat,
             book_cover_photo_url: imgbbUrl,
             book_language: data?.translator,
-            book_country: data?.country
+            book_country: data?.country,
+            seller_id: getUser[0]._id
           }
           const postAuthorData = () => {
-            console.log('before post:', productInfoData);
+            // console.log('before post:', productInfoData);
             axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => {
               toast.success('Book Added Successfully');
-              console.log('Post data:', data)
+              navigate(`/dashboard/myproducts`);
             })
           }
           postAuthorData();
         }
       })
 
-    reset();
+    // reset();
   };
 
   return (
@@ -222,7 +217,7 @@ const AddProduct = () => {
                 <label className="label">
                   <span className="label-text text-lg">Upload Image</span>
                 </label>
-                <input
+                {/* <input
                   {...register("image", {
                     required: {
                       value: true,
@@ -232,7 +227,19 @@ const AddProduct = () => {
                   type="file"
                   onChange={onChangePicture}
                   placeholder="Update Your Address"
-                  className="input input-bordered w-full pt-[5px] bg-secondary text-white" />
+                  className="input input-bordered w-full pt-[5px] bg-secondary text-white" /> */}
+                  <input type="file"  {...register("image", {
+                    required: {
+                      value: true,
+                      message: "image is Required"
+                    }
+                  })}   onChange={onChangePicture} class="block w-full text-sm text-slate-500
+      file:mr-4 file:py-2 file:px-4
+      file:rounded-full file:outline-none
+      file:text-sm file:font-semibold
+      file:bg-primary file:text-white
+      hover:file:bg-white hover:file:text-primary file:border-primary file:border-0
+    "/>
                 <label className="label">
                   <span className="label-text-alt text-red-500">{errors.image?.type === 'required' && `${errors?.image?.message}`}</span>
                 </label>
@@ -337,10 +344,21 @@ const AddProduct = () => {
               </div >
               {/* row-5 */}
               < div className='mt-4' >
-                <label className="label-text text-lg">Short Details</label>
-                <input type="text" {...register("book_description", {
+                <label className="label-text text-lg">Discount %</label>
+                <input type="number" {...register("discount", {
                   required: 'required*',
-                })} placeholder="Type here" className="input input-bordered bg-white w-full mt-2" />
+                })}
+                  placeholder="Discount %"
+                  max={100}
+                  min={0}
+                  className="input input-bordered bg-white w-full mt-2" />
+                {errors?.discount && <p><small className='pl-1 text-red-600'>{errors?.discount?.message}</small></p>}
+              </div >
+              < div className='mt-4' >
+                <label className="label-text text-lg">Short Details</label>
+                <textarea type="text" {...register("book_description", {
+                  required: 'required*',
+                })} placeholder="Type here" className="textarea textarea-bordered  bg-white w-full mt-2" />
                 {errors?.book_description && <p><small className='pl-1 text-red-600'>{errors?.book_description?.message}</small></p>}
               </div >
             </div>

@@ -25,40 +25,17 @@ import QuickViewButton from "../QuickViewButton/QuickViewButton";
 const FirstCategoryBooks = () => {
   // const [books, setBooks] = useState([]);
   const books = useSelector((state) => state?.sellBooks?.books);
-  const [size, setSize] = useState(1);
-  const { width } = useWindowDimensions();
   const navigate = useNavigate();
   const catHandeler = (e) => {
     navigate("/categoryView");
   };
-
-  // useEffect(() => {
-  //     fetch('data.json')
-  //         .then(res => res.json())
-  //         .then(data => setBooks(data));
-  // }, []);
-
-  useEffect(() => {
-    //  responsiveness added by width change
-    if (width >= 992) {
-      setSize(4);
-    }
-    // else if (width >= 768) {
-    //     setSize(3)
-    // }
-    else if (width >= 576) {
-      setSize(2);
-    } else {
-      setSize(1);
-    }
-  }, [width]);
 
   // The Novel
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <div className="bg-white sction_padding">
+    <div className="bg-white section_spacing">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <div className="flex justify-between items-center ">
@@ -113,21 +90,26 @@ const FirstCategoryBooks = () => {
               <SwiperSlide key={book._id}>
                 <div className="product_widget26 mb_30">
                   <div className="product_thumb_upper position-relative">
-                    <span className="offer_badge">-0%</span>
-                    <a href="product_details.php" className="thumb text-center">
+               {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
+                    <Link
+                      to={`/selectedBook/${book?._id}`}
+                      className="thumb text-center"
+                    >
                       <img src={book.book_cover_photo_url} alt="" />
-                    </a>
+                    </Link>
                     <div className="product_action">
                       <Wishlistbutton _id={book._id} />
-                    <QuickViewButton _id={book._id} />
+                      <QuickViewButton _id={book._id} />
                       <CartButton _id={book._id} />
                     </div>
                   </div>
                   <div className="product__meta">
                     <Link to={`/selectedBook/${book?._id}`}>
-                      <h4 >{book.book_title}</h4>
+                      <h4>{book.book_title}</h4>
                     </Link>
-                    <p className="text-[16px] text-[#00124e] font-semibold">{book?.book_author?.author_name}</p>
+                    <p className="text-[16px] text-[#00124e] font-semibold">
+                      {book?.book_author?.author_name}
+                    </p>
                     <div className="stars">
                       <i className="fas fa-star"></i>
                       <i className="fas fa-star"></i>
@@ -145,10 +127,8 @@ const FirstCategoryBooks = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-
         </div>
-        <div className="text-end mt-4">
-
+        <div className="text-center mt-8">
           <button
             onClick={() => catHandeler()}
             className="btn btn-primary text-white hover:text-white hover:bg-accent  "

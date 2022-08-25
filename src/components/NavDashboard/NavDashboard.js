@@ -96,7 +96,7 @@ const NavDashboard = ({ children }) => {
                 </p>{" "}
                 <p className="text-xl text-primary uppercase text-center font-bold">
                   <span className="text-secondary">Book</span>
-                  <span className="">Shef</span>
+                  <span className="">Shelf</span>
                 </p>{" "}
                 <p className="text-xl text-secondary uppercase text-center font-bold">
                   Dashboard

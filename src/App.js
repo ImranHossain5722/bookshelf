@@ -28,10 +28,8 @@ import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
 import AuthorOrPublisher from "./pages/Forms/AuthorOrPublisher";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import AllBooks from "./components/Books/AllBooks";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
-import PopularWritersBooks from "./components/PopularWritersBooks/PopularWritersBooks";
 import auth from "./firebase.init";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
@@ -143,14 +141,7 @@ function App() {
       ) : (
         <NavBar>
           <Routes>
-            <Route path="/" element={<Home />}>
-              <Route path="/" element={<BestOffersBooks />} />
-              <Route
-                path="/popular-writers"
-                element={<PopularWritersBooks />}
-              />
-              <Route path="/best-offers" element={<BestOffersBooks />} />
-            </Route>
+            <Route path="/" element={<Home />}/>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/trackorder" element={<TrackOrder />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>

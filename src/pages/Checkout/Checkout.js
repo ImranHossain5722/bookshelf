@@ -14,11 +14,11 @@ const Checkout = () => {
   console.log(cart)
   const sendOrder = async () => {
     if (payMethod === "cash_on") {
-      axios.get(`https://book-shelf-webapp.herokuapp.com/change-order-status?oid=${cart._id}&status="cash_on`)
+      axios.get(`https://book-shelf-webapp.herokuapp.com/change-order-status?oid=${cart._id}&status="cash_on`).then(data => navigate('/thank_you'))
     } 
    else if (payMethod === "online_pay") {
     // /make-payment?oid=[order id]&price=[order price]
-    fetch(`https://book-shelf-webapp.herokuapp.com/make-payment?oid=${cart._id}&price=${cart.ordered_price_amount}`)
+    axios.get(`https://book-shelf-webapp.herokuapp.com/make-payment?oid=${cart._id}`).then(data => window.location.href=`${data.data.url}`)
       console.log("cash on online")
       } 
    

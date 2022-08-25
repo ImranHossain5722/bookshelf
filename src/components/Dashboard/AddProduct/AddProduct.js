@@ -217,7 +217,7 @@ const AddProduct = () => {
                 <label className="label">
                   <span className="label-text text-lg">Upload Image</span>
                 </label>
-                <input
+                {/* <input
                   {...register("image", {
                     required: {
                       value: true,
@@ -227,7 +227,19 @@ const AddProduct = () => {
                   type="file"
                   onChange={onChangePicture}
                   placeholder="Update Your Address"
-                  className="input input-bordered w-full pt-[5px] bg-secondary text-white" />
+                  className="input input-bordered w-full pt-[5px] bg-secondary text-white" /> */}
+                  <input type="file"  {...register("image", {
+                    required: {
+                      value: true,
+                      message: "image is Required"
+                    }
+                  })}   onChange={onChangePicture} class="block w-full text-sm text-slate-500
+      file:mr-4 file:py-2 file:px-4
+      file:rounded-full file:outline-none
+      file:text-sm file:font-semibold
+      file:bg-primary file:text-white
+      hover:file:bg-white hover:file:text-primary file:border-primary file:border-0
+    "/>
                 <label className="label">
                   <span className="label-text-alt text-red-500">{errors.image?.type === 'required' && `${errors?.image?.message}`}</span>
                 </label>

@@ -342,7 +342,13 @@ const Myprofile = () => {
                         }
                       })}
                       type="file"
-                      className="input input-bordered w-full pt-[5px] bg-[#0000000d]  text-secondary" />
+                     class="block w-full text-sm text-slate-500
+      file:mr-4 file:py-2 file:px-4
+      file:rounded-full file:outline-none
+      file:text-sm file:font-semibold
+      file:bg-primary file:text-white
+      hover:file:bg-white hover:file:text-primary file:border-primary file:border-0
+    " />
                     <label className="label">
                       <span className="label-text-alt text-red-500">{errors.image?.type === 'required' && `${errors?.image?.message}`}</span>
                     </label>

@@ -72,6 +72,7 @@ import OrdersDelivered from "./components/Dashboard/OrderHistory/OrdersDelivered
 import AddProductReview from "./components/Dashboard/AddProductReview/AddProductReview";
 
 import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
+import ThankYou from "./components/ThankYou/ThankYou";
 
 
 
@@ -160,6 +161,9 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/trackorder" element={<TrackOrder />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
+            {/* thank_you */}
+            <Route path="/thank_you" element={<ThankYou />}></Route>
+
             <Route path="/cart" element={<Cart />}></Route>
             <Route path="/wishlist" element={<Wishlist />}></Route>
             <Route path="/checkout" element={<Checkout />}></Route>

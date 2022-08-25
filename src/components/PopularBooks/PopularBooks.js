@@ -11,7 +11,6 @@ import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 const PopularBooks = () => {
    const [books, setBooks] = useState([]);
    const [clicked, setclicked] = useState("best_selling");
-
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const PopularBooks = () => {
     if(clicked === "best_selling"){
 
       setLoading(true);
-      fetch("https://book-shelf-webapp.herokuapp.com/all-books")
+      fetch("https://book-shelf-webapp.herokuapp.com/get-popular-books")
         .then((res) => res.json())
         .then((data) => setBooks(data));
       setLoading(false);

@@ -93,7 +93,7 @@ const RecentlyViewed = () => {
               <SwiperSlide key={book._id}>
                 <div className="product_widget26 mb_30">
                   <div className="product_thumb_upper position-relative">
-                    <span className="offer_badge">-{book.discount}%</span>
+                      {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
                     <Link
                       to={`/selectedBook/${book?._id}`}
                       className="thumb text-center"

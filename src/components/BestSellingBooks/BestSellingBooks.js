@@ -27,10 +27,9 @@ const BestSellingBooks = () => {
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10 mt-5 mx-4">
     {
       books?.map((book) => (
-        // <Link to={`/selectedBook/${book?._id}`}>
         <div className="product_widget26 mb_30 bg-white">
           <div className="product_thumb_upper position-relative">
-            <span className="offer_badge">-{book.discount}%</span>
+              {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
             <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
               <img src={book?.book_cover_photo_url} alt="" />
             </Link>
@@ -61,7 +60,6 @@ const BestSellingBooks = () => {
             <AddCartButton _id={book._id} />
           </div>
         </div>
-        // </Link>
       ))
     }
   </div>

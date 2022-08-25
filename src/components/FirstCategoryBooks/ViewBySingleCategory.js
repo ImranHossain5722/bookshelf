@@ -23,7 +23,7 @@ const ViewBySingleCategory = () => {
             {books?.map((book) => (
               <div className="product_widget26 mb_30">
               <div className="product_thumb_upper position-relative">
-                <span className="offer_badge">-{book.discount}%</span>
+                  {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
                 <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
                   <img src={book.book_cover_photo_url} alt="" />
                 </Link>

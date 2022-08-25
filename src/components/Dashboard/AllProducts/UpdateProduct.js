@@ -15,8 +15,7 @@ const UpdateProduct = () => {
     queryClient.clear();
     const { isLoading, data: book } = useQuery(['getBookDatasss'], () => fetch(`https://book-shelf-webapp.herokuapp.com/get-book?id=${bookid}`).then(res =>
         res.json()
-    ), { cacheTime: 1 }
-    )
+    ), { cacheTime: 1 })
 
     // get all Categories 
     const [allCategories, setAllCategories] = useState([]);
@@ -222,8 +221,13 @@ const UpdateProduct = () => {
                                         })}
                                         type="file"
                                         onChange={onChangePicture}
-                                        placeholder="Update Your Address"
-                                        className="input input-bordered w-full pt-[5px] bg-secondary text-white" />
+                                        class="block w-full text-sm text-slate-500
+                                        file:mr-4 file:py-2 file:px-4
+                                        file:rounded-full file:outline-none
+                                        file:text-sm file:font-semibold
+                                        file:bg-primary file:text-white
+                                        hover:file:bg-white hover:file:text-primary file:border-primary file:border-0
+                                      "/>
                                     <label className="label">
                                         <span className="label-text-alt text-red-500">{errors.image?.type === 'required' && `${errors?.image?.message}`}</span>
                                     </label>

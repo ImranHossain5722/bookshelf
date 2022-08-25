@@ -7,6 +7,8 @@ import auth from "../../firebase.init";
 import chat from "../../Assets/images/footer/chat.png";
 import "./footer.scss";
 import ScrollToTop from "react-scroll-to-top";
+import Modal from "../Modal/Modal";
+import QuickView from "../QuickView/QuickView";
 const Footer = () => {
   const [user] = useAuthState(auth);
 
@@ -74,7 +76,7 @@ const Footer = () => {
                     <a href="#">Order History</a>
                   </li>
                   <li>
-                    <a href="trackorder">Track Order</a>
+                    <a href="/trackorder">Track Order</a>
                   </li>
                   <li>
                     <a href="#">Order History</a>
@@ -123,7 +125,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
+           <Modal modal={"quick-view"}>
+        <QuickView />    
+      </Modal>
+
       </footer>
 
     </>

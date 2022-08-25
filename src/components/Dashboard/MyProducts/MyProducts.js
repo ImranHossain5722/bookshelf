@@ -74,7 +74,7 @@ const MyProducts = () => {
                             </tbody>
 
                         </table>
-                        {books[0].books_list.length === 0 &&
+                        {books[0]?.books_list.length === 0 &&
                             <p className='text-error text-2xl text-center py-8'>
                                 You dont have any book listed on our site
                                 <Link className='btn-primary text-xl text-white p-3 ml-4 rounded-xl' to='/dashboard/addproduct' element={<AddProduct></AddProduct>}> Add Product</Link>

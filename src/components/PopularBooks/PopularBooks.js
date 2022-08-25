@@ -11,7 +11,6 @@ import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 const PopularBooks = () => {
    const [books, setBooks] = useState([]);
    const [clicked, setclicked] = useState("best_selling");
-
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const PopularBooks = () => {
     if(clicked === "best_selling"){
 
       setLoading(true);
-      fetch("https://book-shelf-webapp.herokuapp.com/all-books")
+      fetch("https://book-shelf-webapp.herokuapp.com/get-popular-books")
         .then((res) => res.json())
         .then((data) => setBooks(data));
       setLoading(false);
@@ -76,7 +75,7 @@ const PopularBooks = () => {
         {books?.splice(0, 8).map((book) => (
           <div className="product_widget26 mb_30 bg-white">
             <div className="product_thumb_upper position-relative">
-              <span className="offer_badge">-{book.discount}%</span>
+                {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
               <Link
                 to={`/selectedBook/${book?._id}`}
                 className="thumb text-center"

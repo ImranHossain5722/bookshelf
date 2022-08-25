@@ -53,15 +53,11 @@ const ChatContainer = ({ currentChat, socket }) => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
 
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
   return (
     <div className="bg-white rounded-xl p-10 flex flex-col max-h-screen">
       <div class="avatar p-4 flex items-center border-b">
         <div class="w-10 rounded-full">
-          <img src={`https://api.multiavatar.com/${user_name}.png`} />
+          <img src={`https://xsgames.co/randomusers/assets/avatars/male/${user_name.length}.jpg` } /> 
         </div>
 
         <p className="ml-2 font-semibold">{user_name}</p>
@@ -78,8 +74,12 @@ const ChatContainer = ({ currentChat, socket }) => {
             key={uuidv4()}
           >
             <p
-              className="bg-[#0CCF6A] py-2 px-4  m-2 to text-white"
-              style={{ borderRadius: "30px 0px 30px 30px" }}
+                 className={`${
+                  msgs.fromSelf
+                    ? " sender"
+                    : " reciver"
+                } bg-[#0CCF6A] py-2 px-4  m-2 to text-white     `}
+         
             >
               {msgs.message}
             </p>

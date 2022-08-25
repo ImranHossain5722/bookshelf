@@ -15,6 +15,7 @@ import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 import Review from "../../components/Review/Review";
 import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCategoryBooks";
 import Release from "../Release/Release";
+import WorkPolicy from "../../components/WorkPolicy/WorkPolicy";
 
 const Home = () => {
   return (
@@ -38,6 +39,7 @@ const Home = () => {
       <BestSelling />
 
       <ContactClubBanner />
+      <WorkPolicy/>
       {/* Recently veiwed section */}
       <RecentlyViewed />
       <Modal modal={"quick-view"}>

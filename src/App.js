@@ -28,10 +28,8 @@ import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
 import AuthorOrPublisher from "./pages/Forms/AuthorOrPublisher";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import BestOffersBooks from "./components/BestOffersBooks/BestOffersBooks";
 import AllBooks from "./components/Books/AllBooks";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
-import PopularWritersBooks from "./components/PopularWritersBooks/PopularWritersBooks";
 import auth from "./firebase.init";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
@@ -67,10 +65,14 @@ import ChatPopup from "./components/ChatPopup/ChatPopup";
 import UpScrollButton from "./components/UpScrollButton/UpScrollButton";
 import UpdateProduct from "./components/Dashboard/AllProducts/UpdateProduct";
 import MyProducts from "./components/Dashboard/MyProducts/MyProducts";
+
 import CurrentOrders from "./components/Dashboard/OrderHistory/CurrentOrders";
 import OrdersPicked from "./components/Dashboard/OrderHistory/OrdersPicked";
 import OrdersDelivered from "./components/Dashboard/OrderHistory/OrdersDelivered";
 import AddProductReview from "./components/Dashboard/AddProductReview/AddProductReview";
+
+import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
+
 
 
 
@@ -154,14 +156,7 @@ function App() {
       ) : (
         <NavBar>
           <Routes>
-            <Route path="/" element={<Home />}>
-              <Route path="/" element={<BestOffersBooks />} />
-              <Route
-                path="/popular-writers"
-                element={<PopularWritersBooks />}
-              />
-              <Route path="/best-offers" element={<BestOffersBooks />} />
-            </Route>
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />}></Route>
             <Route path="/trackorder" element={<TrackOrder />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
@@ -175,6 +170,8 @@ function App() {
             <Route path="/became" element={<AuthorOrPublisher />}></Route>
             <Route path="/payment" element={<Payment />}></Route>
             <Route path="/books" element={<AllBooks />}></Route>
+            <Route path="/bestSelling" element={<BestSellingBooks />} />
+
             <Route
               path="/addbook"
               element={

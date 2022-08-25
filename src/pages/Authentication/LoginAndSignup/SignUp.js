@@ -15,7 +15,12 @@ import auth from "../../../firebase.init";
 import useToken from "../../../hooks/useToken";
 import "./Login.css";
 import SocialLogin from "./SocialLogin";
+
 import { onAuthStateChanged } from "firebase/auth";
+
+// import { onAuthStateChanged } from "firebase/auth";
+// import axios from "axios";
+
 
 const SignUp = () => {
 
@@ -30,6 +35,29 @@ const SignUp = () => {
   const { token } = useToken();
 
 
+  //   const userInfo = {
+  //     user_name: user?.user?.displayName,
+  //     user_email: user?.user?.email,
+  //     user_phone: user?.user?.phoneNumber ? user?.user?.phoneNumber : phoneNo,
+  //     user_photo_url: user?.user?.photoURL
+  //       ? user?.user?.photoURL
+  //       : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
+  //     uid: user?.user?.uid,
+  //     user_role: "user",
+  //   };
+  //   if (user) {
+  //     console.log("Got User");
+  //     const postAuthorData = async () => {
+  //       await axios
+  //         .post("https://book-shelf-webapp.herokuapp.com/add-user", userInfo)
+  //         .then((data) => console.log(data));
+  //       navigate("/dashboard");
+  //     };
+  //     postAuthorData();
+  //   } else {
+  //     console.log("user data not found");
+  //   }
+  // console.log(socialUser);
 
   if (loading || updating || sending) {
     return <Loading></Loading>;
@@ -40,7 +68,13 @@ const SignUp = () => {
   }
 
   if (user || socialUser || token) {
+
     // navigate("/dashboard");
+
+    navigate("/dashboard");
+
+    // console.log(user);
+
   }
 
   let confirmPassError;
@@ -53,6 +87,13 @@ const SignUp = () => {
     if (pass === confirmPass) {
       await createUserWithEmailAndPassword(data.email, data.password);
       await updateProfile({ displayName: data.name });
+      // await onAuthStateChanged(auth, async (user) => {
+      //   if (user) {
+      //     const data = await axios.post(
+      //       "https://book-shelf-webapp.herokuapp.com/login-user", user);
+      //     console.log(user)
+      //   }
+      // });
       await sendEmailVerification();
       toast("Verification Email Sent");
 

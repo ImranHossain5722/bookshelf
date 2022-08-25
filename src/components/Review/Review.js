@@ -55,7 +55,6 @@ const Review = () => {
         >
           {reviews?.map((review) => (
             <SwiperSlide key={review.id} className="swiper-review">
-              {console.log(review)}
               <div class="single_testmonial">
                 <div class="testmonial_header flex items-center">
                   <div class="thumb">

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import wp from "../../Assets/images/wp.png";
+import wp from "../../Assets/images/Banner-images/ebook3-slider-pic1.png";
 import "./RightSideBar.css";
 import Contacts from "../Contacts/Contacts";
 import { useDispatch, useSelector } from 'react-redux'
@@ -58,7 +58,7 @@ const RightSideBar = () => {
       {/* add */}
       <div className="add mt-5">
         <div class="flex items-center dark:bg-gray-700 dark:border-gray-600 dark:text-white px-4 cursor-pointer">
-          <img className=" w-36 text-[#056BE1] rounded-lg" src={wp}  alt="" />
+          <img className=" w-20 text-[#056BE1] rounded-lg" src={wp}  alt="" />
           <p className=" px-4 w-full text-black text-[15px]   dark:bg-gray-800 dark:border-gray-600">
             30% of our this books 
           </p>

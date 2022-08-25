@@ -81,7 +81,7 @@ const NavBar = ({ children }) => {
           <NavTopbar />
 
           {/* <!-- Navbar --> */}
-          <div className="w-full navbar bg-gray-200 main_header sticky top-0 z-50">
+          <div className="w-full navbar main_header sticky top-0 z-50">
             {/* mobile menu button */}
             <div className="flex-none lg:hidden">
               <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
@@ -100,40 +100,30 @@ const NavBar = ({ children }) => {
                 </svg>
               </label>
             </div>
-            <div className="text-4xl text-blue-400 uppercase font-bold">
+            <div className="text-4xl text-blue-400 uppercase font-bold flex-1 text-center justify-center lg:flex-none lg:block">
               <NavLink to="/" className="">
-                <img className="" alt="" src={logo} />
+                <img className="w-44" alt="logo" src={logo} />
               </NavLink>
             </div>
 
             {/* desktop */}
-            <div className="flex-none mx-2 hidden lg:block ">
-              <ul className="menu menu-horizontal  ">
+            <div className="flex-none mx-2 hidden lg:flex lg:flex-1 lg:justify-center">
+              <ul className="menu menu-horizontal main_middle_menu ">
                 {/* <!-- Navbar menu content here --> */}
                 <li>
-                  <NavLink to="/" className="rounded-lg ">
-                    Home
-                  </NavLink>
+                  <NavLink to="/">Home</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/books" className="rounded-lg">
-                    Books
-                  </NavLink>
+                  <NavLink to="/books">Books</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/bestSelling" className="rounded-lg">
-                   Best Selling Books
-                  </NavLink>
+                  <NavLink to="/bestSelling">Best Selling Books</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/about" className="rounded-lg">
-                    About Us
-                  </NavLink>
+                  <NavLink to="/about">About Us</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/contact" className="rounded-lg">
-                    Contact US
-                  </NavLink>
+                  <NavLink to="/contact">Contact US</NavLink>
                 </li>
               </ul>
             </div>
@@ -183,7 +173,7 @@ const NavBar = ({ children }) => {
 
                     {/* dropdown */}
                     <div className="flex-none">
-                      <ul className="menu menu-horizontal p-0">
+                      <ul className="menu menu-horizontal  p-0">
                         <li tabIndex="0">
                           <img className="" width={45} alt="" src={downArrow} />
 

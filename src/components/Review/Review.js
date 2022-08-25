@@ -27,7 +27,7 @@ const Review = () => {
   }, []);
 
   return (
-    <div className="bg-white py-[120px]">
+    <div className="bg-white section_spacing_top">
       <div className="container mx-auto relative">
         <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold  pb-1">
           Client Testimonial
@@ -55,7 +55,6 @@ const Review = () => {
         >
           {reviews?.map((review) => (
             <SwiperSlide key={review.id} className="swiper-review">
-              {console.log(review)}
               <div class="single_testmonial">
                 <div class="testmonial_header flex items-center">
                   <div class="thumb">

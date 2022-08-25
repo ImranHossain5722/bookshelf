@@ -90,15 +90,15 @@ const NavDashboard = ({ children }) => {
             {/* desktop */}
             <div className="flex-none mx-96 hidden lg:block">
               {/* <!-- Navbar menu content here --> */}
-              <div className="flex items-center justify-center">
-                <p className="text-2xl text-primary uppercase text-center font-bold">
+              <div className="flex items-center justify-center gap-1">
+                <p className="text-xl text-primary uppercase text-center font-bold">
                   Weclome to
                 </p>{" "}
-                <p className="text-2xl text-primary uppercase text-center font-bold">
+                <p className="text-xl text-primary uppercase text-center font-bold">
                   <span className="text-secondary">Book</span>
                   <span className="">Shef</span>
                 </p>{" "}
-                <p className="text-2xl text-secondary uppercase text-center font-bold">
+                <p className="text-xl text-secondary uppercase text-center font-bold">
                   Dashboard
                 </p>
               </div>

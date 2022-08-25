@@ -66,6 +66,7 @@ import ScrollToTop from "react-scroll-to-top";
 import ChatPopup from "./components/ChatPopup/ChatPopup";
 import UpScrollButton from "./components/UpScrollButton/UpScrollButton";
 import UpdateProduct from "./components/Dashboard/AllProducts/UpdateProduct";
+import MyProducts from "./components/Dashboard/MyProducts/MyProducts";
 
 
 
@@ -123,6 +124,7 @@ function App() {
               <Route path="requestbook" element={<RequestBook />} />
               <Route path="addreview" element={<Addreview />} />
               <Route path="addproduct" element={<AddProduct />} />
+              <Route path="myproducts" element={<MyProducts />} />
               <Route path="updateproduct/:bookid" element={<UpdateProduct />} />
               <Route path="allpublisher" element={<AllPublishers />} />
               <Route path="allusers" element={<AllUsers />} />
@@ -261,12 +263,12 @@ function App() {
               {" "}
             </Route>
           </Routes>
-          
+
           <Footer />
-        
+
         </NavBar>
       )}
-      
+
       <ToastContainer />
     </div>
   );

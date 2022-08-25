@@ -21,9 +21,13 @@ const SocialLogin = () => {
   const from = location.state?.from?.pathname || "/dashboard";
   const { userLogin } = useToken();
 
-  if (error || fError) {
+  if (error) {
     toast(`Error: ${error?.message}`);
   }
+  if (fError) {
+    toast(`Error: ${fError?.message}`);
+  }
+
   if (loading || fLoading) {
     return <Loading></Loading>;
   }

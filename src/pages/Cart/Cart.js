@@ -123,7 +123,7 @@ const Cart = () => {
                   </td>
                   <td className="border-[#e1e2e6]">
                  
-                    <CartDeleteButton _id={book.book._id} />
+                    <CartDeleteButton _id={book.book?._id} />
                   </td>
                 </tr>)}
 

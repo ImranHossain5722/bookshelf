@@ -8,6 +8,9 @@ import { toast } from "react-toastify";
 const Products_details = () => {
   const { _id } = useParams();
   const [book, setbook] = useState({});
+  const [quantity, setqnt] = useState(1);
+
+  
   const {
     book_cover_photo_url,
     book_title,
@@ -17,7 +20,9 @@ const Products_details = () => {
     book_pages,
     book_language,
     discount,
+    
   } = book;
+  console.log(book)
   useEffect(() => {
     axios
       .get(`https://book-shelf-webapp.herokuapp.com/get-book?id=${_id}`)
@@ -32,7 +37,7 @@ const Products_details = () => {
       user_id: userId,
       cart_data: {
         book: id,
-        qnt: 2
+        qnt: quantity
       }
     }
     if (userId) {
@@ -41,7 +46,6 @@ const Products_details = () => {
     } else {
       console.log("user id not found", userId)
     }
-    console.log(cartData)
   }
 
   // adding to  wishlist 
@@ -57,8 +61,20 @@ const Products_details = () => {
     } else {
       console.log(" the user id is not found")
     }
-    console.log(cardData)
   }
+  
+  const increaseQnt =() => {
+  
+    setqnt(quantity+1)
+ 
+  }
+  const decreaseQnt = () => {
+    if(quantity !==1){
+      setqnt(quantity-1)
+
+    }
+  }
+  console.log(quantity)
   return (
     <div className="pt-[60px] md:pt-[80px] lg:pt-[120px]  pb-[60px] md:pb-[80px] lg:pb-[120px] ">
       <div className="container m-auto flex gap-6 justify-center">
@@ -86,17 +102,18 @@ const Products_details = () => {
             <div className="flex items-center gap-2 mb-3">
               <p className="text-black text-[16px]">Quantity</p>
               <div className="flex">
-                <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6] border-solid border text-black">
-                  +
-                </button>
-                <input
-                  type="text"
-                  placeholder="0"
-                  className="input  w-[50px] h-[40px] max-w-xs rounded-none text-center border-[#e1e2e6] border-solid border-y-1 border-x-0 text-black"
-                />
-                <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6 border-solid border text-black">
-                  -
-                </button>
+              <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6] border-solid border text-black" onClick={increaseQnt}>
+                        +
+                      </button>
+                      <input
+                        type="text"
+                        value={quantity}
+
+                        className="input  w-[50px] h-[40px] max-w-xs rounded-none text-center border-[#e1e2e6] border-solid border-y-1 border-x-0 text-black"
+                      /> 
+                      <button className="bg-[#f9f9fd] w-[40px] h-[40px] flex items-center justify-center rounded-none border-[#e1e2e6 border-solid border text-black" onClick={decreaseQnt} >
+                        -
+                      </button>
               </div>
             </div>
             <div className="flex items-center text-black mb-3 gap-2">

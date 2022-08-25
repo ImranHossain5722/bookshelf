@@ -27,7 +27,7 @@ const Review = () => {
   }, []);
 
   return (
-    <div className="bg-white py-[120px]">
+    <div className="bg-white section_spacing_top">
       <div className="container mx-auto relative">
         <h2 className="text-[30px] lg:text-[40px] text-[#00124E] font-bold  pb-1">
           Client Testimonial

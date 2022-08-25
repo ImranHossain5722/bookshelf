@@ -26,7 +26,7 @@ const PopularAuthor = () => {
   }, []);
 
   return (
-    <div className="bg-white section_padding">
+    <div className="bg-white section_spacing_bottom">
       <div className="container mx-auto relative ">
         {/* ------title section----- */}
         <h1 className="text-[30px] lg:text-[40px] font-bold text-[#00124E] section_title">

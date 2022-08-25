@@ -4,6 +4,7 @@ import Loading from '../Loading/Loading'
 
 const OrderView = () => {
     const orderItem = useSelector((state) => state.orderView.orderView)
+    // console.log(orderItem);
     if (!orderItem) {
         return <Loading />
     }
@@ -29,7 +30,6 @@ const OrderView = () => {
 
                                 <td className="border-[#e1e2e6]">
 
-
                                     <div className="avatar">
                                         <div className="w rounded text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
                                             {orderItem?._id}
@@ -50,19 +50,26 @@ const OrderView = () => {
                                                         <img src={book.book_id?.book_cover_photo_url} alt="" />
                                                     </div>
                                                 </div>
-
                                             </td>
                                             <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
                                                 {book.book_id?.book_title}
                                             </td>
                                             <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
-                                                ${book.book_id?.book_price * book.qnt}
+                                                ${book.book_id?.book_price}
 
                                             </td>
                                             <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
-                                                {orderItem?.createdAt?.slice(0, 10)}
+                                                {book.qnt}
 
                                             </td>
+                                            <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
+                                                ${book.book_id?.book_price * book.qnt}
+
+                                            </td>
+                                            {/* <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
+                                                {orderItem?.createdAt?.slice(0, 10)}
+
+                                            </td> */}
 
 
 

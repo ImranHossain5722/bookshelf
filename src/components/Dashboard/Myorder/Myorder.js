@@ -25,10 +25,9 @@ const Myorder = () => {
     }, [userId])
 
     const viewOrder = (selectedOrder) => {
-        console.log(selectedOrder)
+        // console.log(selectedOrder)
         dispatch(orderView(selectedOrder))
     }
-
     return (
         <div className="my-5">
             <p className="text-5xl text-center mb-3">My Orders</p>
@@ -40,6 +39,7 @@ const Myorder = () => {
                                 <th className="rounded-none">code</th>
                                 <th>Date</th>
                                 <th>Amount</th>
+                                <th>Order Status</th>
                                 <th>payment Status</th>
                                 <th>Options</th>
                             </tr>
@@ -60,6 +60,14 @@ const Myorder = () => {
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
                                     ${orderDetails.ordered_price_amount}
+                                </td>
+                                <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-semibold">
+                                    {
+                                        (orderDetails.delivered_status === true && 'Delivered')
+                                        || (orderDetails.picked_status === true && 'Picked')
+                                        || (orderDetails.placed_status === true && 'Placed')
+
+                                    }
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
                                     <button className=" btn btn-xs btn-warning text-white w-[155px] h-[24px] mb-3 rounded-full" >{orderDetails.order_status} </button>

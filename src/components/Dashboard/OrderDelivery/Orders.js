@@ -20,11 +20,7 @@ const Orders = () => {
     )
     // console.log(allOrders)
     let newOrders = [];
-    allOrders?.map(order => {
-        if (order?.picked_status === false) {
-            newOrders.push(order);
-        }
-    })
+    allOrders?.map(order => (order?.picked_status === false) && newOrders.push(order))
 
     const today = new Date();
     const formatedData = format(today, 'dd.MM.yyyy');

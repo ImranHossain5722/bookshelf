@@ -56,11 +56,8 @@ const NavDashboard = ({ children }) => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* <!-- Navbar --> */}
-          <div className="w-full  navbar bg-white p-20 border-b-2 border-primary ">
-            <div
-              style={{ margin: "0px 0px 0px -45px" }}
-              className=" hidden lg:flex  flex-1 px-2 "
-            >
+          <div className="w-full  navbar bg-white p-2 dashboard_header">
+            <div className=" hidden lg:block  px-2 ">
               <NavLink
                 to="/"
                 className="text-white text-sm p-2 bg-primary rounded-md"
@@ -88,7 +85,7 @@ const NavDashboard = ({ children }) => {
             </div>
 
             {/* desktop */}
-            <div className="flex-none mx-96 hidden lg:block">
+            <div className=" hidden lg:block flex-1">
               {/* <!-- Navbar menu content here --> */}
               <div className="flex items-center justify-center gap-1">
                 <p className="text-xl text-primary uppercase text-center font-bold">

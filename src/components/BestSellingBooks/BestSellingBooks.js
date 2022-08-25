@@ -34,7 +34,7 @@ const BestSellingBooks = () => {
                     books?.splice(0, 8).map(book =>
                         <div className="product_widget26 mb_30">
                         <div className="product_thumb_upper position-relative">
-                          <span className="offer_badge">-0%</span>
+                          <span className="offer_badge">-{book.discount}%</span>
                           <a href="product_details.php" className="thumb text-center">
                             <img src={book.book_cover_photo_url} alt="" />
                           </a>

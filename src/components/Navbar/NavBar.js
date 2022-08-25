@@ -102,7 +102,7 @@ const NavBar = ({ children }) => {
             </div>
             <div className="text-4xl text-blue-400 uppercase font-bold flex-1 text-center justify-center lg:flex-none lg:block">
               <NavLink to="/" className="">
-                <img className="" alt="" src={logo} />
+                <img className="w-44" alt="logo" src={logo} />
               </NavLink>
             </div>
 

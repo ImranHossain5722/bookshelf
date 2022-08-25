@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 
 
-const TrackOrder = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+const TrackOrders = () => {
+    const { bookid } = useParams();
     const [orderData, setOrderData] = useState([]);
     // const [orderStatus, setOrderStatus] = useState('');
     const order = orderData[0];
-    console.log(orderData);
+    useEffect(() => {
 
-    const onSubmit = data => {
-        console.log(data)
-        fetch(`https://book-shelf-webapp.herokuapp.com/get-order-details?oid=${data?.invoice}`)
+        fetch(`https://book-shelf-webapp.herokuapp.com/get-order-details?oid=${bookid}`)
             .then(res => res.json())
             .then(data => setOrderData(data))
-    }
+    }, [bookid])
+    console.log(orderData)
+
 
 
     return (
@@ -26,35 +26,7 @@ const TrackOrder = () => {
                     <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
                 </div>
             </div>
-            <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className=' mx-auto w-4/6 py-12 border p-8 rounded-lg bg-white '>
-                        <div className=' text-center text-xl font-bold pb-6'>
-                            <label >Check Your Order Status</label>
-                        </div>
-                        <div className=''>
-                            <input
-                                {...register("invoice", {
-                                    required: {
-                                        value: true,
-                                        message: "Invoice Number is Required"
-                                    }
-                                })}
-                                type="text"
-                                placeholder='Input Invoice Number'
-                                className="input input-bordered w-full bg-[#0000000d]  text-secondary" />
-                            <label className="label">
-                                <span className="label-text-alt text-red-500">{errors.name?.type === 'required' && `${errors?.name?.message}`}</span>
-                            </label>
 
-                        </div>
-                        <div className='mx-auto text-center'>
-                            <input type="submit" className='btn btn-primary text-white w-md ml-2 mx-auto' value='Track Order' />
-                        </div>
-
-                    </div>
-                </form>
-            </div>
             <div>
                 {order &&
                     <div className='w-4/6 mx-auto '>
@@ -145,4 +117,4 @@ const TrackOrder = () => {
     );
 };
 
-export default TrackOrder;
+export default TrackOrders;

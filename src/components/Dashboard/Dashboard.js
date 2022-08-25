@@ -29,16 +29,16 @@ function Dashboard() {
                 <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
                 <li><Link to='/dashboard/myorder' className='text-lg text-[#00124E] font-bold'>My Order</Link></li>
                 <li><Link to='/dashboard/orderhistory/orders' className='text-lg text-[#00124E] font-bold'>Order History</Link></li>
+                <li><Link to='/dashboard/addproductreviews' className='text-lg text-[#00124E] font-bold'>Make Reviews</Link></li>
                 <li><Link to='/dashboard/mywishlist' className='text-lg text-[#00124E] font-bold'>My Wishlist</Link></li>
                 <li><Link to='/dashboard/requestbook' className='text-lg text-[#00124E] font-bold'>Request Book</Link></li>
-                <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
+
                 <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
               </>}
 
               {userRole === 'author' && <>
                 <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
                 <li><Link to='/dashboard/myproducts' className='text-lg text-[#00124E] font-bold'>My Products</Link></li>
-                <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
                 <li><Link to='/dashboard/addproduct' className='text-lg text-[#00124E] font-bold'>Add Product</Link></li>
                 <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
               </>}
@@ -46,7 +46,6 @@ function Dashboard() {
               {userRole === 'publisher' && <>
                 <li><Link to='/dashboard' className='text-lg text-[#00124E] font-bold'>My profile</Link></li>
                 <li><Link to='/dashboard/myproducts' className='text-lg text-[#00124E] font-bold'>My Products</Link></li>
-                <li><Link to='/dashboard/addreview' className='text-lg text-[#00124E] font-bold'>Add a review</Link></li>
                 <li><Link to='/dashboard/addproduct' className='text-lg text-[#00124E] font-bold'>Add Product</Link></li>
                 <li className='text-lg text-[#00124E] font-bold pl-5' onClick={() => signOut(auth)}>Logout</li>
               </>}

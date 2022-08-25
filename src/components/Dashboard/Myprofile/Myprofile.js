@@ -15,6 +15,7 @@ import { newUser } from "../../Redux/actions/bookActions";
 import useGetUserData from "../../../hooks/useGetUserData";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 const Myprofile = () => {
   const [user] = useAuthState(auth);
   // const [getUser, setGetUser] = useState([]);
@@ -218,7 +219,7 @@ const Myprofile = () => {
               getUser[0]?.user_photo_url
                 ? getUser[0]?.user_photo_url
                 : user?.photoURL ||
-                  "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg "
+                "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg "
             }
             alt=""
           />
@@ -260,6 +261,12 @@ const Myprofile = () => {
             <p className="font-[600] text-[16px] py-[7px]">
               {getUser[0]?.user_birthday}
             </p>
+          </div>
+          <div className="bg-base-100 py-6 px-2 text-center rounded-md">
+            <p className="text-xl mb-2 text-[#666666] ">
+              Please feel free to share your feedback about <b>BookShelf</b>
+            </p>
+            <Link to='/dashboard/addreview' className="text-white mx-auto btn btn-primary">Add a Review</Link>
           </div>
         </div>
 

@@ -23,16 +23,17 @@ const PickedOrder = () => {
     )
     // console.log(allOrders)
     let newOrders = [];
-    allOrders?.map(order => order?.picked_status === true && newOrders.push(order))
+    allOrders?.map(order => (order?.picked_status === true && order?.delivered_status === false) && newOrders.push(order))
     const today = new Date();
     const formatedData = format(today, 'dd.MM.yyyy');
+    console.log(newOrders)
     const deliverOrder = (id) => {
         console.log('picked hit')
 
         const pickedData = {
-            picked_status: true,
-            picked_date: formatedData,
-            picked_by: getUser[0]?.uid
+            delivered_status: true,
+            delivered_date: formatedData,
+            delivered_by: getUser[0]?.uid
         }
         axios.patch(`https://book-shelf-webapp.herokuapp.com/update-order-tracking?oid=${id}`, pickedData)
             .then(data => {

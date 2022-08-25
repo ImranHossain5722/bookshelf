@@ -39,7 +39,7 @@ const AddProductReview = () => {
         axios.post('https://book-shelf-webapp.herokuapp.com/add-book-review', reviewData)
             .then(res => console.log(res));
 
-        // navigate('/dashboard/addproductreviews')
+        navigate('/dashboard/addproductreviews')
     };
 
     return (

@@ -61,13 +61,13 @@ const PopularBooks = () => {
         <div className="flex justify-center mt-5 mb-16 text-[#00124E] font-bold">
           <ul className="flex">
             <li className="hover:text-primary duration-500">
-              <button onClick={() => setclicked("best_selling")} >Best Selling Books</button>
+              <button onClick={() => setclicked("best_selling")} >Best Selling</button>
             </li>
             <li className="mx-10 hover:text-primary duration-500">
-              <button  onClick={() => setclicked("popular_writer")}>Popular Writer's Books</button>
+            <button  onClick={() => setclicked("popular_writer")}>Popular Writer's </button>
             </li>
             <li className="hover:text-primary duration-500">
-              <button onClick={() => setclicked("best_offer")} >Best Offers Books</button>
+              <button onClick={() => setclicked("best_offer")} >Best Offers </button>
             </li>
           </ul>
         </div>

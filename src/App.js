@@ -65,7 +65,14 @@ import ChatPopup from "./components/ChatPopup/ChatPopup";
 import UpScrollButton from "./components/UpScrollButton/UpScrollButton";
 import UpdateProduct from "./components/Dashboard/AllProducts/UpdateProduct";
 import MyProducts from "./components/Dashboard/MyProducts/MyProducts";
+
+import CurrentOrders from "./components/Dashboard/OrderHistory/CurrentOrders";
+import OrdersPicked from "./components/Dashboard/OrderHistory/OrdersPicked";
+import OrdersDelivered from "./components/Dashboard/OrderHistory/OrdersDelivered";
+import AddProductReview from "./components/Dashboard/AddProductReview/AddProductReview";
+
 import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
+
 
 
 
@@ -125,15 +132,22 @@ function App() {
               <Route path="addproduct" element={<AddProduct />} />
               <Route path="myproducts" element={<MyProducts />} />
               <Route path="updateproduct/:bookid" element={<UpdateProduct />} />
+              <Route path="addproductreviews/:bookid" element={<AddProductReview />} />
               <Route path="allpublisher" element={<AllPublishers />} />
               <Route path="allusers" element={<AllUsers />} />
               <Route path="allorders" element={<AllOrders />} />
               <Route path="allauthor" element={<AllAuthors />} />
-              <Route path="orderhistory" element={<OrderHistory />} />
-              <Route path="orderdelivery" element={<OrderDelivery />}>
-                <Route path="orders" element={<Orders />} />
+              <Route path="orderhistory" element={<OrderHistory />} >
+                <Route path="orders" element={<CurrentOrders />} />
                 <Route path="deliveredorders" element={<DeliveredOrder />} />
                 <Route path="pickedorders" element={<PickedOrder />} />
+              </Route>
+
+
+              <Route path="orderdelivery" element={<OrderDelivery />}>
+                <Route path="orders" element={<Orders />} />
+                <Route path="deliveredorders" element={<OrdersDelivered />} />
+                <Route path="pickedorders" element={<OrdersPicked />} />
               </Route>
 
             </Route>
@@ -142,7 +156,7 @@ function App() {
       ) : (
         <NavBar>
           <Routes>
-            <Route path="/" element={<Home />}/>
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />}></Route>
             <Route path="/trackorder" element={<TrackOrder />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>

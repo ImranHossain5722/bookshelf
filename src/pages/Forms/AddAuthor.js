@@ -85,7 +85,7 @@ const AddAuthor = () => {
                       authorInfo
                     )
                     .then((data) => {
-                      console.log("Server Data", data);
+                      // console.log("Server Data", data);
                       navigate("/dashboard");
                     });
                 };

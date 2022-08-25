@@ -1,4 +1,5 @@
 import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
 import {
   useCreateUserWithEmailAndPassword,
@@ -14,7 +15,7 @@ import auth from "../../firebase.init";
 const AddPublisher = () => {
   const [sendEmailVerification, sending, vError] =
     useSendEmailVerification(auth);
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, user1, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, uError] = useUpdateProfile(auth);
   const {
@@ -25,7 +26,6 @@ const AddPublisher = () => {
   } = useForm();
   const navigate = useNavigate();
   const [phoneNo, setPhoneNo] = useState("");
-  const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
 
   if (loading || updating || sending) {
@@ -40,7 +40,6 @@ const AddPublisher = () => {
 
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
-      setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
@@ -64,47 +63,53 @@ const AddPublisher = () => {
       });
       await sendEmailVerification();
       toast("Verification Email Sent");
-      console.log("user created on firebase");
-      if (user) {
-        const imgbbKey = "5e72e46e329464d233a1bc1128fc1a76";
-        const image = data?.image[0];
-        const formData = new FormData();
-        formData.append("image", image);
+      // console.log("user created on firebase");
+      await onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const imgbbKey = "5e72e46e329464d233a1bc1128fc1a76";
+          const image = data?.image[0];
+          const formData = new FormData();
+          formData.append("image", image);
 
-        fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
-          method: "POST",
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((result) => {
-            if (result.success) {
-              const imgbbUrl = result?.data?.url;
-              const publisherInfo = {
-                user_name: user?.user?.displayName,
-                user_email: user?.user?.email,
-                user_phone: user?.user?.phoneNumber
-                  ? user?.user?.phoneNumber
-                  : phoneNo,
-                user_photo_url: imgbbUrl
-                  ? imgbbUrl
-                  : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
-                uid: user?.user?.uid,
-              };
-              const postPublisherData = async () => {
-                await axios
-                  .post(
-                    "https://book-shelf-webapp.herokuapp.com/register-publisher",
-                    publisherInfo
-                  )
-                  .then((data) => console.log(data));
-                navigate("/dashboard");
-              };
-              postPublisherData();
-            }
-          });
-      } else {
-        console.log("user data not found");
-      }
+          fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              if (result.success) {
+                const imgbbUrl = result?.data?.url;
+                const publisherInfo = {
+                  user_name: user?.displayName ? user?.displayName : data?.publisher_name,
+                  user_email: user?.email ? user?.email : data?.publisher_email,
+                  user_phone: user?.phoneNumber
+                    ? user?.phoneNumber
+                    : phoneNo,
+                  user_photo_url: imgbbUrl
+                    ? imgbbUrl
+                    : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
+                  uid: user?.uid,
+                };
+                const postPublisherData = async () => {
+                  await axios
+                    .post(
+                      "https://book-shelf-webapp.herokuapp.com/register-publisher",
+                      publisherInfo
+                    )
+                    .then((data) => {
+                      // console.log("Server Data", data);
+                      navigate("/dashboard");
+                    });
+
+                };
+                postPublisherData();
+              }
+            });
+        } else {
+          console.log("user data not found");
+        }
+      });
+
     } else {
       toast("Password and Confirm Password Dose not match");
     }

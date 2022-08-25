@@ -14,6 +14,8 @@ import auth from "../../../firebase.init";
 import useToken from "../../../hooks/useToken";
 import "./Login.css";
 import SocialLogin from "./SocialLogin";
+// import { onAuthStateChanged } from "firebase/auth";
+// import axios from "axios";
 
 const SignUp = () => {
   const [sendEmailVerification, sending, vError] =
@@ -55,7 +57,7 @@ const SignUp = () => {
   //   } else {
   //     console.log("user data not found");
   //   }
-  console.log(socialUser);
+  // console.log(socialUser);
   if (loading || updating || sending) {
     return <Loading></Loading>;
   }
@@ -67,7 +69,7 @@ const SignUp = () => {
   if (user || socialUser || token) {
     navigate("/dashboard");
 
-    console.log(user);
+    // console.log(user);
   }
 
   let confirmPassError;
@@ -80,6 +82,13 @@ const SignUp = () => {
     if (pass === confirmPass) {
       await createUserWithEmailAndPassword(data.email, data.password);
       await updateProfile({ displayName: data.name });
+      // await onAuthStateChanged(auth, async (user) => {
+      //   if (user) {
+      //     const data = await axios.post(
+      //       "https://book-shelf-webapp.herokuapp.com/login-user", user);
+      //     console.log(user)
+      //   }
+      // });
       await sendEmailVerification();
       toast("Verification Email Sent");
       reset();

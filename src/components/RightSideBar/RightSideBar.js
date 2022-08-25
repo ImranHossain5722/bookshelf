@@ -34,6 +34,7 @@ const RightSideBar = () => {
       fetchUsers();
     }
   }, [])
+  const mainUsers = users.filter(user => user?._id !== currentUser?._id  && user.role !== "admin"   )
   useEffect(() => {
     if (currentUser) {
       socket.current = io("https://book-shelf-webapp.herokuapp.com");
@@ -73,7 +74,7 @@ const RightSideBar = () => {
        
       </div>
       {
-        users.map((user) =>(
+        mainUsers.map((user) =>(
           <Contacts key={user.id} user={user} handleContact={handleContact} />
         ))}
         <div className="fixed bottom-0 right-[50px]">

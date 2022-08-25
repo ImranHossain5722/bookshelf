@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { useSelector } from "react-redux";
 import { BsCartCheckFill } from "react-icons/bs";
 import { toast } from "react-toastify";
@@ -8,23 +8,25 @@ const Checkout = () => {
   const cart = useSelector((state) => state.cartData.cartData);
   const user = useSelector((state) => state?.newUser?.user);
   const userId = user?._id;
+  const [payMethod , setPayment] = useState("cash_on")
   const navigate = useNavigate();
+  // setPayment
+  console.log(cart)
   const sendOrder = async () => {
-
-
-    
-    if (cart) {
-      await axios
-        .post("https://book-shelf-webapp.herokuapp.com/place-order", cart)
-        .then((data) => toast.success("Thanks for Ordering"));
-      await axios.delete(
-        `https://book-shelf-webapp.herokuapp.com/delete-cart?id=${userId}`
-      );
-    } else {
-      console.log("cart not found");
-
-    }
+    if (payMethod === "cash_on") {
+      axios.get(`https://book-shelf-webapp.herokuapp.com/change-order-status?oid=${cart._id}&status="cash_on`)
+    } 
+   else if (payMethod === "online_pay") {
+    // /make-payment?oid=[order id]&price=[order price]
+    fetch(`https://book-shelf-webapp.herokuapp.com/make-payment?oid=${cart._id}&price=${cart.ordered_price_amount}`)
+      console.log("cash on online")
+      } 
+   
   };
+  
+  
+
+
   if (!cart.user_id) {
     navigate("/cart");
   }
@@ -160,29 +162,25 @@ const Checkout = () => {
                   </div>
                   <div className="single_payment_box border-[1px] border-t-[0] p-4 font-normal">
                     <div class="single_lists">
-                      <div class="select_list">
-                        <label class="primary_checkbox flex mb-2">
-                          <input type="checkbox" />
-                          <span class="checkmark mr-2.5"></span>
-                          <span class="label_name">Cash on delivery</span>
-                        </label>
-                        <label class="primary_checkbox flex ">
-                          <input type="checkbox" />
-                          <span class="checkmark mr-2.5"></span>
-                          <span class="label_name">Online Payment</span>
-                        </label>
-                      </div>
+                    <div class="form-control w-fit" onClick={() => setPayment("cash_on")}>
+  <label class="label cursor-pointer">
+    <input type="radio" name="radio-" class="radio radio-primary" checked />
+    <span class="label-text ml-2">Cash on delivery</span> 
+  </label>
+</div>
+<div class="form-control w-fit"  onClick={() => setPayment("online_pay")}>
+  <label class="label cursor-pointer">
+    <input type="radio" name="radio-" class="radio radio-primary"  />
+    <span class="label-text ml-2">Online Payment</span> 
+  </label>
+</div>
+                      
                     </div>
                   </div>
                 </div>
-                <div className="single_payment_box border-[1px] text-black p-4 mb-3 font-semibold">
-                  CHEQUE PAYMENT
-                </div>
-                <Link to="/payment">
-                  <div className="single_payment_box border-[1px] text-black p-4 mb-3 font-semibold">
-                    PAYPAL
-                  </div>
-                </Link>
+             
+               
+                
               </div>
               <div className="mt-6">
                 <button

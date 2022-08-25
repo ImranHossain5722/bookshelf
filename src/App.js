@@ -70,14 +70,11 @@ import CurrentOrders from "./components/Dashboard/OrderHistory/CurrentOrders";
 import OrdersPicked from "./components/Dashboard/OrderHistory/OrdersPicked";
 import OrdersDelivered from "./components/Dashboard/OrderHistory/OrdersDelivered";
 import AddProductReview from "./components/Dashboard/AddProductReview/AddProductReview";
-
 import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
-<<<<<<< HEAD
 import ThankYou from "./components/ThankYou/ThankYou";
-=======
 import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
 import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
->>>>>>> a8f29b6a5e78f2ca6ca77d2fc6e2b79a67df6ffe
+
 
 
 

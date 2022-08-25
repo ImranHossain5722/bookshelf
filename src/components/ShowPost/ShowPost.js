@@ -60,47 +60,27 @@ const ShowPost = ({ singlePost }) => {
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
-  const lovePost =(id) => {
-    // "https://book-shelf-webapp.herokuapp.com/get-posts"
+  const lovePost =(postLoves,id) => {
+   const ids =  postLoves.map(post => post.user_email)
+    console.log(currentUser)
+
     const data = {
       
         user_id :currentUser._id,
         post_id : id
     
     }
+    if(ids.includes(currentUser.user_email)){
+      axios.patch("https://book-shelf-webapp.herokuapp.com/downvote-post",data).then(data => console.log(data))
 
-    if(data){
-
+    }
+    else{
+   
       axios.patch("https://book-shelf-webapp.herokuapp.com/upvote-post",data).then(data => console.log(data))
     }
-
-
-    console.log(id)
+    console.log(ids,id)
   }
 
-  const UnLovePost = (id) => {
-    // "https://book-shelf-webapp.herokuapp.com/upvote-post"
-    const data = {
-      
-      user_id :currentUser._id,
-      post_id : id
-  
-  }
-
-  if(data){
-
-    axios.patch("https://book-shelf-webapp.herokuapp.com/downvote-post",data).then(data => console.log(data))
-  }
-
-
-  console.log(id)
-  //  import QuickViewButton from '../QuickViewButton/QuickViewButton';
-// import Wishlistbutton from '../wishlistButton/Wishlistbutton';
-// import { Link } from 'react-router-dom';
-// import AddCartButton from '../AddCartButton/AddCartButton';
-// import Button from '../Button/Button';
-
-  }
   return (
     <div >
       {allPosts?.map((post,i) => 
@@ -109,23 +89,23 @@ const ShowPost = ({ singlePost }) => {
            
        <div class="avatar">
 <div class="w-14 m-4  rounded-full">
- <img src={post?.user_id.user_photo_url ? post?.user_id.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${post?.user_id.user_name.length}.jpg`||`https://api.multiavatar.com/${post?.user_id.user_name}.png`} />
+ <img src={post?.user_id?.user_photo_url ? post?.user_id?.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${post?.user_id?.user_name.length}.jpg`||`https://api.multiavatar.com/${post?.user_id?.user_name}.png`} />
 </div>
 </div>
             <p className="text-[18px] font-semibold mt- ml-1">
-              {post?.user_id.user_name} 
+              {post?.user_id?.user_name} 
             </p>
             
           </div>
           <div>
-            {/* post des */}
-            <p className="px-4">{post.post_content}</p>
+            {/* post details */}
+            <p className="px-4">{post?.post_content}</p>
             <img className="pt-4 w-full " src={post?.post_image} alt="" />
           </div>
           {/* like comment share */}
           <div className="likeCommentShar mb- relative ">
             <div className="flex justify-between p-2 pb-4">
-              {/* imoje */}
+              {/* imoge */}
               <div className="flex ml-2">
                
                 <img className="w-6 h-6" src={heart} alt="" />
@@ -141,16 +121,12 @@ const ShowPost = ({ singlePost }) => {
             >
               <div
                 className="flex items-center gap-1 hover:bg-gray-200 p-2 cursor-pointer "
-                onClick={() => lovePost(post._id)}
+                onClick={() => lovePost(post?.up_votes,post._id)}
               >
                 <FcLike />
                 <p>Love</p>
               </div>
               <div className="border-2"></div>
-              <div className="flex items-center gap-1 cursor-pointer "    onClick={() => UnLovePost(post._id)}>
-                <FcDislike />
-               
-              </div>
               <label for="comment_modal" className="flex items-center gap-1 cursor-pointer" onClick={() => showCommentModal(post._id)}>
                 <BiComment />
                 <p>Comment</p>
@@ -170,11 +146,11 @@ const ShowPost = ({ singlePost }) => {
           { post?.post_comments?.map(comment => <div className="flex items-center">
           <div class="avatar">
 <div class="w-14 m-4  rounded-full">
-<img src={comment?.user_id.user_photo_url ? comment?.user_id.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${comment?.user_id.user_name.length}.jpg`||`https://api.multiavatar.com/${comment?.user_id.user_name}.png`} />
+<img src={comment?.user_id?.user_photo_url ? comment?.user_id?.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${comment?.user_id?.user_name.length}.jpg`||`https://api.multiavatar.com/${comment?.user_id?.user_name}.png`} />
 </div>
 </div>
 <div>
-<p className="text-[13px] font-semibold">   {comment?.user_id.user_name} </p>
+<p className="text-[13px] font-semibold">   {comment?.user_id?.user_name} </p>
   <p>{comment?.comment}</p>
 </div>
           </div>)}

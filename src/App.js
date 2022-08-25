@@ -65,6 +65,7 @@ import ChatPopup from "./components/ChatPopup/ChatPopup";
 import UpScrollButton from "./components/UpScrollButton/UpScrollButton";
 import UpdateProduct from "./components/Dashboard/AllProducts/UpdateProduct";
 import MyProducts from "./components/Dashboard/MyProducts/MyProducts";
+import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
 
 
 
@@ -155,6 +156,8 @@ function App() {
             <Route path="/became" element={<AuthorOrPublisher />}></Route>
             <Route path="/payment" element={<Payment />}></Route>
             <Route path="/books" element={<AllBooks />}></Route>
+            <Route path="/bestSelling" element={<BestSellingBooks />} />
+
             <Route
               path="/addbook"
               element={

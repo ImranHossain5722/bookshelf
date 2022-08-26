@@ -31,8 +31,8 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-1">
-            <h3 className="text-black text-[24px] capitalize font-semibold pb-4 border-b-[1px] border-[#e1e2e6] mb-12">
+          <div className="col-span-1 bg-white p-6 shadow-2xl rounded-lg">
+            <h3 className="text-secondary text-[40px] capitalize font-semibold pb-4 border-b-[1px] border-[#e1e2e6] mb-12">
               Get in Touch
             </h3>
             <div className="flex gap-6 flex-col">
@@ -40,31 +40,31 @@ const Contact = () => {
                 <input
                   type="text"
                   placeholder="Reason for contact us"
-                  className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                  className="input w-full border-[#e1e2e6] bg-white h-[50px] rounded-none focus:outline-none"
                 />
               </div>
               <div className="w-full flex grid-cols-2 gap-6">
                 <input
                   type="text"
                   placeholder="First Name"
-                  className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                  className="input w-full border-[#e1e2e6] bg-white h-[50px] rounded-none focus:outline-none"
                 />
                 <input
                   type="text"
                   placeholder="Last Name "
-                  className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                  className="input w-full border-[#e1e2e6] bg-white h-[50px] rounded-none focus:outline-none"
                 />
               </div>
               <div className="w-full flex ">
                 <input
                   type="email"
                   placeholder="Email"
-                  className="input w-full border-[#e1e2e6] h-[50px] rounded-none focus:outline-none"
+                  className="input w-full border-[#e1e2e6] bg-white h-[50px] rounded-none focus:outline-none"
                 />
               </div>
               <div className="w-full flex">
                 <textarea
-                  className="textarea w-full border-[#e1e2e6] h-[120px] rounded-none focus:outline-none"
+                  className="textarea w-full border-[#e1e2e6] bg-white  h-[120px] rounded-none focus:outline-none"
                   placeholder="Message here"
                 ></textarea>
               </div>

@@ -33,7 +33,7 @@ const LeftSideBar = () => {
   }
 
   const reqHndeler = () => {
-    toast.success("Your request sent successfully.We are notified you");
+    toast.success("Your request sent successfully. We will notify you");
   };
 
   return (

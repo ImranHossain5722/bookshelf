@@ -89,7 +89,7 @@ const ShowPost = ({ singlePost }) => {
            
        <div class="avatar">
 <div class="w-14 m-4  rounded-full">
- <img src={post?.user_id?.user_photo_url ? post?.user_id?.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${post?.user_id?.user_name.length}.jpg`||`https://api.multiavatar.com/${post?.user_id?.user_name}.png`} />
+<img src={post?.user_id?.user_photo_url ? post?.user_id?.user_photo_url :`https://xsgames.co/randomusers/assets/avatars/male/${post?.user_id?.user_name.length}.jpg` ||`https://api.multiavatar.com/${post?.user_id?.user_name}.png`} />
 </div>
 </div>
             <p className="text-[18px] font-semibold mt- ml-1">

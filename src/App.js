@@ -60,20 +60,19 @@ import Orders from "./components/Dashboard/OrderDelivery/Orders";
 import DeliveredOrder from "./components/Dashboard/OrderDelivery/DeliveredOrder";
 import PickedOrder from "./components/Dashboard/OrderDelivery/PickedOrder";
 import TrackOrder from "./pages/TrackOrder/TrackOrder";
-import ScrollToTop from "react-scroll-to-top";
 import ChatPopup from "./components/ChatPopup/ChatPopup";
-import UpScrollButton from "./components/UpScrollButton/UpScrollButton";
 import UpdateProduct from "./components/Dashboard/AllProducts/UpdateProduct";
 import MyProducts from "./components/Dashboard/MyProducts/MyProducts";
-
 import CurrentOrders from "./components/Dashboard/OrderHistory/CurrentOrders";
 import OrdersPicked from "./components/Dashboard/OrderHistory/OrdersPicked";
 import OrdersDelivered from "./components/Dashboard/OrderHistory/OrdersDelivered";
 import AddProductReview from "./components/Dashboard/AddProductReview/AddProductReview";
-
 import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
+import ThankYou from "./components/ThankYou/ThankYou";
 import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
 import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
+import BestSellingBooksPage from "./pages/BestSellingBooksPage/BestSellingBooksPage";
+
 
 
 
@@ -164,6 +163,9 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/trackorder" element={<TrackOrder />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
+            {/* thank_you */}
+            <Route path="/thank_you" element={<ThankYou />}></Route>
+
             <Route path="/cart" element={<Cart />}></Route>
             <Route path="/wishlist" element={<Wishlist />}></Route>
             <Route path="/checkout" element={<Checkout />}></Route>
@@ -263,14 +265,23 @@ function App() {
               element={<ViewBySingleCategory />}
             ></Route>
             <Route path="/about" element={<AboutUs />}></Route>
-            <Route path="/contact" element={<Contact />}></Route>
+            <Route path="/contact" element={<Contact />} ></Route>
             <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
             <Route path="/faq" element={<Faq />}></Route>
             <Route path="/comingsoon" element={<CommingSoon />}></Route>
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
-            <Route path="/readershome" element={<ReadersHome />}></Route>
+            <Route
+              path="/readershome"
+              element={
+                <RequireAuth>
+                  <ReadersHome />
+                </RequireAuth>
+              }
+            ></Route>
+            
             <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
             <Route path="/chatpopup" element={<ChatPopup />}></Route>
+            <Route path="/BestSellingBooksPage" element={<BestSellingBooksPage></BestSellingBooksPage>}></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

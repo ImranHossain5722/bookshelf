@@ -68,7 +68,7 @@ const Chat = () => {
           <div className="border-b flex items-center mb-4 pb-4">
             <div class="avatar ">
               <div class="w-16 h-16 rounded-full">
-                <img src={user?.photoURL} />
+                <img src={user?.photoURL ||  `https://xsgames.co/randomusers/assets/avatars/male/${user?.displayName.length}.jpg`  } />
               </div>
             </div>
             <div>
@@ -89,7 +89,7 @@ const Chat = () => {
                       src={
                         user?.user_photo_url
                           ? user?.user_photo_url
-                          : `https://api.multiavatar.com/${chatUser.user_name}.png`
+                          : `https://xsgames.co/randomusers/assets/avatars/male/${chatUser.user_name.length}.jpg` || `https://api.multiavatar.com/${chatUser.user_name}.png`
                       }
                       alt="user photo"
                     />

@@ -29,9 +29,9 @@ const TrackOrders = () => {
 
             <div>
                 {order &&
-                    <div className='w-4/6 mx-auto '>
+                    <div className=' mx-4 '>
                         <div className='p-8 mt-8 bg-white rounded-lg'>
-                            <ul className="steps steps-vertical lg:steps-horizontal w-full">
+                            <ul className="steps steps-horizontal w-full">
                                 <li className="step step-primary text-xl" data-content="✓">Order</li>
                                 <li className={order?.picked_status === true ? "step step-primary text-xl" : "step text-xl"} data-content={order?.picked_status === true ? "✓" : "✕"}>Picked</li>
                                 <li className={order?.delivered_status === true ? "step step-primary text-xl" : "step text-xl"} data-content={order?.delivered_status === true ? "✓" : "✕"}>Delivered</li>
@@ -40,39 +40,39 @@ const TrackOrders = () => {
                         {/* order Summury  */}
                         <div className='p-8 mt-8 bg-white rounded-lg '>
                             <h2 className='font-bold text-xl border-b-2 pb-4'>Order Summury</h2>
-                            <div className='flex'>
-                                <div className='w-3/6 pt-4 mt-1 border-r-2 px-3'>
-                                    <div className='flex py-4 border-b-2 '>
-                                        <p className='w-1/2 font-bold'>Invoice :</p>
-                                        <p className='w-1/2'>{order?._id}</p>
+                            <div className='md:flex'>
+                                <div className='md:w-3/6 pt-4 mt-1 md:border-r-2 px-3'>
+                                    <div className='lg:flex py-4 border-b-2 '>
+                                        <p className='lg:w-1/2 font-bold'>Invoice :</p>
+                                        <p className='lg:w-1/2'>{order?._id}</p>
                                     </div>
-                                    <div className='flex py-4 border-b-2'>
+                                    <div className='lg:flex  py-4 border-b-2'>
                                         <p className='w-1/2 font-bold'>Customer :</p>
                                         <p className='w-1/2'>{order?.user_id?.user_name}</p>
                                     </div>
-                                    <div className='flex py-4 border-b-2'>
+                                    <div className='lg:flex  py-4 border-b-2'>
                                         <p className='w-1/2 font-bold'>Email :</p>
                                         <p className='w-1/2'>{order?.user_id?.user_email}</p>
                                     </div>
-                                    <div className='flex py-4 border-b-2'>
+                                    <div className='lg:flex  py-4 border-b-2'>
                                         <p className='w-1/2 font-bold'>Shipping address :</p>
                                         <p className='w-1/2'>{order?.user_id?.user_address ? order?.user_id?.user_address : 'Not Available'}</p>
                                     </div>
                                 </div>
-                                <div className='w-3/6 pt-4 mt-1 px-3'>
-                                    <div className='flex py-4 border-b-2'>
+                                <div className='md:w-3/6 pt-4 md:mt-1 px-3'>
+                                    <div className='lg:flex  py-4 border-b-2'>
                                         <p className='w-1/2 font-bold'>Order date :</p>
                                         <p className='w-1/2'>{order?.placed_date}</p>
                                     </div>
-                                    <div className='flex py-4 border-b-2'>
+                                    <div className='lg:flex  py-4 border-b-2'>
                                         <p className='w-1/2 font-bold'>Total order amount :</p>
                                         <p className='w-1/2'>{order?.ordered_price_amount}</p>
                                     </div>
-                                    <div className='flex py-4 border-b-2'>
+                                    <div className='lg:flex  py-4 border-b-2'>
                                         <p className='w-1/2 font-bold'>Payment method :</p>
                                         <p className='w-1/2'>{order?.payment_info?.payment_type}</p>
                                     </div>
-                                    <div className='flex py-4 border-b-2'>
+                                    <div className='lg:flex  py-4 border-b-2'>
                                         <p className='w-1/2 font-bold'>Delivery Status :</p>
                                         <p className='w-1/2'>{order?.picked_status === true ? (order?.delivered_status === true ? 'Order Delivered' : 'Picked for Deliver') : 'Order Received'}</p>
                                     </div>

@@ -21,6 +21,27 @@ export const addCart = (books) =>{
     }
 }
 
+export const bestSelllingBooks = (books) =>{
+    return {
+        type : ActionTypes.BEST_SELLING,
+        payload: books
+    }
+}
+
+export const populerWriterBooks = (books) =>{
+    return {
+        type : ActionTypes.POPULAR_WRITER_BOOKS,
+        payload: books
+    }
+}
+
+export const bestOfferBooks = (books) =>{
+    return {
+        type : ActionTypes.BEST_OFFER,
+        payload: books
+    }
+}
+
 export const newUser = (user) =>{
     return {
         type : ActionTypes.NEWUSER,

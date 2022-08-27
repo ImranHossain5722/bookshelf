@@ -23,7 +23,11 @@ const defState = {
     cartData : {},
     quickView : {},
     orderView : {},
-    commentId : undefined
+    commentId : undefined,
+    bestSelling : [],
+    popularWriter : [],
+    besOffer : []
+
 
 }
 
@@ -36,6 +40,47 @@ export const sellBookReducer = (state = defState, {type, payload} ) => {
             return state;
     }
 }
+
+export const bestSellingReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.BEST_SELLING:
+            return {
+            bestSelling : payload
+        };
+    
+        default:
+            return state;
+    }
+}
+
+
+export const popularWriterBookReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.POPULAR_WRITER_BOOKS:
+            return {
+            popularWriter : payload
+        };
+    
+        default:
+            return state;
+    }
+}
+
+
+
+export const bestOfferBookReducer = (state = defState, {type, payload} ) => {
+    switch (type) {
+        case ActionTypes.BEST_OFFER:
+            return {
+                 bestOffer : payload
+                } ;
+    
+        default:
+            return state;
+    }
+}
+
+
 
 export const addCartReducer = (state = defState, {type, payload} ) => {
     switch (type) {

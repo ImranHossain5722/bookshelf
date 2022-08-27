@@ -1,29 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaEye, FaHeart } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartButton from "../CartButton/CartButton";
 import Loading from "../Loading/Loading";
-import { allBooks } from "../Redux/actions/bookActions";
-import Stars from "../Stars/Stars";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
 import AddCartButton from "../AddCartButton/AddCartButton";
-// import { useQuery } from "react-query";
+import { FaHome } from 'react-icons/fa';
+import { GiBookCover } from 'react-icons/gi'; 
 
 const AllBooks = () => {
-  // const [bookpagi, setBookpagi] = useState([]);
-  // const [pageCount, setPageCount] = useState(1);
-  // const [size, setSize] = useState(10);
+  
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [hidden, setHidden] = useState(false);
   const [active, setActive] = useState(false);
-
   const [countBooks, setCountBooks] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostPerPage] = useState(10);
@@ -121,7 +115,26 @@ const AllBooks = () => {
 
   return (
     <div className="section_padding">
+       
       <div style={{ background: "#FBF6F6" }} className=" container mx-auto ">
+      <div class="text-sm  text-center justify-center mx-auto breadcrumbs">
+  <ul className=" text-center mx-auto">
+    <li>
+      <Link to="/">
+      <FaHome className="text-[20px] mr-2"/>
+      
+      <p className="text-[20px] ">Home</p>
+
+      </Link>
+    </li> 
+    <li>
+
+      <GiBookCover  className="text-[20px] mr-2"/>
+      <p className="text-[20px] ">Books</p>
+    </li>
+  </ul>
+</div>
+
         <div className="md:flex gap-6 items-start ">
           {/* filter options left-side */}
           <div className="flex-1 md:w-1/4 mb-4">

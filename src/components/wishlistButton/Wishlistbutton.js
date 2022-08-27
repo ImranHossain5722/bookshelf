@@ -8,6 +8,7 @@ import Loading from '../Loading/Loading'
 const Wishlistbutton = ({ _id }) => {
   const user = useSelector((state) => state?.newUser?.user)
   const [includeCart, setincludeCart] = useState(false)
+  const wishlistBook = useSelector((state) => state.wishlist.wishlistBooks);
 
   const userId = user?._id
   const userWishlist = user?.user_wishlist?.map(book => book?.book)
@@ -35,7 +36,7 @@ const Wishlistbutton = ({ _id }) => {
     }else{
      setincludeCart(false)
     }
-  }, [user,_id]) 
+  }, [user,_id,includeCart,wishlistBook]) 
 
   return (
     <button className=" hover:text-primar duration-500 a">

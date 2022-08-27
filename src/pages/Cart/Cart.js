@@ -39,7 +39,6 @@ const Cart = () => {
           `https://book-shelf-webapp.herokuapp.com/delete-cart?id=${userId}`
         );
       
-   
   }
   
 
@@ -65,7 +64,7 @@ const Cart = () => {
       <p className="text-5xl text-center mb-5 flex justify-center">My Cart <span><MdShoppingCart className='text-5xl text-primary ' /></span></p>
       <div className="container m-auto ">
         <div className="w-full">
-          <div className="overflow-auto  h-[460px]">
+          <div className="overflow-auto mt-4  max-h-[460px]">
             <table className="table w-full ">
               <thead>
                 <tr>

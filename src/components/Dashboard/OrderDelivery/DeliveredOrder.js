@@ -17,7 +17,7 @@ const DeliveredOrder = () => {
 
     const { data: allOrders } = useQuery(['allOrders'], () =>
 
-        fetch(`https://book-shelf-webapp.herokuapp.com/delivered-orders?uid=${getUser[0]?.uid}`).then(res =>
+        fetch(`https://book-shelf-webapp.herokuapp.com/delivered-orders?uid=${getUser[0]?._id}`).then(res =>
             res.json()
         )
     )

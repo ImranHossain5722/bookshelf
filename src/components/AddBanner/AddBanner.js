@@ -9,22 +9,22 @@ const AddBanner = () => {
   return (
     <div className="card lg:card-side bg-white mx-auto max-w-[1240px]  mb-[125px] py-6">
       <div className="card-body container mx-auto ">
-        <h2 className="card-title ml-28 text-4xl">
+        <h2 className="card-title lg:ml-28 text-lg lg:text-4xl">
           <span className="text-black">Get</span>
           <span className="text-accent">Extra</span>
         </h2>
-        <p className="pl-28 text-4xl lg:text-7xl font-semibold text-primary">
+        <p className=" lg:pl-28 text-lg lg:text-7xl font-semibold text-primary">
           Sale -25%
         </p>
-        <p className="pl-28 text-4xl font-semibold text-accent">
+        <p className=" lg:pl-28 text-lg lg:text-4xl font-semibold text-accent">
           ON ORDER OVER
         </p>
-        <div className="card-actions pl-28">
+        <div className="card-actions lg:pl-28">
           <Button>SEE MORE</Button>
         </div>
       </div>
       <figure>
-        <img className="pr-28" src={Bannerbook} alt="Album" />
+        <img className=" pr-16 lg:pr-28" src={Bannerbook} alt="Album" />
       </figure>
     </div>
   );

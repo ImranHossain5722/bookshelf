@@ -1,54 +1,69 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import Button from "../Button/Button";
 import CartButton from "../CartButton/CartButton";
 import Loading from "../Loading/Loading";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
-import Stars from "../Stars/Stars";
+import { bestOfferBooks, bestSelllingBooks, popularBooks, populerWriterBooks } from "../Redux/actions/bookActions";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 
 const PopularBooks = () => {
    const [books, setBooks] = useState([]);
    const [clicked, setclicked] = useState("best_selling");
   const [loading, setLoading] = useState(false);
+  const sellBooks = useSelector(state => state?.bestSelling?.bestSelling)
+  const authorBooks = useSelector(state => state?.popularWriter?.popularWriter)
+  const offerBooks = useSelector(state => state?.bestOffer?.bestOffer)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    fetch("https://book-shelf-webapp.herokuapp.com/get-popular-books")
+        .then((res) => res.json())
+        .then((data) => dispatch(bestSelllingBooks(data)));
+  }, []);
+  
+
+  useEffect(() => {
+    fetch("https://book-shelf-webapp.herokuapp.com/all-books")
+    .then((res) => res.json())
+    .then((data) => dispatch(populerWriterBooks(data.slice(0,8))));
+  }, []);
+    
+
+  useEffect(() => {
+  fetch("https://book-shelf-webapp.herokuapp.com/all-books")
+        .then((res) => res.json())
+        .then((data) => dispatch(bestOfferBooks(data.slice(2,10))));
+  }, []);
+  
+  useEffect(() => {
+   if(clicked === "best_selling"){
+    setBooks(sellBooks)
+
+   } 
+  }, [books,sellBooks]); 
 
   useEffect(() => {
    
     if(clicked === "best_selling"){
 
-      setLoading(true);
-      fetch("https://book-shelf-webapp.herokuapp.com/get-popular-books")
-        .then((res) => res.json())
-        .then((data) => setBooks(data));
-      setLoading(false);
-
+  
+      setBooks(sellBooks)
+      
     }
    else if(clicked === "popular_writer"){
-
-      setLoading(true);
-      fetch("https://book-shelf-webapp.herokuapp.com/all-books")
-        .then((res) => res.json())
-        .then((data) => setBooks(data));
-      setLoading(false);
-
+    
+    setBooks(authorBooks)
+  }
+  else if(clicked === "best_offer"){
+   
+      setBooks(offerBooks)
     }
-   else if(clicked === "best_offer"){
+  }, [clicked]); 
 
-      setLoading(true);
-      fetch("https://book-shelf-webapp.herokuapp.com/all-books")
-        .then((res) => res.json())
-        .then((data) => setBooks(data));
-      setLoading(false);
-    }else{
-      setLoading(true);
-      fetch("https://book-shelf-webapp.herokuapp.com/all-books")
-        .then((res) => res.json())
-        .then((data) => setBooks(data));
-      setLoading(false);
-    }
-  }, [clicked,books]);
-  if (loading) {
+  if (loading  || books.length === 0) {
     return <Loading />;
   }
   return (
@@ -72,10 +87,10 @@ const PopularBooks = () => {
         </div>
         {/* content */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {books?.splice(0, 8).map((book) => (
+        {books?.map((book) => (
           <div className="product_widget26 mb_30 bg-white">
             <div className="product_thumb_upper position-relative">
-                {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
+                {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
               <Link
                 to={`/selectedBook/${book?._id}`}
                 className="thumb text-center"

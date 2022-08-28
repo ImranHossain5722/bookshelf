@@ -9,7 +9,6 @@ import axios from "axios";
 
 const BestSellingBooksPage = () => {
 
-      const [books, setBooks] = useState([]);
       const [currentPage, setCurrentPage] = useState(1);
       const [postsPerPage, setpostPerPage] = useState(10);
       const [posts, setPosts] = useState([]);

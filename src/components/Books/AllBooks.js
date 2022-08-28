@@ -21,7 +21,8 @@ const AllBooks = () => {
   const [countBooks, setCountBooks] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostPerPage] = useState(10);
-
+  const [showList, setShowLIst] = useState(false);
+  
   useEffect(() => {
     const loadBooks = async () => {
       setLoading(true);
@@ -56,7 +57,7 @@ const AllBooks = () => {
 
     loadAuthors();
 
-    console.log(authors);
+   
   }, []);
 
   // filtering all books by category or author
@@ -115,9 +116,8 @@ const AllBooks = () => {
 
   return (
     <div className="section_padding">
-       
-      <div style={{ background: "#FBF6F6" }} className=" container mx-auto ">
-      <div class="text-sm  text-center justify-center mx-auto breadcrumbs">
+       <div className="flex w-full mb-4 justify-between  ">
+      <div class="text-sm  breadcrumbs justify-center ">
   <ul className=" text-center mx-auto">
     <li>
       <Link to="/">
@@ -130,10 +130,21 @@ const AllBooks = () => {
     <li>
 
       <GiBookCover  className="text-[20px] mr-2"/>
-      <p className="text-[20px] ">Books</p>
+      <p className="text-[20px] ">Book</p>
     </li>
   </ul>
 </div>
+<div >
+<button className="btn" onClick={() => setShowLIst(false)}>
+  grid
+</button>
+<button className="btn" onClick={() => setShowLIst(true)}>
+ list
+</button>
+  
+  </div>
+</div>
+      <div style={{ background: "#FBF6F6" }} className=" container mx-auto ">
 
         <div className="md:flex gap-6 items-start ">
           {/* filter options left-side */}
@@ -224,49 +235,85 @@ const AllBooks = () => {
             </div>
           </div>
           {/* filter results right-side */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
-            {loading ? (
-              <Loading />
-            ) : (
-              currentPosts?.map((book) => (
-                // <Link to={`/selectedBook/${book?._id}`}>
-                <div className="product_widget26 mb_30 bg-white">
-                  <div className="product_thumb_upper position-relative">
-                      {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
-                    <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
-                      <img src={book?.book_cover_photo_url} alt="" />
-                    </Link>
-                    <div className="product_action">
-                      <Wishlistbutton _id={book._id} />
-                      <QuickViewButton _id={book._id} />
-                      <CartButton _id={book._id} />
-                    </div>
-                  </div>
-                  <div className="product__meta">
-                    <Link to={`/selectedBook/${book?._id}`}>
-                      <h4>{book.book_title}</h4>
-                    </Link>
-                    <p className="text-[16px] text-[#00124e] font-semibold">
-                      {book.author}
-                    </p>
-                    <div className="stars">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <span className="text-sm font-medium">(02 Rating)</span>
-                    </div>
-                    <div className="product_prise">
-                      <p>${book.book_price}</p>
-                    </div>
-                    <AddCartButton _id={book._id} />
-                  </div>
+        {
+          showList ?  <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-10 md:w-3/4">
+          {loading ? (
+            <Loading />
+          ) : (
+            currentPosts?.map((book) => (
+              <div class="card lg:card-side bg-base-100 shadow-xl">
+             <div className="product_thumb_upper position-relative">
+                   {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
+                  <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                    <img src={book?.book_cover_photo_url} alt=""className="min-w-[300px]" />
+                  </Link>
+                  <div className="product_action">
+                     <Wishlistbutton _id={book._id} />
+                    <QuickViewButton _id={book._id} />
+                    <CartButton _id={book._id} />
+                 </div>
+               </div>
+              <div class="card-body">
+                <h2 class="card-title"> 
+                  <Link to={`/selectedBook/${book?._id}`}>
+                <h4>{book.book_title}</h4>
+              </Link>
+              </h2>
+                <p>{book.book_description}</p>
+                <div class="card-actions justify-end">
+                  <button class="btn btn-primary">Listen</button>
                 </div>
-                // </Link>
-              ))
-            )}
+              </div>
+            </div>
+           
+            ))
+          )}
+        </div>
+      :  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
+      {loading ? (
+        <Loading />
+      ) : (
+        currentPosts?.map((book) => (
+        
+          <div className="product_widget26 mb_30 bg-white">
+            <div className="product_thumb_upper position-relative">
+                {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
+              <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                <img src={book?.book_cover_photo_url} alt="" />
+              </Link>
+              <div className="product_action">
+                <Wishlistbutton _id={book._id} />
+                <QuickViewButton _id={book._id} />
+                <CartButton _id={book._id} />
+              </div>
+            </div>
+            <div className="product__meta">
+              <Link to={`/selectedBook/${book?._id}`}>
+                <h4>{book.book_title}</h4>
+              </Link>
+              <p className="text-[16px] text-[#00124e] font-semibold">
+                {book.author}
+              </p>
+              <div className="stars">
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <span className="text-sm font-medium">(02 Rating)</span>
+              </div>
+              <div className="product_prise">
+                <p>${book.book_price}</p>
+              </div>
+              <AddCartButton _id={book._id} />
+            </div>
           </div>
+          // </Link>
+        ))
+      )}
+    </div>
+ 
+        } 
         </div>
 
         {/* pagenation */}

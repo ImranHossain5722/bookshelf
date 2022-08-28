@@ -72,6 +72,7 @@ import ThankYou from "./components/ThankYou/ThankYou";
 import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
 import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
 import BestSellingBooksPage from "./pages/BestSellingBooksPage/BestSellingBooksPage";
+import Testcss from './components/test/Testcss'
 
 
 
@@ -282,6 +283,11 @@ function App() {
             <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
             <Route path="/chatpopup" element={<ChatPopup />}></Route>
             <Route path="/BestSellingBooksPage" element={<BestSellingBooksPage></BestSellingBooksPage>}></Route>
+
+            <Route path='/test' element={<Testcss></Testcss>}>
+
+            </Route>
+
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>

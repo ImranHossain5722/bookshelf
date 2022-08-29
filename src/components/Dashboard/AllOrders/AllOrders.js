@@ -32,7 +32,10 @@ const AllOrders = () => {
     }
     return (
         <div className="my-5">
-            <p className="text-5xl text-center mb-3">My Orders</p>
+            <p className="text-5xl text-center mb-3">All Orders</p>
+            <div className=" flex items-center justify-center pb-10">
+        <div className="bg-primary h-1 w-10 rounded-lg "></div>
+      </div>
             <div className="w-full p-5">
                 <div className="overflow-auto  ">
                     <table className="table w-full ">

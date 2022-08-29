@@ -204,7 +204,7 @@ const AddProduct = () => {
     <div className=''>
       <h2 className='text-center font-semibold uppercase text-secondary text-[40px]'> Add Product</h2>
       <div className=" flex items-center justify-center pb-10">
-        <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+        <div className="bg-primary h-1 w-10 rounded-lg "></div>
       </div>
 
       <div className='mt-1 md:w-5/6 mx-8 md:mx-auto bg-white p-10 rounded-xl shadow-md' >

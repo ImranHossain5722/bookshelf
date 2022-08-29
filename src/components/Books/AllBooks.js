@@ -9,19 +9,26 @@ import QuickViewButton from "../QuickViewButton/QuickViewButton";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import { FaHome } from 'react-icons/fa';
 import { GiBookCover } from 'react-icons/gi'; 
+import { RiLayoutGridFill } from 'react-icons/ri'; 
+import { AiOutlineUnorderedList } from 'react-icons/ai'; 
+import { FaCartPlus, FaHeart } from "react-icons/fa";
+import { useSelector } from 'react-redux';
+import { toast } from "react-toastify";
 
 const AllBooks = () => {
   
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [authors, setAuthors] = useState([]);
+  const [authors, setAuthors] = useState([]);     
   const [hidden, setHidden] = useState(false);
   const [active, setActive] = useState(false);
   const [countBooks, setCountBooks] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostPerPage] = useState(10);
-
+  const [showList, setShowLIst] = useState(false);
+  const user = useSelector((state) => state?.newUser?.user)
+  const userId = user?._id
   useEffect(() => {
     const loadBooks = async () => {
       setLoading(true);
@@ -56,7 +63,7 @@ const AllBooks = () => {
 
     loadAuthors();
 
-    console.log(authors);
+   
   }, []);
 
   // filtering all books by category or author
@@ -113,11 +120,41 @@ const AllBooks = () => {
     pageNumbers.push(i);
   }
 
+  const AddCart = (id) => {
+    const cartData = {
+      user_id: userId,
+      cart_data: {
+        book: id,
+        qnt: 1
+      }
+    }
+    if (userId) {
+
+      axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart', cartData).then(data => { toast.success('successfully added to cart') })
+    } else {
+      console.log("user id not found", userId)
+    }
+  }
+
+  // adding to  wishlist 
+  const AddWishlist = async (id) => {
+    const cardData = {
+      user_id: userId,
+      wishlist_data: {
+        book: id
+      }
+    }
+    if (userId) {
+      await axios.post('https://book-shelf-webapp.herokuapp.com/add-to-wishlist', cardData).then(data => toast.success("added to wishlist"))
+    } else {
+      console.log(" the user id is not found")
+    }
+  }
+  
   return (
     <div className="section_padding">
-       
-      <div style={{ background: "#FBF6F6" }} className=" container mx-auto ">
-      <div class="text-sm  text-center justify-center mx-auto breadcrumbs">
+       <div className="flex w-full mb-4 justify-between  ">
+      <div class="text-sm  breadcrumbs justify-center ">
   <ul className=" text-center mx-auto">
     <li>
       <Link to="/">
@@ -130,10 +167,21 @@ const AllBooks = () => {
     <li>
 
       <GiBookCover  className="text-[20px] mr-2"/>
-      <p className="text-[20px] ">Books</p>
+      <p className="text-[20px] ">Book</p>
     </li>
   </ul>
 </div>
+<div >
+<button className="btn btn-sm mr-2 text-primary border-primary border-2 hover:bg-primary hover:text-white hover:border-primary focus:bg-primary focus:text-white focus:border-primary" onClick={() => setShowLIst(false)}>
+  <RiLayoutGridFill className = "text-[18px] font-bold"/>
+</button>
+<button  className="btn btn-sm mr-2 text-primary border-primary border-2 hover:bg-primary hover:text-white hover:border-primary focus:bg-primary focus:text-white focus:border-primary" onClick={() => setShowLIst(true)}>
+ <AiOutlineUnorderedList  className = "text-[18px] font-bold"/>
+ </button>
+  
+  </div>
+</div>
+      <div style={{ background: "#FBF6F6" }} className=" container mx-auto ">
 
         <div className="md:flex gap-6 items-start ">
           {/* filter options left-side */}
@@ -224,49 +272,107 @@ const AllBooks = () => {
             </div>
           </div>
           {/* filter results right-side */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
-            {loading ? (
-              <Loading />
-            ) : (
-              currentPosts?.map((book) => (
-                // <Link to={`/selectedBook/${book?._id}`}>
-                <div className="product_widget26 mb_30 bg-white">
-                  <div className="product_thumb_upper position-relative">
-                      {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
-                    <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
-                      <img src={book?.book_cover_photo_url} alt="" />
-                    </Link>
-                    <div className="product_action">
-                      <Wishlistbutton _id={book._id} />
-                      <QuickViewButton _id={book._id} />
-                      <CartButton _id={book._id} />
-                    </div>
-                  </div>
-                  <div className="product__meta">
-                    <Link to={`/selectedBook/${book?._id}`}>
-                      <h4>{book.book_title}</h4>
-                    </Link>
-                    <p className="text-[16px] text-[#00124e] font-semibold">
-                      {book.author}
-                    </p>
-                    <div className="stars">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <span className="text-sm font-medium">(02 Rating)</span>
-                    </div>
-                    <div className="product_prise">
-                      <p>${book.book_price}</p>
-                    </div>
-                    <AddCartButton _id={book._id} />
-                  </div>
-                </div>
-                // </Link>
-              ))
-            )}
+        {
+          showList ?  <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-10 md:w-3/4">
+          {loading ? (
+            <Loading />
+          ) : (
+            currentPosts?.map((book) => (
+              <div class="card lg:card-side bg-base-100 shadow-xl">
+             <div className="product_thumb_upper position-relative">
+                   {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
+                  <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                    <img src={book?.book_cover_photo_url} alt=""className="min-w-[300px]" />
+                  </Link>
+                  <div className="product_action">
+                     <Wishlistbutton _id={book._id} />
+                    <QuickViewButton _id={book._id} />
+                    <CartButton _id={book._id} />
+                 </div>
+               </div>
+              <div class="card-body">
+                <h2 class="card-title"> 
+                  <Link to={`/selectedBook/${book?._id}`}>
+                <h4>{book.book_title}</h4>
+              </Link>
+              </h2>
+                <p className="h-fit mb-1">{book.book_description}</p>
+                <div className="product_prise">
+                <p>${book.book_price}</p>
+              </div>
+              <div className="stars">
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <span className="text-sm font-medium">(02 Rating)</span>
+              </div>
+              <div className="flex items-center text-black mb-3 gap-2">
+          
+              <button className="icon-btn add-btn" onClick={() => AddCart(book._id)}>
+              <FaCartPlus className="add-icon  text-primary text-2xl" />
+
+                <div className="btn-txt">Add to cart</div>
+              </button>
+            
+
+              <button className="icon-btn add-btn" onClick={() => AddWishlist(book._id)}>
+                <FaHeart className="add-icon text-primary text-2xl" />
+                <div className="btn-txt">Add to wishlist</div>
+              </button>
+            </div>
+              </div>
+            </div>
+           
+            ))
+          )}
+        </div>
+      :  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
+      {loading ? (
+        <Loading />
+      ) : (
+        currentPosts?.map((book) => (
+        
+          <div className="product_widget26 mb_30 bg-white">
+            <div className="product_thumb_upper position-relative">
+                {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
+              <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                <img src={book?.book_cover_photo_url} alt="" />
+              </Link>
+              <div className="product_action">
+                <Wishlistbutton _id={book._id} />
+                <QuickViewButton _id={book._id} />
+                <CartButton _id={book._id} />
+              </div>
+            </div>
+            <div className="product__meta">
+              <Link to={`/selectedBook/${book?._id}`}>
+                <h4>{book.book_title}</h4>
+              </Link>
+              <p className="text-[16px] text-[#00124e] font-semibold">
+                {book.author}
+              </p>
+              <div className="stars">
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <span className="text-sm font-medium">(02 Rating)</span>
+              </div>
+              <div className="product_prise">
+                <p>${book.book_price}</p>
+              </div>
+              <AddCartButton _id={book._id} />
+            </div>
           </div>
+          // </Link>
+        ))
+      )}
+    </div>
+ 
+        } 
         </div>
 
         {/* pagenation */}

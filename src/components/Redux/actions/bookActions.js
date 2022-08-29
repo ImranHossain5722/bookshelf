@@ -1,171 +1,168 @@
 import { ActionTypes } from "../Constants/ActionTypes";
 
+export const sellBooks = (books) => {
+  return {
+    type: ActionTypes.SELL_BOOKS,
+    payload: books,
+  };
+};
 
-export const sellBooks = (books) =>{
-    return {
-        type : ActionTypes.SELL_BOOKS,
-        payload: books
-    }
-}
+export const commentId = (books) => {
+  return {
+    type: ActionTypes.COMMENTID,
+    payload: books,
+  };
+};
+export const addCart = (books) => {
+  return {
+    type: ActionTypes.ADD_CART,
+    payload: books,
+  };
+};
 
-export const commentId = (books) =>{
-    return {
-        type : ActionTypes.COMMENTID,
-        payload: books
-    }
-}
-export const addCart = (books) =>{
-    return {
-        type : ActionTypes.ADD_CART,
-        payload: books
-    }
-}
+export const bestSelllingBooks = (books) => {
+  return {
+    type: ActionTypes.BEST_SELLING,
+    payload: books,
+  };
+};
 
-export const bestSelllingBooks = (books) =>{
-    return {
-        type : ActionTypes.BEST_SELLING,
-        payload: books
-    }
-}
+export const populerWriterBooks = (books) => {
+  return {
+    type: ActionTypes.POPULAR_WRITER_BOOKS,
+    payload: books,
+  };
+};
 
-export const populerWriterBooks = (books) =>{
-    return {
-        type : ActionTypes.POPULAR_WRITER_BOOKS,
-        payload: books
-    }
-}
+export const bestOfferBooks = (books) => {
+  return {
+    type: ActionTypes.BEST_OFFER,
+    payload: books,
+  };
+};
 
-export const bestOfferBooks = (books) =>{
-    return {
-        type : ActionTypes.BEST_OFFER,
-        payload: books
-    }
-}
+export const newUser = (user) => {
+  return {
+    type: ActionTypes.NEWUSER,
+    payload: user,
+  };
+};
 
-export const newUser = (user) =>{
-    return {
-        type : ActionTypes.NEWUSER,
-        payload: user
-    }
-}
+export const quickView = (data) => {
+  return {
+    type: ActionTypes.QUICKVIEW,
+    payload: data,
+  };
+};
 
-export const quickView = (data) =>{
-    return {
-        type : ActionTypes.QUICKVIEW,
-        payload: data
-    }
-}
+export const author = (author) => {
+  return {
+    type: ActionTypes.AUTHOR,
+    payload: author,
+  };
+};
 
+export const orderView = (order) => {
+  return {
+    type: ActionTypes.ORDERVIEW,
+    payload: order,
+  };
+};
 
-export const author = (author) =>{
-    return {
-        type : ActionTypes.AUTHOR,
-        payload: author
-    }
-}
+export const popularBooks = (books) => {
+  return {
+    type: ActionTypes.POPULARBOOKS,
+    payload: books,
+  };
+};
 
-export const orderView = (order) =>{
-    return {
-        type : ActionTypes.ORDERVIEW,
-        payload: order
-    }
-}
+export const category = (books) => {
+  return {
+    type: ActionTypes.CATEGORY,
+    payload: books,
+  };
+};
 
-export const popularBooks = (books) =>{
-    return {
-        type : ActionTypes.POPULARBOOKS,
-        payload: books
-    }
-}
+export const allUsers = (users) => {
+  return {
+    type: ActionTypes.ALLUSER,
+    payload: users,
+  };
+};
 
-export const category = (books) =>{
-    return {
-        type : ActionTypes.CATEGORY,
-        payload: books
-    }
-}
+export const allPublishers = (users) => {
+  return {
+    type: ActionTypes.ALLPUBLISHER,
+    payload: users,
+  };
+};
 
-export const allUsers = (users) =>{
-    return {
-        type : ActionTypes.ALLUSER,
-        payload: users
-    }
-}
+export const allAuthors = (users) => {
+  return {
+    type: ActionTypes.ALLAUTHORS,
+    payload: users,
+  };
+};
 
-export const allPublishers = (users) =>{
-    return {
-        type : ActionTypes.ALLPUBLISHER,
-        payload: users
-    }
-}
+export const MyOrder = (order) => {
+  return {
+    type: ActionTypes.MYORDER,
+    payload: order,
+  };
+};
 
-export const allAuthors = (users) =>{
-    return {
-        type : ActionTypes.ALLAUTHORS,
-        payload: users
-    }
-}
+export const allOrders = (orders) => {
+  return {
+    type: ActionTypes.ALLORDERS,
+    payload: orders,
+  };
+};
 
-export const MyOrder = (order) =>{
-    return {
-        type : ActionTypes.MYORDER,
-        payload: order
-    }
-}
+export const myProfile = (user) => {
+  return {
+    type: ActionTypes.MYPROFILE,
+    payload: user,
+  };
+};
 
-export const allOrders = (orders) =>{
-    return {
-        type : ActionTypes.ALLORDERS,
-        payload: orders
-    }
-}
+export const orderHistory = (orders) => {
+  return {
+    type: ActionTypes.ORDERHISTORYS,
+    payload: orders,
+  };
+};
 
-export const myProfile = (user) =>{
-    return {
-        type : ActionTypes.MYPROFILE,
-        payload: user
-    }
-}
+export const cartBooks = (books) => {
+  return {
+    type: ActionTypes.CART_BOOKS,
+    payload: books,
+  };
+};
 
-export const orderHistory = (orders) =>{
-    return {
-        type : ActionTypes.ORDERHISTORYS,
-        payload: orders
-    }
-}
+export const selectedBooks = (book) => {
+  return {
+    type: ActionTypes.SELECTED_BOOKS,
+    payload: book,
+  };
+};
 
-export const cartBooks = (books) =>{
-    return {
-        type : ActionTypes.CART_BOOKS,
-        payload: books
-    }
-}
+export const whistlist = (books) => {
+  return {
+    type: ActionTypes.WHISTLIST,
+    payload: books,
+  };
+};
 
-export const selectedBooks = (book) =>{
-    return {
-        type : ActionTypes.SELECTED_BOOKS,
-        payload: book
-    }
-}
+export const allBooks = (books) => {
+  return {
+    type: ActionTypes.ALLBOOKS,
+    payload: books,
+  };
+};
 
-export const whistlist = (books) =>{
-    return {
-        type : ActionTypes.WHISTLIST,
-        payload: books
-    }
-}
-
-export const allBooks = (books) =>{
-    return {
-        type : ActionTypes.ALLBOOKS,
-        payload: books
-    }
-}
-
-export const cartdata = (books) =>{
-    return {
-        type : ActionTypes.CURRENT_CART,
-        payload: books
-    }
-}
-
+export const cartdata = (books) => {
+  return {
+    type: ActionTypes.CURRENT_CART,
+    payload: books,
+  };
+};

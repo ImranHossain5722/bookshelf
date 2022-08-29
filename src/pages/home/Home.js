@@ -16,6 +16,7 @@ import Review from "../../components/Review/Review";
 import SecondCategoryBooks from "../../components/SecondCategoryBooks/SecondCategoryBooks";
 import Release from "../Release/Release";
 import WorkPolicy from "../../components/WorkPolicy/WorkPolicy";
+import Blog from "../Blog/Blog";
 
 const Home = () => {
   return (
@@ -39,9 +40,10 @@ const Home = () => {
       <BestSelling />
 
       <ContactClubBanner />
-      <WorkPolicy/>
+      <WorkPolicy />
       {/* Recently veiwed section */}
       <RecentlyViewed />
+      <Blog />
       <Modal modal={"quick-view"}>
         <QuickView />
       </Modal>

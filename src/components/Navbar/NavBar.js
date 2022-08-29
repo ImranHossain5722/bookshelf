@@ -116,9 +116,7 @@ const NavBar = ({ children }) => {
                 <li>
                   <NavLink to="/books">Books</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/BestSellingBooksPage">Best Selling Books</NavLink>
-                </li>
+                
                 <li>
                   <NavLink to="/about">About Us</NavLink>
                 </li>
@@ -234,7 +232,7 @@ const NavBar = ({ children }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/books" className="rounded-lg">
+              <NavLink to="/cart" className="rounded-lg">
                 Cart
               </NavLink>
             </li>

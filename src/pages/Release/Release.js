@@ -58,7 +58,7 @@ const Release = () => {
           <div>
             <p className=" text-xl lg:text-[35px] mb-5 font-semibold text-primary">
               {" "}
-              An Up Comming Book
+              An Up Coming Book
             </p>
             <p className="  text-xl lg:text-[30px]  my-5 font-semibold text-accent">
               Publishing time is running out!{" "}

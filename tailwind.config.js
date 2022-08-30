@@ -16,7 +16,6 @@ module.exports = {
           " --b2": "0 0% 100%"
         },
       },
-      "dark",
     ],
   },
   plugins: [require("daisyui")],

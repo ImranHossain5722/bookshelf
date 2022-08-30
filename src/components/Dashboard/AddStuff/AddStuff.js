@@ -83,8 +83,11 @@ const AddStuff = () => {
     return (
         <div className="pt-12 pb-12 w-1/2 mx-auto">
             <h2 className='text-center font-bold text-3xl mb-3'>Add A New Stuff</h2>
+            <div className=" flex items-center justify-center pb-10">
+        <div className="bg-primary h-1 w-10 rounded-lg "></div>
+      </div>
             <div className='w-full mb-6'>
-                <label className="label-text text-lg">Search User By Email</label>
+                <label className="label-text text-lg ">Search User By Email</label>
                 <Select onChange={(choice) => getUserDatas(choice)} className="mt-2 rounded-xl" options={userByEmailOption} />
             </div>
             <form className='mb-2' onSubmit={handleSubmit(onSubmit)}>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Router, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 // aos animation
 import AOS from "aos";
@@ -72,10 +72,7 @@ import ThankYou from "./components/ThankYou/ThankYou";
 import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
 import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
 import BestSellingBooksPage from "./pages/BestSellingBooksPage/BestSellingBooksPage";
-
-
-
-
+import BestOfferPage from './pages/BestOfferPage/BestOfferPage'
 
 // initialize aos
 AOS.init();
@@ -110,8 +107,6 @@ function App() {
 
   return (
     <div className="App">
-
-
       {dash ? (
         <NavDashboard>
           <Routes>
@@ -133,26 +128,27 @@ function App() {
               <Route path="addproduct" element={<AddProduct />} />
               <Route path="myproducts" element={<MyProducts />} />
               <Route path="updateproduct/:bookid" element={<UpdateProduct />} />
-              <Route path="addproductreviews/:bookid" element={<AddProductReview />} />
+              <Route
+                path="addproductreviews/:bookid"
+                element={<AddProductReview />}
+              />
               <Route path="addproductreviews" element={<ProductToReview />} />
               <Route path="trackorder/:bookid" element={<TrackOrders />} />
               <Route path="allpublisher" element={<AllPublishers />} />
               <Route path="allusers" element={<AllUsers />} />
               <Route path="allorders" element={<AllOrders />} />
               <Route path="allauthor" element={<AllAuthors />} />
-              <Route path="orderhistory" element={<OrderHistory />} >
+              <Route path="orderhistory" element={<OrderHistory />}>
                 <Route path="orders" element={<CurrentOrders />} />
                 <Route path="deliveredorders" element={<DeliveredOrder />} />
                 <Route path="pickedorders" element={<PickedOrder />} />
               </Route>
-
 
               <Route path="orderdelivery" element={<OrderDelivery />}>
                 <Route path="orders" element={<Orders />} />
                 <Route path="deliveredorders" element={<OrdersDelivered />} />
                 <Route path="pickedorders" element={<OrdersPicked />} />
               </Route>
-
             </Route>
           </Routes>
         </NavDashboard>
@@ -265,7 +261,7 @@ function App() {
               element={<ViewBySingleCategory />}
             ></Route>
             <Route path="/about" element={<AboutUs />}></Route>
-            <Route path="/contact" element={<Contact />} ></Route>
+            <Route path="/contact" element={<Contact />}></Route>
             <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
             <Route path="/faq" element={<Faq />}></Route>
             <Route path="/comingsoon" element={<CommingSoon />}></Route>
@@ -278,17 +274,26 @@ function App() {
                 </RequireAuth>
               }
             ></Route>
-            
-            <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
+
+            <Route
+              path="/productReleaseLandingpage"
+              element={<ProductReleaseLandingPage />}
+            ></Route>
             <Route path="/chatpopup" element={<ChatPopup />}></Route>
-            <Route path="/BestSellingBooksPage" element={<BestSellingBooksPage></BestSellingBooksPage>}></Route>
+            <Route
+              path="/BestSellingBooksPage"
+              element={<BestSellingBooksPage></BestSellingBooksPage>}
+            ></Route>
+            <Route
+              path="/BestOffers"
+              element={<BestOfferPage></BestOfferPage>}
+            ></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>
           </Routes>
 
           <Footer />
-
         </NavBar>
       )}
 

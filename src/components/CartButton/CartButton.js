@@ -41,7 +41,7 @@ const CartButton = ({ _id }) => {
   
 
   return (
-    <button className=" hover:text-primar duration-500 a" >
+    <button className=" hover:text-primar duration-500 a " >
       {includeCart ? <FaShoppingBasket className='text-primary'/> : <FaShoppingBasket onClick={() => AddCart(_id)} />}
   
   </button>

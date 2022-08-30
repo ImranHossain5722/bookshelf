@@ -7,8 +7,8 @@ import Esayreturn from '../../Assets/images/return_small.webp'
 const WorkPolicy = () => {
     return (
         <div className='workPolicy '>
-            <div className=' lg:flex justify-center  gap-3 mb-[120px]'>
-            <div className='freeShipping flex items-center gap-1'>
+            <div className=' lg:flex justify-center  gap-5 mb-[120px]'>
+            <div className='freeShipping flex items-center justify-center mx-5'>
                 <div className=''>
                     <img className='w-4/5' src={freeShipping} alt=''/>
                 </div>
@@ -19,7 +19,7 @@ const WorkPolicy = () => {
 
             </div>
         
-            <div className='securePayment flex items-center  gap-1'>
+            <div className='securePayment flex items-center justify-center mx-5 '>
                 <div className=''>
                     <img className='w-4/5'  src={payment} alt=''/>
                 </div>
@@ -29,7 +29,7 @@ const WorkPolicy = () => {
                 </div>
 
             </div>
-            <div className='BestPrice flex items-center  gap-1'>
+            <div className='BestPrice flex items-center justify-center mx-5 '>
                 <div className=''>
                     <img className='w-4/5'  src={price } alt=''/>
                 </div>
@@ -39,7 +39,7 @@ const WorkPolicy = () => {
                 </div>
 
             </div>
-            <div className='easyreturn flex items-center  gap-1'>
+            <div className='easyreturn flex items-center justify-center mx-5'>
                 <div className=''>
                     <img className='w-4/5' src={Esayreturn} alt=''/>
                 </div>

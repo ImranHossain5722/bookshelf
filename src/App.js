@@ -73,6 +73,7 @@ import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
 import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
 import BestSellingBooksPage from "./pages/BestSellingBooksPage/BestSellingBooksPage";
 import BestOfferPage from './pages/BestOfferPage/BestOfferPage'
+import PopularWritersBooksPage from "./pages/PopularWritersBooksPage/PopularWritersBooksPage";
 
 // initialize aos
 AOS.init();
@@ -287,6 +288,10 @@ function App() {
             <Route
               path="/BestOffers"
               element={<BestOfferPage></BestOfferPage>}
+            ></Route>
+            <Route
+              path="/Poplerwriters"
+              element={<PopularWritersBooksPage></PopularWritersBooksPage>}
             ></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}

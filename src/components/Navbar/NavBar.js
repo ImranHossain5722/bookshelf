@@ -118,6 +118,10 @@ const NavBar = ({ children }) => {
                 </li>
                 
                 <li>
+                  <NavLink to="/BestSellingBooksPage">Best Selling Books</NavLink>
+                </li>
+                
+                <li>
                   <NavLink to="/about">About Us</NavLink>
                 </li>
                 <li>

@@ -44,6 +44,7 @@ const Categorys = () => {
       .then((data) => setAllCategories(data));
   }, []);
 
+
   // get books by category id
   useEffect(() => {
     const options = { method: "GET" };
@@ -55,7 +56,7 @@ const Categorys = () => {
       .then((response) => setBooks(response))
       .catch((err) => toast.error(err));
   }, [selectedCatId]);
-
+  console.log(books);
   // get selected Category
   const getCategoryIdOnClick = (id, title) => {
     if (selectedCatId === id) {
@@ -241,7 +242,7 @@ const Categorys = () => {
                       <SwiperSlide key={book._id}>
                         <div className="product_widget26 mb_30 bg-white">
                           <div className="product_thumb_upper position-relative">
-                              {book.discount>0 && <span className="offer_badge">-{book.discount}%</span>}
+                            {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
                             <Link
                               to={`/selectedBook/${book?._id}`}
                               className="thumb text-center"
@@ -262,21 +263,21 @@ const Categorys = () => {
                               {book?.book_author?.author_name}
                             </p>
                             <div className="stars">
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
+                              <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                              <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                              <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                              <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                              <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
                               <span className="text-sm font-medium">
-                                (02 Rating)
+                                ({book?.book_reviews.length})
                               </span>
                             </div>
                             <div className="product_prise flex items-center gap-2">
-                            <span className="line-through">
-                        {book.discount > 0 &&
-                          `$${book.discount + book.book_price}.00`}
-                      </span>
-                      <p>${book.book_price}.00</p>
+                              <span className="line-through">
+                                {book.discount > 0 &&
+                                  `$${book.discount + book.book_price}.00`}
+                              </span>
+                              <p>${book.book_price}.00</p>
                             </div>
                             <AddCartButton _id={book._id} />
                           </div>

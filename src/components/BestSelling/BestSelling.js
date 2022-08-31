@@ -1,8 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 
-//icons
-import { FaHeart, FaEye, FaShoppingCart, FaRegEye } from "react-icons/fa";
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,21 +10,17 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Navigation, Autoplay } from "swiper";
-import Stars from "../Stars/Stars";
+import { Navigation, Autoplay } from "swiper";
 import useWindowDimensions from "../windowSize/windowSize";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "../Loading/Loading";
 import { sellBooks } from "../Redux/actions/bookActions";
 import CartButton from "../CartButton/CartButton";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
 const BestSelling = () => {
   const books = useSelector((state) => state?.sellBooks?.books);
-  const [size, setSize] = useState(1);
-  const { width } = useWindowDimensions();
   const dispatch = useDispatch();
 
   useEffect(() => {

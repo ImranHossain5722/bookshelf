@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React  from "react";
 import newsBanner from "../../Assets/images/slider-3.png";
 // Banner Images
 import img1 from "../../Assets/images/slider-1.png";
@@ -15,7 +15,6 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
-import Button from "../Button/Button";
 
 const data = [
   {
@@ -96,8 +95,6 @@ const Banner = () => {
               </div>
             </div>
           </SwiperSlide>
-
-           
           
         ))}
       </Swiper>

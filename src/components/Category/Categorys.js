@@ -27,24 +27,23 @@ import { Link, NavLink } from "react-router-dom";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
+import { toast } from "react-toastify";
 
 const Categorys = () => {
-  // const books = useSelector((state) => state?.sellBooks?.books);
+
   // Get Categories from database
   const [allCategories, setAllCategories] = useState([]);
+  const [selectedCatId, setSelectedCatId] = useState("");
+  const [selectedCatTitle, setSelectedCatTitle] = useState("");
+  const [books, setBooks] = useState([]);
+
   useEffect(() => {
     const options = { method: "GET" };
     fetch("https://book-shelf-webapp.herokuapp.com/all-categories", options)
       .then((response) => response.json())
       .then((data) => setAllCategories(data));
-    // .catch(err => console.error(err));
   }, []);
 
-  // console.log(allCategories)
-  const [selectedCatId, setSelectedCatId] = useState("");
-  const [selectedCatTitle, setSelectedCatTitle] = useState("");
-
-  const [books, setBooks] = useState([]);
   // get books by category id
   useEffect(() => {
     const options = { method: "GET" };
@@ -54,7 +53,7 @@ const Categorys = () => {
     )
       .then((response) => response.json())
       .then((response) => setBooks(response))
-      .catch((err) => console.error(err));
+      .catch((err) => toast.error(err));
   }, [selectedCatId]);
 
   // get selected Category
@@ -70,8 +69,6 @@ const Categorys = () => {
   // for swiper slider
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-  const cardNextRef = useRef(null);
-  const cardPrevRef = useRef(null);
   return (
     <div className="section_spacing">
       <div className="container mx-auto">
@@ -129,7 +126,7 @@ const Categorys = () => {
               swiper.navigation.update();
             }}
           >
-            {allCategories.map((category) => (
+            {allCategories?.map((category) => (
               <SwiperSlide key={category._id}>
                 {category._id === selectedCatId ? (
                   <div

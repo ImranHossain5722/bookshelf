@@ -11,9 +11,7 @@ const BestSellingBooks = () => {
     const [books, setBooks] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setpostPerPage] = useState(10);
-    const [posts, setPosts] = useState([]);
-  
- 
+    const [posts, setPosts] = useState([])
    const [loading, setLoading] = useState(false);
 
    useEffect(() => {
@@ -24,7 +22,6 @@ const BestSellingBooks = () => {
       );
  
       setPosts(res.data);
-
       setLoading(false);
     };
 

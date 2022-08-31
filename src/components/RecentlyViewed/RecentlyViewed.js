@@ -123,7 +123,11 @@ const RecentlyViewed = () => {
                       <i className="fas fa-star"></i>
                       <span className="text-sm font-medium">(02 Rating)</span>
                     </div>
-                    <div className="product_prise">
+                    <div className="product_prise flex items-center gap-2">
+                      <span className="line-through">
+                        {book.discount > 0 &&
+                          `${book.discount + book.book_price}`}
+                      </span>
                       <p>${book.book_price}</p>
                     </div>
                     <AddCartButton _id={book._id} />

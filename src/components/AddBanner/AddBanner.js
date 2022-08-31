@@ -4,7 +4,6 @@ import Bannerbook from "../../Assets/images/Banner-images/img1-13.png";
 import Button from "../Button/Button";
 
 const AddBanner = () => {
-  //dynamic api needed to make the banner image and link change form the dashboard
 
   return (
     <div className="card lg:card-side bg-white mx-auto max-w-[1240px]  mb-[125px] py-6">

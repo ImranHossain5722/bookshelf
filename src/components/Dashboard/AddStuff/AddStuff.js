@@ -9,35 +9,33 @@ import auth from '../../../firebase.init';
 const AddStuff = () => {
     const { handleSubmit } = useForm();
     const [user] = useAuthState(auth);
-
     const [stuffData, setStuffData] = useState(user);
-    // console.log(user);
-
     const [userByEmail, setUserByEmail] = useState([]);
+    const [userEmail, setUserEmail] = useState({});
+    const [uData, setUData] = useState();
+    
+    let userByEmailOption = [];
     useEffect(() => {
         const options = { method: 'GET' };
 
         fetch('https://book-shelf-webapp.herokuapp.com/get-all-users-email', options)
             .then(response => response.json())
             .then(data => setUserByEmail(data))
-            .catch(err => console.error(err));
+            .catch(err => toast.error(err));
 
     }, [])
 
-    let userByEmailOption = [];
 
     userByEmail.forEach(cat => {
         let dropDown = { label: cat['user_email'], value: cat['_id'] };
         userByEmailOption.push(dropDown);
     });
-    const [userEmail, setUserEmail] = useState({});
 
     const getUserDatas = (choice) => {
         const email = choice?.label;
         setUserEmail(email);
 
     }
-    const [uData, setUData] = useState();
 
     useEffect(() => {
         const options = {
@@ -76,7 +74,7 @@ const AddStuff = () => {
         };
         axios.patch(`https://book-shelf-webapp.herokuapp.com/update-user-role?id=${userId}`, updatedRole)
             .then(data => {
-                toast.success(`User Role Updated to  ${selRole}`);
+                toast.success(`Your Role Is Updated to ${selRole}`);
             })
     }
 

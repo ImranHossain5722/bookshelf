@@ -116,11 +116,13 @@ const NavBar = ({ children }) => {
                 <li>
                   <NavLink to="/books">Books</NavLink>
                 </li>
-                
+
                 <li>
-                  <NavLink to="/BestSellingBooksPage">Best Selling Books</NavLink>
+                  <NavLink to="/BestSellingBooksPage">
+                    Best Selling Books
+                  </NavLink>
                 </li>
-                
+
                 <li>
                   <NavLink to="/about">About Us</NavLink>
                 </li>
@@ -229,6 +231,9 @@ const NavBar = ({ children }) => {
               <NavLink to="/books" className="rounded-lg">
                 Books
               </NavLink>
+            </li>
+            <li>
+              <NavLink to="/BestSellingBooksPage">Best Selling Books</NavLink>
             </li>
             <li>
               <NavLink to="/books" className="rounded-lg">

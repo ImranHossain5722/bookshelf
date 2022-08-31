@@ -116,19 +116,21 @@ const RecentlyViewed = () => {
                       {book?.book_author?.author_name}
                     </p>
                     <div className="stars">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <span className="text-sm font-medium">(02 Rating)</span>
+                      <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                      <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                      <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                      <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                      <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                      <span className="text-sm font-medium">
+                        ({book?.book_reviews.length})
+                      </span>
                     </div>
                     <div className="product_prise flex items-center gap-2">
                       <span className="line-through">
                         {book.discount > 0 &&
-                          `${book.discount + book.book_price}`}
+                          `$${book.discount + book.book_price}.00`}
                       </span>
-                      <p>${book.book_price}</p>
+                      <p>${book.book_price}.00</p>
                     </div>
                     <AddCartButton _id={book._id} />
                   </div>

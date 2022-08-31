@@ -37,7 +37,7 @@ const AllAuthors = () => {
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 g-4 gy-8'>
 
         {users?.map(user => <div className=" bg-white flex items-center justify-center  
-        mx-[2px] card user-shadow  w-[370px] h-[160px] p-7 font-semibold m-3">
+        mx-[2px] card user-shadow  w-[320px] h-[135px] p-7 font-semibold m-3">
           <p className="pl-8 relative bottom-2">{user.user_name}</p>
           <div className='flex items-center'>
             <div className="avatar">

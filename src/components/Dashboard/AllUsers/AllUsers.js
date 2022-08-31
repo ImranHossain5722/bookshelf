@@ -38,10 +38,10 @@ const AllUsers = () => {
       <div className=" flex items-center justify-center pb-10">
         <div className="bg-primary h-1 w-10 rounded-lg "></div>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  justify-center items-center'>
 
 
-        {users?.map(user => <div className="mx-[12px] card user-shadow  w-[370px] h-[160px] p-7 font-semibold m-3 bg-white " >
+        {users?.map(user => <div className="mx-[12px] card user-shadow  w-[320px] h-[135px] p-7 font-semibold m-3 bg-white" >
           <p className="pl-8 relative bottom-2 text-secondary text-lg font-semibold capitalize ">{user.user_name}</p>
           <div className='flex items-center'>
             <div className="avatar">
@@ -50,8 +50,8 @@ const AllUsers = () => {
               </div>
             </div>
             <div className=''>
-              <p className='flex items-center break-all'><IoMdMail className='text-[#B7B7B7] text-[25px] mr-4' />{user.user_email}</p>
-              <p className='flex items-center'><MdPhoneInTalk className='text-[#B7B7B7] text-[25px] mr-4' />{user.user_phone ? user.user_phone : "+8801688615454"}</p>
+              <p className='flex items-center break-all'><IoMdMail className='text-[#B7B7B7] text-[16px] mr-4' />{user.user_email}</p>
+              <p className='flex items-center'><MdPhoneInTalk className='text-[#B7B7B7] text-[16px] mr-4' />{user.user_phone ? user.user_phone : "+8801xxxxx"}</p>
 
             </div>
           </div>

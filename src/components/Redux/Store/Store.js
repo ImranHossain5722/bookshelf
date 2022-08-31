@@ -21,7 +21,10 @@ import {
   currentCartReducer,
   quickViewReducer,
   orderViewReducer,
-  commentIdReducer
+  commentIdReducer,
+  bestSellingReducer,
+  popularWriterBookReducer,
+  bestOfferBookReducer
 } from "../Features/bookReducers";
 import thunk from "redux-thunk";
 
@@ -47,7 +50,10 @@ const store = configureStore({
     quickView : quickViewReducer,
     cartData : currentCartReducer,
     orderView : orderViewReducer,
-    commentId : commentIdReducer
+    commentId : commentIdReducer,
+    bestSelling : bestSellingReducer,
+    popularWriter : popularWriterBookReducer,
+    bestOffer : bestOfferBookReducer
   },
   middleware: [thunk],
   

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import useGetUserData from '../../../hooks/useGetUserData';
 import { format } from "date-fns";
+import Loading from '../../Loading/Loading';
 
 
 const PickedOrder = () => {
@@ -16,8 +17,8 @@ const PickedOrder = () => {
         setOrderQty(newOrderQty);
     }
 
-    const { data: allOrders, refetch } = useQuery(['allOrders'], () =>
-        fetch(`https://book-shelf-webapp.herokuapp.com/picked-orders?uid=${getUser[0]?.uid}`).then(res =>
+    const { data: allOrders, refetch, isLoading } = useQuery(['allOrders'], () =>
+        fetch(`https://book-shelf-webapp.herokuapp.com/picked-orders?uid=${getUser[0]?._id}`).then(res =>
             res.json()
         )
     )
@@ -26,16 +27,17 @@ const PickedOrder = () => {
     allOrders?.map(order => (order?.picked_status === true && order?.delivered_status === false) && newOrders.push(order))
     const today = new Date();
     const formatedData = format(today, 'dd.MM.yyyy');
-    console.log(newOrders)
+    // console.log(newOrders)
     const deliverOrder = (id) => {
-        console.log('picked hit')
+        console.log('Delivered hit')
 
-        const pickedData = {
+        const deliveredData = {
             delivered_status: true,
             delivered_date: formatedData,
-            delivered_by: getUser[0]?.uid
+            delivered_by: getUser[0]?._id
         }
-        axios.patch(`https://book-shelf-webapp.herokuapp.com/update-order-tracking?oid=${id}`, pickedData)
+        console.log('p', deliveredData)
+        axios.patch(`https://book-shelf-webapp.herokuapp.com/update-order-tracking?oid=${id}`, deliveredData)
             .then(data => {
                 console.log('patch', data)
                 toast.success(`Order delivered`);
@@ -68,23 +70,26 @@ const PickedOrder = () => {
                                 <th className='border border-[#666666]'>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {newOrders?.map(order => <tr key={order?._id}>
-                                <th className='border border-[#666666]'>{order?._id}</th>
-                                <td className='border border-[#666666]'>{order?.user_id?.user_name}</td>
-                                <td className='border border-[#666666]'>Dhaka</td>
-                                <td className='border border-[#666666]'>01</td>
-                                <td className='border border-[#666666]'>{order?.ordered_price_amount}</td>
-                                <td className='border border-[#666666]'>0</td>
-                                <td className='border border-[#666666]'>{order?.payment_info?.payment_type}</td>
-                                <td className='border border-[#666666]'>{order?.picked_date}</td>
+                        {isLoading ? <Loading></Loading> :
 
-                                <td className='border border-[#666666]'>
-                                    <button onClick={() => deliverOrder(order?._id)} className='btn btn-error  text-white'><BsTruckFlatbed /> <span className='ml-1'>Deliver order</span> </button>
-                                </td>
-                            </tr>)}
+                            <tbody>
+                                {newOrders?.map(order => <tr key={order?._id}>
+                                    <th className='border border-[#666666]'>{order?._id}</th>
+                                    <td className='border border-[#666666]'>{order?.user_id?.user_name}</td>
+                                    <td className='border border-[#666666]'>Dhaka</td>
+                                    <td className='border border-[#666666]'>01</td>
+                                    <td className='border border-[#666666]'>{order?.ordered_price_amount}</td>
+                                    <td className='border border-[#666666]'>0</td>
+                                    <td className='border border-[#666666]'>{order?.payment_info?.payment_type}</td>
+                                    <td className='border border-[#666666]'>{order?.picked_date}</td>
 
-                        </tbody>
+                                    <td className='border border-[#666666]'>
+                                        <button onClick={() => deliverOrder(order?._id)} className='btn btn-error  text-white'><BsTruckFlatbed /> <span className='ml-1'>Deliver order</span> </button>
+                                    </td>
+                                </tr>)}
+
+                            </tbody>
+                        }
 
                     </table>
                 </div>

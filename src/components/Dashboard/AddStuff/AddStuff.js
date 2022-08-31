@@ -9,35 +9,33 @@ import auth from '../../../firebase.init';
 const AddStuff = () => {
     const { handleSubmit } = useForm();
     const [user] = useAuthState(auth);
-
     const [stuffData, setStuffData] = useState(user);
-    // console.log(user);
-
     const [userByEmail, setUserByEmail] = useState([]);
+    const [userEmail, setUserEmail] = useState({});
+    const [uData, setUData] = useState();
+    
+    let userByEmailOption = [];
     useEffect(() => {
         const options = { method: 'GET' };
 
         fetch('https://book-shelf-webapp.herokuapp.com/get-all-users-email', options)
             .then(response => response.json())
             .then(data => setUserByEmail(data))
-            .catch(err => console.error(err));
+            .catch(err => toast.error(err));
 
     }, [])
 
-    let userByEmailOption = [];
 
     userByEmail.forEach(cat => {
         let dropDown = { label: cat['user_email'], value: cat['_id'] };
         userByEmailOption.push(dropDown);
     });
-    const [userEmail, setUserEmail] = useState({});
 
     const getUserDatas = (choice) => {
         const email = choice?.label;
         setUserEmail(email);
 
     }
-    const [uData, setUData] = useState();
 
     useEffect(() => {
         const options = {
@@ -76,15 +74,18 @@ const AddStuff = () => {
         };
         axios.patch(`https://book-shelf-webapp.herokuapp.com/update-user-role?id=${userId}`, updatedRole)
             .then(data => {
-                toast.success(`User Role Updated to  ${selRole}`);
+                toast.success(`Your Role Is Updated to ${selRole}`);
             })
     }
 
     return (
         <div className="pt-12 pb-12 w-1/2 mx-auto">
             <h2 className='text-center font-bold text-3xl mb-3'>Add A New Stuff</h2>
+            <div className=" flex items-center justify-center pb-10">
+        <div className="bg-primary h-1 w-10 rounded-lg "></div>
+      </div>
             <div className='w-full mb-6'>
-                <label className="label-text text-lg">Search User By Email</label>
+                <label className="label-text text-lg ">Search User By Email</label>
                 <Select onChange={(choice) => getUserDatas(choice)} className="mt-2 rounded-xl" options={userByEmailOption} />
             </div>
             <form className='mb-2' onSubmit={handleSubmit(onSubmit)}>

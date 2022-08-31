@@ -43,6 +43,7 @@ const Chat = () => {
       setshowChats(allAdmins);
     }
   }, [currentUser, allUser]);
+  
   useEffect(() => {
     if (currentUser) {
       socket.current = io("https://book-shelf-webapp.herokuapp.com");
@@ -55,7 +56,6 @@ const Chat = () => {
   }
   const handleContact = (chat) => {
     setCurrentChat(chat);
-    console.log(chat);
   };
   return (
     <div className="section_padding">

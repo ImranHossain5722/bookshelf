@@ -206,7 +206,7 @@ const Myprofile = () => {
         My Profile
       </h2>
       <div className=" flex items-center justify-center pb-10">
-        <progress className="progress progress-primary bg-white h-2 w-10  "></progress>
+        <div className="bg-primary h-1 w-10 rounded-lg "></div>
       </div>
       {/* md:flex  mr-auto mx-[20px] md:ml-20 */}
       <div className="lg:grid lg:grid-cols-2 lg:gap-6 m-6">
@@ -219,7 +219,7 @@ const Myprofile = () => {
               getUser[0]?.user_photo_url
                 ? getUser[0]?.user_photo_url
                 : user?.photoURL ||
-                "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg "
+                  "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg "
             }
             alt=""
           />
@@ -266,7 +266,12 @@ const Myprofile = () => {
             <p className="text-xl mb-2 text-[#666666] ">
               Please feel free to share your feedback about <b>BookShelf</b>
             </p>
-            <Link to='/dashboard/addreview' className="text-white mx-auto btn btn-primary">Add a Review</Link>
+            <Link
+              to="/dashboard/addreview"
+              className="text-white mx-auto btn btn-primary"
+            >
+              Add a Review
+            </Link>
           </div>
         </div>
 
@@ -390,9 +395,7 @@ const Myprofile = () => {
             <h2 className="font-semibold uppercase text-secondary mt-4 text-[16px]">
               Update Information
             </h2>
-            <div className="">
-              <progress className="progress progress-primary bg-white h-2 w-5  "></progress>
-            </div>
+  
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex mx-auto py-2 ">
                 <div className=" flex-1 ">
@@ -499,14 +502,14 @@ const Myprofile = () => {
                         },
                       })}
                       type="file"
-
-                     class="block w-full text-sm text-slate-500
+                      class="block w-full text-sm text-slate-500
       file:mr-4 file:py-2 file:px-4
       file:rounded-full file:outline-none
       file:text-sm file:font-semibold
       file:bg-primary file:text-white
       hover:file:bg-white hover:file:text-primary file:border-primary file:border-0
-    " />
+    "
+                    />
                     <label className="label">
                       <span className="label-text-alt text-red-500">
                         {errors.image?.type === "required" &&

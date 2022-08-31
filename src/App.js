@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import React, { Component ,Suspense, lazy  } from "react";
+import { Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 // aos animation
 import AOS from "aos";
@@ -18,32 +18,31 @@ import AddPublisher from "./pages/Forms/AddPublisher";
 import AddProduct from "./components/Dashboard/AddProduct/AddProduct";
 import Addreview from "./components/Dashboard/Addreview/Addreview";
 import AllAuthors from "./components/Dashboard/AllAuthors/AllAuthors";
-import AllOrders from "./components/Dashboard/AllOrders/AllOrders";
+
 import AllPublishers from "./components/Dashboard/AllPublishers/AllPublishers";
 import AllUsers from "./components/Dashboard/AllUsers/AllUsers";
-import Dashboard from "./components/Dashboard/Dashboard";
 import Myorder from "./components/Dashboard/Myorder/Myorder";
 import Myprofile from "./components/Dashboard/Myprofile/Myprofile";
 import OrderHistory from "./components/Dashboard/OrderHistory/OrderHistory";
 import AuthorOrPublisher from "./pages/Forms/AuthorOrPublisher";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import AllBooks from "./components/Books/AllBooks";
+// import AllBooks from "./components/Books/AllBooks";
 import NavDashboard from "./components/NavDashboard/NavDashboard";
 import auth from "./firebase.init";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
-import Home from "./pages/Home/Home";
+
 import NotFound from "./pages/NotFound/NotFound";
 import Products_details from "./pages/Products_details/Products_details";
 import axios from "axios";
 import Wishlist from "./pages/wishlist/Wishlist";
-import Contact from "./pages/Contact/Contact";
+
 import Faq from "./pages/Faq/Faq";
 import PrivecyPolicy from "./pages/Privecy_policy/PrivecyPolicy";
 import TermsCondition from "./pages/TermsCondition/TermsCondition";
 import ViewBySingleCategory from "./components/FirstCategoryBooks/ViewBySingleCategory";
-import AboutUs from "./pages/AboutUs/AboutUs";
+// import AboutUs from "./pages/AboutUs/AboutUs";
 import { newUser } from "./components/Redux/actions/bookActions";
 import { useDispatch } from "react-redux";
 import CommingSoon from "./components/CommingSoon/CommingSoon";
@@ -60,12 +59,9 @@ import Orders from "./components/Dashboard/OrderDelivery/Orders";
 import DeliveredOrder from "./components/Dashboard/OrderDelivery/DeliveredOrder";
 import PickedOrder from "./components/Dashboard/OrderDelivery/PickedOrder";
 import TrackOrder from "./pages/TrackOrder/TrackOrder";
-import ScrollToTop from "react-scroll-to-top";
 import ChatPopup from "./components/ChatPopup/ChatPopup";
-import UpScrollButton from "./components/UpScrollButton/UpScrollButton";
 import UpdateProduct from "./components/Dashboard/AllProducts/UpdateProduct";
 import MyProducts from "./components/Dashboard/MyProducts/MyProducts";
-
 import CurrentOrders from "./components/Dashboard/OrderHistory/CurrentOrders";
 import OrdersPicked from "./components/Dashboard/OrderHistory/OrdersPicked";
 import OrdersDelivered from "./components/Dashboard/OrderHistory/OrdersDelivered";
@@ -74,10 +70,19 @@ import BestSellingBooks from "./components/BestSellingBooks/BestSellingBooks";
 import ThankYou from "./components/ThankYou/ThankYou";
 import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
 import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
+import BestOfferPage from "./pages/BestOfferPage/BestOfferPage";
+import PopularWritersBooksPage from "./pages/PopularWritersBooksPage/PopularWritersBooksPage";
+import Loading from "./components/Loading/Loading";
+// import Home from "./pages/Home/Home";
 
-
-
-
+//
+const Home = lazy (()=> import ("./pages/Home/Home"))
+const AboutUs = lazy (()=> import ("./pages/AboutUs/AboutUs"))
+const Contact = lazy (()=> import ("./pages/Contact/Contact"))
+const AllBooks = lazy (()=> import ("./components/Books/AllBooks"))
+const BestSellingBooksPage = lazy (()=> import ("./pages/BestSellingBooksPage/BestSellingBooksPage"))
+const Dashboard = lazy (()=> import ("./components/Dashboard/Dashboard"))
+const AllOrders = lazy (()=> import ("./components/Dashboard/AllOrders/AllOrders"))
 
 // initialize aos
 AOS.init();
@@ -94,7 +99,6 @@ function App() {
       fetch(`https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           dispatch(newUser(data[0]));
         });
     }
@@ -112,16 +116,15 @@ function App() {
 
   return (
     <div className="App">
-
-
       {dash ? (
         <NavDashboard>
+         
           <Routes>
             <Route
               path="/dashboard"
               element={
                 <RequireAuth>
-                  <Dashboard />
+                  <Suspense fallback={<Loading></Loading>}><Dashboard /></Suspense> 
                 </RequireAuth>
               }
             >
@@ -135,33 +138,38 @@ function App() {
               <Route path="addproduct" element={<AddProduct />} />
               <Route path="myproducts" element={<MyProducts />} />
               <Route path="updateproduct/:bookid" element={<UpdateProduct />} />
-              <Route path="addproductreviews/:bookid" element={<AddProductReview />} />
+              <Route
+                path="addproductreviews/:bookid"
+                element={<AddProductReview />}
+              />
               <Route path="addproductreviews" element={<ProductToReview />} />
               <Route path="trackorder/:bookid" element={<TrackOrders />} />
               <Route path="allpublisher" element={<AllPublishers />} />
               <Route path="allusers" element={<AllUsers />} />
-              <Route path="allorders" element={<AllOrders />} />
+              <Route path="allorders" element={ <Suspense fallback={<Loading></Loading>}><AllOrders /></Suspense>} />
               <Route path="allauthor" element={<AllAuthors />} />
-              <Route path="orderhistory" element={<OrderHistory />} >
+              <Route path="orderhistory" element={<OrderHistory />}>
                 <Route path="orders" element={<CurrentOrders />} />
                 <Route path="deliveredorders" element={<DeliveredOrder />} />
                 <Route path="pickedorders" element={<PickedOrder />} />
               </Route>
-
 
               <Route path="orderdelivery" element={<OrderDelivery />}>
                 <Route path="orders" element={<Orders />} />
                 <Route path="deliveredorders" element={<OrdersDelivered />} />
                 <Route path="pickedorders" element={<OrdersPicked />} />
               </Route>
-
             </Route>
           </Routes>
+      
         </NavDashboard>
       ) : (
         <NavBar>
-          <Routes>
-            <Route path="/" element={<Home />} />
+          
+         
+          <Routes >
+           
+            <Route path="/" element={ <Suspense fallback={<Loading></Loading>}><Home /></Suspense>} />
             <Route path="/login" element={<Login />}></Route>
             <Route path="/trackorder" element={<TrackOrder />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
@@ -177,7 +185,7 @@ function App() {
             ></Route>
             <Route path="/became" element={<AuthorOrPublisher />}></Route>
             <Route path="/payment" element={<Payment />}></Route>
-            <Route path="/books" element={<AllBooks />}></Route>
+            <Route path="/books" element={ <Suspense fallback={<Loading></Loading>}> <AllBooks /></Suspense>}></Route>
             <Route path="/bestSelling" element={<BestSellingBooks />} />
 
             <Route
@@ -266,22 +274,47 @@ function App() {
               path="/categoryView"
               element={<ViewBySingleCategory />}
             ></Route>
-            <Route path="/about" element={<AboutUs />}></Route>
-            <Route path="/contact" element={<Contact />}></Route>
+            <Route path="/about" element={ <Suspense fallback={<Loading></Loading>}> <AboutUs /></Suspense>}></Route>
+            <Route path="/contact" element={<Suspense fallback={<Loading></Loading>}><Contact /></Suspense> }></Route>
             <Route path="/privecy_policy" element={<PrivecyPolicy />}></Route>
             <Route path="/faq" element={<Faq />}></Route>
             <Route path="/comingsoon" element={<CommingSoon />}></Route>
             <Route path="/termsCondition" element={<TermsCondition />}></Route>
-            <Route path="/readershome" element={<ReadersHome />}></Route>
-            <Route path="/productReleaseLandingpage" element={<ProductReleaseLandingPage />}></Route>
+            <Route
+              path="/readershome"
+              element={
+                <RequireAuth>
+                  <ReadersHome />
+                </RequireAuth>
+              }
+            ></Route>
+
+            <Route
+              path="/productReleaseLandingpage"
+              element={<ProductReleaseLandingPage />}
+            ></Route>
             <Route path="/chatpopup" element={<ChatPopup />}></Route>
+            <Route
+              path="/BestSellingBooksPage"
+              element={ <Suspense fallback={<Loading></Loading>}><BestSellingBooksPage /></Suspense>}
+            ></Route>
+            <Route
+              path="/BestOffers"
+              element={<BestOfferPage></BestOfferPage>}
+            ></Route>
+            <Route
+              path="/Poplerwriters"
+              element={<PopularWritersBooksPage></PopularWritersBooksPage>}
+            ></Route>
             <Route path="*" element={<NotFound></NotFound>}>
               {" "}
             </Route>
+           
           </Routes>
+         
+         
 
           <Footer />
-
         </NavBar>
       )}
 

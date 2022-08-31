@@ -25,9 +25,8 @@ const CartButton = ({ _id }) => {
 
       axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data =>{toast.success('successfully added to cart')})
   }else{
-      console.log("user id not found", userId)
+      toast.error("Failed To Add To Cart Please Try Again")
   }
-    console.log(cartData)
   }
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const CartButton = ({ _id }) => {
   
 
   return (
-    <button className=" hover:text-primar duration-500 a" >
+    <button className=" hover:text-primar duration-500 a " >
       {includeCart ? <FaShoppingBasket className='text-primary'/> : <FaShoppingBasket onClick={() => AddCart(_id)} />}
   
   </button>

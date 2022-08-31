@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import blogImg1 from "../../Assets/images/Blog/blog_img1.jpg";
 import blogImg2 from "../../Assets/images/Blog/blog_img2.jpg";
 import blogImg3 from "../../Assets/images/Blog/blog_img3.jpg";
@@ -42,13 +43,13 @@ const Blog = () => {
             return (
               <div class="home10_blog_Widget mb_30" key={id}>
                 {console.log(singleBlog)}
-                <a href="#" class="thumb">
+                <Link to={`blog/${id}`} class="thumb">
                   <img src={img} alt="" />
-                </a>
+                </Link>
                 <div class="blog_content">
-                  <a href="#">
+                  <Link to={`blog/${id}`}>
                     <h4>{title}</h4>
-                  </a>
+                  </Link>
                   <span>Category:{category}</span>
 
                   <p>{description}</p>

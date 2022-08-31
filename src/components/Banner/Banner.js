@@ -46,18 +46,21 @@ const Banner = () => {
         loop={true}
         autoplay={true}
         pagination={{ clickable: true }}
-        modules={[Autoplay,Pagination, Navigation]}
+        modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper my-auto"
         style={{ "--swiper-theme-color": "#27AE61" }}
       >
         {data.map((bnrData) => (
           <SwiperSlide>
-          <div class="banner_single" 
-            style={{
-            backgroundImage: `url(${bnrData.image})`,
-            backgroundSize: "content",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat", }}>
+            <div
+              class="banner_single"
+              style={{
+                backgroundImage: `url(${bnrData.image})`,
+                backgroundSize: "content",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
               <div class="container mx-auto">
                 <div class="grid">
                   <div class="banner__text">
@@ -96,9 +99,6 @@ const Banner = () => {
               </div>
             </div>
           </SwiperSlide>
-
-           
-          
         ))}
       </Swiper>
     </div>

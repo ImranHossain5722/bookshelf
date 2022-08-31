@@ -74,6 +74,7 @@ import ProductToReview from "./components/Dashboard/AddProductReview/ProductToRe
 import BestSellingBooksPage from "./pages/BestSellingBooksPage/BestSellingBooksPage";
 import BestOfferPage from "./pages/BestOfferPage/BestOfferPage";
 import PopularWritersBooksPage from "./pages/PopularWritersBooksPage/PopularWritersBooksPage";
+import BlogDetails from "./pages/Blog/BlogDetails";
 
 // initialize aos
 AOS.init();
@@ -174,6 +175,7 @@ function App() {
             <Route path="/payment" element={<Payment />}></Route>
             <Route path="/books" element={<AllBooks />}></Route>
             <Route path="/bestSelling" element={<BestSellingBooks />} />
+            <Route path="/blog/:id" element={<BlogDetails />} />
 
             <Route
               path="/addbook"

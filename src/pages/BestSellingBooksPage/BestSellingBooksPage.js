@@ -23,7 +23,6 @@ const BestSellingBooksPage = () => {
         );
    
         setPosts(res.data);
-  
         setLoading(false);
       };
   

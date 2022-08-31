@@ -9,8 +9,9 @@ const ChatContainer = ({ currentChat, socket }) => {
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const currentUser = useSelector((state) => state?.newUser?.user);
-  const { email, user_name, _id } = currentChat;
+  const {  user_name,user_photo_url} = currentChat;
 
+  // fetching all chats of current and selected user
   useEffect(() => {
     const fetchChat = async () => {
       const response = await axios.post(
@@ -25,6 +26,8 @@ const ChatContainer = ({ currentChat, socket }) => {
     fetchChat();
   }, [currentChat]);
 
+
+  // sending massages to database 
   const handleSendMessage = async (msg) => {
     socket.current.emit("send-msg", {
       to: currentChat._id,
@@ -41,6 +44,8 @@ const ChatContainer = ({ currentChat, socket }) => {
     msgs.push({ fromSelf: true, message: msg });
     setMessages(msgs);
   };
+
+  //  reciving massages from sender
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-recieve", (msg) => {
@@ -49,6 +54,7 @@ const ChatContainer = ({ currentChat, socket }) => {
     }
   }, []);
 
+  // showing the messages
   useEffect(() => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
@@ -57,13 +63,13 @@ const ChatContainer = ({ currentChat, socket }) => {
     <div className="bg-white rounded-xl p-10 flex flex-col max-h-screen">
       <div class="avatar p-4 flex items-center border-b">
         <div class="w-10 rounded-full">
-          <img src={`https://xsgames.co/randomusers/assets/avatars/male/${user_name.length}.jpg` } /> 
+          <img src={ user_photo_url ? user_photo_url:  `https://xsgames.co/randomusers/assets/avatars/male/${user_name?.length}.jpg` } /> 
         </div>
 
         <p className="ml-2 font-semibold">{user_name}</p>
       </div>
       <div className="flex_1 overflow-auto ">
-        {messages.map((msgs) => (
+        {messages?.map((msgs) => (
           <div
             className={`${
               msgs.fromSelf

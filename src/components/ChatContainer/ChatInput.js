@@ -11,6 +11,8 @@ const ChatInput = ({ handleSendMessage }) => {
     message += emojiObject.emoji;
     setMsg(message);
   };
+
+  // sending the messages to the handleSendMessage function
   const sendChat = (event) => {
     event.preventDefault();
     if (msg.length > 0) {
@@ -18,10 +20,11 @@ const ChatInput = ({ handleSendMessage }) => {
       setMsg("");
     }
   };
+
   return (
     <div className="flex items-center relative ">
       <div className="mx-2 relative">
-        {showEmoji && <Picker className="" onEmojiClick={handleEmoji} />}
+        {showEmoji && <Picker  onEmojiClick={handleEmoji} />}
         <BsEmojiSmileFill onClick={() => setshowEmoji(!showEmoji)} />
       </div>
       <form onSubmit={(event) => sendChat(event)}>

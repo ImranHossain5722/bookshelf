@@ -41,7 +41,7 @@ const Blog = () => {
             const { id, img, title, category, description } = singleBlog;
             return (
               <div class="home10_blog_Widget mb_30" key={id}>
-                {console.log(singleBlog)}
+                {/* {console.log(singleBlog)} */}
                 <a href="#" class="thumb">
                   <img src={img} alt="" />
                 </a>

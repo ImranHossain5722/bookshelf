@@ -7,15 +7,20 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
 import AddCartButton from "../AddCartButton/AddCartButton";
-import { FaHome } from "react-icons/fa";
-import { GiBookCover } from "react-icons/gi";
-import { RiLayoutGridFill } from "react-icons/ri";
-import { AiOutlineUnorderedList } from "react-icons/ai";
+
+import { FaHome } from 'react-icons/fa';
+import { GiBookCover } from 'react-icons/gi';
+import { RiLayoutGridFill } from 'react-icons/ri';
+import { AiOutlineUnorderedList } from 'react-icons/ai';
+
+
 import { FaCartPlus, FaHeart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const AllBooks = () => {
+
+
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -61,6 +66,7 @@ const AllBooks = () => {
     };
 
     loadAuthors();
+
   }, []);
 
   // filtering all books by category or author
@@ -108,7 +114,7 @@ const AllBooks = () => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
-
+  console.log(currentPosts)
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -154,7 +160,9 @@ const AllBooks = () => {
     } else {
       console.log(" the user id is not found");
     }
+
   };
+
 
   return (
     <div className="section_padding">
@@ -166,30 +174,28 @@ const AllBooks = () => {
                 <FaHome className="text-[20px] mr-2" />
 
                 <p className="text-[20px] ">Home</p>
+
               </Link>
             </li>
             <li>
+
               <GiBookCover className="text-[20px] mr-2" />
               <p className="text-[20px] ">Book</p>
             </li>
           </ul>
         </div>
-        <div>
-          <button
-            className="btn btn-sm mr-2 text-primary border-primary border-2 hover:bg-primary hover:text-white hover:border-primary focus:bg-primary focus:text-white focus:border-primary"
-            onClick={() => setShowLIst(false)}
-          >
+        <div >
+          <button className="btn btn-sm mr-2 text-primary border-primary border-2 hover:bg-primary hover:text-white hover:border-primary focus:bg-primary focus:text-white focus:border-primary" onClick={() => setShowLIst(false)}>
             <RiLayoutGridFill className="text-[18px] font-bold" />
           </button>
-          <button
-            className="btn btn-sm mr-2 text-primary border-primary border-2 hover:bg-primary hover:text-white hover:border-primary focus:bg-primary focus:text-white focus:border-primary"
-            onClick={() => setShowLIst(true)}
-          >
+          <button className="btn btn-sm mr-2 text-primary border-primary border-2 hover:bg-primary hover:text-white hover:border-primary focus:bg-primary focus:text-white focus:border-primary" onClick={() => setShowLIst(true)}>
             <AiOutlineUnorderedList className="text-[18px] font-bold" />
           </button>
+
         </div>
       </div>
       <div style={{ background: "#FBF6F6" }} className=" container mx-auto ">
+
         <div className="md:flex gap-6 items-start ">
           {/* filter options left-side */}
           <div className="flex-1 md:w-1/4 mb-4">
@@ -279,26 +285,17 @@ const AllBooks = () => {
             </div>
           </div>
           {/* filter results right-side */}
-          {showList ? (
-            <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-10 md:w-3/4">
+          {
+            showList ? <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-10 md:w-3/4">
               {loading ? (
                 <Loading />
               ) : (
                 currentPosts?.map((book) => (
-                  <div class="product_widget26  bg-white lg:flex gap-2">
+                  <div class="card lg:card-side bg-base-100 shadow-xl">
                     <div className="product_thumb_upper position-relative">
-                      {book.discount > 0 && (
-                        <span className="offer_badge">-{book.discount}%</span>
-                      )}
-                      <Link
-                        to={`/selectedBook/${book?._id}`}
-                        className="thumb text-center"
-                      >
-                        <img
-                          src={book?.book_cover_photo_url}
-                          alt=""
-                          className="min-w-[300px]"
-                        />
+                      {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
+                      <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                        <img src={book?.book_cover_photo_url} alt="" className="min-w-[300px]" />
                       </Link>
                       <div className="product_action">
                         <Wishlistbutton _id={book._id} />
@@ -306,104 +303,93 @@ const AllBooks = () => {
                         <CartButton _id={book._id} />
                       </div>
                     </div>
-                    <div class="product__meta my-10">
+                    <div class="card-body">
                       <h2 class="card-title">
                         <Link to={`/selectedBook/${book?._id}`}>
                           <h4>{book.book_title}</h4>
                         </Link>
                       </h2>
                       <p className="h-fit mb-1">{book.book_description}</p>
-                      <div className="product_prise flex items-center gap-2">
-                      <span className="line-through">
-                        {book.discount > 0 &&
-                          `$${book.discount + book.book_price}.00`}
-                      </span>
-                      <p>${book.book_price}.00</p>
+                      <div className="product_prise">
+                        <p>${book.book_price}</p>
                       </div>
                       <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <span className="text-sm font-medium">(02 Rating)</span>
+                        <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <span className="text-sm font-medium">
+                          ({book?.book_reviews.length})
+                        </span>
                       </div>
                       <div className="flex items-center text-black mb-3 gap-2">
-                        <button
-                          className="icon-btn add-btn"
-                          onClick={() => AddCart(book._id)}
-                        >
+
+                        <button className="icon-btn add-btn" onClick={() => AddCart(book._id)}>
                           <FaCartPlus className="add-icon  text-primary text-2xl" />
 
                           <div className="btn-txt">Add to cart</div>
                         </button>
 
-                        <button
-                          className="icon-btn add-btn"
-                          onClick={() => AddWishlist(book._id)}
-                        >
+
+                        <button className="icon-btn add-btn" onClick={() => AddWishlist(book._id)}>
                           <FaHeart className="add-icon text-primary text-2xl" />
                           <div className="btn-txt">Add to wishlist</div>
                         </button>
                       </div>
                     </div>
                   </div>
+
                 ))
               )}
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
-              {loading ? (
-                <Loading />
-              ) : (
-                currentPosts?.map((book) => (
-                  <div className="product_widget26 mb_30 bg-white">
-                    <div className="product_thumb_upper position-relative">
-                      {book.discount > 0 && (
-                        <span className="offer_badge">-{book.discount}%</span>
-                      )}
-                      <Link
-                        to={`/selectedBook/${book?._id}`}
-                        className="thumb text-center"
-                      >
-                        <img src={book?.book_cover_photo_url} alt="" />
-                      </Link>
-                      <div className="product_action">
-                        <Wishlistbutton _id={book._id} />
-                        <QuickViewButton _id={book._id} />
-                        <CartButton _id={book._id} />
+              : <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
+                {loading ? (
+                  <Loading />
+                ) : (
+                  currentPosts?.map((book) => (
+
+                    <div className="product_widget26 mb_30 bg-white">
+                      <div className="product_thumb_upper position-relative">
+                        {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
+                        <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                          <img src={book?.book_cover_photo_url} alt="" />
+                        </Link>
+                        <div className="product_action">
+                          <Wishlistbutton _id={book._id} />
+                          <QuickViewButton _id={book._id} />
+                          <CartButton _id={book._id} />
+                        </div>
+                      </div>
+                      <div className="product__meta">
+                        <Link to={`/selectedBook/${book?._id}`}>
+                          <h4>{book.book_title}</h4>
+                        </Link>
+                        <p className="text-[16px] text-[#00124e] font-semibold">
+                          {book.author}
+                        </p>
+                        <div className="stars">
+                          <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                          <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                          <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                          <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                          <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                          <span className="text-sm font-medium">
+                            ({book?.book_reviews.length})
+                          </span>
+                        </div>
+                        <div className="product_prise">
+                          <p>${book.book_price}</p>
+                        </div>
+                        <AddCartButton _id={book._id} />
                       </div>
                     </div>
-                    <div className="product__meta">
-                      <Link to={`/selectedBook/${book?._id}`}>
-                        <h4>{book.book_title}</h4>
-                      </Link>
-                      <p className="text-[16px] text-[#00124e] font-semibold">
-                        {book.author}
-                      </p>
-                      <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <span className="text-sm font-medium">(02 Rating)</span>
-                      </div>
-                      <div className="product_prise flex items-center gap-2">
-                      <span className="line-through">
-                        {book.discount > 0 &&
-                          `$${book.discount + book.book_price}.00`}
-                      </span>
-                      <p>${book.book_price}.00</p>
-                      </div>
-                      <AddCartButton _id={book._id} />
-                    </div>
-                  </div>
-                  // </Link>
-                ))
-              )}
-            </div>
-          )}
+                    // </Link>
+                  ))
+                )}
+              </div>
+
+          }
         </div>
 
         {/* pagenation */}

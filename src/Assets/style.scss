@@ -2,12 +2,15 @@ $body_text: #687083;
 $tab: "(max-width: 767.98px)";
 $max_lg: "(min-width: 992.98px)";
 $white: #fff;
+
 .product_widget26 {
   border: 1px solid #ebebeb;
   height: 520px;
   position: relative;
+
   .product_thumb_upper {
     position: relative;
+
     .offer_badge {
       background: rgb(12 207 106 / 80%);
       font-size: 12px;
@@ -23,6 +26,7 @@ $white: #fff;
       min-width: 44px;
       text-align: center;
     }
+
     .product_action {
       position: absolute;
       top: 50%;
@@ -37,6 +41,7 @@ $white: #fff;
       visibility: hidden;
       transform: translate(-50%, -50%) scale(1.2);
       z-index: 1200;
+
       .a {
         width: 47.5px;
         height: 45px;
@@ -46,9 +51,11 @@ $white: #fff;
         justify-content: center;
         font-size: 15px;
         position: relative;
+
         &:hover {
           color: #0cce6b;
         }
+
         &:not(:last-child)::before {
           height: 15px;
           background: #f1f1f1;
@@ -62,6 +69,7 @@ $white: #fff;
       }
     }
   }
+
   .thumb {
     background: #fff;
     padding: 0;
@@ -73,6 +81,7 @@ $white: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+
     img {
       transform: scale(1);
       transition: 0.3s;
@@ -80,8 +89,10 @@ $white: #fff;
       max-height: 290px;
     }
   }
+
   .product__meta {
     padding: 0 20px 20px 30px;
+
     .product_banding {
       font-size: 14px;
       font-weight: 500;
@@ -89,6 +100,7 @@ $white: #fff;
       display: block;
       margin-bottom: 6px;
     }
+
     h4 {
       font-size: 20px;
       font-weight: 700;
@@ -100,26 +112,32 @@ $white: #fff;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
       &:hover {
         color: #367e62;
       }
     }
+
     .stars {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
+
       i {
-        color: #ffc107;
+
         font-size: 15px;
+
         &:not(:last-child) {
           margin-right: 5px;
         }
       }
     }
+
     .product_prise {
       position: relative;
       overflow: hidden;
       margin-bottom: 17px;
+
       p {
         font-size: 18px;
         font-weight: 700;
@@ -128,14 +146,17 @@ $white: #fff;
       }
     }
   }
+
   &:hover {
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.05);
     border-color: transparent;
+
     .product_action {
       opacity: 1;
       visibility: visible;
       transform: translate(-50%, -50%) scale(1);
     }
+
     .thumb img {
       transform: scale(1.1);
     }
@@ -168,6 +189,7 @@ $white: #fff;
 .home22_addCard_btn .circle_icon img {
   width: 15px;
 }
+
 .home22_addCard_btn h5 {
   transition: 0.3s;
 }
@@ -177,6 +199,7 @@ $white: #fff;
   padding: 0 20px 0 8px;
   grid-gap: 0px;
 }
+
 .home22_addCard_btn:hover h5 {
   color: #fff;
 }
@@ -188,15 +211,19 @@ $white: #fff;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
   padding: 55px 30px 52px 30px;
   min-height: 300px;
+
   &.catwiz_bg2 {
     background: #83cccf;
   }
+
   &.catwiz_bg3 {
     background: #dfa2a9;
   }
+
   &.catwiz_bg4 {
     background: #9aaddc;
   }
+
   .icon {
     background: #fff;
     width: 80px;
@@ -206,10 +233,12 @@ $white: #fff;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+
     img {
       max-width: 40px;
     }
   }
+
   h4 {
     font-size: 22px;
     font-weight: 700;
@@ -219,6 +248,7 @@ $white: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   span {
     font-size: 14px;
     color: $body_text;
@@ -227,6 +257,7 @@ $white: #fff;
     display: block;
     margin-bottom: 27px;
   }
+
   .shop_text {
     font-size: 14px;
     color: #28af62;
@@ -235,29 +266,36 @@ $white: #fff;
     display: inline-block;
   }
 }
+
 .checked_cat {
   background: rgba(#00124e, 0.4);
 }
+
 // banner
 .hero_Banner {
   @media #{'(min-width: 1600px)'} {
     margin: 0 110px;
   }
+
   margin-top: 30px !important;
   border-radius: 10px;
   overflow: hidden;
+
   .banner_single {
     padding: 123px 30px 128px 30px;
     border-radius: 10px;
     background-size: cover;
     background-position: center center !important;
     border-radius: 10px;
+
     @media #{$tab} {
       padding: 60px 30px 60px 30px;
       background-position: left center !important;
     }
+
     .banner__text {
       max-width: 576px;
+
       span {
         font-size: 14px;
         font-weight: 700;
@@ -265,16 +303,19 @@ $white: #fff;
         display: block;
         text-transform: uppercase;
       }
+
       h3 {
         font-size: 50px;
         font-weight: 800;
         color: $white;
         line-height: 1.2;
         margin: 20px 0 23px 0;
+
         @media #{$tab} {
           font-size: 35px;
         }
       }
+
       h5 {
         font-size: 16px;
         color: $white;
@@ -283,6 +324,7 @@ $white: #fff;
       }
     }
   }
+
   .swiper-pagination {
     display: flex;
     justify-content: center;
@@ -292,6 +334,7 @@ $white: #fff;
     bottom: 45px !important;
     left: 0;
     right: 0;
+
     .swiper-pagination-bullet {
       width: 5px;
       height: 5px;
@@ -301,6 +344,7 @@ $white: #fff;
       transition: 0.3s;
       position: relative;
       opacity: 0.8;
+
       &::before {
         position: absolute;
         content: "";
@@ -313,10 +357,12 @@ $white: #fff;
         transform: scale(0);
         transition: 0.3s;
       }
+
       &.swiper-pagination-bullet-active {
         width: 8px;
         height: 8px;
         background: #28af62;
+
         &::before {
           opacity: 1;
           transform: scale(1);
@@ -326,6 +372,7 @@ $white: #fff;
     }
   }
 }
+
 .theme_btn_white {
   background: #fff;
   -webkit-border-radius: 5px;
@@ -348,6 +395,7 @@ $white: #fff;
     padding: 12px 18px;
   }
 }
+
 .theme_btn_white.small_btn {
   padding: 13.5px 45px;
 }
@@ -362,9 +410,11 @@ $white: #fff;
 .swiperSlide_button_group {
   display: flex;
   grid-gap: 10px;
+
   @media #{$tab} {
     display: none;
   }
+
   .swiper_button {
     width: 50px;
     height: 50px;
@@ -378,6 +428,7 @@ $white: #fff;
     transition: 0.3s;
     cursor: pointer;
     background: #fff;
+
     &:hover {
       background: #28af62;
       border-color: #28af62;
@@ -388,6 +439,7 @@ $white: #fff;
 
 .header_topBar {
   padding: 13px 115px;
+
   @media #{$tab} {
     padding: 13px 30px;
   }
@@ -395,6 +447,7 @@ $white: #fff;
 
 .main_header {
   padding: 13px 115px 13px 105px !important;
+
   @media #{$tab} {
     padding: 13px 15px 13px 5px !important;
   }
@@ -402,12 +455,15 @@ $white: #fff;
 
 .section_padding {
   padding: 107px 30px 120px 30px;
+
   @media #{$tab} {
     padding: 60px 15px;
   }
 }
+
 .section_padding_2 {
   padding: 80px 30px 120px 30px;
+
   @media #{$tab} {
     padding: 60px 15px;
   }
@@ -415,12 +471,15 @@ $white: #fff;
 
 .section_padding_bottom {
   padding: 0 30px 120px 30px;
+
   @media #{$tab} {
     padding: 0 15px 60px 15px;
   }
 }
+
 .section_padding_top {
   padding: 107px 0px 0px 0px;
+
   @media #{$tab} {
     padding: 60px 0 0 0;
   }
@@ -429,32 +488,38 @@ $white: #fff;
 // new added section spacing
 .section_spacing {
   padding: 107px 30px 120px 30px;
+
   @media #{$tab} {
     padding: 60px 15px;
   }
 }
+
 .section_spacing_2 {
   padding: 80px 30px 120px 30px;
+
   @media #{$tab} {
     padding: 60px 15px;
   }
 }
+
 .section_spacing_top {
   padding: 107px 0px 0px 0px;
+
   @media #{$tab} {
     padding: 60px 0 0 0;
   }
 }
+
 .section_spacing_bottom {
   padding: 0px 0px 120px 0px;
+
   @media #{$tab} {
     padding: 0px 0 60px 0;
   }
 }
 
 // heder
-.main_header {
-}
+.main_header {}
 
 // CHACKBOX
 .primary_checkbox {
@@ -507,7 +572,7 @@ $white: #fff;
   visibility: hidden;
 }
 
-.primary_checkbox input:checked ~ .checkmark:after {
+.primary_checkbox input:checked~.checkmark:after {
   width: 100%;
   height: 100%;
   border: 0;
@@ -515,12 +580,12 @@ $white: #fff;
   transform: scale(0);
 }
 
-.primary_checkbox input:checked ~ .checkmark {
+.primary_checkbox input:checked~.checkmark {
   background: #0ccf6a;
   transition: 0.3s;
 }
 
-.primary_checkbox input:checked ~ .checkmark::before {
+.primary_checkbox input:checked~.checkmark::before {
   content: "\e64c";
   font-family: "themify";
   position: absolute;
@@ -558,23 +623,30 @@ $white: #fff;
   transition: 0.3s;
   transform: scale(1);
 }
+
 .custom_modal_wrapper {
   .modal-box {
     max-width: 800px !important;
+
     @media #{$tab} {
       max-width: 100% !important;
     }
+
     .quickView_wrapper_inner {
       display: flex;
+
       @media #{$tab} {
         display: block;
       }
+
       .product_quickViewThumb {
         flex: 35% 0 0;
+
         img {
           max-width: 100%;
         }
       }
+
       .product_quickView_content {
         flex: 65% 0 0;
         padding-left: 20px;
@@ -650,13 +722,16 @@ $white: #fff;
   display: grid;
   grid-template-columns: 5fr 7fr;
   grid-gap: 30px;
+
   @media #{$tab} {
     grid-template-columns: 1fr;
   }
+
   @media #{"(max-width: 768px) and (max-width: 767.98px)"} {
     grid-template-columns: 1fr;
   }
 }
+
 .flex_1 {
   flex: 1 1 0 !important;
 }
@@ -665,6 +740,7 @@ $white: #fff;
 .main_header {
   background: #fff;
   border-bottom: 1px solid #ebebeb;
+
   .main_middle_menu {
     li {
       a {
@@ -675,6 +751,7 @@ $white: #fff;
         padding: 22.5px 19px;
         display: inline-block;
         text-transform: uppercase;
+
         &::before {
           background: #28af62;
           bottom: 0;
@@ -686,13 +763,16 @@ $white: #fff;
           transition: 0.3s;
           width: 0;
         }
+
         &.active {
           background: rgba(#28af62, 0.1);
         }
+
         &.active,
         &:hover {
           background: transparent;
           color: #28af62;
+
           &::before {
             left: 0;
             right: auto;
@@ -705,16 +785,19 @@ $white: #fff;
 }
 
 // dashboard
-.drawer-mobile > .drawer-toggle ~ .drawer-side {
+.drawer-mobile>.drawer-toggle~.drawer-side {
   @media #{$max_lg} {
     overflow-y: auto;
     width: 240px;
   }
+
   border-right: 1px solid #e3e6ef;
 }
+
 .dashboard_header {
   border-bottom: 1px solid #e3e6ef;
 }
+
 .commentModal {
   max-width: 600px;
   height: auto;
@@ -748,6 +831,7 @@ $white: #fff;
   margin: 0 0 0 0;
   font-family: "Mulish", sans-serif;
 }
+
 .home10_blog_Widget .blog_content h4 {
   font-size: 22px;
   font-weight: 700;

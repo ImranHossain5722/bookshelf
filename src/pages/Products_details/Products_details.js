@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Product_details.css";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
+import { BiSad } from "react-icons/bi";
 import { toast } from "react-toastify";
 import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 import Loading from "../../components/Loading/Loading";
@@ -223,7 +224,7 @@ const Products_details = () => {
             <div className="mt-8 py-6 flex">
               <div>
                 <div className="text-3xl">
-                  <span className="font-bold">{book?.average_rating ? book?.average_rating : calAverageRating}</span>
+                  <span className="font-bold">{book?.average_rating ? book?.average_rating : (calAverageRating ? calAverageRating : 0)}</span>
                   <span>/</span>
                   <span>5</span>
                 </div>
@@ -315,8 +316,8 @@ const Products_details = () => {
           </div>
           {/* Review Section  */}
           <div >
-            <h3 className="border-y py-3 my-4 font-bold text-2xl">Book Reviews</h3>
-            <div>
+            <h3 className="border-y py-3 my-4 font-bold text-2xl">Book Reviews </h3>
+            {book?.book_reviews?.length ? <div>
               {book?.book_reviews?.map(review => <div className="border-b py-4" key={review?._id}>
                 <div className="flex justify-between">
                   <div className="stars mx-1 ">
@@ -340,7 +341,13 @@ const Products_details = () => {
                 </div>
               </div>
               )}
-            </div>
+            </div> :
+              <div className="text-center py-6">
+                <BiSad className="mx-auto text-3xl" />
+                <p>This product has no reviews. <br /> Let others know what you think and be the first to write a review.</p>
+              </div>
+
+            }
           </div>
 
         </div>

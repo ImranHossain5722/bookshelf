@@ -120,7 +120,8 @@ const PreOrderBooks = () => {
                       </span>
                       <p>${book.book_price}.00</p>
                     </div>
-                    <AddCartButton _id={book._id} />
+                     {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
+                      
                   </div>
                 </div>
               </SwiperSlide>

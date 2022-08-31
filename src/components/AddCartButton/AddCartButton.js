@@ -21,9 +21,8 @@ const AddCartButton = ({_id}) => {
 
       axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart',cartData).then(data =>{toast.success('successfully added to cart')})
   }else{
-      console.log("user id not found", userId)
+      toast.error("Please login before adding to cart")
   }
-    console.log(cartData)
   }
   return (
     <button className="home22_addCard_btn add_to_cart flex border-0 items-center" onClick={() => AddCart(_id)}>

@@ -31,6 +31,7 @@ const BestOfferPage = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10 mx-4 mt-4">
+
         {loading ? (
           <Loading />
         ) : (
@@ -70,6 +71,8 @@ const BestOfferPage = () => {
                 </div>
                 <AddCartButton _id={book._id} />
               </div>
+
+
             </div>
             // </Link>
           ))

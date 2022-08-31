@@ -87,9 +87,13 @@ const SecondCategoryBooks = () => {
           >
             {books?.map((book) => (
               <SwiperSlide key={book._id}>
-                <div className="product_widget26 mb_30">
+                <div className="product_widget26 mb_30 ">
                   <div className="product_thumb_upper position-relative">
-                    {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
+
+                    {book.discount > 0 && (
+                      <span className="offer_badge">-{book.discount}%</span>
+                    )}
+
                     <Link
                       to={`/selectedBook/${book?._id}`}
                       className="thumb text-center"
@@ -119,8 +123,12 @@ const SecondCategoryBooks = () => {
                         ({book?.book_reviews.length})
                       </span>
                     </div>
-                    <div className="product_prise">
-                      <p>${book.book_price}</p>
+                    <div className="product_prise flex items-center gap-2">
+                      <span className="line-through">
+                        {book.discount > 0 &&
+                          `$${book.discount + book.book_price}.00`}
+                      </span>
+                      <p>${book.book_price}.00</p>
                     </div>
                     <AddCartButton _id={book._id} />
                   </div>

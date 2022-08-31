@@ -5,8 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Loading/Loading';
-
-
+import { toast } from 'react-toastify';
 
 const AddProductReview = () => {
     const user = useSelector((state) => state?.newUser?.user)
@@ -19,12 +18,9 @@ const AddProductReview = () => {
         res.json()
     ))
 
-    console.log(book);
-
     const rateNumber = rate => {
         setRating(rate)
     }
-
 
     const navigate = useNavigate();
     const onSubmit = data => {
@@ -35,9 +31,8 @@ const AddProductReview = () => {
             review: data.review,
             ratings: rating
         }
-        // console.log("data is",review);
         axios.post('https://book-shelf-webapp.herokuapp.com/add-book-review', reviewData)
-            .then(res => console.log(res));
+            .then(res => toast.success("Successfully Added Your Review"));
 
         navigate('/dashboard/addproductreviews')
     };

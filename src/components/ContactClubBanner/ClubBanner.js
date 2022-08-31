@@ -1,6 +1,6 @@
 import React from "react";
 import clubBanner from "../../Assets/images/cul-books-banner.jpg";
-import { FaChevronRight, FaArrowRight } from "react-icons/fa";
+import {  FaArrowRight } from "react-icons/fa";
 
 import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
@@ -32,8 +32,8 @@ const ClubBanner = () => {
               />{" "}
             </h1>
             <p className="my-5 text-lg text-secondary ">
-              Join Our Readers Club. It's a coummuity for books lover. we can
-              discus every user about to books details.
+              Join Our Readers Club. It's a coummuity for book lovers. we can
+              discuss about all the book details here.
             </p>
             <Link
               to="/readershome"

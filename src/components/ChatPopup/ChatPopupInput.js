@@ -21,7 +21,7 @@ const ChatPopupInput = ({ handleSendMessage }) => {
   return (
     <div className="flex items-center relative ">
     <div className="mx-2 relative">
-      {showEmoji && <Picker className="" onEmojiClick={handleEmoji} />}
+      {showEmoji && <Picker  onEmojiClick={handleEmoji} />}
       <BsEmojiSmileFill onClick={() => setshowEmoji(!showEmoji)} />
     </div>
     <form onSubmit={(event) => sendChat(event)}>

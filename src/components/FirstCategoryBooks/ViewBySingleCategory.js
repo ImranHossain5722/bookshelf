@@ -4,11 +4,13 @@ import { NavLink } from "react-router-dom";
 import { FaHeart, FaEye, FaShoppingCart } from "react-icons/fa";
 import CartButton from "../CartButton/CartButton";
 import Stars from "../Stars/Stars";
+
 import QuickViewButton from '../QuickViewButton/QuickViewButton';
 import Wishlistbutton from '../wishlistButton/Wishlistbutton';
 import { Link } from 'react-router-dom';
 import AddCartButton from '../AddCartButton/AddCartButton';
 import Button from '../Button/Button';
+
 
 const ViewBySingleCategory = () => {
   const books = useSelector((state) => state?.sellBooks?.books);

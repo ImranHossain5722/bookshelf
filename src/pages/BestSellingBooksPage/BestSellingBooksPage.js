@@ -9,6 +9,7 @@ import axios from "axios";
 
 const BestSellingBooksPage = () => {
 
+
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostPerPage] = useState(10);
   const [posts, setPosts] = useState([]);
@@ -48,7 +49,7 @@ const BestSellingBooksPage = () => {
   }
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10 mx-4 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
         {loading ? (
           <Loading />
         ) : (

@@ -7,15 +7,19 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
 import AddCartButton from "../AddCartButton/AddCartButton";
+
 import { FaHome } from 'react-icons/fa';
 import { GiBookCover } from 'react-icons/gi';
 import { RiLayoutGridFill } from 'react-icons/ri';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
+
+
 import { FaCartPlus, FaHeart } from "react-icons/fa";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const AllBooks = () => {
+
 
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -27,8 +31,8 @@ const AllBooks = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostPerPage] = useState(10);
   const [showList, setShowLIst] = useState(false);
-  const user = useSelector((state) => state?.newUser?.user)
-  const userId = user?._id
+  const user = useSelector((state) => state?.newUser?.user);
+  const userId = user?._id;
   useEffect(() => {
     const loadBooks = async () => {
       setLoading(true);
@@ -62,7 +66,6 @@ const AllBooks = () => {
     };
 
     loadAuthors();
-
 
   }, []);
 
@@ -125,31 +128,41 @@ const AllBooks = () => {
       user_id: userId,
       cart_data: {
         book: id,
-        qnt: 1
-      }
-    }
+        qnt: 1,
+      },
+    };
     if (userId) {
-
-      axios.post('https://book-shelf-webapp.herokuapp.com/add-to-cart', cartData).then(data => { toast.success('successfully added to cart') })
+      axios
+        .post("https://book-shelf-webapp.herokuapp.com/add-to-cart", cartData)
+        .then((data) => {
+          toast.success("successfully added to cart");
+        });
     } else {
-      console.log("user id not found", userId)
+      console.log("user id not found", userId);
     }
-  }
+  };
 
-  // adding to  wishlist 
+  // adding to  wishlist
   const AddWishlist = async (id) => {
     const cardData = {
       user_id: userId,
       wishlist_data: {
-        book: id
-      }
-    }
+        book: id,
+      },
+    };
     if (userId) {
-      await axios.post('https://book-shelf-webapp.herokuapp.com/add-to-wishlist', cardData).then(data => toast.success("added to wishlist"))
+      await axios
+        .post(
+          "https://book-shelf-webapp.herokuapp.com/add-to-wishlist",
+          cardData
+        )
+        .then((data) => toast.success("added to wishlist"));
     } else {
-      console.log(" the user id is not found")
+      console.log(" the user id is not found");
     }
-  }
+
+  };
+
 
   return (
     <div className="section_padding">

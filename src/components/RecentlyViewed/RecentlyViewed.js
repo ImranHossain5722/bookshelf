@@ -125,8 +125,12 @@ const RecentlyViewed = () => {
                         ({book?.book_reviews.length})
                       </span>
                     </div>
-                    <div className="product_prise">
-                      <p>${book.book_price}</p>
+                    <div className="product_prise flex items-center gap-2">
+                      <span className="line-through">
+                        {book.discount > 0 &&
+                          `$${book.discount + book.book_price}.00`}
+                      </span>
+                      <p>${book.book_price}.00</p>
                     </div>
                     <AddCartButton _id={book._id} />
                   </div>

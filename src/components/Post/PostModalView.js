@@ -27,7 +27,7 @@ const PostModalView = () => {
           if(result.data.url){
             const postData = {
               user_id : currentUser?._id, 
-              post_content : text.current.value,
+              post_content : text.current.value || "",
               post_image :  result.data.url
             }
             // sending post

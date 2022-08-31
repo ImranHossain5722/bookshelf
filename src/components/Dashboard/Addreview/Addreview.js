@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const Addreview = () => {
   const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -12,9 +13,8 @@ const Addreview = () => {
       user_id: user._id,
       review: data.review
     }
-    // console.log("data is",review);
     axios.post('https://book-shelf-webapp.herokuapp.com/add-review', review)
-      .then(res => console.log(res));
+      .then(res => toast.success("Successfully Added Your Review"));
     reset();
   };
   return (

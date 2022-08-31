@@ -12,6 +12,7 @@ import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 const PopularBooks = () => {
    const [books, setBooks] = useState([]);
    const [clicked, setclicked] = useState("best_selling");
+   const [selectedRoute, setselectedRoute] = useState("/bestSelling");
   const [loading, setLoading] = useState(false);
   const sellBooks = useSelector(state => state?.bestSelling?.bestSelling)
   const authorBooks = useSelector(state => state?.popularWriter?.popularWriter)
@@ -19,9 +20,12 @@ const PopularBooks = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    setLoading(true)
     fetch("https://book-shelf-webapp.herokuapp.com/get-popular-books")
         .then((res) => res.json())
         .then((data) => dispatch(bestSelllingBooks(data)));
+    setLoading(false)
+
   }, []);
   
 
@@ -33,33 +37,36 @@ const PopularBooks = () => {
     
 
   useEffect(() => {
-  fetch("https://book-shelf-webapp.herokuapp.com/all-books")
+  fetch("https://book-shelf-webapp.herokuapp.com/get-best-discount-books")
         .then((res) => res.json())
-        .then((data) => dispatch(bestOfferBooks(data.slice(2,10))));
+        .then((data) => dispatch(bestOfferBooks(data)));
   }, []);
   
   useEffect(() => {
    if(clicked === "best_selling"){
     setBooks(sellBooks)
-
+    setselectedRoute("/bestSelling")
    } 
   }, [books,sellBooks]); 
 
   useEffect(() => {
    
     if(clicked === "best_selling"){
-
-  
       setBooks(sellBooks)
-      
+      setselectedRoute("/bestSelling")
+
     }
    else if(clicked === "popular_writer"){
     
     setBooks(authorBooks)
+    setselectedRoute("/Poplerwriters")
+
   }
   else if(clicked === "best_offer"){
    
       setBooks(offerBooks)
+      setselectedRoute("/BestOffers")
+
     }
   }, [clicked]); 
 
@@ -127,7 +134,9 @@ const PopularBooks = () => {
         ))}
       </div>
       <div className="flex justify-center my-12">
+        <Link to={selectedRoute}>
         <Button>See More</Button>
+        </Link>
       </div>
 
       </div>

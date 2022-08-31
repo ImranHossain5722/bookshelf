@@ -15,9 +15,6 @@ const AddProduct = () => {
   const [userRole, setUserRole] = useState('');
   const [getUser, setGetUser] = useState([]);
   const { register, formState: { errors }, handleSubmit, reset } = useForm();
-  // console.log(getUser, userRole);
-
-
 
   // get all Categories 
   const [allCategories, setAllCategories] = useState([]);
@@ -29,7 +26,6 @@ const AddProduct = () => {
       .catch(err => console.error(err));
 
   }, [])
-  // console.log('Categories :', allCategories)
 
   // get all catagory list in array for drop down list 
   let catOption = [];
@@ -37,8 +33,6 @@ const AddProduct = () => {
     let dropDown = { label: cat['category_title'], value: cat['_id'] };
     catOption.push(dropDown);
   });
-  // console.log('Options', catOption);
-
 
   // get all authors 
   const [allAuthors, setAllAuthors] = useState([]);
@@ -51,7 +45,6 @@ const AddProduct = () => {
       .catch(err => console.error(err));
 
   }, [])
-  // console.log('Authors :', allAuthors)
   // get all author list in array for drop down list 
 
   let authorOptions = [];
@@ -61,7 +54,6 @@ const AddProduct = () => {
     authorOptions.push(dropDown);
   });
 
-  // console.log('authorOptions', authorOptions);
   // get all Publishers 
 
   const [allPublishers, setAllPublishers] = useState([]);
@@ -74,7 +66,6 @@ const AddProduct = () => {
       .catch(err => console.error(err));
 
   }, [])
-  // console.log('Publisher :', allPublishers)
   // get all Publisher list in array for drop down list 
 
   let publisherOptions = [];
@@ -82,7 +73,6 @@ const AddProduct = () => {
     let dropDown = { label: cat['publisher_name'], value: cat['_id'] };
     publisherOptions.push(dropDown);
   });
-  // console.log('publisherOptions', publisherOptions);
 
 
   useEffect(() => {
@@ -99,10 +89,7 @@ const AddProduct = () => {
     });
   }, [user?.uid])
 
-
-  // // get current user role form database 
-
-
+  // get current user role form database 
   useEffect(() => {
     const currentUserRole = getUser[0]?.user_role;
 
@@ -132,7 +119,6 @@ const AddProduct = () => {
   }
 
   const [bookCat, setBookCat] = useState([]);
-  // console.log(bookCat);
   const getChoosenCategory = (choice) => {
     setBookCat(Array.isArray(choice) ? choice.map(x => (
       { category_id: x.value }
@@ -184,10 +170,9 @@ const AddProduct = () => {
             book_cover_photo_url: imgbbUrl,
             book_language: data?.translator,
             book_country: data?.country,
-            seller_id: getUser[0]._id
+            seller_id: getUser[0]?._id
           }
           const postAuthorData = () => {
-            // console.log('before post:', productInfoData);
             axios.post('https://book-shelf-webapp.herokuapp.com/add-book', productInfoData).then(data => {
               toast.success('Book Added Successfully');
               navigate(`/dashboard/myproducts`);
@@ -217,17 +202,7 @@ const AddProduct = () => {
                 <label className="label">
                   <span className="label-text text-lg">Upload Image</span>
                 </label>
-                {/* <input
-                  {...register("image", {
-                    required: {
-                      value: true,
-                      message: "image is Required"
-                    }
-                  })}
-                  type="file"
-                  onChange={onChangePicture}
-                  placeholder="Update Your Address"
-                  className="input input-bordered w-full pt-[5px] bg-secondary text-white" /> */}
+             
                   <input type="file"  {...register("image", {
                     required: {
                       value: true,

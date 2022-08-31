@@ -72,7 +72,7 @@ import ThankYou from "./components/ThankYou/ThankYou";
 import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
 import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
 import BestSellingBooksPage from "./pages/BestSellingBooksPage/BestSellingBooksPage";
-import BestOfferPage from './pages/BestOfferPage/BestOfferPage'
+import BestOfferPage from "./pages/BestOfferPage/BestOfferPage";
 import PopularWritersBooksPage from "./pages/PopularWritersBooksPage/PopularWritersBooksPage";
 
 // initialize aos

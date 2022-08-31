@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import newsBanner from "../../Assets/images/slider-3.png";
 // Banner Images
 import img1 from "../../Assets/images/slider-1.png";
@@ -45,18 +45,21 @@ const Banner = () => {
         loop={true}
         autoplay={true}
         pagination={{ clickable: true }}
-        modules={[Autoplay,Pagination, Navigation]}
+        modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper my-auto"
         style={{ "--swiper-theme-color": "#27AE61" }}
       >
         {data.map((bnrData) => (
           <SwiperSlide>
-          <div class="banner_single" 
-            style={{
-            backgroundImage: `url(${bnrData.image})`,
-            backgroundSize: "content",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat", }}>
+            <div
+              class="banner_single"
+              style={{
+                backgroundImage: `url(${bnrData.image})`,
+                backgroundSize: "content",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
               <div class="container mx-auto">
                 <div class="grid">
                   <div class="banner__text">
@@ -95,7 +98,6 @@ const Banner = () => {
               </div>
             </div>
           </SwiperSlide>
-          
         ))}
       </Swiper>
     </div>

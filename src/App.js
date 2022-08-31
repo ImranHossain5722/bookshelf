@@ -62,6 +62,7 @@ import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
 import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
 import BestOfferPage from "./pages/BestOfferPage/BestOfferPage";
 import PopularWritersBooksPage from "./pages/PopularWritersBooksPage/PopularWritersBooksPage";
+import BlogDetails from "./pages/Blog/BlogDetails";
 import Loading from "./components/Loading/Loading";
 
 
@@ -208,6 +209,7 @@ function App() {
               }
             ></Route>
             <Route path="/bestSelling" element={<BestSellingBooks />} />
+            <Route path="/blog/:id" element={<BlogDetails />} />
 
             <Route
               path="/addbook"

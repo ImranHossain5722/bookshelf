@@ -25,6 +25,7 @@ const Products_details = () => {
   } = book;
 
   useEffect(() => {
+    setbook([])
     axios
       .get(`https://book-shelf-webapp.herokuapp.com/get-book?id=${_id}`)
       .then((data) => setbook(data.data[0]));
@@ -131,10 +132,15 @@ const Products_details = () => {
               <h4 className="text-black text-[24px] capitalize font-semibold mb-3">
                 {book_title}
               </h4>
-              <div className="flex items-center gap-2 mb-3">
-                <h3 className="text-black text-[18px]">${book_price}</h3>
-                <p className="text-[16px]">Tax included</p>
-              </div>
+             
+              <div className="product_prise flex items-center gap-2">
+                        <span className="line-through">
+                          {book.discount > 0 &&
+                            `$${book.discount + book.book_price}.00`}
+                        </span>
+                        <h3 className="text-black text-[18px] font-semibold mb-3">${book_price}.00</h3>
+
+                      </div>
 
               <div className="flex items-center text-black mb-3">
                 <p>({book?.book_reviews?.length} reviews)</p>
@@ -184,25 +190,25 @@ const Products_details = () => {
               <div className=" single_description_wrap border-b-[1px] border-[#e1e2e6] pb-4 mb-4">
                 <div className="description_box">
                   <p className="Information_text text-black mb-3">
-                    <span> Language: </span> {book_language}
+                    <span className=" font-semibold"> Language: </span> {book_language}
                   </p>
                   <p className="Information_text text-black mb-3">
                     {" "}
-                    <span>Pages: </span> {book_pages}
+                    <span className=" font-semibold">Pages: </span> {book_pages}
                   </p>
                   <p className="Information_text text-black mb-3">
                     {" "}
-                    <span>Country: </span> {book_country}
+                    <span className=" font-semibold">Country: </span> {book_country}
                   </p>
                   <p className="Information_text text-black mb-3">
                     {" "}
-                    <span>Tags: </span> Vintage, Awesome, Summer, Beachwear
+                    <span className=" font-semibold">Tags: </span> Vintage, Awesome, Summer, Beachwear
                   </p>
                 </div>
               </div>
               <div className="single_description_wrap border-b-[1px] border-[#e1e2e6] pb-4 mb-4">
                 <div className="details_title">
-                  <h4 className="text-black text-[18px]">Description</h4>
+                  <h4 className="text-black text-[18px]" className=" font-semibold">Description</h4>
                 </div>
                 <div className="description_box">
                   <p className="mb-4">{book_description}</p>

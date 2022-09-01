@@ -163,23 +163,23 @@ const PopularBooks = () => {
                     <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
                     <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
                     <span className="text-sm font-medium">
-                      ({book?.book_reviews?.length})
+                      ({book?.book_reviews?.length || 0})
                     </span>
                   </div>
-                  <div className="product_prise">
-                    <p>${book.book_price}</p>
-                  </div>
-                  <AddCartButton _id={book._id} />
+                  <div className="product_prise flex items-center gap-2">
+                        <span className="line-through">
+                          {book.discount > 0 &&
+                            `$${book.discount + book.book_price}.00`}
+                        </span>
+                        <p>${book.book_price}.00</p>
+                      </div>
+                  {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
+                      
                 </div>
               </div>
 
             ))}
           </div>
-          <div className="flex justify-center my-12">
-            <Button>See More</Button>
-          </div>
-
-
         </div>
 
       </div>

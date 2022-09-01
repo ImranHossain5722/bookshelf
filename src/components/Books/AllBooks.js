@@ -14,6 +14,9 @@ import { AiOutlineUnorderedList } from "react-icons/ai";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { BsStar } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
+
 
 const AllBooks = () => {
   const [loading, setLoading] = useState(false);
@@ -297,7 +300,7 @@ const AllBooks = () => {
                         <img
                           src={book?.book_cover_photo_url}
                           alt=""
-                          className="min-w-[300px]"
+                          className="min-w-[300px] h-full"
                         />
                       </Link>
                       <div className="product_action">
@@ -321,11 +324,10 @@ const AllBooks = () => {
                       <p>${book.book_price}.00</p>
                       </div>
                       <div className="stars">
-                      <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                        <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                        <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                        <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                        <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                      {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
                         <span className="text-sm font-medium">
                           ({book?.book_reviews.length})
                         </span>
@@ -384,11 +386,10 @@ const AllBooks = () => {
                         {book.author}
                       </p>
                       <div className="stars">
-                      <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                        <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                        <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                        <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                        <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                      {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
                         <span className="text-sm font-medium">
                           ({book?.book_reviews.length})
                         </span>

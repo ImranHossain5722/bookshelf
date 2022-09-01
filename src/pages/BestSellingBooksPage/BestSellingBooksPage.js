@@ -6,6 +6,8 @@ import Loading from "../../components/Loading/Loading";
 import QuickViewButton from "../../components//QuickViewButton/QuickViewButton";
 import Wishlistbutton from "../../components//wishlistButton/Wishlistbutton";
 import axios from "axios";
+import { BsStar } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
 
 const BestSellingBooksPage = () => {
 
@@ -49,7 +51,7 @@ const BestSellingBooksPage = () => {
   }
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10 md:w-3/4 mx-auto mt-5">
         {loading ? (
           <Loading />
         ) : (
@@ -75,11 +77,11 @@ const BestSellingBooksPage = () => {
                   {book.author}
                 </p>
                 <div className="stars">
-                  <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                {book?.average_rating >= 1 ?<AiFillStar className="text-[#ffc107]" />:<BsStar/>} 
+                    {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
                   <span className="text-sm font-medium">
                     ({book?.book_reviews.length})
                   </span>

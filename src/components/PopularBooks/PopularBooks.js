@@ -8,6 +8,8 @@ import Loading from "../Loading/Loading";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
 import { bestOfferBooks, bestSelllingBooks, popularBooks, populerWriterBooks } from "../Redux/actions/bookActions";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
+import { BsStar } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
 
 const PopularBooks = () => {
    const [books, setBooks] = useState([]);
@@ -82,13 +84,13 @@ const PopularBooks = () => {
           </h1>
           <div className="flex justify-center mt-5 mb-16 text-[#00124E] font-bold">
             <ul className="flex">
-              <li className="hover:text-primary duration-500">
+              <li className="hover:text-primary focus:text-primary duration-500">
                 <button onClick={() => setclicked("best_selling")} >Best Selling</button>
               </li>
-              <li className="mx-10 hover:text-primary duration-500">
+              <li className="mx-10 hover:text-primary focus:text-primary  duration-500">
                 <button onClick={() => setclicked("popular_writer")}>Popular Writer's </button>
               </li>
-              <li className="hover:text-primary duration-500">
+              <li className="hover:text-primary focus:text-primary duration-500">
                 <button onClick={() => setclicked("best_offer")} >Best Offers </button>
               </li>
             </ul>
@@ -119,11 +121,11 @@ const PopularBooks = () => {
                     {book?.book_author?.author_name}
                   </p>
                   <div className="stars">
-                    <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                    <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                    <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                    <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                    <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                  {book?.average_rating >= 1 ?<AiFillStar className="text-[#ffc107]" />:<BsStar/>} 
+                    {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
                     <span className="text-sm font-medium">
                       ({book?.book_reviews?.length || 0})
                     </span>
@@ -144,51 +146,7 @@ const PopularBooks = () => {
           </div>
         </div>
         {/* content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {books?.map((book) => (
-          <div className="product_widget26 mb_30 bg-white">
-            <div className="product_thumb_upper position-relative">
-                {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
-              <Link
-                to={`/selectedBook/${book?._id}`}
-                className="thumb text-center"
-              >
-                <img src={book.book_cover_photo_url} alt="" />
-              </Link>
-              <div className="product_action">
-                <Wishlistbutton _id={book._id} />
-                <QuickViewButton _id={book._id} />
-                <CartButton _id={book._id} />
-              </div>
-            </div>
-            <div className="product__meta">
-              <Link to={`/selectedBook/${book?._id}`}>
-                <h4>{book.book_title}</h4>
-              </Link>
-              <p className="text-[16px] text-[#00124e] font-semibold">
-                {book?.book_author?.author_name}
-              </p>
-              <div className="stars">
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <span className="text-sm font-medium">(02 Rating)</span>
-              </div>
-              <div className="product_prise flex items-center gap-2">
-              <span className="line-through">
-                        {book.discount > 0 &&
-                          `$${book.discount + book.book_price}.00`}
-                      </span>
-                      <p>${book.book_price}.00</p>
-              </div>
-               {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
-                      
-            </div>
-          </div>
-        ))}
-      </div>
+       
       <div className="flex justify-center my-12">
         <Link to={selectedRoute}>
         <Button>See More</Button>

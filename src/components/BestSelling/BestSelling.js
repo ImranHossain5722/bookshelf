@@ -19,6 +19,8 @@ import { Link } from "react-router-dom";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 import AddCartButton from "../AddCartButton/AddCartButton";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
+import { BsStar } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
 const BestSelling = () => {
   const books = useSelector((state) => state?.sellBooks?.books);
   const dispatch = useDispatch();
@@ -108,11 +110,11 @@ const BestSelling = () => {
                       {book?.book_author?.author_name}
                     </p>
                     <div className="stars">
-                      <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                      <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                      <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                      <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                      <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                    {book?.average_rating >= 1 ?<AiFillStar className="text-[#ffc107]" />:<BsStar/>} 
+                    {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
                       <span className="text-sm font-medium">
                         ({book?.book_reviews.length})
                       </span>

@@ -82,7 +82,7 @@ const Wishlist = () => {
                                     ${book.book?.book_price}
                                 </td>
                                 <td className="text-[16px] border-[#e1e2e6] text-[#00124E] font-bold">
-                                {book.book.book_author.author_name}
+                                {book.book?.book_author?.author_name}
                                 </td>
 
                                 <td className="border-[#e1e2e6] ">

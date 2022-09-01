@@ -321,12 +321,14 @@ const AllBooks = () => {
                       <p>${book.book_price}.00</p>
                       </div>
                       <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <span className="text-sm font-medium">(02 Rating)</span>
+                      <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <span className="text-sm font-medium">
+                          ({book?.book_reviews.length})
+                        </span>
                       </div>
                       <div className="flex items-center text-black mb-3 gap-2">
                         <button
@@ -382,12 +384,14 @@ const AllBooks = () => {
                         {book.author}
                       </p>
                       <div className="stars">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <span className="text-sm font-medium">(02 Rating)</span>
+                      <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                        <span className="text-sm font-medium">
+                          ({book?.book_reviews.length})
+                        </span>
                       </div>
                       <div className="product_prise flex items-center gap-2">
                       <span className="line-through">

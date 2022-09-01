@@ -89,7 +89,7 @@ const BestSellingBooks = () => {
               <div className="product_prise">
                 <p>${book.book_price}</p>
               </div>
-              <AddCartButton _id={book._id} />
+         
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10 ">
@@ -132,34 +132,15 @@ const BestSellingBooks = () => {
                         </span>
                         <p>${book.book_price}.00</p>
                       </div>
-                      <AddCartButton _id={book._id} />
+                 
                     </div>
                   </div>
                   // </Link>
                 ))
               )}
             </div>
-            {/* pagenation */}
-            <div className="flex justify-center p-3 ">
-              {pageNumbers.map((number) => (
-                <button
-                  onClick={() => paginate(number)}
-                  className="page-link btn btn-primary mx-2"
-                >
-                  {number}
-                </button>
-              ))}
-              <select
-                className="select select-primary "
-                onChange={(event) => setpostPerPage(event.target.value)}
-              >
-                <option value="5">5</option>
-                <option value="10" selected>
-                  10
-                </option>
-                <option value="15">15</option>
-              </select>
-            </div>
+         
+         
 
           </div>
           // </Link>

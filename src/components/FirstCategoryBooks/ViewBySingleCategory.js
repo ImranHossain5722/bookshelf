@@ -55,7 +55,8 @@ const ViewBySingleCategory = () => {
                   <div className="product_prise">
                     <p>${book.book_price}</p>
                   </div>
-                  <AddCartButton _id={book._id} />
+                   {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
+                      
                 </div>
               </div>
             ))}

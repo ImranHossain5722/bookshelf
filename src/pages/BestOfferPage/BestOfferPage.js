@@ -1,41 +1,59 @@
-import React, { useRef, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import AddCartButton from "../../components/AddCartButton/AddCartButton";
-import Button from "../../components/Button/Button";
 import CartButton from "../../components/CartButton/CartButton";
 import Loading from "../../components/Loading/Loading";
-import QuickViewButton from "../../components/QuickViewButton/QuickViewButton";
-import {
-  bestOfferBooks,
-} from "../../components/Redux/actions/bookActions";
-import Wishlistbutton from "../../components/wishlistButton/Wishlistbutton";
+import QuickViewButton from "../../components//QuickViewButton/QuickViewButton";
+import Wishlistbutton from "../../components//wishlistButton/Wishlistbutton";
+import axios from "axios";
 
-const BestOfferPage = () => {
-  const [books, setBooks] = useState([]);
+const BestSellingBooksPage = () => {
+
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setpostPerPage] = useState(10);
+  const [posts, setPosts] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
-  const offerBooks = useSelector((state) => state?.bestOffer?.bestOffer);
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    fetch("https://book-shelf-webapp.herokuapp.com/all-books")
-      .then((res) => res.json())
-      .then((data) => dispatch(bestOfferBooks(data.slice(2, 10))));
-  }, []);
+    const loadBooks = async () => {
+      setLoading(true);
+      const res = await axios.get(
+        "https://book-shelf-webapp.herokuapp.com/all-books"
+      );
 
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
+      setPosts(res.data);
 
+      setLoading(false);
+    };
+
+    loadBooks();
+  }, [])
+
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(posts?.length / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10 mx-4 mt-4">
-
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-10 md:w-3/4">
         {loading ? (
           <Loading />
         ) : (
-          offerBooks?.map((book) => (
+          currentPosts?.map((book) => (
             // <Link to={`/selectedBook/${book?._id}`}>
             <div className="product_widget26 mb_30 bg-white">
               <div className="product_thumb_upper position-relative">
@@ -69,19 +87,37 @@ const BestOfferPage = () => {
                 <div className="product_prise">
                   <p>${book.book_price}</p>
                 </div>
-                <AddCartButton _id={book._id} />
+                {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
+           
               </div>
-
-
             </div>
             // </Link>
           ))
         )}
       </div>
-
+      {/* pagenation */}
+      <div className="flex justify-center p-3 ">
+        {pageNumbers.map((number) => (
+          <button
+            onClick={() => paginate(number)}
+            className="page-link btn btn-primary mx-2"
+          >
+            {number}
+          </button>
+        ))}
+        <select
+          className="select select-primary "
+          onChange={(event) => setpostPerPage(event.target.value)}
+        >
+          <option value="5">5</option>
+          <option value="10" selected>
+            10
+          </option>
+          <option value="15">15</option>
+        </select>
+      </div>
     </div>
-
-  )
+  );
 };
 
-export default BestOfferPage;
+export default BestSellingBooksPage;

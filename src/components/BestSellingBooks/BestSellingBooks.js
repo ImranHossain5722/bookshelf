@@ -89,7 +89,7 @@ const BestSellingBooks = () => {
               <div className="product_prise">
                 <p>${book.book_price}</p>
               </div>
-              <AddCartButton _id={book._id} />
+         
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10 ">
@@ -132,7 +132,7 @@ const BestSellingBooks = () => {
                         </span>
                         <p>${book.book_price}.00</p>
                       </div>
-                      <AddCartButton _id={book._id} />
+                 
                     </div>
                   </div>
                   // </Link>

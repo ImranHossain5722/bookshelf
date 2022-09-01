@@ -208,7 +208,7 @@ const Products_details = () => {
               </div>
               <div className="single_description_wrap border-b-[1px] border-[#e1e2e6] pb-4 mb-4">
                 <div className="details_title">
-                  <h4 className="text-black text-[18px]" className=" font-semibold">Description</h4>
+                  <h4 className="text-black text-[18px] font-semibold">Description</h4>
                 </div>
                 <div className="description_box">
                   <p className="mb-4">{book_description}</p>

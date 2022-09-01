@@ -10,7 +10,7 @@ const ProductToReview = () => {
     const [order, setOrders] = useState([])
     const userId = user?._id
 
-
+    console.log('o', order)
     useEffect(() => {
         if (userId) {
             axios.get(`https://book-shelf-webapp.herokuapp.com/get-order-data?id=${userId}`).then(data => setOrders(data.data))

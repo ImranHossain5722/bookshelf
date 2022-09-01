@@ -72,6 +72,7 @@ import TrackOrders from "./components/Dashboard/Myorder/TrackOrders";
 import ProductToReview from "./components/Dashboard/AddProductReview/ProductToReview";
 import BestOfferPage from "./pages/BestOfferPage/BestOfferPage";
 import PopularWritersBooksPage from "./pages/PopularWritersBooksPage/PopularWritersBooksPage";
+import BlogDetails from "./pages/Blog/BlogDetails";
 import Loading from "./components/Loading/Loading";
 // import Home from "./pages/Home/Home";
 
@@ -187,6 +188,7 @@ function App() {
             <Route path="/payment" element={<Payment />}></Route>
             <Route path="/books" element={ <Suspense fallback={<Loading></Loading>}> <AllBooks /></Suspense>}></Route>
             <Route path="/bestSelling" element={<BestSellingBooks />} />
+            <Route path="/blog/:id" element={<BlogDetails />} />
 
             <Route
               path="/addbook"

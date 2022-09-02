@@ -8,6 +8,8 @@ import { BiSad } from "react-icons/bi";
 import { toast } from "react-toastify";
 import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 import Loading from "../../components/Loading/Loading";
+import { BsStar } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
 const Products_details = () => {
   const { _id } = useParams();
   const [book, setbook] = useState({});
@@ -234,12 +236,14 @@ const Products_details = () => {
                   <span>/</span>
                   <span>5</span>
                 </div>
-                <div className="stars text-3xl mt-2">
-                  <i className={(book?.average_rating ? book?.average_rating : calAverageRating) >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={(book?.average_rating ? book?.average_rating : calAverageRating) >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={(book?.average_rating ? book?.average_rating : calAverageRating) >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={(book?.average_rating ? book?.average_rating : calAverageRating) >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={(book?.average_rating ? book?.average_rating : calAverageRating) === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                <div className="">
+                  <div className="stars flex text-3xl mt-2">
+                {(book?.average_rating ? book?.average_rating : calAverageRating) >= 1 ?<AiFillStar className="text-[#ffc107]" />:<BsStar/>} 
+                    {(book?.average_rating ? book?.average_rating : calAverageRating)  >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {(book?.average_rating ? book?.average_rating : calAverageRating)  >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {(book?.average_rating ? book?.average_rating : calAverageRating)  >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {(book?.average_rating ? book?.average_rating : calAverageRating)  === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    </div>
                   <div>
                     <span className="text-sm font-medium">
                       ({book?.book_reviews?.length}) Ratings
@@ -249,12 +253,14 @@ const Products_details = () => {
               </div>
               <div className="ml-8">
                 <div className="flex">
-                  <div className="stars text-sm mt-1">
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
+                  <div className="stars flex text-sm mt-1">
+
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+
                   </div>
                   <div className="ml-2">
                     <progress class="progress bg-gray-300 progress-warning w-56" value={fiveStarCount / totalReview * 100} max="100"></progress>
@@ -262,12 +268,13 @@ const Products_details = () => {
                   </div>
                 </div>
                 <div className="flex">
-                  <div className="stars text-sm mt-1">
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star"></i>
+                  <div className="stars flex text-sm mt-1">
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <BsStar/>
+            
                   </div>
                   <div className="ml-2">
                     <progress class="progress bg-gray-300 progress-warning w-56" value={fourStarCount / totalReview * 100} max="100"></progress>
@@ -276,12 +283,14 @@ const Products_details = () => {
                 </div>
 
                 <div className="flex">
-                  <div className="stars text-sm mt-1">
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
+                <div className="stars flex text-sm mt-1">
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+                  
+                  <BsStar/>
+                  <BsStar/>
+            
                   </div>
                   <div className="ml-2">
                     <progress class="progress bg-gray-300 progress-warning w-56" value={threeStarCount / totalReview * 100} max="100"></progress>
@@ -290,12 +299,13 @@ const Products_details = () => {
                 </div>
 
                 <div className="flex">
-                  <div className="stars text-sm mt-1">
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
+                <div className="stars flex text-sm mt-1">
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <BsStar/>
+                  <BsStar/>
+                  <BsStar/>
+            
                   </div>
                   <div className="ml-2">
                     <progress class="progress bg-gray-300 progress-warning w-56" value={twoStarCount / totalReview * 100} max="100"></progress>
@@ -303,12 +313,13 @@ const Products_details = () => {
                   </div>
                 </div>
                 <div className="flex">
-                  <div className="stars text-sm mt-1">
-                    <i className="fas fa-star text-[#ffc107]"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
+                <div className="stars flex text-sm mt-1">
+                  <AiFillStar className="text-[#ffc107]"/>
+                  <BsStar/>
+                  <BsStar/>
+                  <BsStar/>
+                  <BsStar/>
+            
                   </div>
                   <div className="ml-2">
                     <progress class="progress bg-gray-300 progress-warning w-56" value={oneStarCount / totalReview * 100} max="100"></progress>
@@ -326,12 +337,13 @@ const Products_details = () => {
             {book?.book_reviews?.length ? <div>
               {book?.book_reviews?.map(review => <div className="border-b py-4" key={review?._id}>
                 <div className="flex justify-between">
-                  <div className="stars mx-1 ">
-                    <i className={review?.review_id?.ratings >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                    <i className={review?.review_id?.ratings >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                    <i className={review?.review_id?.ratings >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                    <i className={review?.review_id?.ratings >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                    <i className={review?.review_id?.ratings === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                  <div className="stars flex mx-1 ">
+
+                  {review?.review_id?.ratings >= 1 ?<AiFillStar className="text-[#ffc107]" />:<BsStar/>} 
+                    {review?.review_id?.ratings>= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {review?.review_id?.ratings>= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {review?.review_id?.ratings >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {review?.review_id?.ratings === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
                   </div>
                   <div className="">
                     {

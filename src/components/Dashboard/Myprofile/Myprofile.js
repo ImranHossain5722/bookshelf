@@ -212,7 +212,7 @@ const Myprofile = () => {
       <div className="lg:grid lg:grid-cols-2 lg:gap-6 m-6">
         <div className="p-[20px] md:p-[78px] rounded-xl  text-black bg-white mb-6">
           <img
-            className="block mx-auto"
+            className="block mx-auto rounded-lg"
             height={200}
             width={200}
             src={

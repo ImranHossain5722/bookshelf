@@ -18,7 +18,7 @@ const Release = () => {
 
   let interval = useRef();
   const startCounting = () => {
-    const releaseDate = new Date("September 20,2022 00:00:00 ").getTime();
+    const releaseDate = new Date("December 31,2022 00:00:00 ").getTime();
     interval = setInterval(() => {
       const today = new Date().getTime();
       const duration = releaseDate - today;

@@ -21,8 +21,8 @@ const ProductToReview = () => {
     // filter deliverd orders 
     order?.map(order => (order?.delivered_status === true) && deliveredOrders.push(order))
 
-    const orderedBooks = deliveredOrders[0]?.ordered_items;
-    console.log(orderedBooks);
+    let orderedBooks = [];
+    deliveredOrders?.map(order => order?.ordered_items?.map(o => orderedBooks.push(o)));
 
     const navigate = useNavigate();
     const handleAddReview = id => {

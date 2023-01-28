@@ -17,7 +17,7 @@ const LeftSideBar = () => {
     const fetchPosts = async () => {
       setLoading(true);
       const { data } = await axios.get(
-        "https://book-shelf-webapp.herokuapp.com/all-authors"
+        "https://bookshelf-server-s8lf.onrender.com/all-authors"
       );
       dispatch(allAuthors(data));
       setLoading(false);

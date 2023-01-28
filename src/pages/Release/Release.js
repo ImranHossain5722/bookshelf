@@ -18,7 +18,7 @@ const Release = () => {
 
   let interval = useRef();
   const startCounting = () => {
-    const releaseDate = new Date("December 31,2022 00:00:00 ").getTime();
+    const releaseDate = new Date("December 31,2023 00:00:00 ").getTime();
     interval = setInterval(() => {
       const today = new Date().getTime();
       const duration = releaseDate - today;
@@ -52,7 +52,11 @@ const Release = () => {
     <div className="px-10 bg-white mx-auto max-w-[1240px] my-[60px] lg:my-[120px] shadow-xl rounded-xl border-solid border-2 border-primary">
       <div className="card lg:card-side p-10 container mx-auto">
         <figure>
-          <img className="rounded w-full h-60 lg:h-96" src={ReleaseBook} alt="Album" />
+          <img
+            className="rounded w-full h-60 lg:h-96"
+            src={ReleaseBook}
+            alt="Album"
+          />
         </figure>
         <div className="card-body flex justify-center items-center">
           <div>

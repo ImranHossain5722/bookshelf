@@ -14,7 +14,7 @@ const PopularWritersBooksPage = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    fetch("https://book-shelf-webapp.herokuapp.com/all-books")
+    fetch("https://bookshelf-server-s8lf.onrender.com/all-books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
     setLoading(false);
@@ -52,11 +52,41 @@ const PopularWritersBooksPage = () => {
                   {book?.book_author?.author_name}
                 </p>
                 <div className="stars">
-                  <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                  <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                  <i
+                    className={
+                      book?.average_rating >= 1
+                        ? "fas fa-star text-[#ffc107]"
+                        : "fas fa-star"
+                    }
+                  ></i>
+                  <i
+                    className={
+                      book?.average_rating >= 2
+                        ? "fas fa-star text-[#ffc107]"
+                        : "fas fa-star"
+                    }
+                  ></i>
+                  <i
+                    className={
+                      book?.average_rating >= 3
+                        ? "fas fa-star text-[#ffc107]"
+                        : "fas fa-star"
+                    }
+                  ></i>
+                  <i
+                    className={
+                      book?.average_rating >= 4
+                        ? "fas fa-star text-[#ffc107]"
+                        : "fas fa-star"
+                    }
+                  ></i>
+                  <i
+                    className={
+                      book?.average_rating === 5
+                        ? "fas fa-star text-[#ffc107]"
+                        : "fas fa-star"
+                    }
+                  ></i>
                   <span className="text-sm font-medium">
                     ({book?.book_reviews.length})
                   </span>
@@ -68,8 +98,11 @@ const PopularWritersBooksPage = () => {
                   </span>
                   <p>${book.book_price}.00</p>
                 </div>
-                 {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
-                      
+                {book.book_qnt ? (
+                  <AddCartButton _id={book._id} />
+                ) : (
+                  <AddCartButton />
+                )}
               </div>
             </div>
           ))}

@@ -9,13 +9,13 @@ const ChatContainer = ({ currentChat, socket }) => {
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const currentUser = useSelector((state) => state?.newUser?.user);
-  const {  user_name,user_photo_url} = currentChat;
+  const { user_name, user_photo_url } = currentChat;
 
   // fetching all chats of current and selected user
   useEffect(() => {
     const fetchChat = async () => {
       const response = await axios.post(
-        "https://book-shelf-webapp.herokuapp.com/getmsg",
+        "https://bookshelf-server-s8lf.onrender.com/getmsg",
         {
           from: currentUser._id,
           to: currentChat._id,
@@ -26,15 +26,14 @@ const ChatContainer = ({ currentChat, socket }) => {
     fetchChat();
   }, [currentChat]);
 
-
-  // sending massages to database 
+  // sending massages to database
   const handleSendMessage = async (msg) => {
     socket.current.emit("send-msg", {
       to: currentChat._id,
       from: currentUser._id,
       msg,
     });
-    await axios.post("https://book-shelf-webapp.herokuapp.com/addmsg", {
+    await axios.post("https://bookshelf-server-s8lf.onrender.com/addmsg", {
       from: currentUser._id,
       to: currentChat._id,
       message: msg,
@@ -63,7 +62,13 @@ const ChatContainer = ({ currentChat, socket }) => {
     <div className="bg-white rounded-xl p-10 flex flex-col max-h-screen">
       <div class="avatar p-4 flex items-center border-b">
         <div class="w-10 rounded-full">
-          <img src={ user_photo_url ? user_photo_url:  `https://xsgames.co/randomusers/assets/avatars/male/${user_name?.length}.jpg` } /> 
+          <img
+            src={
+              user_photo_url
+                ? user_photo_url
+                : `https://xsgames.co/randomusers/assets/avatars/male/${user_name?.length}.jpg`
+            }
+          />
         </div>
 
         <p className="ml-2 font-semibold">{user_name}</p>
@@ -80,12 +85,9 @@ const ChatContainer = ({ currentChat, socket }) => {
             key={uuidv4()}
           >
             <p
-                 className={`${
-                  msgs.fromSelf
-                    ? " sender"
-                    : " reciver"
-                } bg-[#0CCF6A] py-2 px-4  m-2 to text-white     `}
-         
+              className={`${
+                msgs.fromSelf ? " sender" : " reciver"
+              } bg-[#0CCF6A] py-2 px-4  m-2 to text-white     `}
             >
               {msgs.message}
             </p>

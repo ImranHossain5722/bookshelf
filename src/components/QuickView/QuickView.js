@@ -20,7 +20,10 @@ const QuickView = () => {
 
     if (userId) {
       axios
-        .post("https://book-shelf-webapp.herokuapp.com/add-to-cart", cartData)
+        .post(
+          "https://bookshelf-server-s8lf.onrender.com/add-to-cart",
+          cartData
+        )
         .then((data) => {
           toast.success("successfully added to cart");
         });
@@ -39,7 +42,7 @@ const QuickView = () => {
     if (userId) {
       await axios
         .post(
-          "https://book-shelf-webapp.herokuapp.com/add-to-wishlist",
+          "https://bookshelf-server-s8lf.onrender.com/add-to-wishlist",
           cartData
         )
         .then((data) => toast.success("Added to wishlist"));

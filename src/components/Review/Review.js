@@ -22,7 +22,7 @@ const Review = () => {
   // fetched  review data
   useEffect(() => {
     axios
-      .get(`https://book-shelf-webapp.herokuapp.com/all-reviews`)
+      .get(`https://bookshelf-server-s8lf.onrender.com/all-reviews`)
       .then((data) => setReviews(data.data));
   }, []);
 
@@ -58,7 +58,14 @@ const Review = () => {
               <div class="single_testmonial">
                 <div class="testmonial_header flex items-center">
                   <div class="thumb">
-                    <img src={review?.user_id?.user_photo_url?   review?.user_id?.user_photo_url  : `https://xsgames.co/randomusers/assets/avatars/male/${review?.user_id?.user_name.length}.jpg`} alt="" />
+                    <img
+                      src={
+                        review?.user_id?.user_photo_url
+                          ? review?.user_id?.user_photo_url
+                          : `https://xsgames.co/randomusers/assets/avatars/male/${review?.user_id?.user_name.length}.jpg`
+                      }
+                      alt=""
+                    />
                   </div>
                   <div class="reviewer_name">
                     <h4>{review?.user_id?.user_name}</h4>

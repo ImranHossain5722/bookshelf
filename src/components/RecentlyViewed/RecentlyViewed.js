@@ -32,7 +32,7 @@ const RecentlyViewed = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch("https://book-shelf-webapp.herokuapp.com/all-books")
+    fetch("https://bookshelf-server-s8lf.onrender.com/all-books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }, []);
@@ -118,11 +118,31 @@ const RecentlyViewed = () => {
                       {book?.book_author?.author_name}
                     </p>
                     <div className="stars">
-                    {book?.average_rating >= 1 ?<AiFillStar className="text-[#ffc107]" />:<BsStar/>} 
-                    {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                      {book?.average_rating >= 1 ? (
+                        <AiFillStar className="text-[#ffc107]" />
+                      ) : (
+                        <BsStar />
+                      )}
+                      {book?.average_rating >= 2 ? (
+                        <AiFillStar className="text-[#ffc107]" />
+                      ) : (
+                        <BsStar />
+                      )}
+                      {book?.average_rating >= 3 ? (
+                        <AiFillStar className="text-[#ffc107]" />
+                      ) : (
+                        <BsStar />
+                      )}
+                      {book?.average_rating >= 4 ? (
+                        <AiFillStar className="text-[#ffc107]" />
+                      ) : (
+                        <BsStar />
+                      )}
+                      {book?.average_rating === 5 ? (
+                        <AiFillStar className="text-[#ffc107]" />
+                      ) : (
+                        <BsStar />
+                      )}
                       <span className="text-sm font-medium">
                         ({book?.book_reviews.length})
                       </span>
@@ -134,8 +154,11 @@ const RecentlyViewed = () => {
                       </span>
                       <p>${book.book_price}.00</p>
                     </div>
-                     {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
-                      
+                    {book.book_qnt ? (
+                      <AddCartButton _id={book._id} />
+                    ) : (
+                      <AddCartButton />
+                    )}
                   </div>
                 </div>
               </SwiperSlide>

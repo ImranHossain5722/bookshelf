@@ -1,5 +1,5 @@
 import axios from "axios";
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BsCartCheckFill } from "react-icons/bs";
 import { toast } from "react-toastify";
@@ -8,24 +8,27 @@ const Checkout = () => {
   const cart = useSelector((state) => state.cartData.cartData);
   const user = useSelector((state) => state?.newUser?.user);
   const userId = user?._id;
-  const [payMethod , setPayment] = useState("cash_on")
+  const [payMethod, setPayment] = useState("cash_on");
   const navigate = useNavigate();
   // setPayment
-  console.log(cart)
+  console.log(cart);
   const sendOrder = async () => {
     if (payMethod === "cash_on") {
-      axios.get(`https://book-shelf-webapp.herokuapp.com/change-order-status?oid=${cart._id}&status="cash_on`).then(data => navigate('/thank_you'))
-    } 
-   else if (payMethod === "online_pay") {
-    // /make-payment?oid=[order id]&price=[order price]
-    axios.get(`https://book-shelf-webapp.herokuapp.com/make-payment?oid=${cart._id}`).then(data => window.location.href=`${data.data.url}`)
-      console.log("cash on online")
-      } 
-   
+      axios
+        .get(
+          `https://bookshelf-server-s8lf.onrender.com/change-order-status?oid=${cart._id}&status="cash_on`
+        )
+        .then((data) => navigate("/thank_you"));
+    } else if (payMethod === "online_pay") {
+      // /make-payment?oid=[order id]&price=[order price]
+      axios
+        .get(
+          `https://bookshelf-server-s8lf.onrender.com/make-payment?oid=${cart._id}`
+        )
+        .then((data) => (window.location.href = `${data.data.url}`));
+      console.log("cash on online");
+    }
   };
-  
-  
-
 
   if (!cart.user_id) {
     navigate("/cart");
@@ -162,25 +165,36 @@ const Checkout = () => {
                   </div>
                   <div className="single_payment_box border-[1px] border-t-[0] p-4 font-normal">
                     <div class="single_lists">
-                    <div class="form-control w-fit" onClick={() => setPayment("cash_on")}>
-  <label class="label cursor-pointer">
-    <input type="radio" name="radio-" class="radio radio-primary" checked />
-    <span class="label-text ml-2">Cash on delivery</span> 
-  </label>
-</div>
-<div class="form-control w-fit"  onClick={() => setPayment("online_pay")}>
-  <label class="label cursor-pointer">
-    <input type="radio" name="radio-" class="radio radio-primary"  />
-    <span class="label-text ml-2">Online Payment</span> 
-  </label>
-</div>
-                      
+                      <div
+                        class="form-control w-fit"
+                        onClick={() => setPayment("cash_on")}
+                      >
+                        <label class="label cursor-pointer">
+                          <input
+                            type="radio"
+                            name="radio-"
+                            class="radio radio-primary"
+                            checked
+                          />
+                          <span class="label-text ml-2">Cash on delivery</span>
+                        </label>
+                      </div>
+                      <div
+                        class="form-control w-fit"
+                        onClick={() => setPayment("online_pay")}
+                      >
+                        <label class="label cursor-pointer">
+                          <input
+                            type="radio"
+                            name="radio-"
+                            class="radio radio-primary"
+                          />
+                          <span class="label-text ml-2">Online Payment</span>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
-             
-               
-                
               </div>
               <div className="mt-6">
                 <button

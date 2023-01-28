@@ -40,7 +40,7 @@ const Myprofile = () => {
   const [wishlist, setWishlist] = useState([]);
   useEffect(() => {
     fetch(
-      `https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${currentUserId}`
+      `https://bookshelf-server-s8lf.onrender.com/get-wishlist-data?id=${currentUserId}`
     )
       .then((res) => res.json())
       .then((data) => setWishlist(data));
@@ -53,7 +53,7 @@ const Myprofile = () => {
   const [brought, setBrought] = useState([]);
   useEffect(() => {
     fetch(
-      `https://book-shelf-webapp.herokuapp.com/get-order-data?id=${currentUserId}`
+      `https://bookshelf-server-s8lf.onrender.com/get-order-data?id=${currentUserId}`
     )
       .then((res) => res.json())
       .then((data) => setBrought(data));
@@ -69,9 +69,9 @@ const Myprofile = () => {
   const [sales, setSales] = useState([]);
   useEffect(() => {
     fetch(
-      `https://book-shelf-webapp.herokuapp.com/get-sells-data?id=${currentUserId}`
+      `https://bookshelf-server-s8lf.onrender.com/get-sells-data?id=${currentUserId}`
     )
-      // fetch(`https://book-shelf-webapp.herokuapp.com/get-sells-data?id=62e969f82b99d5b6e7d806c2`)
+      // fetch(`https://bookshelf-server-s8lf.onrender.com/get-sells-data?id=62e969f82b99d5b6e7d806c2`)
       .then((res) => res.json())
       .then((data) => setSales(data));
   }, [currentUserId]);
@@ -84,7 +84,7 @@ const Myprofile = () => {
     const updateData = (updatedProfileData) => {
       axios
         .put(
-          `https://book-shelf-webapp.herokuapp.com/update-user?id=${currentUserId}`,
+          `https://bookshelf-server-s8lf.onrender.com/update-user?id=${currentUserId}`,
           updatedProfileData
         )
         .then((data) => {
@@ -132,7 +132,7 @@ const Myprofile = () => {
     };
     axios
       .patch(
-        `https://book-shelf-webapp.herokuapp.com/update-user-role?id=${userId}`,
+        `https://bookshelf-server-s8lf.onrender.com/update-user-role?id=${userId}`,
         updatedRole
       )
       .then((data) => {
@@ -395,7 +395,7 @@ const Myprofile = () => {
             <h2 className="font-semibold uppercase text-secondary mt-4 text-[16px]">
               Update Information
             </h2>
-  
+
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex mx-auto py-2 ">
                 <div className=" flex-1 ">

@@ -1,17 +1,22 @@
-import axios from 'axios';
-import useGetUserData from './useGetUserData';
+import axios from "axios";
+import useGetUserData from "./useGetUserData";
 
 const useViewAs = (role) => {
-    const { getUser } = useGetUserData();
-    const userId = getUser[0]?._id;
+  const { getUser } = useGetUserData();
+  const userId = getUser[0]?._id;
 
-    // console.log(role);
-    const updatedRole = {
-        "user_role": role
-    };
-    axios.post(`https://book-shelf-webapp.herokuapp.com/update-user-role?id=${role}`, updatedRole).then(data => { })
+  // console.log(role);
+  const updatedRole = {
+    user_role: role,
+  };
+  axios
+    .post(
+      `https://bookshelf-server-s8lf.onrender.com/update-user-role?id=${role}`,
+      updatedRole
+    )
+    .then((data) => {});
 
-    return { userId };
+  return { userId };
 };
 
 export default useViewAs;

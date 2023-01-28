@@ -30,7 +30,6 @@ import QuickViewButton from "../QuickViewButton/QuickViewButton";
 import { toast } from "react-toastify";
 
 const Categorys = () => {
-
   // Get Categories from database
   const [allCategories, setAllCategories] = useState([]);
   const [selectedCatId, setSelectedCatId] = useState("");
@@ -39,17 +38,16 @@ const Categorys = () => {
 
   useEffect(() => {
     const options = { method: "GET" };
-    fetch("https://book-shelf-webapp.herokuapp.com/all-categories", options)
+    fetch("https://bookshelf-server-s8lf.onrender.com/all-categories", options)
       .then((response) => response.json())
       .then((data) => setAllCategories(data));
   }, []);
-
 
   // get books by category id
   useEffect(() => {
     const options = { method: "GET" };
     fetch(
-      `https://book-shelf-webapp.herokuapp.com/get-book-by-category?ct=${selectedCatId}`,
+      `https://bookshelf-server-s8lf.onrender.com/get-book-by-category?ct=${selectedCatId}`,
       options
     )
       .then((response) => response.json())
@@ -242,7 +240,11 @@ const Categorys = () => {
                       <SwiperSlide key={book._id}>
                         <div className="product_widget26 mb_30 bg-white">
                           <div className="product_thumb_upper position-relative">
-                            {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
+                            {book.discount > 0 && (
+                              <span className="offer_badge">
+                                -{book.discount}%
+                              </span>
+                            )}
                             <Link
                               to={`/selectedBook/${book?._id}`}
                               className="thumb text-center"
@@ -263,11 +265,41 @@ const Categorys = () => {
                               {book?.book_author?.author_name}
                             </p>
                             <div className="stars">
-                              <i className={book?.average_rating >= 1 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                              <i className={book?.average_rating >= 2 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                              <i className={book?.average_rating >= 3 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                              <i className={book?.average_rating >= 4 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
-                              <i className={book?.average_rating === 5 ? "fas fa-star text-[#ffc107]" : "fas fa-star"}></i>
+                              <i
+                                className={
+                                  book?.average_rating >= 1
+                                    ? "fas fa-star text-[#ffc107]"
+                                    : "fas fa-star"
+                                }
+                              ></i>
+                              <i
+                                className={
+                                  book?.average_rating >= 2
+                                    ? "fas fa-star text-[#ffc107]"
+                                    : "fas fa-star"
+                                }
+                              ></i>
+                              <i
+                                className={
+                                  book?.average_rating >= 3
+                                    ? "fas fa-star text-[#ffc107]"
+                                    : "fas fa-star"
+                                }
+                              ></i>
+                              <i
+                                className={
+                                  book?.average_rating >= 4
+                                    ? "fas fa-star text-[#ffc107]"
+                                    : "fas fa-star"
+                                }
+                              ></i>
+                              <i
+                                className={
+                                  book?.average_rating === 5
+                                    ? "fas fa-star text-[#ffc107]"
+                                    : "fas fa-star"
+                                }
+                              ></i>
                               <span className="text-sm font-medium">
                                 ({book?.book_reviews.length})
                               </span>
@@ -279,8 +311,11 @@ const Categorys = () => {
                               </span>
                               <p>${book.book_price}.00</p>
                             </div>
-                             {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
-                      
+                            {book.book_qnt ? (
+                              <AddCartButton _id={book._id} />
+                            ) : (
+                              <AddCartButton />
+                            )}
                           </div>
                         </div>
                       </SwiperSlide>

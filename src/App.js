@@ -65,7 +65,6 @@ import PopularWritersBooksPage from "./pages/PopularWritersBooksPage/PopularWrit
 import BlogDetails from "./pages/Blog/BlogDetails";
 import Loading from "./components/Loading/Loading";
 
-
 //  React lazy loading
 const Home = lazy(() => import("./pages/Home/Home"));
 const AboutUs = lazy(() => import("./pages/AboutUs/AboutUs"));
@@ -98,7 +97,9 @@ function App() {
   const userUid = user?.uid;
   useEffect(() => {
     if (userUid) {
-      fetch(`https://book-shelf-webapp.herokuapp.com/get-user?uid=${userUid}`)
+      fetch(
+        `https://bookshelf-server-s8lf.onrender.com/get-user?uid=${userUid}`
+      )
         .then((res) => res.json())
         .then((data) => {
           dispatch(newUser(data[0]));
@@ -189,10 +190,31 @@ function App() {
             {/* thank_you */}
             <Route path="/thank_you" element={<ThankYou />}></Route>
 
-            <Route path="/cart" element={<Suspense fallback={<Loading></Loading>}><Cart /> </Suspense>}></Route>
+            <Route
+              path="/cart"
+              element={
+                <Suspense fallback={<Loading></Loading>}>
+                  <Cart />{" "}
+                </Suspense>
+              }
+            ></Route>
 
-            <Route path="/wishlist" element={<Suspense fallback={<Loading></Loading>}><Wishlist /></Suspense>}></Route>
-            <Route path="/checkout" element={<Suspense fallback={<Loading></Loading>}><Checkout /></Suspense>}></Route>
+            <Route
+              path="/wishlist"
+              element={
+                <Suspense fallback={<Loading></Loading>}>
+                  <Wishlist />
+                </Suspense>
+              }
+            ></Route>
+            <Route
+              path="/checkout"
+              element={
+                <Suspense fallback={<Loading></Loading>}>
+                  <Checkout />
+                </Suspense>
+              }
+            ></Route>
             <Route
               path="/selectedBook/:_id"
               element={<Products_details />}

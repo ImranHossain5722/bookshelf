@@ -32,7 +32,7 @@ const NavDashboard = ({ children }) => {
 
     const options = {
       method: "GET",
-      url: "https://book-shelf-webapp.herokuapp.com/get-user",
+      url: "https://bookshelf-server-s8lf.onrender.com/get-user",
       params: userUid,
     };
     axios

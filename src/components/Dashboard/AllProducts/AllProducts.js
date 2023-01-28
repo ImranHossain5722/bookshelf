@@ -13,14 +13,14 @@ const AllProducts = () => {
     refetch,
     isLoading,
   } = useQuery(["repoData"], () =>
-    fetch(`https://book-shelf-webapp.herokuapp.com/all-books`).then((res) =>
+    fetch(`https://bookshelf-server-s8lf.onrender.com/all-books`).then((res) =>
       res.json()
     )
   );
 
   const handleProductDelete = (id, title) => {
     axios
-      .delete(`https://book-shelf-webapp.herokuapp.com/delete-book?id=${id}`)
+      .delete(`https://bookshelf-server-s8lf.onrender.com/delete-book?id=${id}`)
       .then((data) => {
         toast.success(`You are now viewing as ${title}`);
         refetch();

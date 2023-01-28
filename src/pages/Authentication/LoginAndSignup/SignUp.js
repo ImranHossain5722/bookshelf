@@ -21,19 +21,22 @@ import { onAuthStateChanged } from "firebase/auth";
 // import { onAuthStateChanged } from "firebase/auth";
 // import axios from "axios";
 
-
 const SignUp = () => {
-
-  const [sendEmailVerification, sending, vError] = useSendEmailVerification(auth);
-  const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
+  const [sendEmailVerification, sending, vError] =
+    useSendEmailVerification(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, uError] = useUpdateProfile(auth);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [socialUser] = useAuthState(auth);
   const [phoneNo, setPhoneNo] = useState("");
 
   const navigate = useNavigate();
   const { token } = useToken();
-
 
   //   const userInfo = {
   //     user_name: user?.user?.displayName,
@@ -49,7 +52,7 @@ const SignUp = () => {
   //     console.log("Got User");
   //     const postAuthorData = async () => {
   //       await axios
-  //         .post("https://book-shelf-webapp.herokuapp.com/add-user", userInfo)
+  //         .post("https://bookshelf-server-s8lf.onrender.com/add-user", userInfo)
   //         .then((data) => console.log(data));
   //       navigate("/dashboard");
   //     };
@@ -68,13 +71,11 @@ const SignUp = () => {
   }
 
   if (user || socialUser || token) {
-
     // navigate("/dashboard");
 
     navigate("/dashboard");
 
     // console.log(user);
-
   }
 
   let confirmPassError;
@@ -90,7 +91,7 @@ const SignUp = () => {
       // await onAuthStateChanged(auth, async (user) => {
       //   if (user) {
       //     const data = await axios.post(
-      //       "https://book-shelf-webapp.herokuapp.com/login-user", user);
+      //       "https://bookshelf-server-s8lf.onrender.com/login-user", user);
       //     console.log(user)
       //   }
       // });
@@ -100,17 +101,16 @@ const SignUp = () => {
       await onAuthStateChanged(auth, async (user) => {
         if (user) {
           const data = await axios.post(
-            "https://book-shelf-webapp.herokuapp.com/login-user", user);
+            "https://bookshelf-server-s8lf.onrender.com/login-user",
+            user
+          );
           if (data.data._id) {
             navigate("/dashboard");
           }
-
         } else {
           console.log("user data not found");
         }
-      })
-
-
+      });
     } else {
       toast("Password and Confirm Password Dose not match");
     }
@@ -170,8 +170,6 @@ const SignUp = () => {
                 </span>
               </label>
             </div>
-
-
 
             <div className="form-control w-full max-w-xs">
               <input

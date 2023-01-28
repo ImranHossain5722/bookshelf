@@ -17,7 +17,6 @@ import { toast } from "react-toastify";
 import { BsStar } from "react-icons/bs";
 import { AiFillStar } from "react-icons/ai";
 
-
 const AllBooks = () => {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -35,7 +34,7 @@ const AllBooks = () => {
     const loadBooks = async () => {
       setLoading(true);
       const res = await axios.get(
-        "https://book-shelf-webapp.herokuapp.com/all-books"
+        "https://bookshelf-server-s8lf.onrender.com/all-books"
       );
 
       setPosts(res.data);
@@ -48,7 +47,7 @@ const AllBooks = () => {
     // get all categories data
     const loadCategories = async () => {
       const categoriesData = await axios.get(
-        "https://book-shelf-webapp.herokuapp.com/all-categories"
+        "https://bookshelf-server-s8lf.onrender.com/all-categories"
       );
       setCategories(categoriesData.data);
     };
@@ -58,7 +57,7 @@ const AllBooks = () => {
     // get all author data
     const loadAuthors = async () => {
       const authorsData = await axios.get(
-        "https://book-shelf-webapp.herokuapp.com/all-authors"
+        "https://bookshelf-server-s8lf.onrender.com/all-authors"
       );
       setAuthors(authorsData.data);
     };
@@ -70,7 +69,7 @@ const AllBooks = () => {
   const filterBooks = async (categoryTitle, authorTitle) => {
     setLoading(true);
     const res = await axios.get(
-      "https://book-shelf-webapp.herokuapp.com/all-books"
+      "https://bookshelf-server-s8lf.onrender.com/all-books"
     );
 
     if (categoryTitle) {
@@ -130,7 +129,10 @@ const AllBooks = () => {
     };
     if (userId) {
       axios
-        .post("https://book-shelf-webapp.herokuapp.com/add-to-cart", cartData)
+        .post(
+          "https://bookshelf-server-s8lf.onrender.com/add-to-cart",
+          cartData
+        )
         .then((data) => {
           toast.success("successfully added to cart");
         });
@@ -150,7 +152,7 @@ const AllBooks = () => {
     if (userId) {
       await axios
         .post(
-          "https://book-shelf-webapp.herokuapp.com/add-to-wishlist",
+          "https://bookshelf-server-s8lf.onrender.com/add-to-wishlist",
           cardData
         )
         .then((data) => toast.success("added to wishlist"));
@@ -317,17 +319,33 @@ const AllBooks = () => {
                       </h2>
                       <p className="h-fit mb-1">{book.book_description}</p>
                       <div className="product_prise flex items-center gap-2">
-                      <span className="line-through">
-                        {book.discount > 0 &&
-                          `$${book.discount + book.book_price}.00`}
-                      </span>
-                      <p>${book.book_price}.00</p>
+                        <span className="line-through">
+                          {book.discount > 0 &&
+                            `$${book.discount + book.book_price}.00`}
+                        </span>
+                        <p>${book.book_price}.00</p>
                       </div>
                       <div className="stars">
-                      {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                        {book?.average_rating >= 2 ? (
+                          <AiFillStar className="text-[#ffc107]" />
+                        ) : (
+                          <BsStar />
+                        )}
+                        {book?.average_rating >= 3 ? (
+                          <AiFillStar className="text-[#ffc107]" />
+                        ) : (
+                          <BsStar />
+                        )}
+                        {book?.average_rating >= 4 ? (
+                          <AiFillStar className="text-[#ffc107]" />
+                        ) : (
+                          <BsStar />
+                        )}
+                        {book?.average_rating === 5 ? (
+                          <AiFillStar className="text-[#ffc107]" />
+                        ) : (
+                          <BsStar />
+                        )}
                         <span className="text-sm font-medium">
                           ({book?.book_reviews.length})
                         </span>
@@ -386,23 +404,42 @@ const AllBooks = () => {
                         {book.author}
                       </p>
                       <div className="stars">
-                      {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                        {book?.average_rating >= 2 ? (
+                          <AiFillStar className="text-[#ffc107]" />
+                        ) : (
+                          <BsStar />
+                        )}
+                        {book?.average_rating >= 3 ? (
+                          <AiFillStar className="text-[#ffc107]" />
+                        ) : (
+                          <BsStar />
+                        )}
+                        {book?.average_rating >= 4 ? (
+                          <AiFillStar className="text-[#ffc107]" />
+                        ) : (
+                          <BsStar />
+                        )}
+                        {book?.average_rating === 5 ? (
+                          <AiFillStar className="text-[#ffc107]" />
+                        ) : (
+                          <BsStar />
+                        )}
                         <span className="text-sm font-medium">
                           ({book?.book_reviews.length})
                         </span>
                       </div>
                       <div className="product_prise flex items-center gap-2">
-                      <span className="line-through">
-                        {book.discount > 0 &&
-                          `$${book.discount + book.book_price}.00`}
-                      </span>
-                      <p>${book.book_price}.00</p>
+                        <span className="line-through">
+                          {book.discount > 0 &&
+                            `$${book.discount + book.book_price}.00`}
+                        </span>
+                        <p>${book.book_price}.00</p>
                       </div>
-                       {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
-                      
+                      {book.book_qnt ? (
+                        <AddCartButton _id={book._id} />
+                      ) : (
+                        <AddCartButton />
+                      )}
                     </div>
                   </div>
                   // </Link>

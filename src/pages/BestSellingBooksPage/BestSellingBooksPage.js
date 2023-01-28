@@ -10,8 +10,6 @@ import { BsStar } from "react-icons/bs";
 import { AiFillStar } from "react-icons/ai";
 
 const BestSellingBooksPage = () => {
-
-
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostPerPage] = useState(10);
   const [posts, setPosts] = useState([]);
@@ -22,7 +20,7 @@ const BestSellingBooksPage = () => {
     const loadBooks = async () => {
       setLoading(true);
       const res = await axios.get(
-        "https://book-shelf-webapp.herokuapp.com/all-books"
+        "https://bookshelf-server-s8lf.onrender.com/all-books"
       );
 
       setPosts(res.data);
@@ -31,7 +29,7 @@ const BestSellingBooksPage = () => {
     };
 
     loadBooks();
-  }, [])
+  }, []);
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -59,8 +57,13 @@ const BestSellingBooksPage = () => {
             // <Link to={`/selectedBook/${book?._id}`}>
             <div className="product_widget26 mb_30 bg-white">
               <div className="product_thumb_upper position-relative">
-                {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
-                <Link to={`/selectedBook/${book?._id}`} className="thumb text-center">
+                {book.discount > 0 && (
+                  <span className="offer_badge">-{book.discount}%</span>
+                )}
+                <Link
+                  to={`/selectedBook/${book?._id}`}
+                  className="thumb text-center"
+                >
                   <img src={book?.book_cover_photo_url} alt="" />
                 </Link>
                 <div className="product_action">
@@ -77,11 +80,31 @@ const BestSellingBooksPage = () => {
                   {book.author}
                 </p>
                 <div className="stars">
-                {book?.average_rating >= 1 ?<AiFillStar className="text-[#ffc107]" />:<BsStar/>} 
-                    {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                  {book?.average_rating >= 1 ? (
+                    <AiFillStar className="text-[#ffc107]" />
+                  ) : (
+                    <BsStar />
+                  )}
+                  {book?.average_rating >= 2 ? (
+                    <AiFillStar className="text-[#ffc107]" />
+                  ) : (
+                    <BsStar />
+                  )}
+                  {book?.average_rating >= 3 ? (
+                    <AiFillStar className="text-[#ffc107]" />
+                  ) : (
+                    <BsStar />
+                  )}
+                  {book?.average_rating >= 4 ? (
+                    <AiFillStar className="text-[#ffc107]" />
+                  ) : (
+                    <BsStar />
+                  )}
+                  {book?.average_rating === 5 ? (
+                    <AiFillStar className="text-[#ffc107]" />
+                  ) : (
+                    <BsStar />
+                  )}
                   <span className="text-sm font-medium">
                     ({book?.book_reviews.length})
                   </span>
@@ -89,8 +112,11 @@ const BestSellingBooksPage = () => {
                 <div className="product_prise">
                   <p>${book.book_price}</p>
                 </div>
-                {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
-           
+                {book.book_qnt ? (
+                  <AddCartButton _id={book._id} />
+                ) : (
+                  <AddCartButton />
+                )}
               </div>
             </div>
             // </Link>

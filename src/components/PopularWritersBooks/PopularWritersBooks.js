@@ -17,7 +17,7 @@ const PopularWritersBooks = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    fetch("https://book-shelf-webapp.herokuapp.com/all-books")
+    fetch("https://bookshelf-server-s8lf.onrender.com/all-books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
     setLoading(false);
@@ -31,7 +31,9 @@ const PopularWritersBooks = () => {
         {books?.splice(0, 8).map((book) => (
           <div className="product_widget26 mb_30 bg-white">
             <div className="product_thumb_upper position-relative">
-              {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
+              {book.discount > 0 && (
+                <span className="offer_badge">-{book.discount}%</span>
+              )}
               <Link
                 to={`/selectedBook/${book?._id}`}
                 className="thumb text-center"
@@ -52,24 +54,47 @@ const PopularWritersBooks = () => {
                 {book?.book_author?.author_name}
               </p>
               <div className="stars">
-              {book?.average_rating >= 1 ?<AiFillStar className="text-[#ffc107]" />:<BsStar/>} 
-                    {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                {book?.average_rating >= 1 ? (
+                  <AiFillStar className="text-[#ffc107]" />
+                ) : (
+                  <BsStar />
+                )}
+                {book?.average_rating >= 2 ? (
+                  <AiFillStar className="text-[#ffc107]" />
+                ) : (
+                  <BsStar />
+                )}
+                {book?.average_rating >= 3 ? (
+                  <AiFillStar className="text-[#ffc107]" />
+                ) : (
+                  <BsStar />
+                )}
+                {book?.average_rating >= 4 ? (
+                  <AiFillStar className="text-[#ffc107]" />
+                ) : (
+                  <BsStar />
+                )}
+                {book?.average_rating === 5 ? (
+                  <AiFillStar className="text-[#ffc107]" />
+                ) : (
+                  <BsStar />
+                )}
                 <span className="text-sm font-medium">
                   ({book?.book_reviews.length})
                 </span>
               </div>
               <div className="product_prise flex items-center gap-2">
-              <span className="line-through">
-                        {book.discount > 0 &&
-                          `$${book.discount + book.book_price}.00`}
-                      </span>
-                      <p>${book.book_price}.00</p>
+                <span className="line-through">
+                  {book.discount > 0 &&
+                    `$${book.discount + book.book_price}.00`}
+                </span>
+                <p>${book.book_price}.00</p>
               </div>
-               {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
-                      
+              {book.book_qnt ? (
+                <AddCartButton _id={book._id} />
+              ) : (
+                <AddCartButton />
+              )}
             </div>
           </div>
         ))}

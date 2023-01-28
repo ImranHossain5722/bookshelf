@@ -37,7 +37,7 @@ const NavBar = ({ children }) => {
       if (userId) {
         await axios
           .get(
-            `https://book-shelf-webapp.herokuapp.com/get-cart-data?id=${userId}`
+            `https://bookshelf-server-s8lf.onrender.com/get-cart-data?id=${userId}`
           )
           .then((data) => dispatch(cartBooks(data.data.user_cart)));
       }
@@ -49,7 +49,7 @@ const NavBar = ({ children }) => {
       if (userId) {
         await axios
           .get(
-            `https://book-shelf-webapp.herokuapp.com/get-wishlist-data?id=${userId}`
+            `https://bookshelf-server-s8lf.onrender.com/get-wishlist-data?id=${userId}`
           )
           .then((data) => dispatch(whistlist(data.data[0].user_wishlist)));
       }

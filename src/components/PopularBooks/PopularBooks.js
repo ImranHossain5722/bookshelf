@@ -6,73 +6,69 @@ import Button from "../Button/Button";
 import CartButton from "../CartButton/CartButton";
 import Loading from "../Loading/Loading";
 import QuickViewButton from "../QuickViewButton/QuickViewButton";
-import { bestOfferBooks, bestSelllingBooks, popularBooks, populerWriterBooks } from "../Redux/actions/bookActions";
+import {
+  bestOfferBooks,
+  bestSelllingBooks,
+  popularBooks,
+  populerWriterBooks,
+} from "../Redux/actions/bookActions";
 import Wishlistbutton from "../wishlistButton/Wishlistbutton";
 import { BsStar } from "react-icons/bs";
 import { AiFillStar } from "react-icons/ai";
 
 const PopularBooks = () => {
-   const [books, setBooks] = useState([]);
-   const [clicked, setclicked] = useState("best_selling");
-   const [selectedRoute, setselectedRoute] = useState("/bestSelling");
+  const [books, setBooks] = useState([]);
+  const [clicked, setclicked] = useState("best_selling");
+  const [selectedRoute, setselectedRoute] = useState("/bestSelling");
   const [loading, setLoading] = useState(false);
-  const sellBooks = useSelector(state => state?.bestSelling?.bestSelling)
-  const authorBooks = useSelector(state => state?.popularWriter?.popularWriter)
-  const offerBooks = useSelector(state => state?.bestOffer?.bestOffer)
-  const dispatch = useDispatch()
+  const sellBooks = useSelector((state) => state?.bestSelling?.bestSelling);
+  const authorBooks = useSelector(
+    (state) => state?.popularWriter?.popularWriter
+  );
+  const offerBooks = useSelector((state) => state?.bestOffer?.bestOffer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true)
-    fetch("https://book-shelf-webapp.herokuapp.com/get-popular-books")
-        .then((res) => res.json())
-        .then((data) => dispatch(bestSelllingBooks(data)));
-    setLoading(false)
-
+    setLoading(true);
+    fetch("https://bookshelf-server-s8lf.onrender.com/get-popular-books")
+      .then((res) => res.json())
+      .then((data) => dispatch(bestSelllingBooks(data)));
+    setLoading(false);
   }, []);
-  
 
   useEffect(() => {
-    fetch("https://book-shelf-webapp.herokuapp.com/all-books")
-    .then((res) => res.json())
-    .then((data) => dispatch(populerWriterBooks(data.slice(0,8))));
+    fetch("https://bookshelf-server-s8lf.onrender.com/all-books")
+      .then((res) => res.json())
+      .then((data) => dispatch(populerWriterBooks(data.slice(0, 8))));
   }, []);
-    
 
   useEffect(() => {
-  fetch("https://book-shelf-webapp.herokuapp.com/get-best-discount-books")
-        .then((res) => res.json())
-        .then((data) => dispatch(bestOfferBooks(data)));
+    fetch("https://bookshelf-server-s8lf.onrender.com/get-best-discount-books")
+      .then((res) => res.json())
+      .then((data) => dispatch(bestOfferBooks(data)));
   }, []);
-  
-  useEffect(() => {
-   if(clicked === "best_selling"){
-    setBooks(sellBooks)
-    setselectedRoute("/bestSelling")
-   } 
-  }, [books,sellBooks]); 
 
   useEffect(() => {
-   
-    if(clicked === "best_selling"){
-      setBooks(sellBooks)
-      setselectedRoute("/bestSelling")
-
+    if (clicked === "best_selling") {
+      setBooks(sellBooks);
+      setselectedRoute("/bestSelling");
     }
-   else if(clicked === "popular_writer"){
-    
-    setBooks(authorBooks)
-    setselectedRoute("/Poplerwriters")
+  }, [books, sellBooks]);
 
-  }
-  else if(clicked === "best_offer"){
-   
-      setBooks(offerBooks)
-      setselectedRoute("/BestOffers")
-
+  useEffect(() => {
+    if (clicked === "best_selling") {
+      setBooks(sellBooks);
+      setselectedRoute("/bestSelling");
+    } else if (clicked === "popular_writer") {
+      setBooks(authorBooks);
+      setselectedRoute("/Poplerwriters");
+    } else if (clicked === "best_offer") {
+      setBooks(offerBooks);
+      setselectedRoute("/BestOffers");
     }
-  }, [clicked]); 
+  }, [clicked]);
 
-  if (loading  || books.length === 0) {
+  if (loading || books.length === 0) {
     return <Loading />;
   }
   return (
@@ -85,13 +81,19 @@ const PopularBooks = () => {
           <div className="flex justify-center mt-5 mb-16 text-[#00124E] font-bold">
             <ul className="flex">
               <li className="hover:text-primary focus:text-primary duration-500">
-                <button onClick={() => setclicked("best_selling")} >Best Selling</button>
+                <button onClick={() => setclicked("best_selling")}>
+                  Best Selling
+                </button>
               </li>
               <li className="mx-10 hover:text-primary focus:text-primary  duration-500">
-                <button onClick={() => setclicked("popular_writer")}>Popular Writer's </button>
+                <button onClick={() => setclicked("popular_writer")}>
+                  Popular Writer's{" "}
+                </button>
               </li>
               <li className="hover:text-primary focus:text-primary duration-500">
-                <button onClick={() => setclicked("best_offer")} >Best Offers </button>
+                <button onClick={() => setclicked("best_offer")}>
+                  Best Offers{" "}
+                </button>
               </li>
             </ul>
           </div>
@@ -100,7 +102,9 @@ const PopularBooks = () => {
             {books?.map((book) => (
               <div className="product_widget26 mb_30 bg-white">
                 <div className="product_thumb_upper position-relative">
-                  {book.discount > 0 && <span className="offer_badge">-{book.discount}%</span>}
+                  {book.discount > 0 && (
+                    <span className="offer_badge">-{book.discount}%</span>
+                  )}
                   <Link
                     to={`/selectedBook/${book?._id}`}
                     className="thumb text-center"
@@ -121,38 +125,59 @@ const PopularBooks = () => {
                     {book?.book_author?.author_name}
                   </p>
                   <div className="stars">
-                  {book?.average_rating >= 1 ?<AiFillStar className="text-[#ffc107]" />:<BsStar/>} 
-                    {book?.average_rating >= 2 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 3 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating >= 4 ?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
-                    {book?.average_rating === 5?<AiFillStar className="text-[#ffc107]"/>:<BsStar/>} 
+                    {book?.average_rating >= 1 ? (
+                      <AiFillStar className="text-[#ffc107]" />
+                    ) : (
+                      <BsStar />
+                    )}
+                    {book?.average_rating >= 2 ? (
+                      <AiFillStar className="text-[#ffc107]" />
+                    ) : (
+                      <BsStar />
+                    )}
+                    {book?.average_rating >= 3 ? (
+                      <AiFillStar className="text-[#ffc107]" />
+                    ) : (
+                      <BsStar />
+                    )}
+                    {book?.average_rating >= 4 ? (
+                      <AiFillStar className="text-[#ffc107]" />
+                    ) : (
+                      <BsStar />
+                    )}
+                    {book?.average_rating === 5 ? (
+                      <AiFillStar className="text-[#ffc107]" />
+                    ) : (
+                      <BsStar />
+                    )}
                     <span className="text-sm font-medium">
                       ({book?.book_reviews?.length || 0})
                     </span>
                   </div>
                   <div className="product_prise flex items-center gap-2">
-                        <span className="line-through">
-                          {book.discount > 0 &&
-                            `$${book.discount + book.book_price}.00`}
-                        </span>
-                        <p>${book.book_price}.00</p>
-                      </div>
-                  {book.book_qnt ? <AddCartButton _id={book._id} /> : <AddCartButton  />}
-                      
+                    <span className="line-through">
+                      {book.discount > 0 &&
+                        `$${book.discount + book.book_price}.00`}
+                    </span>
+                    <p>${book.book_price}.00</p>
+                  </div>
+                  {book.book_qnt ? (
+                    <AddCartButton _id={book._id} />
+                  ) : (
+                    <AddCartButton />
+                  )}
                 </div>
               </div>
-
             ))}
           </div>
         </div>
         {/* content */}
-       
-      <div className="flex justify-center my-12">
-        <Link to={selectedRoute}>
-        <Button>See More</Button>
-        </Link>
-      </div>
 
+        <div className="flex justify-center my-12">
+          <Link to={selectedRoute}>
+            <Button>See More</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

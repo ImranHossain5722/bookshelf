@@ -80,11 +80,11 @@ const AddPublisher = () => {
               if (result.success) {
                 const imgbbUrl = result?.data?.url;
                 const publisherInfo = {
-                  user_name: user?.displayName ? user?.displayName : data?.publisher_name,
+                  user_name: user?.displayName
+                    ? user?.displayName
+                    : data?.publisher_name,
                   user_email: user?.email ? user?.email : data?.publisher_email,
-                  user_phone: user?.phoneNumber
-                    ? user?.phoneNumber
-                    : phoneNo,
+                  user_phone: user?.phoneNumber ? user?.phoneNumber : phoneNo,
                   user_photo_url: imgbbUrl
                     ? imgbbUrl
                     : "https://icon-library.com/images/profile-pic-icon/profile-pic-icon-8.jpg ",
@@ -93,14 +93,13 @@ const AddPublisher = () => {
                 const postPublisherData = async () => {
                   await axios
                     .post(
-                      "https://book-shelf-webapp.herokuapp.com/register-publisher",
+                      "https://bookshelf-server-s8lf.onrender.com/register-publisher",
                       publisherInfo
                     )
                     .then((data) => {
                       // console.log("Server Data", data);
                       navigate("/dashboard");
                     });
-
                 };
                 postPublisherData();
               }
@@ -109,7 +108,6 @@ const AddPublisher = () => {
           console.log("user data not found");
         }
       });
-
     } else {
       toast("Password and Confirm Password Dose not match");
     }
